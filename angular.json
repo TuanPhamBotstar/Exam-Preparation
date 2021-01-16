@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "ExamPrep"
+  "defaultProject": "ExamPrep",
+  "cli": {
+    "analytics": "5137b638-f7ed-4652-b202-2d0dbfe68a97"
+  }
 }

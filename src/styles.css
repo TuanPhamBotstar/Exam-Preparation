@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none;
+}
+body{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    background: #ccc;
+    width: 100vw;
+    padding: 10px;
+}

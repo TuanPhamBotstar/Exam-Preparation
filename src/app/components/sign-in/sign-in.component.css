@@ -1,0 +1,113 @@
+.sub-navbar{
+    position: absolute;
+    right: 0;
+    top: 80px;
+    width: 100vw;
+    height: 50px;
+    background-color: #dddd;
+}
+.sub-navbar ul{
+    display: flex;
+    flex-flow: row nowrap;
+}
+.sub-navbar li a {
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    padding: 0px 15px;
+    text-decoration: none;
+    color: #337ab7;
+    font-size: 18px;
+}
+.sub-navbar li.home:hover{
+    text-decoration: underline;
+    color: #063e6e;
+}
+.sub-navbar li.active{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ----------- */
+.container{
+    margin-top: 150px;
+    display: flex;
+    flex-flow: nowrap wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.panel-primary{
+    width: 400px;
+    background-color: #f2f2f2;
+    box-shadow: 0 4px 4px rgba(4, 4, 4, 0.25);
+    border: none;
+    border-radius: 10px;
+}
+.panel-heading{
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #ddd;
+    color: #000;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.panel-heading h3{
+    font-size: 25px;
+    font-weight: bold;
+}
+.panel-body form{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+.panel-body form div{
+    margin: 10px auto;
+}
+.panel-body input{
+    width: 280px;
+    height: 50px;
+    background-color: #f2f2f2;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
+    font-size: 20px;
+}
+.panel-body div.form-group span{
+    display: block;
+    margin-top: 10px;
+    color: #d9534f;
+}
+form div button{
+    border-radius: 10px;
+    outline: none;
+}
+form div button[type=submit]{
+    width: 280px;
+    height: 50px;
+    font-size: 25px;
+}
+form div button[type=button]{
+    width: 220px;
+    height: 50px;
+    font-size: 25px;
+    background-color: #27AE60;
+    border: none;
+}
+form div button[type=button]:hover{
+    background-color: #11F38A;
+}
+
+/* ---------- */
+.slogan{
+    background-color: #ccc;
+    padding: 15px;
+}
+.slogan img{
+    width:200px;
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+}
+.slogan p{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 25px;
+}

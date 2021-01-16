@@ -1,0 +1,28 @@
+<nav class="navbar">
+    <ul>
+        <li>
+            <a [routerLink]="['']">
+                <img class="images" src="assets/img/logo.png" alt="PT Exam Prep">
+            </a>
+        </li>
+        <li>
+            <a 
+            [routerLink]="['/tai-khoan/dang-nhap']"
+            >
+                <div class="user">
+                    <span>Đăng Nhập</span>
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                </div>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer>
+    <p>
+        Copyright <i class="fa fa-copyright" aria-hidden="true"></i>
+        2021 by PTExamprep.com
+    </p>
+</footer>
