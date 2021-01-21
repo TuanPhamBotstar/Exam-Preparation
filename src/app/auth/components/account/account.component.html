@@ -1,0 +1,25 @@
+<!-- <ng-container>
+    <nav class="sub-navbar" >
+        <ul>
+            <li class="home">
+                <a [routerLink]="['']">Trang Chủ</a>
+            </li>
+            <li class="active">
+                <a *ngIf="!isSignIn else navSignUp">Đăng nhập</a>
+                <ng-template #navSignUp>
+                    <a>Đăng ký</a>  
+                </ng-template>
+            </li>
+        </ul>
+    </nav>
+</ng-container> -->
+<div class="container">
+    <div class="slogan">
+        <img src="assets/img/logo1.png">
+        <p>Trắc nghiệm thông minh !</p>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+
+
+

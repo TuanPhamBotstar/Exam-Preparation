@@ -1,0 +1,116 @@
+
+<div class="panel panel-danger" *ngIf="isExist === -1">
+    <h4>Username hoặc Email đã tồn tại !</h4>
+</div>
+
+<div class="panel panel-success" *ngIf="isExist === 1">
+      <div class="panel-heading">
+            <h4 class="panel-title">Đăng kí thành công ! Chuyển sang đăng nhập.</h4>
+      </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+          <h3 class="panel-title">Đăng Ký</h3>
+    </div>
+    <div class="panel-body">
+        <form
+            (ngSubmit) = "onSignUp(username.value,password.value,fullname.value,email.value)"
+            [formGroup] = "signUpForm"
+            novalidate="true"
+        >
+            <div class="form-group">
+                <input 
+                type="text" 
+                class="form-control" 
+                formControlName="fullname"
+                placeholder="Họ và Tên"
+                required
+                #fullname
+                > 
+                <span 
+                *ngIf="signUpForm.controls.fullname.touched && signUpForm.controls.fullname.errors?.required"
+                >
+                Vui lòng nhập Họ và Tên !
+                </span>
+            </div> 
+            
+            <div class="form-group">
+                <input 
+                type="text" 
+                class="form-control" 
+                formControlName="username"
+                placeholder="Username"
+                required
+                pattern="^((?!@).)*$"
+                #username
+                > 
+                <span 
+                *ngIf="signUpForm.controls.username.touched && signUpForm.controls.username.errors?.required"
+                >
+                Vui lòng nhập Username !
+                </span>
+                <span 
+                *ngIf="signUpForm.controls.username.touched && signUpForm.controls.username.errors?.pattern"
+                >
+                Username không có kí tự @ !
+                </span>
+            </div>
+            
+            <div class="form-group">
+                <input 
+                type="text" 
+                class="form-control" 
+                formControlName="email"
+                placeholder="Email"
+                pattern="^\S+@\S+$"
+                required
+                #email
+                > 
+                <span 
+                *ngIf="signUpForm.controls.email.touched && signUpForm.controls.email.errors?.required"
+                >
+                Vui lòng nhập Email !
+                </span>
+                <span 
+                *ngIf="signUpForm.controls.email.touched && signUpForm.controls.email.errors?.pattern"
+                >
+                Địa chỉ Email không hợp lệ !
+                </span>
+            </div>
+
+            <div class="form-group">
+                <input 
+                type="password" 
+                class="form-control" 
+                formControlName="password"
+                placeholder="Mật khẩu mới"
+                required
+                minlength="6"
+                #password
+                >              
+                <span 
+                *ngIf="signUpForm.controls.password.touched && signUpForm.controls.password.errors?.required"
+                >
+                Vui lòng nhập mật khẩu !
+                </span>
+                <span 
+                *ngIf="signUpForm.controls.password.touched && signUpForm.controls.password.errors?.minlength"
+                >
+                Mật khẩu phải có độ dài tối thiểu 6 kí tự !
+                </span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button type="submit" 
+                    class="btn btn-primary"
+                    [disabled]="signUpForm.invalid"
+                    >
+                        Tạo tài khoản mới
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

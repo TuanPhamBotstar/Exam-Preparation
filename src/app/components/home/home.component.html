@@ -1,11 +1,11 @@
 <nav class="navbar">
     <ul>
-        <li>
+        <li class="logo">
             <a [routerLink]="['']">
                 <img class="images" src="assets/img/logo.png" alt="PT Exam Prep">
             </a>
         </li>
-        <li>
+        <li *ngIf="!username; else signedIn">
             <a 
             [routerLink]="['/tai-khoan/dang-nhap']"
             >
@@ -14,15 +14,28 @@
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                 </div>
             </a>
-        </li>
+            
+        </li>  
+        <ng-template #signedIn>
+            <li>
+                <a 
+                [routerLink]="['/']"
+                >
+                    <div class="user">
+                        <span>{{username}}</span>
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    </div>
+                </a>
+            </li>  
+        </ng-template> 
     </ul>
 </nav>
 
 <router-outlet></router-outlet>
 
-<footer>
+<!-- <footer>
     <p>
         Copyright <i class="fa fa-copyright" aria-hidden="true"></i>
         2021 by PTExamprep.com
     </p>
-</footer>
+</footer> -->

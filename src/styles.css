@@ -4,11 +4,222 @@
     padding: 0;
     list-style-type: none;
     text-decoration: none;
+    outline: none;
 }
 body{
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     background: #ccc;
     width: 100vw;
-    padding: 10px;
+    padding: 0px;
 }
+/* ---------- */
+
+.sub-navbar{
+    position: absolute;
+    right: 0;
+    top: 80px;
+    width: 100vw;
+    height: 50px;
+    background-color: #dddd;
+}
+.sub-navbar ul{
+    display: flex;
+    flex-flow: row nowrap;
+}
+.sub-navbar li a {
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    padding: 0px 15px;
+    text-decoration: none;
+    color: #337ab7;
+    font-size: 18px;
+}
+.sub-navbar li.home:hover a{
+    color: #0c3c66;
+    cursor: pointer;
+}
+.sub-navbar li.active{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ----------- */
+.container{
+    /* position: absolute;
+    top:50%;
+    right: 50%;
+    transform: translate(50%,-45%); */
+    margin: 60px auto 120px;
+    display: flex;
+    flex-flow: nowrap wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.panel-title{
+    text-align: center;
+}
+.panel-primary{
+    width: 400px;
+    background-color: #f2f2f2;
+    box-shadow: 0 4px 4px rgba(4, 4, 4, 0.25);
+    border: none;
+    border-radius: 10px;
+}
+.panel-primary div.panel-heading{
+    /* background-color: #f2f2f2; */
+    border-bottom: 2px solid #ddd;
+    /* color: #000; */
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.panel-heading h3{
+    font-size: 25px;
+    font-weight: bold;
+}
+.panel-body form{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+.panel-body form div{
+    margin: 10px auto;
+}
+.panel-body input{
+    width: 280px;
+    height: 50px;
+    background-color: #f2f2f2;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
+    font-size: 20px;
+}
+
+.panel-body div.form-group span{
+    display: block;
+    margin-top: 6px;
+    color: #d9534f;
+}
+
+form div button[type=submit]{
+    width: 280px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+}
+form div button[type=button]{
+    width: 220px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #27AE60;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+}
+form div button[type=button]:hover{
+    background-color: #11F38A;
+}
+
+.panel-danger{
+    border:1px solid #d9534f;
+    text-align: center;
+    color:#d9534f;
+    font-size: 24px;
+}
+
+/* ---------- */
+.slogan{
+    background-color: #ccc;
+    padding: 15px;
+}
+.slogan img{
+    width:200px;
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+}
+.slogan p{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 25px;
+}
+hr{
+    height: 1px;
+    background-color: #ddd;
+}
+/* home component */
+.navbar{
+    width: 100vw;
+    height:80px;
+    /* background-color:#08AC60; */
+    background-color: #5b9bd1;
+    top:0;
+    right: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    padding: 0 10% 0 20%;
+}
+.navbar ul{
+    display: flex;
+    height: 80px;
+    flex-flow: nowrap row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.navbar ul li.logo{
+    flex-basis: 80%;
+}
+.navbar ul li{
+    margin-right: 20px;
+}
+.navbar ul li a{
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+.navbar ul li a img{
+    width: auto;
+    height: 60px;
+}
+.navbar ul li a div.user{
+    height: 50px;
+    border-radius: 25px;
+    /* width: 170px; */
+    background-color: #fff;
+    text-align: center;
+    display: flex;
+    flex-flow:row ;
+    align-items: center;
+    justify-content: space-around;
+    padding:0 15px;
+}
+div.user i{
+    font-size: 3rem;
+    line-height: 60px;
+}
+div.user span{
+    font-size: 2rem;
+    line-height: 60px;
+    margin-right: 5px;
+}
+
+footer{
+    background-color: #666;
+    height: 60px;
+    width: 100%;
+    display: block;
+    padding: 0;
+    color: #fff;
+}
+
+footer p{
+    text-align: center;
+    line-height: 60px;
+    margin: 0;
+}
+
+/* --------------------- */
