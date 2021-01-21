@@ -8,12 +8,25 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthGuard } from '../shared/Services/guard/auth-guard.guard';
 import { LoggedInComponent } from './components/logged-in/logged-in.component';
 import { AppComponent } from '../app.component';
+import { SubjectComponent } from '../subject/components/subject/subject.component';
+import { AddQuestionComponent } from '../subject/components/add-question/add-question.component';
+import { CreateSubjectComponent } from '../subject/components/create-subject/create-subject.component';
 
 const routes: Routes = [
     {
       path:'',
-      component:LoggedInComponent,
+      component:SubjectComponent,
       canActivate:[AuthGuard],
+      // children:[
+      //   {
+      //     path:'tao-bo-de',
+      //     component:CreateSubjectComponent,
+      //   },
+      //   {
+      //     path:'them-cau-hoi',
+      //     component: AddQuestionComponent
+      //   }
+      // ]
     },
     // {
     //   path:'',

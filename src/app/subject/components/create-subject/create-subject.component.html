@@ -1,0 +1,41 @@
+<div class="popup-subject">
+    <div class="panel panel-primary">
+          <div class="panel-heading">
+                <h3 class="panel-title">Tạo Bộ Đề</h3>
+                <i class="glyphicon glyphicon-remove" (click)="onClose()"></i>
+          </div>
+          <div class="panel-body">
+            <form 
+            [formGroup]="subjectForm"
+            novalidate="true"
+        >
+            <div class="form-group">
+                <input 
+                type="text" 
+                class="form-control" 
+                formControlName="subjectname"
+                placeholder="Tên bộ đề"
+                #subjectname
+                > 
+                <span 
+                *ngIf="subjectForm.controls.subjectname.touched && subjectForm.controls.subjectname.errors?.required"
+                >
+                Vui lòng nhập tên bộ đề !
+                </span>
+            </div> 
+            
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button 
+                    type="button"  class="btn btn-primary"
+                    [disabled]="subjectForm.invalid"
+                    (click)="onAddQuestion()"
+                    >
+                        Tạo Bộ Đề
+                    </button>
+                </div>
+            </div>
+        </form>
+          </div>
+    </div>
+</div>
