@@ -10,9 +10,9 @@ import { LoggedInComponent } from './components/logged-in/logged-in.component'
 import { HttpClientModule } from '@angular/common/http';
 // ngrx
 import { StoreModule } from '@ngrx/store';
-import { reducer } from '../store/reducers/user.reducer';
+import { reducer } from '../../store/reducers/user.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { UserEffects } from '../store/effects/user.efffects';
+import { UserEffects } from '../../store/effects/user.efffects';
 
 
 @NgModule({
@@ -35,7 +35,19 @@ import { UserEffects } from '../store/effects/user.efffects';
         strictActionImmutability: false,
       },
     }),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([
+      UserEffects,
+    ]),
+    /*
+     EffectsModule.forRoot([
+      CustomerSupportEffects,
+      SpinnerEffects,
+      AlertEffects,
+      RouteEffects,
+      ModalEffects,
+      AppEffects,
+    ]),
+    */ 
   ],
   exports: [
     SignInComponent,

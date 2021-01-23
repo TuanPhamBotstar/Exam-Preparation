@@ -188,8 +188,6 @@ hr{
 .navbar ul li a div.user{
     height: 50px;
     border-radius: 25px;
-    /* width: 170px; */
-    background-color: #fff;
     text-align: center;
     display: flex;
     flex-flow:row ;

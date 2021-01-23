@@ -9,7 +9,7 @@ import { IntroduceComponent} from './components/introduce/introduce.component'
 import { Routes, RouterModule} from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 //auth module
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 //create subject test module
 
@@ -17,7 +17,7 @@ import { SharedModule } from './shared/shared.module';
 // NgRx store-devtool
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { SubjectModule } from './subject/subject.module';
+import { SubjectModule } from './modules/subject/subject.module';
 @NgModule({
   declarations: [
     AppComponent,

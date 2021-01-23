@@ -1,0 +1,46 @@
+.subject-content {
+    position: relative;
+      padding: 20px;
+      background: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-flow: row nowrap;
+    }
+/* subject */
+.subject{
+    width: 180px;
+    height: 180px;
+    border: 1px solid #5b9bd1;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 10px;
+    cursor: pointer;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+  }
+  .subject:hover{
+  box-shadow: 2px 2px 5px  #5b9bd1 inset,-2px -2px 5px  #5b9bd1 inset;
+  }
+  .subject.add{
+    border: none;
+    box-shadow: none;
+  }
+  .subject.add span{
+    font-size: 1.2em;
+  }
+  .subject.add button{
+    border-radius: 5px;
+    outline: none;
+  }
+  .subject i{
+    font-size: 2.5em;
+  }
+  .subject p{
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 1.5em;
+  }
+  .subject .subject-element{
+    margin: auto auto;
+  }

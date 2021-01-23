@@ -14,28 +14,16 @@ export class SubjectComponent implements OnInit {
     public formBuilder:FormBuilder,
   ) { }
 
-  ngOnInit(): void {
-    this.createSubjectFrom();
-  }
-  createSubjectFrom(){
-    this.subjectForm = this.formBuilder.group({
-      subjectname: ['',[Validators.required]]
-    })
-  }
+  ngOnInit(): void {}
+ 
 
   onLogOut(){
     localStorage.removeItem('user');
     console.log('logout')
     this.router.navigate(['/gioi-thieu']);
   }
-  onAddQuestion(){
-    console.log('add question')
-    this.router.navigate(['/them-cau-hoi']);
-  }
-  onCreateSubject(){
-    console.log('create subject test')
-    this.router.navigate(['/tao-bo-de']);
-  }
+ 
+ 
   openPopup(){
     this.isOpen = true;
   }

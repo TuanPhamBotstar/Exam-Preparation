@@ -1,0 +1,33 @@
+form.add-question div button.btn-primary{
+    width: auto;
+    height: auto;
+}
+form.add-question button.add-answer{
+    background-color: #337ab7;
+    font-size: 1em;
+    text-align: center;
+    padding: 0 3px;
+}
+form.add-question textarea{
+    width: 85%;
+    resize: vertical;
+}
+form.add-question select{
+    width:105px;
+    padding:5px;
+}
+div.answer-container{
+    display: flex;
+    flex-flow: nowrap row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+form.add-question  input[type=checkbox]{
+    margin-right: 6px;
+}
+
+i{
+    cursor: pointer;
+    font-size: 0.8em;
+}
