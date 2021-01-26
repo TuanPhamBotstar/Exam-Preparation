@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from '../../../../shared/models/subject.model';
-import { SubjectApiService } from 'src/app/shared/Services/subject/subject-api.service ';
+import { Subject } from '../../models/subject.model';
+import { SubjectApiService } from '../../services/subject-api.service ';
 
 @Component({
   selector: 'app-create-subject',
@@ -19,29 +19,20 @@ export class CreateSubjectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.subjectApi.getSubject().subscribe((data => console.log(data)))
-    this.createSubjectFrom();
+    this.createSubjectForm();
   }
-  createSubjectFrom() {
+  createSubjectForm() {
     this.subjectForm = this.formBuilder.group({
       subjectname: ['', [Validators.required]]
     })
   }
-
-  onCreateSubject(){
-    console.log('create subject test')
-    this.router.navigate(['/bo-de/tao-bo-de']);
-  }
-  
-  onAddQuestion(subjectname: string) {
+  onAddSubject(subjectname: string) {
     const newSubject = new Subject('',subjectname,0,0);
-    
-    this.subjectApi.addSubject(newSubject);
-    console.log('to add question')
-    this.router.navigate(['/tao-cau-hoi'], { queryParams: { bo_de: subjectname } });
+    this.subjectApi.addSubject(newSubject).subscribe(data => console.log(data));
+    this.router.navigate(['/chi-tiet'], {queryParams: {bo_de: subjectname}});
   }
 
   onClose(){
-    this.router.navigate(['/']);
+    this.router.navigate(['/bo-de']);
   }
 }

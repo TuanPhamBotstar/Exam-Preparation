@@ -1,9 +1,12 @@
 <div class="subject-content">
-    <div class="subject">
+    <div class="subject" 
+        *ngFor="let subject of subjects"
+        (click)="detailSubject(subject.subjectname)"
+    >
         <div class="subject-element">
 
             <i class="glyphicon glyphicon-folder-open"></i>
-            <p>Bộ Đề 01</p>
+            <p>Bộ Đề - {{subject.subjectname | uppercase}}</p>
         </div>
     </div>
     <div class="subject add">

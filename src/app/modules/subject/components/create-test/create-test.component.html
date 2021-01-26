@@ -1,0 +1,135 @@
+<div class="create-test">
+
+    <i class="glyphicon glyphicon-arrow-left" (click)="onBack()"></i>
+    
+    <!-- <h2>Tạo Đề Thi</h2> -->
+
+
+    <div class="panel panel-heading">
+        <div class="panel-heading">
+                <h3 class="panel-title">Tạo Đề Thi</h3>
+                <!-- <i class="glyphicon glyphicon-remove" (click)="onBack()"></i> -->
+        </div>
+        <div class="">
+            <form 
+            class="add-question"
+            novalidate="true"
+            [formGroup]="createTestForm"
+            (ngSubmit)="onCreateTest()"
+        >
+            <div class="form-group">
+                <h3> Tên Đề Thi</h3>
+                <input type="text" 
+                class="form-control question"
+                placeholder="Tên đề thi"
+                formControlName="testTitle"
+                #testTitle
+                >
+                
+                <span 
+                class="label label-danger"
+                *ngIf="createTestForm.controls.testTitle.touched && createTestForm.controls.testTitle.errors?.required"
+                >
+                Vui lòng nhập tên đề thi !
+                </span>
+            </div> 
+            <div class="form-group">
+                <label>Thời gian thi (phút)</label>
+                <input type="number" min="15" step="5" 
+                class="form-control" placeholder="00"
+                formControlName="timeTest"
+                #timeTest
+                >
+                <span 
+                class="label label-danger"
+                *ngIf="createTestForm.controls.timeTest.touched && createTestForm.controls.timeTest.errors?.required"
+                >
+                Vui lòng nhập thời gian thi !
+                </span>
+            </div>
+            <div class="form-group">
+                <label>Mã Code</label>
+                <input type="text"  
+                class="form-control" placeholder="0000"
+                formControlName="codeTest"
+                #codeTest
+                >
+                <span 
+                class="label label-danger"
+                *ngIf="createTestForm.controls.codeTest.touched && createTestForm.controls.codeTest.errors?.required"
+                >
+                Vui lòng nhập mã Code !
+                </span>
+                <span 
+                class="label label-danger"
+                *ngIf="createTestForm.controls.codeTest.touched && createTestForm.controls.codeTest.errors?.pattern"
+                >
+                Mã code phải gồm 4 chữ số !
+                </span>
+            </div>
+            <div class="form-group">
+                <label>Số lượng câu hỏi</label>
+                <!-- <input type="number" min="5" step="5" class="form-control"> -->
+            </div>
+            <div class="qty-config">
+                <input type="text" class="hide"
+                formControlName="subject_id">
+               
+                <div class="form-group">
+                    <label>Khó</label>
+                    <input type="number"  class="" placeholder="0" min="0"
+                    formControlName="hardQty"
+                    #hardQty
+                    >
+                    <span 
+                    class="label label-danger"
+                    *ngIf="createTestForm.controls.hardQty.touched && createTestForm.controls.hardQty.errors?.required"
+                    >
+                    Chưa nhập trường này !
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Trung bình</label>
+                    <input type="number" class="" placeholder="0" min="0"
+                    formControlName="normalQty"
+                    #normalQty
+                    >
+                    <span 
+                    class="label label-danger"
+                    *ngIf="createTestForm.controls.normalQty.touched && createTestForm.controls.normalQty.errors?.required"
+                    >
+                    Chưa nhập trường này !
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Dễ</label>
+                    <input type="number" class="" placeholder="0" min="0"
+                    formControlName="easyQty"
+                    #easyQty
+                    >
+                    <span 
+                    class="label label-danger"
+                    *ngIf="createTestForm.controls.easyQty.touched && createTestForm.controls.easyQty.errors?.required"
+                    >
+                    Chưa nhập trường này !
+                    </span>
+                </div>
+            </div>
+            
+        
+            <!-- {{this.addQuestionForm.value | json}}   -->
+            <div class="form-group">
+                
+                    <button 
+                    type="submit"  class="btn btn-primary"
+                    [disabled]="createTestForm.invalid"
+                    >
+                        Tạo đề thi
+                    </button>
+                
+            </div>
+        </form>
+        </div>
+    </div>
+
+</div>

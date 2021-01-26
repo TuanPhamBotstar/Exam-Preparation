@@ -9,6 +9,7 @@ import { AddQuestionComponent } from './components/add-question/add-question.com
 import { ProfileSidebarComponent } from './components/profile-sidebar/profile-sidebar.component';
 import { SubjectDetailComponent } from './components/subject-detail/subject-detail.component';
 import { SubjectOveriewComponent } from './components/subject-overiew/subject-overiew.component';
+import { CreateTestComponent } from './components/create-test/create-test.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { SubjectOveriewComponent } from './components/subject-overiew/subject-ov
     ProfileSidebarComponent,
     SubjectDetailComponent,
     SubjectOveriewComponent,
+    CreateTestComponent,
   ],
   imports: [
     CommonModule,

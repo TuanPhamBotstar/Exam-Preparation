@@ -1,0 +1,42 @@
+.create-test{
+    min-height: 100vh;
+}
+.create-test .panel{
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+    border: 1px solid rgba(0,0,0,0.2);
+    width: 60%;
+    background-color: #f2f2f2;
+    margin: 15px auto;
+}
+.qty-config .form-group{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.qty-config .form-group label{
+    flex-basis: 43.5%;
+}
+
+.qty-config .form-group input{
+    margin-right: 20px;
+    width: 80px;
+    padding-left: 10px;
+}
+.qty-config .form-group span{
+    height: 20px;
+}
+div.form-group{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+form div button[type=submit] {
+    width: auto;    
+    display: block;
+    margin: auto;
+    height: auto;
+    font-size: 1em;
+}
+.hide{
+    display: none;
+}

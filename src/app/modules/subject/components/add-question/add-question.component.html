@@ -1,17 +1,15 @@
-<h2>BỘ ĐỀ - {{ subjectname | uppercase }}</h2>
-<hr />
 
 <div class="panel panel-heading">
     <div class="panel-heading">
             <h3 class="panel-title">Tạo Câu Hỏi</h3>
-            
+            <i class="glyphicon glyphicon-remove" (click)="onBack()"></i>
     </div>
     <div class="">
         <form 
         class="add-question"
         novalidate="true"
         [formGroup]="addQuestionForm"
-        (ngSubmit)="onAddQuestion()"
+        (ngSubmit)="onSaveQuestion()"
     >
         <div class="form-group">
             <h3> Câu Hỏi</h3>
@@ -78,7 +76,7 @@
         <div class="form-group">
                 
         </div>
-        {{this.addQuestionForm.value | json}}
+        <!-- {{this.addQuestionForm.value | json}}   -->
         <div class="form-group">
             
                 <button 
