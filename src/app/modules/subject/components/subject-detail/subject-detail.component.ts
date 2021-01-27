@@ -30,6 +30,7 @@ export class SubjectDetailComponent implements OnInit {
         if(this.subjectname){
             this.subjectApi.getSubjectByName(this.subjectname).subscribe(data => {
             this.subject_id = data;
+            
             console.log(this.subject_id);
             if(this.subject_id){
               console.log('get questions')
@@ -62,10 +63,17 @@ export class SubjectDetailComponent implements OnInit {
   }
   // test handle
   onCreateTest(){
-    this.router.navigate(['/tao-de-thi'], {queryParams: {bo_de:this.subjectname}})
+    this.router.navigate(['/chi-tiet/tao-de-thi'], {queryParams: {bo_de:this.subjectname}})
   }
-  detailTest(){
-    
+  overviewTests(){
+      this.router.navigate(['chi-tiet/de-thi'], {queryParams: {bo_de:this.subjectname}});
+
+  }
+  // pass subject_id to child component
+  onActive(childCpn){
+    console.log('view child')
+    childCpn.getSubject_id(this.subject_id);
+    console.log(this.subject_id)
   }
   //
   onBack(){

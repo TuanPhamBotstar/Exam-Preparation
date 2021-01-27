@@ -1,0 +1,24 @@
+<router-outlet (activate)="onActive($event)"></router-outlet>
+<div class="overview-test-container">
+    <i class="glyphicon glyphicon-arrow-left" (click)="onBack()"></i>
+    <div class="subject-content">
+        <div class="subject" 
+        *ngFor="let test of tests; let i = index"
+            
+        >
+            <div class="subject-element" (click)="getDetailTest()">
+    
+                <i class="glyphicon glyphicon-folder-open"></i>
+                <p>Đề thi - {{test.testTitle | uppercase}}</p>
+            </div>
+        </div>
+        <div class="subject add">
+            <div class="subject-element">
+                <button type="button" class="btn btn-primary" (click)="onCreateTest()">
+                    Tạo đề thi
+                </button>                   
+            </div>
+        </div>
+        
+    </div>
+</div>

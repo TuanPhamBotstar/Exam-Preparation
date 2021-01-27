@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-// import { TestComponent } from '../test/components/test/test.component';
+import { AuthGuard } from 'src/app/shared/Services/guard/auth-guard.guard';
+import { OverviewTestComponent } from '../test/components/overview-test/overview-test.component';
+import { TestComponent } from '../test/components/test/test.component';
 import { AddQuestionComponent } from './components/add-question/add-question.component';
 import { CreateSubjectComponent } from './components/create-subject/create-subject.component';
 import { CreateTestComponent } from './components/create-test/create-test.component';
@@ -12,6 +14,7 @@ const routes: Routes = [
   {
     path:'',
     component:SubjectComponent,
+    canActivate:[AuthGuard],
     children:[
       {
         path:'bo-de',
@@ -32,15 +35,29 @@ const routes: Routes = [
             path:'them-cau-hoi',
             component:AddQuestionComponent
           },
+          // {
+          //   path:'tao-de-thi',
+          //   component:CreateTestComponent,
+          // },
+          {
+            path:'de-thi',
+            component:OverviewTestComponent, 
+            children:[
+              {
+                path:'tao-de-thi',
+                component:CreateTestComponent,
+              },
+              {
+                path:'noi-dung',
+                component:TestComponent
+              }
+            ]
+          },
         ]
       },
-      {
-        path:'tao-de-thi',
-        component:CreateTestComponent
-      },
       // {
-      //   path:'de-thi',
-      //   component:TestComponent,
+      //   path:'tao-de-thi',
+      //   component:CreateTestComponent
       // },
     ],
   }, 

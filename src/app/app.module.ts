@@ -12,12 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './modules/auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 //create subject test module
-
+import { SubjectModule } from './modules/subject/subject.module';
+import { TestModule } from './modules/test/test.module';
 
 // NgRx store-devtool
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { SubjectModule } from './modules/subject/subject.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +31,7 @@ import { SubjectModule } from './modules/subject/subject.module';
     SharedModule,
     AuthModule,
     SubjectModule,
+    TestModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode

@@ -30,18 +30,22 @@ export class AddQuestionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(data => {
-      this.subjectname = data.bo_de;
-      if(this.subjectname){
-          this.subjectApi.getSubjectByName(this.subjectname).subscribe(data => {
-          this.subject_id = data;
-          console.log(this.subject_id);
-        })
-      }
-    });
+    /* is instead to viewchild */
+    // this.activatedRoute.queryParams.subscribe(data => {
+    //   this.subjectname = data.bo_de;
+    //   if(this.subjectname){
+    //       this.subjectApi.getSubjectByName(this.subjectname).subscribe(data => {
+    //       this.subject_id = data;
+    //       console.log(this.subject_id);
+    //     })
+    //   }
+    // });
     this.createAddQuestionForm();
-    console.log(this.answers.controls[0])
+    // console.log(this.answers.controls[0])
     // this.http.get('http://localhost:8082/api/admin/questions').subscribe(data => console.log(data))
+  }
+  getSubject_id(id:string){
+      this.subject_id = id;
   }
   createAddQuestionForm(){
     this.addQuestionForm = this.formBuilder.group({
@@ -82,4 +86,5 @@ export class AddQuestionComponent implements OnInit {
   onBack(){
     this._location.back();
   }
+  
 }

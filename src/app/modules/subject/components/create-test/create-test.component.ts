@@ -11,7 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-test.component.css']
 })
 export class CreateTestComponent implements OnInit {
+
   public createTestForm:FormGroup;
+  public subject_id:string;
   constructor(
     private _location:Location,
     private subjectApi: SubjectApiService,
@@ -21,11 +23,16 @@ export class CreateTestComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.initialTestForm();
+  }
+  getSubject_id(id:string){
+    this.subject_id = id;
+    console.log(this.subject_id)
   }
   initialTestForm(){
     this.createTestForm = this.formBuilder.group({
-      subject_id:['600d778541ad1335d8d30f21'],
+      subject_id:[this.subject_id],
       testTitle:['',[Validators.required]],
       timeTest:['',Validators.required],
       codeTest:['',[Validators.pattern('[0-9]{4}$'), Validators.required]],
@@ -44,7 +51,7 @@ export class CreateTestComponent implements OnInit {
         console.log(data2);
         this.testApi.putQuestions(data2).subscribe(finish => {
           console.log(finish);
-          if(finish) this.router.navigate(['de-thi']);
+          if(finish) this.router.navigate(['chi-tiet/de-thi']);
         });
       })
     });

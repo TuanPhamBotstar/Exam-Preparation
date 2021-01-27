@@ -6,9 +6,8 @@
         Thêm câu hỏi
     </button>
     
-    <button type="button" class="btn btn-primary" (click)="onCreateTest()">Tạo đề thi</button>
-    
-    <button type="button" class="btn btn-primary" (click)="detailTest()">
+    <!-- <button type="button" class="btn btn-primary" (click)="onCreateTest()">Tạo đề thi</button> -->
+    <button type="button" class="btn btn-primary" (click)="overviewTests()">
         <i class="glyphicon glyphicon-list-alt">   </i>
         <span>Đề thi</span>
     </button>   
@@ -16,7 +15,7 @@
     <button type="button" class="btn btn-danger" (click) = "openConfirmBlock()">Xóa bộ đề</button>
 </div>
 
-<router-outlet></router-outlet>
+<router-outlet (activate)="onActive($event)"></router-outlet>
 
 <div class="panel panel-danger" *ngIf="confirmBlock">
       <div class="panel-heading">

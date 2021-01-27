@@ -31,7 +31,9 @@ export class CreateSubjectComponent implements OnInit {
     this.subjectApi.addSubject(newSubject).subscribe(data => console.log(data));
     this.router.navigate(['/chi-tiet'], {queryParams: {bo_de: subjectname}});
   }
-
+  testViewChild(no){
+    console.log('viewchild working',no)
+  }
   onClose(){
     this.router.navigate(['/bo-de']);
   }

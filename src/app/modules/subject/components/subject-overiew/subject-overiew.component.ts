@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SubjectApiService } from '../../services/subject-api.service ';
+import { CreateSubjectComponent } from '../create-subject/create-subject.component';
 
 @Component({
   selector: 'app-subject-overiew',
@@ -17,11 +18,17 @@ export class SubjectOveriewComponent implements OnInit {
   ngOnInit(): void {
     this.subjectApi.getSubject().subscribe((data => this.subjects = data))
   }
+ 
   onCreateSubject(){
     console.log('create subject test')
     this.router.navigate(['/bo-de/tao-bo-de']);
   }
   detailSubject(subjectname){
     this.router.navigate(['/chi-tiet'],{queryParams:{bo_de:subjectname}});
+  }
+  ///
+  onActive(cpnRef){
+    console.log(cpnRef)
+    cpnRef.testViewChild(12)
   }
 }

@@ -22,4 +22,7 @@ export class TestApiService {
   getTest(id:string):Observable<any>{
     return this.http.get(`${testUrl}/${id}`);
   }
+  getTestsBySubject_id(subject_id:string):Observable<{}>{
+    return this.http.get(`${testUrl}/subject/${subject_id}`);
+  }
 }
