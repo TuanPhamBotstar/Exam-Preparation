@@ -11,6 +11,7 @@ import { Question } from '../../models/question.model';
   styleUrls: ['./subject-detail.component.css']
 })
 export class SubjectDetailComponent implements OnInit {
+  public showQuestions: boolean = true;
   public levels = ['', 'Dễ', 'Trung bình', 'Khó'];
   public questions: any;
   public confirmBlock: boolean = false;
@@ -25,27 +26,19 @@ export class SubjectDetailComponent implements OnInit {
 
   ngOnInit(): void {
       this.activatedRoute.queryParams.subscribe(data => {
-        this.subjectname = data.bo_de
+        this.subject_id = data.bo_de
         console.log(data.bo_de)
-        if(this.subjectname){
-            this.subjectApi.getSubjectByName(this.subjectname).subscribe(data => {
-            this.subject_id = data;
-            
-            console.log(this.subject_id);
-            if(this.subject_id){
-              console.log('get questions')
-              this.subjectApi.getQuestions(this.subject_id).subscribe(data => this.questions = data);
-            }
-          })
+        if(this.subject_id){
+          this.subjectApi.getQuestions(this.subject_id).subscribe(data => this.questions = data);
+          this.subjectApi.getSubjectName(this.subject_id).subscribe(data => this.subjectname = data)
         }
       });
   }
   onAddQuestion(){
-    console.log('them cau hoi')
-    this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subjectname} });
+    this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subject_id} });
   }
   openConfirmBlock(){
-    this.confirmBlock = true;
+    this.confirmBlock = !this.confirmBlock;
   }
   onDelSubject(id:string){
       this.subjectApi.delSubject(id).subscribe(data => console.log(data));
@@ -57,23 +50,26 @@ export class SubjectDetailComponent implements OnInit {
     console.log(id);
     this.subjectApi.delQuestion(id).subscribe(data => console.log(data))
   }
-  onEditQuestion(i:number){
-    console.log(this.questions[i])
-    this.router.navigate(['/chi-tiet/them-cau-hoi'])
+  onEditQuestion(question){
+    console.log(question)
+    this.router.navigate(['/chi-tiet/them-cau-hoi'], {queryParams: {bo_de:this.subject_id}});
   }
   // test handle
-  onCreateTest(){
-    this.router.navigate(['/chi-tiet/tao-de-thi'], {queryParams: {bo_de:this.subjectname}})
-  }
   overviewTests(){
-      this.router.navigate(['chi-tiet/de-thi'], {queryParams: {bo_de:this.subjectname}});
+      this.router.navigate(['chi-tiet/de-thi'], {queryParams: {bo_de:this.subject_id}});
 
   }
   // pass subject_id to child component
   onActive(childCpn){
+    this.showQuestions = !this.showQuestions;
     console.log('view child')
-    childCpn.getSubject_id(this.subject_id);
-    console.log(this.subject_id)
+    this.activatedRoute.queryParams.subscribe(data => {
+      this.subject_id = data.bo_de
+      childCpn.getSubject_id(this.subject_id, this.subjectname);
+    });
+  }
+  onToggle(){
+    this.showQuestions = !this.showQuestions;
   }
   //
   onBack(){

@@ -1,12 +1,11 @@
 .subject-content {
     position: relative;
-    padding: 20px;
     background: #fff;
-    min-height: 100vh;
     display: flex;
     flex-flow: row  wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
+    padding-top: 20px;
     }
 /* subject */
 .subject{

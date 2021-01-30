@@ -16,15 +16,16 @@ export class SubjectOveriewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.subjectApi.getSubject().subscribe((data => this.subjects = data))
+    const user_id = JSON.parse(localStorage.getItem('user')).user_id;
+    this.subjectApi.getSubjects(user_id).subscribe((data => this.subjects = data))
   }
  
   onCreateSubject(){
     console.log('create subject test')
     this.router.navigate(['/bo-de/tao-bo-de']);
   }
-  detailSubject(subjectname){
-    this.router.navigate(['/chi-tiet'],{queryParams:{bo_de:subjectname}});
+  detailSubject(subject_id){
+    this.router.navigate(['/chi-tiet'],{queryParams:{bo_de:subject_id}});
   }
   ///
   onActive(cpnRef){

@@ -1,23 +1,33 @@
+<!-- [routerLink]="[]" [queryParams]="{page:no}" -->
 
+<div class="navbar">
+    <ul class="nav navbar-nav">
+        <li >
+            <a [routerLink]="['/bo-de']">Tất cả bộ đề</a>
+        </li>
+        <li routerLinkActive = "active">
+            <a [routerLink]="['/chi-tiet']" [queryParams]="{bo_de: subject_id}">Bộ đề {{subjectname | uppercase}}</a>
+        </li>
+        <li routerLinkActive = "active" *ngIf="!showQuestions">
+            <a [routerLink]="['/chi-tiet/de-thi']" [queryParams]="{bo_de: subject_id}">Tất cả đề thi</a>
+        </li>
+    </ul>
+</div>
 
-<h2>BỘ ĐỀ - {{subjectname | uppercase}}</h2>
 <div class="btn-container">
     <button type="button" class="btn btn-primary" (click)="onAddQuestion()">
         Thêm câu hỏi
     </button>
-    
-    <!-- <button type="button" class="btn btn-primary" (click)="onCreateTest()">Tạo đề thi</button> -->
     <button type="button" class="btn btn-primary" (click)="overviewTests()">
-        <i class="glyphicon glyphicon-list-alt">   </i>
+        <i class="glyphicon glyphicon-list-alt"></i>
         <span>Đề thi</span>
-    </button>   
-    
+    </button>  
     <button type="button" class="btn btn-danger" (click) = "openConfirmBlock()">Xóa bộ đề</button>
 </div>
 
-<router-outlet (activate)="onActive($event)"></router-outlet>
+<router-outlet (activate)="onActive($event)" (deactivate)="onToggle()"></router-outlet>
 
-<div class="panel panel-danger" *ngIf="confirmBlock">
+<div class="panel panel-danger confirm-del-subject" *ngIf="confirmBlock">
       <div class="panel-heading">
             <h3 class="panel-title">Xóa Bộ Đề</h3>
             <i class="glyphicon glyphicon-remove" (click)="onBack()"></i>
@@ -26,7 +36,7 @@
             Bạn có chắc chắn muốn xóa bộ đề {{subjectname | uppercase}} không ?
             <div>
 
-                <button type="button" class="btn btn-primary" (click) = "onBack()">Không</button>
+                <button type="button" class="btn btn-primary" (click) = "openConfirmBlock()">Không</button>
                 
                 <button type="button" class="btn btn-danger" (click) = "onDelSubject(subject_id)">Có</button>
             </div>
@@ -34,31 +44,34 @@
             
       </div>
 </div>
-
-<h3>Danh sách câu hỏi</h3>
-<i *ngIf="questions">( Tổng {{questions.length}} câu hỏi )</i>
-<!-- {{questions | json}} -->
-<div class="question" *ngFor="let question of questions; let i = index">
-    <div class="question-elemment">
-        <h4 (click)="onEditQuestion(i)">
-            <strong>Câu {{i+1}}:</strong> ({{levels[question.level]}})
-        </h4>
-        <i class="glyphicon glyphicon-minus" (click)="delQuestion(i)"></i>
-        <p>
-            {{question.title}}
-        </p>
-    </div>
-    <div class="answers">
-        <div class="" *ngFor="let answer of question.answers; let j = index">
-            <div class="answer-elemnt is{{answer.isCorrect}}">
-                <input type="checkbox" id="'a'+j" value="j">
-                <label for="'a'+j">
-                    {{answer.content}}
-                </label>
+<ng-container *ngIf="showQuestions">
+    <h3>Danh sách câu hỏi</h3>
+    <i *ngIf="questions">( Tổng {{questions.length}} câu hỏi )</i>
+    <div class="questions-container">
+        <div class="question" *ngFor="let question of questions; let i = index">
+            <div class="question-elemment">
+                <h4 (click)="onEditQuestion(i)">
+                    <strong>Câu {{i+1}}:</strong> ({{levels[question.level]}})
+                </h4>
+                <i class="glyphicon glyphicon-minus" (click)="onEditQuestion(question)"></i>
+                <p>
+                    {{question.title}}
+                </p>
             </div>
-        </div>
-    </div>
-</div> 
+            <div class="answers">
+                <div class="" *ngFor="let answer of question.answers; let j = index">
+                    <div class="answer-elemnt is{{answer.isCorrect}}">
+                        <input type="checkbox" id="'a'+j" value="j">
+                        <label for="'a'+j">
+                            {{answer.content}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>      
+</ng-container>
+
     
 
 

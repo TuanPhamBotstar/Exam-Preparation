@@ -11,6 +11,7 @@ import { SubjectApiService } from '../../services/subject-api.service ';
 })
 export class CreateSubjectComponent implements OnInit {
   public subjectForm: FormGroup;
+  public author: string;
   constructor(
     public formBuilder: FormBuilder,
     public router: Router,
@@ -27,9 +28,13 @@ export class CreateSubjectComponent implements OnInit {
     })
   }
   onAddSubject(subjectname: string) {
-    const newSubject = new Subject('',subjectname,0,0);
-    this.subjectApi.addSubject(newSubject).subscribe(data => console.log(data));
-    this.router.navigate(['/chi-tiet'], {queryParams: {bo_de: subjectname}});
+    const user_id = JSON.parse(localStorage.getItem('user')).user_id;
+    console.log(JSON.parse(localStorage.getItem('user')))
+    const newSubject = new Subject('',subjectname,0,user_id,0);
+    this.subjectApi.addSubject(newSubject).subscribe(data => {
+      console.log(data)
+      this.router.navigate(['/chi-tiet'], {queryParams: {bo_de: data['subject_id']}});
+    });
   }
   testViewChild(no){
     console.log('viewchild working',no)

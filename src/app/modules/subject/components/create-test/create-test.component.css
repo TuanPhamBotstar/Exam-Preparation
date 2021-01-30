@@ -2,11 +2,18 @@
     min-height: 100vh;
 }
 .create-test .panel{
+    position: relative;
     box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
     border: 1px solid rgba(0,0,0,0.2);
     width: 60%;
     background-color: #f2f2f2;
     margin: 15px auto;
+}
+.panel-heading i{
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    font-size: 1.2em;
 }
 .qty-config .form-group{
     display: flex;

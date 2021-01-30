@@ -5,11 +5,12 @@
     list-style-type: none;
     text-decoration: none;
     outline: none;
+    box-sizing: border-box;
 }
 body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    background: #ccc;
+    background: #edf0f5;
     width: 100%;
     margin: 0;
     padding: 0px;
@@ -137,7 +138,7 @@ form div button[type=button]:hover{
 
 /* ---------- */
 .slogan{
-    background-color: #ccc;
+    background-color: #F2F3F5;
     padding: 15px;
 }
 .slogan img{
@@ -159,8 +160,14 @@ hr{
 nav.navbar{
     width: 100%;
     height:80px;
-    /* background-color:#08AC60; */
-    background-color: #5b9bd1;
+    /* background: linear-gradient(to right, #9a68fc,#7662b9); */
+    /* background-color: #5b9bd1; */
+    --gradient-from-color: #5b9bd1;
+    --gradient-to-color: #8cc5f3;
+    background: var(--gradient-to-color) 
+    linear-gradient(90deg,var(--gradient-from-color),
+    var(--gradient-to-color) 51%,var(--gradient-from-color));
+    transition: .5s;
     top:0;
     right: 0;
     border-radius: 0;
@@ -168,6 +175,7 @@ nav.navbar{
     box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
     z-index: 1000;
     padding: 0 10% 0 20%;
+    margin-bottom: 0;
 }
 .navbar ul{
     display: flex;
@@ -177,7 +185,7 @@ nav.navbar{
     align-items: center;
 }
 .navbar ul li.logo{
-    flex-basis: 80%;
+    flex-basis: 70%;
 }
 .navbar ul li{
     margin-right: 20px;
@@ -193,48 +201,58 @@ nav.navbar{
 }
 .navbar ul li a div.user{
     height: 50px;
-    border-radius: 25px;
     text-align: center;
     display: flex;
     flex-flow:row ;
     align-items: center;
     justify-content: space-around;
-    padding:0 15px;
-}
-div.user i{
-    font-size: 3rem;
-    line-height: 60px;
+    color: #f2f3f5;
 }
 div.user span{
     font-size: 2rem;
     line-height: 60px;
     margin-right: 5px;
 }
+div.user i{
+    font-size: 3rem;
+    line-height: 60px;
+}
+.navbar ul li a div.user img{
+    height: 40px;
+    width: auto;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
 
 footer{
-    background-color: #666;
+    background-color: #cbcdd1;
     height: 60px;
     width: 100%;
     display: block;
     padding: 0;
-    color: #fff;
 }
 
 footer p{
     text-align: center;
     line-height: 60px;
     margin: 0;
+    color: #777;
 }
 
 /* --------------------- */
 /* Render questions */
+.questions-container{
+    max-height: 100vh;
+    overflow-y: scroll;
+    padding: 10px;
+}
 .question{
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
-    margin-top: 10px;
     padding: 0 10px;
     background-color: #f2f2f2;
     border-radius: 15px;
+    margin-bottom: 10px;
 }
 .question-elemment{
     position: relative;

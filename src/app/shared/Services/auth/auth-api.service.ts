@@ -17,7 +17,9 @@ export class AuthApiService {
   getUsers(): Observable<{}> {
     return this.http.get(userUrl);
   }
-
+  getUsername(id:string):Observable<{}>{
+    return this.http.get(`${userUrl}/${id}`);
+  }
   addUser(user: User): Observable<{}> {
     return this.http.post(`${userUrl}/signup`, user);
   }

@@ -1,0 +1,15 @@
+.not-found{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.error-page-content{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+.error-page-content p{
+    margin-top: 20px;
+}

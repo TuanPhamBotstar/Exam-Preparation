@@ -1,3 +1,23 @@
+.test-content{
+    position: relative;
+    top:-40px;
+    background-color: #fff;
+    padding-top: 20px;
+    z-index: 10;
+}
+.test-btn{
+    display: flex;
+    flex: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.panel-body{
+    padding: 0;
+}
 .panel-body input {
     width: auto;
     height: auto;
@@ -17,4 +37,49 @@
 label, input{
     font-weight: initial;
     cursor: pointer;
+}
+/*  confirm block */
+.confirm-del-subject{
+    position: absolute;
+    top: 40px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 60%;
+}
+.confirm-del-subject i{
+    position: absolute;
+    top:10px;
+    right: 10px;
+}
+.confirm-del-subject button{
+    margin: 20px 40px;
+}
+/* share box */
+.share-box{
+    border: 2px solid green;
+    border-radius: 5px;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+}
+.share-box .panel{
+    margin-bottom: 0;
+}
+.share-box .panel-heading i{
+    position: absolute;
+    top:15px;
+    right: 15px;
+}
+.share-box .panel-heading input[type=text]{
+    cursor: initial;
+}
+.share-box .panel-heading label{
+    cursor: initial;
+    width: auto;
+    display: inline;
+}
+.share-box .panel-heading button{
+    width: auto;
 }

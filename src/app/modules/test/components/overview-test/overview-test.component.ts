@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { TestApiService } from 'src/app/modules/subject/services/test-api.service';
@@ -10,36 +10,44 @@ import { TestApiService } from 'src/app/modules/subject/services/test-api.servic
   styleUrls: ['./overview-test.component.css']
 })
 export class OverviewTestComponent implements OnInit {
-  public tests:any;
-  public subject_id:string;
+  public show:boolean = true;
+  public tests: any;
+  public subject_id: string;
+  public subjectname: string;
   constructor(
-    private _location:Location,
+    private _location: Location,
     private testApi: TestApiService,
     public router: Router,
   ) { }
 
   ngOnInit(): void {
-    if(this.subject_id){
-      this.testApi.getTestsBySubject_id(this.subject_id).subscribe(data =>{
+    if (this.subject_id) {
+      this.testApi.getTestsBySubject_id(this.subject_id).subscribe(data => {
         console.log(data)
         this.tests = data;
       })
     }
   }
-  getSubject_id(id:string){
-    this.subject_id = id;
-    console.log(this.subject_id)
+  getSubject_id(id: string, subjectname: string) {
+      this.subject_id = id;
+      this.subjectname = subjectname;
+      console.log(this.subject_id)
   }
-  getDetailTest(){
-    this.router.navigate(['/chi-tiet/de-thi/noi-dung']);
+  getDetailTest(i: number) {
+    this.router.navigate(['/chi-tiet/de-thi/noi-dung-de-thi'], { queryParams: {bo_de: this.subject_id, de_thi: this.tests[i]._id } });
   }
-  onCreateTest(){
-    this.router.navigate(['/chi-tiet/de-thi/tao-de-thi']);
+  onCreateTest() {
+    this.router.navigate(['/chi-tiet/de-thi/tao-de-thi'], { queryParams: { bo_de: this.subject_id}});
   }
-  onBack(){
+  onBack() {
     this._location.back();
   }
-  onActive(childCpn){
-    
+  onActive(childCpn) {
+    this.show = false;
+    console.log(childCpn)
+    childCpn.getSubject_id(this.subject_id);
+  }
+  onDeactivate() {
+    this.show = true;
   }
 }

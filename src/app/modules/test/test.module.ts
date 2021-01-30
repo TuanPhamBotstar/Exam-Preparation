@@ -5,6 +5,7 @@ import { TestRoutingModule } from './test-routing.module';
 import { TestComponent } from './components/test/test.component';
 import { OverviewTestComponent } from './components/overview-test/overview-test.component';
 import { TestingComponent } from './components/testing/testing.component';
+import { ResultComponent } from './components/result/result.component';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { TestingComponent } from './components/testing/testing.component';
     TestComponent,
     OverviewTestComponent,
     TestingComponent,
+    ResultComponent,
   ],
   imports: [
     CommonModule,

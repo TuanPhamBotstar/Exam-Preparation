@@ -1,13 +1,13 @@
+.main-container{
+    width: 100%;
+}
 section.feature-section{
-    /* position: absolute;
-    top:50%;
-    right: 0;
-    transform: translateY(-50%); */
-    margin: 50px 0 120px 0;
+    /* margin: 50px 0 120px 0; */
     display: flex;
     flex-flow: row nowrap;
-    width: 100vw;
+    align-items: center;
     justify-content: space-around;
+    height: calc(100vh - 140px);
 }
 section div.feature{
     position: relative;
@@ -36,11 +36,16 @@ section div.feature button{
     bottom: 10px;
     right: 50%;
     font-size: 1.2em;
-    letter-spacing: 2px;
+    /* letter-spacing: 2px; */
     transform: translateX(50%);
     padding: 5px 15px;
     border-radius: 5px;
-    background-color: #5b9bd1;
+    /* background-color: #5b9bd1; */
+    --gradient-from-color: #5b9bd1;
+    --gradient-to-color: #8cc5f3;
+    background: var(--gradient-to-color) 
+    linear-gradient(180deg,var(--gradient-from-color),
+    var(--gradient-to-color) 51%,var(--gradient-from-color));
     border: none;
 }
 section div.feature button:hover{

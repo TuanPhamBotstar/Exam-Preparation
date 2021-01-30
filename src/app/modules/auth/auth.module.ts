@@ -6,7 +6,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AccountComponent } from './components/account/account.component';
-import { LoggedInComponent } from './components/logged-in/logged-in.component'
+import { NotFoundComponent } from './components/page-not-found/not-found.component'
 import { HttpClientModule } from '@angular/common/http';
 // ngrx
 import { StoreModule } from '@ngrx/store';
@@ -20,7 +20,7 @@ import { UserEffects } from '../../store/effects/user.efffects';
     SignInComponent,
     SignUpComponent,
     AccountComponent,
-    LoggedInComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,

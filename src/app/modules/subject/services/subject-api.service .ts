@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Question } from '../models/question.model';
 import { Subject } from '../models/subject.model';
 
 const subjectUrl = 'http://localhost:8082/api/admin/subjects';
@@ -17,17 +18,20 @@ export class SubjectApiService {
     console.log(subject)
     return this.http.post(subjectUrl, subject);
   }
-  getSubject():Observable<{}>{
-    return this.http.get(subjectUrl);
+  getSubjects(user_id:string):Observable<{}>{
+    return this.http.get(`${subjectUrl}/author/${user_id}`);
   }
-  getSubjectByName(subjectname:string):Observable<any>{
-    return this.http.get(`${subjectUrl}/${subjectname}`);
+  getSubjectName(subject_id:string):Observable<any>{
+    return this.http.get(`${subjectUrl}/${subject_id}`);
   }
   delSubject(id:string):Observable<{}>{
     console.log(id)
     return this.http.delete(`${subjectUrl}/delete/${id}`);
   }
   // question handle
+  addQuestion(question: Question):Observable<{}>{
+    return this.http.post(`${questionUrl}`,question);
+  }
   getQuestions(subject_id:string):Observable<{}>{
     return this.http.get(`${questionUrl}/${subject_id}`);
   }

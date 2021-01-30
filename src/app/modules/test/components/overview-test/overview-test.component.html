@@ -1,12 +1,12 @@
-<router-outlet (activate)="onActive($event)"></router-outlet>
-<div class="overview-test-container">
-    <i class="glyphicon glyphicon-arrow-left" (click)="onBack()"></i>
+<router-outlet (activate)="onActive($event)" (deactivate)="onDeactivate()"></router-outlet>
+<div class="overview-test-container" *ngIf="show">
+    <!-- <i class="fa fa-long-arrow-left" aria-hidden="true" (click)="onBack()"> Quay lại</i> -->
     <div class="subject-content">
         <div class="subject" 
         *ngFor="let test of tests; let i = index"
             
         >
-            <div class="subject-element" (click)="getDetailTest()">
+            <div class="subject-element" (click)="getDetailTest(i)">
     
                 <i class="glyphicon glyphicon-folder-open"></i>
                 <p>Đề thi - {{test.testTitle | uppercase}}</p>

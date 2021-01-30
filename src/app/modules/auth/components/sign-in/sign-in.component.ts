@@ -13,6 +13,7 @@ import { AuthApiService } from 'src/app/shared/Services/auth/auth-api.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
+
   public signInForm: FormGroup;
   isSignUp: boolean = false;
   isSignedUp:boolean = false;
@@ -22,7 +23,7 @@ export class SignInComponent implements OnInit {
     public router: Router,
     public formBuilder: FormBuilder,
     public auth:AuthService,
-    private authApi:AuthApiService,
+    public authApi: AuthApiService,
     private authGuard: AuthGuard,
   ) { }
 
@@ -49,25 +50,30 @@ export class SignInComponent implements OnInit {
     }
   }
   onSignIn(username: string, password: string) {
-    let currentUser;
+    let currentUser, saveUser;
     if(username.indexOf('@')>-1){
       currentUser = {email: username, password: password};
+      saveUser = { email: username};
     }
     else{
       currentUser = {username: username, password: password};
+      saveUser = { username: username};
     }
     this.auth.login(currentUser);
     this.auth.getUser()
+    // this.authApi.login(currentUser)
       .subscribe(data => {
-        console.log('success',data);
         if(data['isAuthenticated']){
+          console.log('success',data);
           this.error = 1;
-          localStorage.setItem('user',JSON.stringify(currentUser));
+          saveUser.user_id = data['user_id'];
+          localStorage.setItem('user',JSON.stringify(saveUser));
           this.router.navigate(['']);
         }
         else{
           this.error = -1;
         }
     });
+  
   }
 }

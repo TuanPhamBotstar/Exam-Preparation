@@ -7,6 +7,7 @@ export interface UserState {
     loading: boolean,
     error: Error,
     isAuthenticated:boolean,
+    user_id: string,
 }
 
 const initialState: UserState = {
@@ -14,6 +15,7 @@ const initialState: UserState = {
     loading: false,
     error: undefined,
     isAuthenticated:false,
+    user_id:'',
 }
 
 export function reducer(state: UserState = initialState, action: UserActions.action) {
@@ -66,6 +68,7 @@ export function reducer(state: UserState = initialState, action: UserActions.act
             return {
                 ...state,
                 isAuthenticated:action.payload.success,
+                user_id: action.payload.id,
                 loading:false,
             }
         case UserActions.LOGIN_FAILURE:

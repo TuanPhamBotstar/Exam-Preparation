@@ -4,7 +4,7 @@
     padding: 20px;
     background: #f2f2f2;
     min-height: 100vh;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    /* border: 1px solid rgba(0, 0, 0, 0.2); */
 }
 /* subject */
 .subject-content{
@@ -24,6 +24,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    /* padding: 20px; */
   }
   .subject:hover{
   box-shadow: 2px 2px 5px  #5b9bd1 inset,-2px -2px 5px  #5b9bd1 inset;
@@ -45,6 +46,7 @@
   .subject p{
     margin-top: 10px;
     font-weight: 600;
+    width: 120px;
     font-size: 1em;
     white-space: nowrap; 
     overflow: hidden;

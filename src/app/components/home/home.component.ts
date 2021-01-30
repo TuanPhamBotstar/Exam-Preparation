@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Router, ActivatedRoute } from '@angular/router'
 import { AuthApiService } from 'src/app/shared/Services/auth/auth-api.service';
+import { AuthService } from 'src/app/shared/Services/auth/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,18 +8,31 @@ import { AuthApiService } from 'src/app/shared/Services/auth/auth-api.service';
 })
 export class HomeComponent implements OnInit {
   isSignedIn:number = 0;
-  username: string;
+  username: any;
   constructor(
-    public router:Router,
-    public activatedRoute:ActivatedRoute,
     public authApi: AuthApiService,
+    public auth: AuthService,
   ) { }
 
   ngOnInit(): void {
+    this.auth.getUser().subscribe(data => {
+      console.log(data)
+      const user_id = data['user_id'];
+      if(user_id){
+        this.authApi.getUsername(user_id).subscribe(data => {
+          this.username = data;
+        })
+      } 
+    })
+    console.log(localStorage.getItem('user'))
     if(localStorage.getItem('user')){
       this.isSignedIn = 1;
-      this.username = JSON.parse(localStorage.getItem('user')).username;
-      console.log(this.username)
+      const user_id = JSON.parse(localStorage.getItem('user')).user_id;
+      if(user_id){
+        this.authApi.getUsername(user_id).subscribe(data => {
+          this.username = data;
+        })
+      }
     }
   }
 

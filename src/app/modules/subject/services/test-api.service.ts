@@ -22,7 +22,13 @@ export class TestApiService {
   getTest(id:string):Observable<any>{
     return this.http.get(`${testUrl}/${id}`);
   }
+  getTesting(id:string):Observable<any>{
+    return this.http.get(`${testUrl}/testing/${id}`);
+  }
   getTestsBySubject_id(subject_id:string):Observable<{}>{
     return this.http.get(`${testUrl}/subject/${subject_id}`);
+  }
+  delTest(id:string):Observable<{}>{
+    return this.http.delete(`${testUrl}/${id}`);
   }
 }

@@ -13,7 +13,7 @@ import { SubjectApiService } from '../../services/subject-api.service ';
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit {
-
+  public question: Question;
   public levels = [ 
     {name:"Dễ", value : 1},
     {name: "Trung bình", value: 2},
@@ -30,19 +30,7 @@ export class AddQuestionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    /* is instead to viewchild */
-    // this.activatedRoute.queryParams.subscribe(data => {
-    //   this.subjectname = data.bo_de;
-    //   if(this.subjectname){
-    //       this.subjectApi.getSubjectByName(this.subjectname).subscribe(data => {
-    //       this.subject_id = data;
-    //       console.log(this.subject_id);
-    //     })
-    //   }
-    // });
     this.createAddQuestionForm();
-    // console.log(this.answers.controls[0])
-    // this.http.get('http://localhost:8082/api/admin/questions').subscribe(data => console.log(data))
   }
   getSubject_id(id:string){
       this.subject_id = id;
@@ -79,8 +67,8 @@ export class AddQuestionComponent implements OnInit {
     const newAnswer = this.addQuestionForm.value.answers;
     const newLevel = this.addQuestionForm.value.level;
     const newQuestion = new Question(newTitle,newAnswer,newLevel,'',this.subject_id);
-    console.log(newQuestion);
-    this.http.post('http://localhost:8082/api/admin/questions',newQuestion).subscribe(data => console.log(data));
+    console.log(newQuestion); 
+    this.subjectApi.addQuestion(newQuestion).subscribe(data => console.log(data));
     this.addQuestionForm.reset();
   }
   onBack(){

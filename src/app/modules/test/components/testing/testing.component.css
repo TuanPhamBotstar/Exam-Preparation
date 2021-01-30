@@ -1,0 +1,102 @@
+.testing{
+    position: relative;
+    display: flex;
+    /* flex-flow: row nowrap; */
+    width: 100%;
+}
+.testing-sidebar{
+    height: 250px;
+    width: 20%;
+    margin-left: 20px;
+    position: sticky;
+    top: 20px;
+    right: 0;
+    z-index: 1000;
+    padding: 0px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    /* background-color: #5b9bd1; */
+    --gradient-from-color: #5b9bd1;
+    --gradient-to-color: #8cc5f3;
+    background: var(--gradient-to-color) linear-gradient(180deg,var(--gradient-from-color),var(--gradient-to-color) 51%,var(--gradient-from-color));
+    border-radius: 5px;
+    color: #fff;
+}
+.count-down-time{
+    text-align: center;
+    font-size: 2.5em;
+}
+.testing-sidebar div{
+    text-align: center;
+}
+/*  */
+.test-content{
+    position: relative;
+    top:0px;
+    background-color: #f2f2f2;
+    padding-top: 0px;
+    z-index: 10;
+    width: 75%;
+}
+.test-btn{
+    display: flex;
+    flex: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.panel-body{
+    padding: 0;
+}
+.panel-body input {
+    width: auto;
+    height: auto;
+    background-color: #f2f2f2;
+    font-size: 20px;
+    box-shadow: none;
+}
+.panel-body form {
+    display: block;
+}
+.panel-heading{
+    text-align: center;
+}
+.panel-heading p{
+    margin-bottom: 0;
+}
+label, input{
+    font-weight: initial;
+    cursor: pointer;
+}
+
+/*  confirm block */
+.confirm-del-subject{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-80%);
+    width: 50%;
+    z-index: 1000;
+}
+.confirm-del-subject .panel-body{
+    text-align: center;
+}
+.panel-body p{
+    margin: 20px auto;
+}
+.confirm-del-subject i{
+    position: absolute;
+    top:10px;
+    right: 10px;
+}
+.confirm-del-subject button{
+    margin: 20px 40px;
+}
+.isTrue{
+    color: green;
+    font-weight: 600;
+    
+}
