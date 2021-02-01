@@ -12,6 +12,10 @@ import { Router } from '@angular/router';
 })
 export class CreateTestComponent implements OnInit {
 
+  errQty: boolean = false;
+  easyTotal: number;
+  normalTotal: number;
+  hardTotal: number;
   public createTestForm: FormGroup;
   public subject_id: string;
   public subjectname: string;
@@ -45,20 +49,39 @@ export class CreateTestComponent implements OnInit {
   }
   onCreateTest() {
     console.log('create test', this.createTestForm.value)
-    this.testApi.addNewTest(this.createTestForm.value)
-      .subscribe(data => {
-        console.log(data);
-        const test_id = data['_id']
-        this.subjectApi.putQuestionsForTest(data).subscribe(data2 => {
-          console.log(data2);
-          this.testApi.putQuestions(data2).subscribe(finish => {
-            console.log(finish);
-            if (finish) this.router.navigate(['chi-tiet/de-thi/noi-dung-de-thi'],{queryParams: {de_thi: test_id}});
-          });
+    // this.testApi.addNewTest(this.createTestForm.value)
+    //   .subscribe(data => {
+    //     console.log(data);
+    //     const test_id = data['_id']
+    //     this.subjectApi.putQuestionsForTest(data).subscribe(data2 => {
+    //       console.log(data2['susscess']);
+    //       if(data2['susscess']){
+    //         this.testApi.putQuestions(data2).subscribe(finish => {
+    //           console.log(finish);
+    //           if (finish) this.router.navigate(['chi-tiet/de-thi/noi-dung-de-thi'],{queryParams: {de_thi: test_id}});
+    //         });
+    //       }
+    //     })
+    //   });
+    // this.createTestForm.reset();
+    this.subjectApi.putQuestionsForTest(this.createTestForm.value).subscribe(data => {
+      console.log(data)
+      if(data['susscess']){
+        this.errQty = false;
+        this.createTestForm.value.questions = data['questions']
+        console.log(this.createTestForm.value)
+        this.testApi.addNewTest(this.createTestForm.value)
+        .subscribe(data => {
+          this.router.navigate(['chi-tiet/de-thi/noi-dung-de-thi'],{queryParams: {bo_de: this.subject_id, de_thi: data}});
         })
-      });
-    this.createTestForm.reset();
-
+      }
+      else{
+        this.errQty = true;
+        this.easyTotal = data['easyTotal'];
+        this.normalTotal = data['normalTotal'];
+        this.hardTotal = data['hardTotal'];
+      }
+    })
   }
 
   onBack() {

@@ -1,54 +1,54 @@
 
-            <div class="profile-sidebar">
-                <div class="bar-btn">
-                    <i class="glyphicon glyphicon-menu-hamburger"></i>
-                </div>
-                <!-- SIDEBAR USERPIC -->
-                <div class="profile-userpic">
-                    <img src="/assets/img/avatar.png" class="img-responsive" alt="">
-                </div>
-                <!-- END SIDEBAR USERPIC -->
-                <!-- SIDEBAR USER TITLE -->
-                <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">
-                        {{ username | titlecase}}
-                    </div>
-                    <div class="profile-usertitle-job">
-                        Student
-                    </div>
-                </div>
-                <!-- END SIDEBAR USER TITLE -->
-            
-                <!-- SIDEBAR MENU -->
-                <div class="profile-usermenu">
-                    <ul class="nav">
-                        <li>
-                            <a href="#">
-                            <i class="glyphicon glyphicon-th-list"></i>
-                            Tổng Quan </a>
-                        </li>
-                        <li class="active">
-                            <a (click) = "toSubject()">
-                            <i class="glyphicon glyphicon-folder-open"></i>
-                            Bộ Đề </a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                            Lịch Sử Thi </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            
-                            <i class="glyphicon glyphicon-user"></i>
-                            Chỉnh Sửa Thông Tin </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="logout" (click)="onLogOut()">
-                    <a href="#" class="btn btn-info btn-lg">
-                    <span class="glyphicon glyphicon-log-out"></span> Log out
-                    </a>
-                </div> 
-                <!-- END MENU -->
+    <div class="profile-sidebar" *ngIf="show">
+        <!-- <div class="bar-btn">
+            <i class="glyphicon glyphicon-menu-hamburger" (click)="onToggle()"></i>
+        </div> -->
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic">
+            <img src="/assets/img/avatar.png" class="img-responsive" alt="">
+        </div>
+        <!-- END SIDEBAR USERPIC -->
+        <!-- SIDEBAR USER TITLE -->
+        <div class="profile-usertitle">
+            <div class="profile-usertitle-name">
+                {{ username | titlecase}}
             </div>
+            <div class="profile-usertitle-job">
+                Student
+            </div>
+        </div>
+        <!-- END SIDEBAR USER TITLE -->
+
+        <!-- SIDEBAR MENU -->
+        <div class="profile-usermenu">
+            <ul class="nav">
+                <li>
+                    <a href="#">
+                    <i class="glyphicon glyphicon-th-list"></i>
+                    Tổng Quan </a>
+                </li>
+                <li class="active">
+                    <a (click) = "toSubject()">
+                    <i class="glyphicon glyphicon-folder-open"></i>
+                    Bộ Đề </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                    Lịch Sử Thi </a>
+                </li>
+                <li>
+                    <a href="#">
+                    
+                    <i class="glyphicon glyphicon-user"></i>
+                    Chỉnh Sửa Thông Tin </a>
+                </li>
+            </ul>
+        </div>
+        <div class="logout" (click)="onLogOut()">
+            <a href="#" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-log-out"></span> Log out
+            </a>
+        </div> 
+        <!-- END MENU -->
+    </div>

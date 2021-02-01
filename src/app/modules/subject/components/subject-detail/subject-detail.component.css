@@ -29,6 +29,11 @@
     color:#062f53;
     font-weight: 700;
 }
+.isExistSubject{
+    text-align: center;
+    color: red;
+    margin: 30px;
+}
 /* .question{
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);

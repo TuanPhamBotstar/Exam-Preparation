@@ -50,7 +50,7 @@ export class SignInComponent implements OnInit {
     }
   }
   onSignIn(username: string, password: string) {
-    let currentUser, saveUser;
+    var currentUser, saveUser;
     if(username.indexOf('@')>-1){
       currentUser = {email: username, password: password};
       saveUser = { email: username};
@@ -60,13 +60,17 @@ export class SignInComponent implements OnInit {
       saveUser = { username: username};
     }
     this.auth.login(currentUser);
-    this.auth.getUser()
-    // this.authApi.login(currentUser)
+    // this.auth.getUser()
+    this.authApi.login(currentUser)
       .subscribe(data => {
-        if(data['isAuthenticated']){
-          console.log('success',data);
+        if(data['success']){
+          // console.log('success',data);
           this.error = 1;
-          saveUser.user_id = data['user_id'];
+          saveUser.user_id = data['id'];
+          // console.log(saveUser)
+          if(saveUser.email){
+            saveUser.username = data['username'];
+          }
           localStorage.setItem('user',JSON.stringify(saveUser));
           this.router.navigate(['']);
         }

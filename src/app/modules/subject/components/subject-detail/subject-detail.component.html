@@ -16,13 +16,17 @@
 
 <div class="btn-container">
     <button type="button" class="btn btn-primary" (click)="onAddQuestion()">
-        Thêm câu hỏi
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <span>Thêm câu hỏi</span>
     </button>
     <button type="button" class="btn btn-primary" (click)="overviewTests()">
         <i class="glyphicon glyphicon-list-alt"></i>
         <span>Đề thi</span>
     </button>  
-    <button type="button" class="btn btn-danger" (click) = "openConfirmBlock()">Xóa bộ đề</button>
+    <button type="button" class="btn btn-danger" (click) = "openConfirmBlock()">
+        <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        <span>Xóa bộ đề</span>
+    </button>
 </div>
 
 <router-outlet (activate)="onActive($event)" (deactivate)="onToggle()"></router-outlet>
@@ -44,6 +48,11 @@
             
       </div>
 </div>
+
+<div class="isExistSubject" *ngIf="isExistSubject">
+        Bộ đề không tồn tại
+</div>
+
 <ng-container *ngIf="showQuestions">
     <h3>Danh sách câu hỏi</h3>
     <i *ngIf="questions">( Tổng {{questions.length}} câu hỏi )</i>
@@ -53,7 +62,7 @@
                 <h4 (click)="onEditQuestion(i)">
                     <strong>Câu {{i+1}}:</strong> ({{levels[question.level]}})
                 </h4>
-                <i class="glyphicon glyphicon-minus" (click)="onEditQuestion(question)"></i>
+                <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEditQuestion(question)"></i>
                 <p>
                     {{question.title}}
                 </p>
@@ -61,8 +70,8 @@
             <div class="answers">
                 <div class="" *ngFor="let answer of question.answers; let j = index">
                     <div class="answer-elemnt is{{answer.isCorrect}}">
-                        <input type="checkbox" id="'a'+j" value="j">
-                        <label for="'a'+j">
+                        <input type="checkbox" id="a_{{i}}_{{j}}" value="j" name="a_{{i}}">
+                        <label for="a_{{i}}_{{j}}">
                             {{answer.content}}
                         </label>
                     </div>

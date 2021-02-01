@@ -19,9 +19,8 @@
         <ng-template #signedIn>
             <li>
                 <a 
-                [routerLink]="['/']"
                 >
-                    <div class="user">
+                    <div class="user" (click)="onToggleSidebar()">
                         <span>{{username | titlecase}}</span>
                         <img src="assets/img/avatar.png" >
                     </div>
@@ -31,7 +30,7 @@
     </ul>
 </nav>
 
-<router-outlet></router-outlet>
+<router-outlet (activate)="onActive($event)"></router-outlet>
 
 <footer>
     <p>

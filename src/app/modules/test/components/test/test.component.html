@@ -67,53 +67,48 @@
                 <form 
                 class="add-question"
                 novalidate="true"
-
-            > 
+                [formGroup]="shareForm"
+                (ngSubmit)="onShareTest()"
+                > 
                 <div class="form-group">
                     <label>Link đề thi</label>
                     <input type="text" min="15" step="5" 
                     class="form-control" placeholder="00"
-                    formControlName="timeTest"
-                    #timeTest
+                    formControlName="link"
+                    #link
                     >
                     <span 
                     class="label label-danger"
                     *ngIf="0"
                     >
-                    Vui lòng nhập thời gian thi !
+                    Vui lòng nhập link đề thi !
                     </span>
                 </div>
                 <div class="form-group">
                     <label>Email người nhận</label>
                     <input type="text"  
                     class="form-control" placeholder="aido@gmail.com"
-                    formControlName="codeTest"
-                    #codeTest
+                    formControlName="listEmail"
+                    #listEmail
                     >
                     <span 
                     class="label label-danger"
                     *ngIf="0"
                     >
-                    Vui lòng nhập mã Code !
-                    </span>
-                    <span 
-                    class="label label-danger"
-                    *ngIf="0"
-                    >
-                    Mã code phải gồm 4 chữ số !
+                    Vui lòng nhập Email người nhận !
                     </span>
                 </div>
                 <div class="form-group">
                     <label>Yêu cầu người thi nhập mã code</label>
-                    <input class="" type="checkbox">
+                    <input class="" type="checkbox" formControlName="haveCode" #haveCode>
                 </div>
                 <div class="form-group">
                     
                     <button 
                         type="submit" class="btn btn-primary"
                         [disabled]="0"
-                        >
-                            Chia sẽ
+                    >
+                        Chia sẽ
                     </button>
                 </div>
             </form>

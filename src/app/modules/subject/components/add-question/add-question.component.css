@@ -1,5 +1,16 @@
-.panel-heading{
+.add-question-container{
+    display: flex;
+    flex-flow: row nowrap;
+}
+.showNewQuestion{
+    width: 40%;
+    display: flex;
+    padding-top:100px;
+    padding-left:30px;
+}
+.panel{
     position: relative;
+    width: 60%;
 }
 .panel-heading > i{
     position: absolute;

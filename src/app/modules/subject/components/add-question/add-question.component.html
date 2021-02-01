@@ -1,92 +1,115 @@
-
-<div class="panel panel-heading">
-    <div class="panel-heading">
-            <h3 class="panel-title">Tạo Câu Hỏi</h3>
-            <i class="glyphicon glyphicon-remove" (click)="onBack()"></i>
-    </div>
-    <div class="">
-        <form 
-        class="add-question"
-        novalidate="true"
-        [formGroup]="addQuestionForm"
-        (ngSubmit)="onSaveQuestion()"
-    >
-        <div class="form-group">
-            <h3> Câu Hỏi</h3>
-            <textarea type="text" 
-            class="form-control"
-            placeholder="Nhập câu hỏi ở đây"
-            formControlName="questionTitle"
-            #questionTitle
-            ></textarea>
-            
-            <span 
-            class="label label-danger"
-            *ngIf="addQuestionForm.controls.questionTitle.touched && addQuestionForm.controls.questionTitle.errors?.required"
-            >
-            Vui lòng nhập câu hỏi !
-            </span>
-        </div> 
-        <div class="form-group">
-            <label>Mức độ</label>
-            <select  class="form-control" required="required"
-                formControlName="level"
-                #level
-            >
-                <option *ngFor="let level of levels " [value]="level.value">{{level.name}}</option>
-                <!-- <option value="">Trung bình</option>
-                <option value="">Khó</option> -->
-            </select>
+<div class="add-question-container">
+    <div class="panel panel-heading">
+        <div class="panel-heading">
+                <h3 class="panel-title">Tạo Câu Hỏi</h3>
+                <i class="glyphicon glyphicon-remove" (click)="onBack()"></i>
         </div>
-
-        <h3>Đáp án</h3>
-        <button 
-            type="button" class="btn btn-primary add-answer"
-            (click)="addAnswer()"
-            >
-            <i class="glyphicon glyphicon-plus"></i>
-        </button>
-        <div class="form-group" formArrayName="answers">
-            <div *ngFor="let answer of answers.controls; let i = index">
-                <div [formGroupName] = i>
-                    <div class="answer-container">
-                        <textarea type="text" 
-                        class="form-control answer"
-                        [attr.rows]="1"
-                        placeholder="Nhập đáp án ở đây"
-                        formControlName="content"
-                        #content
-                        ></textarea>
-                        <label class="">
-                            <input type="checkbox" #isCorrect formControlName = "isCorrect">
-                            <span class="checkmark">Đúng</span>
-                        </label>
-                        <label>
-                            <i class="glyphicon glyphicon-trash" (click)="removeAnswer(i)"></i>
-                        </label>
-                    </div>
-                    <span class="label label-danger"
-                        *ngIf="0"
-                    >
-                        Vui lòng nhập đáp án !
-                    </span>
-                </div>
-            </div>
-        </div> 
-        <div class="form-group">
+        <div class="">
+            <form 
+            class="add-question"
+            novalidate="true"
+            [formGroup]="addQuestionForm"
+            (ngSubmit)="onSaveQuestion()"
+        >
+            <div class="form-group">
+                <h3> Câu Hỏi</h3>
+                <textarea type="text" 
+                class="form-control"
+                placeholder="Nhập câu hỏi ở đây"
+                formControlName="questionTitle"
+                #questionTitle
+                ></textarea>
                 
-        </div>
-        <!-- {{this.addQuestionForm.value | json}}   -->
-        <div class="form-group">
-            
-                <button 
-                type="submit"  class="btn btn-primary"
-                [disabled]="addQuestionForm.invalid"
+                <span 
+                class="label label-danger"
+                *ngIf="addQuestionForm.controls.questionTitle.touched && addQuestionForm.controls.questionTitle.errors?.required"
                 >
-                    Tạo câu hỏi
-                </button>
-            
+                Vui lòng nhập câu hỏi !
+                </span>
+            </div> 
+            <div class="form-group">
+                <label>Mức độ</label>
+                <select  class="form-control" required="required"
+                    formControlName="level"
+                    #level
+                >
+                    <option *ngFor="let level of levels " [value]="level.value">{{level.name}}</option>
+                </select>
+            </div>
+
+            <h3>Đáp án</h3>
+            <button 
+                type="button" class="btn btn-primary add-answer"
+                (click)="addAnswer()"
+                >
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>
+            <div class="form-group" formArrayName="answers">
+                <div *ngFor="let answer of answers.controls; let i = index">
+                    <div [formGroupName] = i>
+                        <div class="answer-container">
+                            <textarea type="text" 
+                            class="form-control answer"
+                            [attr.rows]="1"
+                            placeholder="Nhập đáp án ở đây"
+                            formControlName="content"
+                            #content
+                            ></textarea>
+                            <label class="">
+                                <input type="checkbox" #isCorrect formControlName = "isCorrect">
+                                <span class="checkmark">Đúng</span>
+                            </label>
+                            <label>
+                                <i class="glyphicon glyphicon-trash" (click)="removeAnswer(i)"></i>
+                            </label>
+                        </div>
+                        <span class="label label-danger"
+                            *ngIf="0"
+                        >
+                            Vui lòng nhập đáp án !
+                        </span>
+                    </div>
+                </div>
+            </div> 
+            <!-- {{this.addQuestionForm.value | json}}   -->
+            <div class="form-group">
+                
+                    <button 
+                    type="submit"  class="btn btn-primary"
+                    [disabled]="addQuestionForm.invalid"
+                    >
+                        Tạo câu hỏi
+                    </button>
+                
+            </div>
+        </form>
         </div>
-    </form>
+    </div>
+   
+    <div class="showNewQuestion" *ngIf="showNewQuestion">
+        <div class="">
+            <div class="">
+                <div class="question-elemment">
+                    <h4>
+                        <strong>Câu hỏi:</strong> ({{textLevel[(newQs.level)]}})
+                    </h4>
+                    
+                    <p>
+                        <b>{{newQs.title}}</b>
+                    </p>
+                </div>
+                <div class="answers">
+                    <div class="" *ngFor="let item of newQs.answers">
+                        <div class="answer-elemnt" >
+                            <input type="checkbox">
+                            <span >
+                                {{item.content}} ({{item.isCorrect?'Đúng':'Sai'}})
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div> 
     </div>
 </div>

@@ -11,6 +11,8 @@ import { Question } from '../../models/question.model';
   styleUrls: ['./subject-detail.component.css']
 })
 export class SubjectDetailComponent implements OnInit {
+  author: string;
+  public isExistSubject:boolean = false;
   public showQuestions: boolean = true;
   public levels = ['', 'Dễ', 'Trung bình', 'Khó'];
   public questions: any;
@@ -27,18 +29,32 @@ export class SubjectDetailComponent implements OnInit {
   ngOnInit(): void {
       this.activatedRoute.queryParams.subscribe(data => {
         this.subject_id = data.bo_de
-        console.log(data.bo_de)
+        // console.log(data.bo_de)
+        console.log(this.author = JSON.parse(localStorage.getItem('user')).user_id)
         if(this.subject_id){
-          this.subjectApi.getQuestions(this.subject_id).subscribe(data => this.questions = data);
-          this.subjectApi.getSubjectName(this.subject_id).subscribe(data => this.subjectname = data)
+          // this.subjectApi.getQuestions(this.subject_id).subscribe(data => this.questions = data);
+          this.subjectApi.getSubjectName(this.subject_id).subscribe(data => {
+            this.subjectname = data['subjectname'];
+            // console.log(data)
+            if(this.author == data['author']){
+                this.subjectApi.getQuestions(this.subject_id).subscribe(data => this.questions = data);
+            }
+            if(!this.subjectname){
+              this.isExistSubject = true;
+            }
+          })
         }
       });
   }
   onAddQuestion(){
-    this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subject_id} });
+    if(!this.isExistSubject){
+      this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subject_id} });
+    }
   }
   openConfirmBlock(){
-    this.confirmBlock = !this.confirmBlock;
+    if(!this.isExistSubject){
+      this.confirmBlock = !this.confirmBlock;
+    }
   }
   onDelSubject(id:string){
       this.subjectApi.delSubject(id).subscribe(data => console.log(data));
@@ -56,8 +72,9 @@ export class SubjectDetailComponent implements OnInit {
   }
   // test handle
   overviewTests(){
+    if(!this.isExistSubject){
       this.router.navigate(['chi-tiet/de-thi'], {queryParams: {bo_de:this.subject_id}});
-
+    }
   }
   // pass subject_id to child component
   onActive(childCpn){

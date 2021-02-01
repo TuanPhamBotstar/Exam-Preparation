@@ -1,4 +1,45 @@
-
+<div class="type-code" *ngIf="tutorialBox">
+        <div class="panel panel-heading">
+            <div class="panel-heading">
+                    <h3 class="panel-title">Hướng dẫn làm bài thi trắc nghiệm</h3>
+            </div>
+            <div class="">
+                <form 
+                class="add-question"
+                novalidate="true"
+                [formGroup]="confirmCode"
+                (ngSubmit)="onStartTesting()"
+                > 
+                <div class="form-group">
+                    <input type="radio" checked="'checked'">
+                    <label>Chọn câu trả lời đúng nhất</label>
+                </div>
+                <div class="form-group" *ngIf="isTypeCode">
+                    <label>Nhập mã code</label>
+                    <input type="text" 
+                    class="form-control" placeholder="0000"
+                    formControlName="codeTyped"
+                    #codeTyped
+                    >
+                    <span 
+                    class="label label-danger"
+                    *ngIf="errCode"
+                    >
+                    Mã code không đúng !
+                    </span>
+                </div>
+                <div class="form-group">
+                    
+                    <button 
+                        type="submit" class="btn btn-primary"
+                    >
+                        Làm Bài Thi
+                    </button>
+                </div>
+            </form>
+            </div>
+        </div>
+</div>
 <div class="testing">
     <div class="test-content">
         <div class="panel panel-default" *ngIf="test">
@@ -8,7 +49,7 @@
                 <p>Thời gian: {{test.timeTest}} phút</p>
                 <p>Mã đề: {{test.testCode}}</p>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" *ngIf="showTest">
                 <div class="questions-container">
                     <div class="question" *ngFor="let question of questions; let i = index">
                         <div class="question-elemment">
@@ -24,7 +65,7 @@
                                 <div class="answer-elemnt">
                                     <input type="radio" name="a_{{i}}" id="a_{{i}}_{{j}}" #isCorrect (change)="showRes($event,i,j)">
                                     <label for="a_{{i}}_{{j}}">
-                                        {{answer.content}}
+                                        {{alphaArr[j]}}. {{answer.content}}
                                     </label>    
                                 </div>
                             </div>
@@ -32,10 +73,10 @@
                         <div class="answers" *ngIf="total">
                             <div class="" *ngFor="let answer of question.answers; let j = index" >
                                 <div class="answer-elemnt" *ngIf="j==correctAnswer[i]">
-                                    <i>Đáp án: </i>
-                                    <label for="a_{{i}}_{{j}}"  class="isTrue">
+                                    <i class="isTrue">Đáp án: {{alphaArr[j]}}. </i>
+                                    <!-- <label for="a_{{i}}_{{j}}"  class="isTrue">
                                         {{answer.content}}
-                                    </label>    
+                                    </label>     -->
                                 </div>
                             </div>
                         </div>
@@ -73,7 +114,7 @@
             </div>
         </div>
     </div>
-    <div class="testing-sidebar">
+    <div class="testing-sidebar" *ngIf="showTest"> 
         <div class="count-down-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
             <p>{{m}} : {{s}}</p>

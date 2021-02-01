@@ -15,7 +15,9 @@ body{
     margin: 0;
     padding: 0px;
 }
-
+i:hover{
+    color: crimson;
+}
 /* cursor pointer */
 i{
     cursor: pointer;
@@ -258,7 +260,7 @@ footer p{
     position: relative;
 }
 
-.question-elemment .glyphicon-minus{
+.question-elemment .fa-pencil-square-o{
     position: absolute;
     top:0px;
     right: 15px;

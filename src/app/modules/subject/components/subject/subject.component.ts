@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+//viewChild
+import { ProfileSidebarComponent } from '../profile-sidebar/profile-sidebar.component';
 @Component({
   selector: 'app-subject',
   templateUrl: './subject.component.html',
   styleUrls: ['./subject.component.css']
 })
-export class SubjectComponent implements OnInit {
-  public subjectForm: FormGroup;
+export class SubjectComponent implements OnInit  {
+  public colMd: number = 9;
   isOpen: Boolean = false;
   constructor(
     public router:Router,
-    public formBuilder:FormBuilder,
   ) { }
-
-  ngOnInit(): void {}
+  @ViewChild(ProfileSidebarComponent) child: ProfileSidebarComponent;
+  // ngAfterViewInit(){
+  //   this.child.onToggle()
+  // }
+  ngOnInit(): void {
+  }
  
-
   onLogOut(){
     localStorage.removeItem('user');
     console.log('logout')
@@ -29,5 +32,18 @@ export class SubjectComponent implements OnInit {
   }
   closePopup(){
     this.isOpen = false;
+  }
+  getShowSidebar(value){
+    console.log(value)
+    this.colMd = 9;
+  }
+  onToggleSidebr(){
+    this.child.onToggle();
+    if(this.colMd === 9){
+      this.colMd = 12;
+    }
+    else{
+      this.colMd = 9;
+    }
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { TestApiService } from 'src/app/modules/subject/services/test-api.service';
 import { ResApiService } from '../../services/res-api.service';
@@ -10,10 +12,18 @@ import { ResApiService } from '../../services/res-api.service';
 })
 export class TestingComponent implements OnInit {
 
+  alphaArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  tutorialBox: boolean = true;
+  isTypeCode: boolean;
+  errCode: boolean = false;
+  testCode: number;
+  test_id: string;
+  showTest: boolean = false;
+  confirmCode: FormGroup;
   public point: number;
   public total: number;
   public chosenAnsers: any = [];
-  public correctAnswer:any;
+  public correctAnswer: any;
   public testing: any;
   public resBlock: boolean = false;
   public confirmBlock: boolean = false;
@@ -23,32 +33,47 @@ export class TestingComponent implements OnInit {
   public m: any;
   public s: any = '00';
   constructor(
+    public activatedRouter: ActivatedRoute,
     public testApi: TestApiService,
     public resAPi: ResApiService,
+    public formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
-    this.testApi.getTesting('60151902a8510c125049aa7d').subscribe(test => {
-      console.log(test)
-      this.test = test;
-      this.questions = test.questions;
-      // this.m = test.timeTest;
-      this.timeTest = test.timeTest * 60;
-      if (this.timeTest < 60) {
-        this.m = '00';
-        this.s = this.timeTest;
-      }
-      this.testing = setInterval(() => {
-        this.timeTest--;
-        if (this.timeTest == 0) {
-          this.onReport();
-        }
-        this.m = Math.floor(this.timeTest / 60)
-        this.s = this.timeTest - 60 * this.m;
-        if (this.m < 10) { this.m = '0' + this.m }
-        if (this.s < 10) { this.s = '0' + this.s }
-      }, 1000)
+    this.confirmCode = this.formBuilder.group({
+      codeTyped: ['']
+    })
+    this.activatedRouter.queryParams.subscribe(data => {
+      this.test_id = data.de_thi;
+      if (this.test_id) {
+        this.testApi.getTesting(this.test_id).subscribe(test => {
+          // console.log(test)
+          this.isTypeCode = test.typeCode;
+          this.testCode = test.testCode;
+          this.test = test;
+          this.questions = test.questions;
+          this.timeTest = test.timeTest * 60;
+          if (this.timeTest < 60) {
+            this.m = '00';
+            this.s = this.timeTest;
+          }
+          this.m = Math.floor(this.timeTest / 60)
+          this.s = this.timeTest - 60 * this.m;
+          if (this.m < 10) { this.m = '0' + this.m }
+          if (this.s < 10) { this.s = '0' + this.s }
+          // this.testing = setInterval(() => {
+          //   this.timeTest--;
+          //   if (this.timeTest == 0) {
+          //     this.onReport();
+          //   }
+          //   this.m = Math.floor(this.timeTest / 60)
+          //   this.s = this.timeTest - 60 * this.m;
+          //   if (this.m < 10) { this.m = '0' + this.m }
+          //   if (this.s < 10) { this.s = '0' + this.s }
+          // }, 1000)
 
+        })
+      }
     })
   }
 
@@ -56,7 +81,7 @@ export class TestingComponent implements OnInit {
     clearInterval(this.testing);
     console.log(this.chosenAnsers)
     const check = {
-      test_id: '60151902a8510c125049aa7d',
+      test_id: this.test_id,
       chosenAnswers: this.chosenAnsers,
       timetest: this.timeTest,
     }
@@ -83,5 +108,41 @@ export class TestingComponent implements OnInit {
   }
   closeResBlock() {
     this.resBlock = !this.resBlock;
+  }
+  onStartTesting() {
+    console.log(this.confirmCode.value)
+    if(this.isTypeCode){
+      if (this.confirmCode.value.codeTyped === this.testCode) {
+        this.tutorialBox = false;
+        this.showTest = true;
+        this.testing = setInterval(() => {
+          this.timeTest--;
+          if (this.timeTest == 0) {
+            this.onReport();
+          }
+          this.m = Math.floor(this.timeTest / 60)
+          this.s = this.timeTest - 60 * this.m;
+          if (this.m < 10) { this.m = '0' + this.m }
+          if (this.s < 10) { this.s = '0' + this.s }
+        }, 1000)
+      }
+      else {
+        this.errCode = true;
+      }
+    }
+    else{
+        this.tutorialBox = false;
+        this.showTest = true;
+        this.testing = setInterval(() => {
+          this.timeTest--;
+          if (this.timeTest == 0) {
+            this.onReport();
+          }
+          this.m = Math.floor(this.timeTest / 60)
+          this.s = this.timeTest - 60 * this.m;
+          if (this.m < 10) { this.m = '0' + this.m }
+          if (this.s < 10) { this.s = '0' + this.s }
+        }, 1000)
+    }
   }
 }

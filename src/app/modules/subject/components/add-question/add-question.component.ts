@@ -13,7 +13,10 @@ import { SubjectApiService } from '../../services/subject-api.service ';
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit {
+  showNewQuestion: boolean = false;
+  newQs: any;
   public question: Question;
+  public textLevel = ['', 'Dễ', 'Trung bình', 'Khó'];
   public levels = [ 
     {name:"Dễ", value : 1},
     {name: "Trung bình", value: 2},
@@ -68,11 +71,14 @@ export class AddQuestionComponent implements OnInit {
     const newLevel = this.addQuestionForm.value.level;
     const newQuestion = new Question(newTitle,newAnswer,newLevel,'',this.subject_id);
     console.log(newQuestion); 
+    this.newQs = newQuestion;
     this.subjectApi.addQuestion(newQuestion).subscribe(data => console.log(data));
+    this.showNewQuestion = true;
     this.addQuestionForm.reset();
   }
   onBack(){
     this._location.back();
+    this.showNewQuestion = false;
   }
   
 }

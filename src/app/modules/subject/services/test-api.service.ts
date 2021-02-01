@@ -31,4 +31,7 @@ export class TestApiService {
   delTest(id:string):Observable<{}>{
     return this.http.delete(`${testUrl}/${id}`);
   }
+  putTypeCode(shareTest: {}):Observable<{}>{
+    return this.http.put(`${testUrl}`,shareTest);
+  }
 }

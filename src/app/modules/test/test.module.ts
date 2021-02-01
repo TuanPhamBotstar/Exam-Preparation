@@ -6,7 +6,7 @@ import { TestComponent } from './components/test/test.component';
 import { OverviewTestComponent } from './components/overview-test/overview-test.component';
 import { TestingComponent } from './components/testing/testing.component';
 import { ResultComponent } from './components/result/result.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import { ResultComponent } from './components/result/result.component';
   imports: [
     CommonModule,
     TestRoutingModule,
+    ReactiveFormsModule,
   ],
   exports: [
     TestComponent,
