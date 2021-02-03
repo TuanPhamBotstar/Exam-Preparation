@@ -6,6 +6,7 @@ import { Question } from "../../models/question.model";
 // go to previous page
 import {Location} from '@angular/common';
 import { SubjectApiService } from '../../services/subject-api.service ';
+import { SubjectService } from '../../services/subject.service';
 
 @Component({
   selector: 'app-add-question',
@@ -29,7 +30,7 @@ export class AddQuestionComponent implements OnInit {
     public formBuilder:FormBuilder,
     public http: HttpClient,
     private _location:Location,
-    public subjectApi: SubjectApiService,
+    public subjectService: SubjectService,
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +73,8 @@ export class AddQuestionComponent implements OnInit {
     const newQuestion = new Question(newTitle,newAnswer,newLevel,'',this.subject_id);
     console.log(newQuestion); 
     this.newQs = newQuestion;
-    this.subjectApi.addQuestion(newQuestion).subscribe(data => console.log(data));
+    // this.subjectApi.addQuestion(newQuestion).subscribe(data => console.log(data));
+    this.subjectService.addQuestion(newQuestion);
     this.showNewQuestion = true;
     this.addQuestionForm.reset();
   }

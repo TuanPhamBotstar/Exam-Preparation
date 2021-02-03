@@ -38,6 +38,8 @@ import { UserEffects } from '../../store/effects/user.efffects';
     EffectsModule.forRoot([
       UserEffects,
     ]),
+    // StoreModule.forFeature('user', reducer),
+    // EffectsModule.forFeature([UserEffects]),
     /*
      EffectsModule.forRoot([
       CustomerSupportEffects,

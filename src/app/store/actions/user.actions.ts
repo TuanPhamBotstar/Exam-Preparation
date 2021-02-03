@@ -5,7 +5,7 @@ import { User } from '../../shared/models/user.model';
 
 export const LOAD_USERS = '[USER] Load Users';
 export const LOAD_USERS_SUCCESS = '[USER] Load Users Success';
-export const LOAD_USERS_FAILURE = '[USER] Load Users Fialure';
+export const LOAD_USERS_FAILURE = '[USER] Load Users Failure';
 export const ADD_USER = '[USER] Add User';
 export const ADD_USER_SUCCESS = '[USER] Add User Success';
 export const ADD_USER_FAILURE = '[USER] Add User Failure';

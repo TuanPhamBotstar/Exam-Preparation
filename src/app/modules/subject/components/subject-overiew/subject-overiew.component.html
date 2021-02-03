@@ -1,13 +1,24 @@
+<ul class="pagination">
+    <li><a (click)="onBack()">&laquo;</a></li>
+    <ng-container *ngFor="let page of arrayV(); let i= index;">
+        <li routerLinkActive="active">
+            <a [routerLink]="['/bo-de']" [queryParams]="{trang: i+1}">
+                {{i+1}}
+            </a>
+        </li>
+    </ng-container>
+    <li><a (click)="onPrevious()">&raquo;</a></li>
+</ul>
 <div class="subject-content">
     <div class="subject" 
         *ngFor="let subject of subjects"
         (click)="detailSubject(subject._id)"
-    >
+    >   
         <div class="subject-element">
 
             <i class="glyphicon glyphicon-folder-open"></i>
             <p>Bộ Đề - {{subject.subjectname | uppercase}}</p>
-        </div>
+        </div>  
     </div>
     <div class="subject add">
         <div class="subject-element">

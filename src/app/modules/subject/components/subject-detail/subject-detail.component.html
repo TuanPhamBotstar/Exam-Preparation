@@ -3,10 +3,10 @@
 <div class="navbar">
     <ul class="nav navbar-nav">
         <li >
-            <a [routerLink]="['/bo-de']">Tất cả bộ đề</a>
+            <a [routerLink]="['/bo-de']" [queryParams]="{trang: 1}">Tất cả bộ đề</a>
         </li>
         <li routerLinkActive = "active">
-            <a [routerLink]="['/chi-tiet']" [queryParams]="{bo_de: subject_id}">Bộ đề {{subjectname | uppercase}}</a>
+            <a [routerLink]="['/chi-tiet']" [queryParams]="{bo_de: subject_id, trang: 1}">Bộ đề {{subjectname | uppercase}}</a>
         </li>
         <li routerLinkActive = "active" *ngIf="!showQuestions">
             <a [routerLink]="['/chi-tiet/de-thi']" [queryParams]="{bo_de: subject_id}">Tất cả đề thi</a>
@@ -15,6 +15,10 @@
 </div>
 
 <div class="btn-container">
+    <button type="button" class="btn btn-primary" (click)="onBack()">
+        <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+        <span>Quay lại</span>
+    </button>
     <button type="button" class="btn btn-primary" (click)="onAddQuestion()">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <span>Thêm câu hỏi</span>
@@ -32,9 +36,10 @@
 <router-outlet (activate)="onActive($event)" (deactivate)="onToggle()"></router-outlet>
 
 <div class="panel panel-danger confirm-del-subject" *ngIf="confirmBlock">
+      
       <div class="panel-heading">
             <h3 class="panel-title">Xóa Bộ Đề</h3>
-            <i class="glyphicon glyphicon-remove" (click)="onBack()"></i>
+            <i class="glyphicon glyphicon-remove" (click)="openConfirmBlock()"></i>
       </div>
       <div class="panel-body">
             Bạn có chắc chắn muốn xóa bộ đề {{subjectname | uppercase}} không ?
@@ -55,12 +60,25 @@
 
 <ng-container *ngIf="showQuestions">
     <h3>Danh sách câu hỏi</h3>
-    <i *ngIf="questions">( Tổng {{questions.length}} câu hỏi )</i>
+    
+    
+    <ul class="pagination">
+        <li><a (click)="onPrevious()">&laquo;</a></li>
+        <ng-container *ngFor="let page of arrayV(); let i= index;">
+            <li routerLinkActive="active">
+                <a [routerLink]="['/chi-tiet']" [queryParams]="{bo_de: subject_id, trang: i+1}">
+                    {{i+1}}
+                </a>
+            </li>
+        </ng-container>
+        <li><a (click)="onNext()">&raquo;</a></li>
+    </ul>
+    <i *ngIf="questions">( Tổng {{total}} câu hỏi )</i>
     <div class="questions-container">
         <div class="question" *ngFor="let question of questions; let i = index">
             <div class="question-elemment">
                 <h4 (click)="onEditQuestion(i)">
-                    <strong>Câu {{i+1}}:</strong> ({{levels[question.level]}})
+                    <strong>Câu {{i+1+(page-1)*10}}:</strong> ({{levels[question.level]}})
                 </h4>
                 <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEditQuestion(question)"></i>
                 <p>

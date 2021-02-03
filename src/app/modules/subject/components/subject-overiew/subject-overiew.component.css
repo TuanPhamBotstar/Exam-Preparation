@@ -5,12 +5,11 @@
     flex-flow: row  wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    padding-top: 20px;
     }
 /* subject */
 .subject{
-    width: 180px;
-    height: 180px;
+    width: 170px;
+    height: 150px;
     border: 1px solid #5b9bd1;
     border-radius: 10px;
     text-align: center;
@@ -37,15 +36,23 @@
   .subject i{
     font-size: 2.5em;
   }
+  i.glyphicon-folder-open{
+    color: darkgoldenrod;
+  }
   .subject p{
     margin-top: 10px;
     font-weight: 600;
-    font-size: 1.5em;
+    font-size: 1.2em;
     white-space: nowrap; 
-    width: 180px; 
+    width: 170px; 
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .subject .subject-element{
     margin: auto auto;
   }
+
+/* pagination */
+.pagination{
+  margin: 10px 0 0;
+}

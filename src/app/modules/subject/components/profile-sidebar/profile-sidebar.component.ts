@@ -28,9 +28,10 @@ export class ProfileSidebarComponent implements OnInit {
     }
   }
   toSubject() {
-    this.router.navigate(['/bo-de']);
+    this.router.navigate(['/bo-de'],{ queryParams: {trang: 1}});
   }
   onLogOut() {
+    localStorage.clear();
     localStorage.removeItem('user');
     console.log('logout')
     this.router.navigate(['/gioi-thieu']);

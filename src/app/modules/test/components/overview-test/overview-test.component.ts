@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { TestApiService } from 'src/app/modules/subject/services/test-api.service';
+import { TestService } from 'src/app/modules/subject/services/test.service';
 
 @Component({
   selector: 'app-overview-test',
@@ -16,16 +16,22 @@ export class OverviewTestComponent implements OnInit {
   public subjectname: string;
   constructor(
     private _location: Location,
-    private testApi: TestApiService,
+    private testService: TestService,
     public router: Router,
   ) { }
 
   ngOnInit(): void {
     if (this.subject_id) {
-      this.testApi.getTestsBySubject_id(this.subject_id).subscribe(data => {
-        console.log(data)
-        this.tests = data;
-      })
+      // this.testApi.getTestsBySubject_id(this.subject_id).subscribe(data => {
+      //   console.log(data)
+      //   this.tests = data;
+      // })
+      this.testService.loadTests(this.subject_id);
+      this.testService.getTests()
+        .subscribe(data => {
+          console.log(data)
+          this.tests = data.test.list;
+        })
     }
   }
   getSubject_id(id: string, subjectname: string) {

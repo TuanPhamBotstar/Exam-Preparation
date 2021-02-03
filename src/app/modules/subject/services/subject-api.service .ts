@@ -15,25 +15,24 @@ export class SubjectApiService {
     private http: HttpClient,
   ) { }
   addSubject(subject: Subject): Observable<{}> {
-    console.log(subject)
+    // console.log(subject)
     return this.http.post(subjectUrl, subject);
   }
-  getSubjects(user_id:string):Observable<{}>{
-    return this.http.get(`${subjectUrl}/author/${user_id}`);
+  getSubjects(user_id:string, page: number):Observable<{}>{
+    return this.http.get(`${subjectUrl}/author/${user_id}/${page}`);
   }
   getSubjectName(subject_id:string):Observable<any>{
     return this.http.get(`${subjectUrl}/${subject_id}`);
   }
   delSubject(id:string):Observable<{}>{
-    console.log(id)
     return this.http.delete(`${subjectUrl}/delete/${id}`);
   }
   // question handle
   addQuestion(question: Question):Observable<{}>{
     return this.http.post(`${questionUrl}`,question);
   }
-  getQuestions(subject_id:string):Observable<{}>{
-    return this.http.get(`${questionUrl}/${subject_id}`);
+  getQuestions(subject_id:string, page: number):Observable<{}>{
+    return this.http.get(`${questionUrl}/${subject_id}/${page}`);
   }
   delQuestion(id:string):Observable<{}>{
     return this.http.delete(`${questionUrl}/${id}`);

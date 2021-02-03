@@ -272,3 +272,11 @@ footer p{
 .answer-elemnt input{
     margin-right: 10px;
 }
+
+/* pagination */
+.pagination>li>a{
+    cursor: pointer;
+}
+.pagination>li>a:active{
+    background-color: #69abe6;
+}
