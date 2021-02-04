@@ -79,7 +79,26 @@ label, input{
     cursor: initial;
     width: auto;
     display: inline;
+    margin-right: 10px;
 }
 .share-box .panel-heading button{
     width: auto;
+    height: auto;
+}
+.share-box .panel-heading form button[type=button]{
+    background-color: initial;
+    border-radius: 5px;
+    border: 1px solid #999;
+    padding: 3px;
+    margin-top: 5px;
+    font-size: 1em;
+}
+.share-box .panel-heading form button[type=button]:hover{
+    background-color: #ddd;
+}
+.share-box .panel-heading form button[type=button]:active{
+    background-color: #fff;
+}
+.shareSuccess{
+    color: green;
 }

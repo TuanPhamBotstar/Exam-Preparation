@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 
 export class Test{
-    public id: string;
+    public _id: string;
     public subject_id:string;
     public link:string;
     public testCode:number;
@@ -14,7 +14,7 @@ export class Test{
         testCode: number, testTitle: string, timetest: string, 
         hardQty: number, normalQty: number, easyQty: number)
         {
-        this.id = id;
+        this._id = id;
         this.subject_id = subject_id;
         this.link = link;
         this.testCode = testCode;

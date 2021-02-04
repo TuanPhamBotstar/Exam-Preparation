@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { from } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { from, Subscription } from 'rxjs';
 import { Location } from '@angular/common'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SubjectApiService } from '../../services/subject-api.service ';
 import { TestApiService } from '../../services/test-api.service';
 import { Router } from '@angular/router';
+import { TestService } from '../../services/test.service';
 @Component({
   selector: 'app-create-test',
   templateUrl: './create-test.component.html',
   styleUrls: ['./create-test.component.css']
 })
-export class CreateTestComponent implements OnInit {
+export class CreateTestComponent implements OnInit, OnDestroy{
 
+  subcription: Subscription;
   errQty: boolean = false;
   easyTotal: number;
   normalTotal: number;
@@ -22,13 +24,18 @@ export class CreateTestComponent implements OnInit {
   constructor(
     private _location: Location,
     private subjectApi: SubjectApiService,
-    private testApi: TestApiService,
+    private testService: TestService,
     public formBuilder: FormBuilder,
     public router: Router,
   ) { }
 
   ngOnInit(): void {
     this.initialTestForm();
+  }
+  ngOnDestroy():void{
+    if(this.subcription){
+      this.subcription.unsubscribe();
+    }
   }
   getSubject_id(id: string, subjectname: string) {
     this.subject_id = id;
@@ -70,10 +77,17 @@ export class CreateTestComponent implements OnInit {
         this.errQty = false;
         this.createTestForm.value.questions = data['questions']
         console.log(this.createTestForm.value)
-        this.testApi.addNewTest(this.createTestForm.value)
-        .subscribe(data => {
-          this.router.navigate(['chi-tiet/de-thi/noi-dung-de-thi'],{queryParams: {bo_de: this.subject_id, de_thi: data}});
+        this.testService.addNewTest(this.createTestForm.value);
+        this.subcription = this.testService.getTests().subscribe(data => {
+          console.log(data)
+          if(data.test.test_id){
+            this.router.navigate(['chi-tiet/de-thi/noi-dung-de-thi'],
+            {queryParams: {bo_de: this.subject_id, de_thi: data.test.test_id, trang: 1}});
+          }
         })
+        // .subscribe(data => {
+        //   this.router.navigate(['chi-tiet/de-thi/noi-dung-de-thi'],{queryParams: {bo_de: this.subject_id, de_thi: data}});
+        // })
       }
       else{
         this.errQty = true;

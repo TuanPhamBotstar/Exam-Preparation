@@ -4,9 +4,9 @@
     <div class="subject-content">
         <div class="subject" 
         *ngFor="let test of tests; let i = index"
-            
+        (click)="getDetailTest(i)"       
         >
-            <div class="subject-element" (click)="getDetailTest(i)">
+            <div class="subject-element">
     
                 <i class="glyphicon glyphicon-list-alt"></i>
                 <p>Đề thi - {{test.testTitle | uppercase}}</p>

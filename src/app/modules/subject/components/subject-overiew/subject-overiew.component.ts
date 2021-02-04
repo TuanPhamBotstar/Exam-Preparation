@@ -31,17 +31,17 @@ export class SubjectOveriewComponent implements OnInit, OnDestroy {
     this.activatedRoute.queryParams.subscribe(data => {
       this.page = data.trang;
       this.subjectService.loadSubjects(user_id, this.page);
-      this.subscription = this.subjectService.getSubject().subscribe(data => {
-        console.log(data)
-        this.subjects = data.subject.list;
-        this.total = data.subject.total;
-        this.totalPage = Math.ceil(this.total/ this.perPage);
-      }) 
-    })
+    });
+    this.subscription = this.subjectService.getSubject().subscribe(data => {
+      console.log(data)
+      this.subjects = data.subject.list;
+      this.total = data.subject.total;
+      this.totalPage = Math.ceil(this.total/ this.perPage);
+    });
   }
   ngOnDestroy() {
     if (this.subscription) {
-      console.log('destroyed')
+      console.log('overview subject is destroyed')
       this.subscription.unsubscribe();
     }
   }

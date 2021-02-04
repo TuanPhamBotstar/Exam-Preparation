@@ -11,7 +11,7 @@ import { TestService } from 'src/app/modules/subject/services/test.service';
 })
 export class OverviewTestComponent implements OnInit {
   public show:boolean = true;
-  public tests: any;
+  public tests: any = [];
   public subject_id: string;
   public subjectname: string;
   constructor(
@@ -22,10 +22,6 @@ export class OverviewTestComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.subject_id) {
-      // this.testApi.getTestsBySubject_id(this.subject_id).subscribe(data => {
-      //   console.log(data)
-      //   this.tests = data;
-      // })
       this.testService.loadTests(this.subject_id);
       this.testService.getTests()
         .subscribe(data => {
@@ -40,7 +36,7 @@ export class OverviewTestComponent implements OnInit {
       console.log(this.subject_id)
   }
   getDetailTest(i: number) {
-    this.router.navigate(['/chi-tiet/de-thi/noi-dung-de-thi'], { queryParams: {bo_de: this.subject_id, de_thi: this.tests[i]._id } });
+    this.router.navigate(['/chi-tiet/de-thi/noi-dung-de-thi'], { queryParams: {bo_de: this.subject_id, de_thi: this.tests[i]._id, trang: 1 } });
   }
   onCreateTest() {
     this.router.navigate(['/chi-tiet/de-thi/tao-de-thi'], { queryParams: { bo_de: this.subject_id}});

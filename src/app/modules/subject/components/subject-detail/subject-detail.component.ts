@@ -42,48 +42,34 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
       // console.log(data.bo_de) 
       this.author = JSON.parse(localStorage.getItem('user')).user_id;
       if (this.subject_id) {
-        // this.subjectService.loadSubjects(this.author)
-        this.subjectService.getSubject().pipe(first()).subscribe(data => { // get data from store
-          console.log(data.subject.list)
-          data.subject.list.forEach(subject => {
-            if (subject._id == this.subject_id) {
-              this.subjectname = subject.subjectname;
-            }
-          })
-          if (!this.subjectname) {
-            this.isExistSubject = true;
-          }
-          else {
-            this.subjectService.loadQuestions(this.subject_id, this.page);
-            this.subjectService.getSubject().subscribe(data => {
-              // console.log(data)
-              this.questions = data.question.list;
-              this.total = data.question.total;
-              this.totalPage = Math.ceil(data.question.total / this.perpage);
-            })
-          }
-        })
-        // this.subjectApi.getSubjectName(this.subject_id).subscribe(data => {
-        //   if(data){
-        //     // console.log(data)
-        //     if(this.author == data['author']){
-        //         this.subjectname = data['subjectname'];
-        //         this.subjectApi.getQuestions(this.subject_id).subscribe(data => this.questions = data);
-        //     }
-        //     else{
-        //       this.isExistSubject = true;
-        //     }
-        //   }
-        //   else{
-        //     this.isExistSubject = true;
-        //   }
-        // })
+        this.subjectService.loadSubjects(this.author, this.page);
       }
     });
+    this.subscription = this.subjectService.getSubject().pipe(first()).subscribe(data => { // get data from store
+      console.log(data.subject.list)
+      data.subject.list.forEach(subject => {
+        if (subject._id == this.subject_id) {
+          this.subjectname = subject.subjectname;
+        }
+      })
+      if (!this.subjectname) {
+        this.isExistSubject = true;
+      }
+      else {
+        this.subjectService.loadQuestions(this.subject_id, this.page);
+        this.subjectService.getSubject().subscribe(data => {
+          // console.log(data)
+          this.questions = data.question.list;
+          this.total = data.question.total;
+          this.totalPage = Math.ceil(data.question.total / this.perpage);
+        })
+      }
+    })
   }
   ngOnDestroy() {
     // unsubscribe
     if (this.subscription) {
+      console.log('detail subject is destroyed')
       this.subscription.unsubscribe();
     }
   }
