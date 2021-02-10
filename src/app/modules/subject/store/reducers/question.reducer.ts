@@ -25,7 +25,7 @@ export function questionReducer(state: QuestionState = initialState, action: Que
                 loading: true,
             }
         case QuestionActions.LOAD_QUESTIONS_SUCCESS:
-            // console.log(action.payload)
+            console.log(action.payload)
             return {
                 ...state,
                 list: action.payload.qsOnePage,
@@ -45,10 +45,11 @@ export function questionReducer(state: QuestionState = initialState, action: Que
                 loading: true,
             }
         case QuestionActions.ADD_QUESTION_SUCCESS:
-            // console.log(action.payload)
+            console.log(action.payload)
             return {
                 ...state,
                 list: [...state.list, action.payload],
+                total: state.total + 1,
                 loading: false
             }
         case QuestionActions.ADD_QUESTION_FAILURE:

@@ -55,7 +55,8 @@ export class SignUpComponent implements OnInit {
     // this.authApi.addUser(newUser).subscribe(data => console.log(data));
     this.auth.addUser(newUser);
     this.auth.getUser().subscribe(data => {
-      if(data['isAuthenticated']){
+      console.log(data)
+      if(data['isAuthenticated'] && !data['loading']){
         this.isExist = 1;
         setTimeout(() => {
           this.redirectLogin()

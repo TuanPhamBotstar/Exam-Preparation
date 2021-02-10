@@ -28,7 +28,7 @@
                 </span>
             </div> 
             <div class="form-group">
-                <label>Mức độ</label>
+                <h3>Mức độ</h3>
                 <select  class="form-control" required="required"
                     formControlName="level"
                     #level
@@ -38,13 +38,19 @@
             </div>
 
             <h3>Đáp án</h3>
-            <button 
-                type="button" class="btn btn-primary add-answer"
-                (click)="addAnswer()"
-                >
-                <i class="glyphicon glyphicon-plus"></i>
-            </button>
+            
             <div class="form-group" formArrayName="answers">
+                <div class="answer-container">
+                    <span>
+                        Nội dung    
+                    </span>
+                    <label class="">
+                        Đúng
+                    </label>
+                    <label>
+                        Xóa
+                    </label>
+                </div>
                 <div *ngFor="let answer of answers.controls; let i = index">
                     <div [formGroupName] = i>
                         <div class="answer-container">
@@ -57,10 +63,9 @@
                             ></textarea>
                             <label class="">
                                 <input type="checkbox" #isCorrect formControlName = "isCorrect">
-                                <span class="checkmark">Đúng</span>
                             </label>
                             <label>
-                                <i class="glyphicon glyphicon-trash" (click)="removeAnswer(i)"></i>
+                                <i class="fa fa-minus-square-o" aria-hidden="true" (click)="removeAnswer(i)"></i>
                             </label>
                         </div>
                         <span class="label label-danger"
@@ -71,6 +76,12 @@
                     </div>
                 </div>
             </div> 
+            <button 
+                type="button" class="btn btn-primary add-answer"
+                (click)="addAnswer()"
+                >
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>       
             <!-- {{this.addQuestionForm.value | json}}   -->
             <div class="form-group">
                 
@@ -86,7 +97,7 @@
         </div>
     </div>
    
-    <div class="showNewQuestion" *ngIf="showNewQuestion">
+    <!-- <div class="showNewQuestion" *ngIf="showNewQuestion">
         <div class="">
             <div class="">
                 <div class="question-elemment">
@@ -111,5 +122,5 @@
                 </div>
             </div> 
         </div> 
-    </div>
+    </div> -->
 </div>

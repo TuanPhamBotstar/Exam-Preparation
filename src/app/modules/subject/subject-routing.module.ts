@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/Services/guard/auth-guard.guard';
+import { pathToFileURL } from 'url';
 import { NotFoundComponent } from '../auth/components/page-not-found/not-found.component';
 import { OverviewTestComponent } from '../test/components/overview-test/overview-test.component';
 import { ResultComponent } from '../test/components/result/result.component';
@@ -61,12 +62,16 @@ const routes: Routes = [
       {
         path: 'lam-bai-thi',
         component: TestingComponent,
-        children: [
-          {
-            path: 'ket-qua',
-            component: ResultComponent,
-          },
-        ]
+        // children: [
+        //   {
+        //     path: 'ket-qua',
+        //     component: ResultComponent,
+        //   },
+        // ]
+      },
+      {
+        path: 'lich-su-thi',
+        component: ResultComponent,
       }
     ],
   },

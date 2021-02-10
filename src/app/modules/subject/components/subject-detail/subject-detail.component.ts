@@ -6,7 +6,7 @@ import { Location } from '@angular/common';
 import { Question } from '../../models/question.model';
 import { SubjectService } from '../../services/subject.service';
 import { first, last, take } from 'rxjs/operators';
-import { SubscriptionLike } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-subject-detail',
@@ -14,7 +14,9 @@ import { SubscriptionLike } from 'rxjs';
   styleUrls: ['./subject-detail.component.css']
 })
 export class SubjectDetailComponent implements OnInit, OnDestroy {
-  subscription: SubscriptionLike;
+  subscription: Subscription;
+  subscription2: Subscription;
+  subscription3: Subscription;
   totalPage: number;
   total: number;
   perpage: number = 10;
@@ -36,41 +38,49 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(data => {
+    this.subscription = this.activatedRoute.queryParams.subscribe(data => { 
       this.subject_id = data.bo_de;
       this.page = data.trang;
+      this.subjectService.loadQuestions(this.subject_id, this.page);
       // console.log(data.bo_de) 
       this.author = JSON.parse(localStorage.getItem('user')).user_id;
-      if (this.subject_id) {
-        this.subjectService.loadSubjects(this.author, this.page);
-      }
     });
-    this.subscription = this.subjectService.getSubject().pipe(first()).subscribe(data => { // get data from store
+    this.subscription2 = this.subjectService.getSubject().subscribe(data => { // get data from store
       console.log(data.subject.list)
-      data.subject.list.forEach(subject => {
-        if (subject._id == this.subject_id) {
-          this.subjectname = subject.subjectname;
-        }
-      })
-      if (!this.subjectname) {
+      if(!data.subject.loading){
+        data.subject.list.forEach(subject => {
+          if (subject._id == this.subject_id) {
+            console.log(subject._id)
+            this.subjectname = subject.subjectname;
+            console.log(this.subjectname)
+          }
+        })
+      }
+      if (!this.subjectname && !data.subject.loading) {
+        console.log('subject is not exist')
         this.isExistSubject = true;
       }
       else {
-        this.subjectService.loadQuestions(this.subject_id, this.page);
-        this.subjectService.getSubject().subscribe(data => {
-          // console.log(data)
-          this.questions = data.question.list;
-          this.total = data.question.total;
-          this.totalPage = Math.ceil(data.question.total / this.perpage);
-        })
+        // this.subjectService.loadQuestions(this.subject_id, this.page);
       }
-    })
+    });
+   
+    this.subscription3 = this.subjectService.getSubject().subscribe(data => {
+      // console.log(data)
+      if(!data.question.loading){
+        this.questions = data.question.list;
+        this.total = data.question.total;
+        this.totalPage = Math.ceil(data.question.total / this.perpage);
+      }
+    });
   }
-  ngOnDestroy() {
+  ngOnDestroy() { 
     // unsubscribe
     if (this.subscription) {
       console.log('detail subject is destroyed')
       this.subscription.unsubscribe();
+      this.subscription2.unsubscribe();
+      this.subscription3.unsubscribe();
     }
   }
   onAddQuestion() {
@@ -84,7 +94,7 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
     }
   }
   onDelSubject(id: string) {
-    this.subjectApi.delSubject(id).subscribe(data => console.log(data));
+    this.subjectApi.removeSubject(id).subscribe(data => console.log(data));
     this._location.back();
   }
   //  question handle
@@ -115,9 +125,9 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
   onToggle() {
     this.showQuestions = !this.showQuestions;
   }
-  onBack() {
-    this._location.back();
-  }
+  // onBack() {
+  //   this._location.back();
+  // }
   //pagination
   arrayV() {
     return Array(this.totalPage);

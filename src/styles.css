@@ -15,9 +15,6 @@ body{
     margin: 0;
     padding: 0px;
 }
-i:hover{
-    color: crimson;
-}
 /* cursor pointer */
 i{
     cursor: pointer;
@@ -183,14 +180,15 @@ nav.navbar{
     display: flex;
     height: 80px;
     flex-flow: nowrap row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 }
 .navbar ul li.logo{
-    flex-basis: 70%;
+    /* flex-grow: 7; */
 }
 .navbar ul li{
-    margin-right: 20px;
+    margin-right: 0px;
+    position: relative
 }
 .navbar ul li a{
     display: block;
@@ -208,7 +206,7 @@ nav.navbar{
     flex-flow:row ;
     align-items: center;
     justify-content: space-around;
-    color: #f2f3f5;
+    color: #d1ddeb;
 }
 div.user span{
     font-size: 2rem;
@@ -216,16 +214,46 @@ div.user span{
     margin-right: 5px;
 }
 div.user i{
-    font-size: 3rem;
+    font-size: 2.5rem;
     line-height: 60px;
+    margin-left: 15px;
 }
+
 .navbar ul li a div.user img{
     height: 40px;
     width: auto;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.2);
 }
-
+.change-profile-box{
+    position: absolute;
+    top: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: 220px;
+    padding: 20px 20px;
+}
+.change-profile-box ul{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    height: 60px;
+}
+    
+.change-profile-box ul li a{
+    color: #5a7391;
+    font-size: 1em;
+    font-weight: 400;
+}
+.change-profile-box ul li a:hover {
+    background-color: #fafcfd;
+    color: #5b9bd1;
+  }
+/* footer */
 footer{
     background-color: #cbcdd1;
     height: 60px;
@@ -244,8 +272,8 @@ footer p{
 /* --------------------- */
 /* Render questions */
 .questions-container{
-    max-height: 100vh;
-    overflow-y: scroll;
+    min-height: 100vh;
+    /* overflow-y: scroll; */
     padding: 10px;
 }
 .question{

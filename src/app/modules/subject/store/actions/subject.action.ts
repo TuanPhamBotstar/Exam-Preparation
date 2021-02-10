@@ -14,6 +14,11 @@ export const ADD_SUBJECTS_FAILURE = '[SUBJECT] Add Subjects Failure';
 export const LOAD_QUESTIONS = '[SUBJECT] Load Questions';
 export const LOAD_QUESTIONS_SUCCESS = '[SUBJECT] Load Questions Success';
 export const LOAD_QUESTIONS_FAILURE = '[SUBJECT] Load Questions Failure';
+
+export const REMOVE_SUBJECTS = '[SUBJECT] Remove Subjects';
+export const REMOVE_SUBJECTS_SUCCESS = '[SUBJECT] Remove Subjects Success';
+export const REMOVE_SUBJECTS_FAILURE = '[SUBJECT] Remove Subjects Failure';
+
 //  load subjects
 export class LoadSubjects implements Action {
     readonly type = LOAD_SUBJECTS;
@@ -45,7 +50,22 @@ export class AddSubjectsFailure implements Action {
     constructor(public payload: Error) { }
 }
 
+export class RemoveSubjects implements Action {
+    readonly type = REMOVE_SUBJECTS;
+    constructor(public subject_id: string) {}
+}
+
+export class RemoveSubjectsSuccess implements Action {
+    readonly type = REMOVE_SUBJECTS_SUCCESS;
+    constructor(public payload: any) { }
+}
+
+export class RemoveSubjectsFailure implements Action {
+    readonly type = REMOVE_SUBJECTS_FAILURE;
+    constructor(public payload: Error) { }
+}
 export type action = LoadSubjects | LoadSubjectsSuccess | LoadSubjectsFailure |
-                     AddSubjects | AddSubjectsSuccess | AddSubjectsFailure 
+                     AddSubjects | AddSubjectsSuccess | AddSubjectsFailure |
+                     RemoveSubjects | RemoveSubjectsSuccess | RemoveSubjectsFailure
 
                     

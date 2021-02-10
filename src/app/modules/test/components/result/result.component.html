@@ -1,1 +1,72 @@
-<p>result works!</p>
+
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Đề Thi</th>
+        <th>Điểm</th>
+        <th>Thời Gian Thi (giây)</th>
+    </tr>
+    <tr *ngFor="let result of results; let i = index">
+        <td>{{i+1}}</td>
+        <td (click)="viewChosenAnswer(result.test_id, result.chosenAnswers, result.correctAnswer)" class="res-detail">
+            {{result.nameTest}}
+        </td>
+        <td>{{result.point}}</td>
+        <td>{{result.time}}</td>
+    </tr>
+</table>
+
+    <div class="test-content">
+        <div class="panel panel-default" *ngIf="test">
+            <div class="panel-heading">
+                <h3 class="panel-title">ĐỀ THI {{test.testTitle | uppercase}}</h3>
+                <i>({{test.easyQty+test.normalQty+test.hardQty}} câu hỏi)</i>
+                <p>Thời gian: {{test.timeTest}} phút</p>
+                <p>Mã đề: {{test.testCode}}</p>
+            </div>
+            <div class="panel-body" >
+                <div class="questions-container">
+                    <div class="question" *ngFor="let question of test.questions; let i = index">
+                        <div class="question-elemment">
+                            <h4>
+                                <!-- <strong>Câu {{i+1+(page-1)*5}}:</strong> -->
+                                <strong>Câu {{i+1}}</strong>
+                            </h4>
+                            <p>
+                                {{question.title}}
+                            </p>
+                        </div>
+                        <div class="answers">
+                            <div class="" *ngFor="let answer of question.answers; let j = index">
+                                <div class="answer-elemnt">
+                                    <input type="radio" *ngIf="j !== chosenAnswers[i] && j !== correctAnswer[i]" disabled="1">
+                                    <i *ngIf="j === chosenAnswers[i] || j === correctAnswer[i]" class="fa fa-check-circle-o" aria-hidden="true" 
+                                        [class.isCorrect]="correctAnswer[i] === chosenAnswers[i] || j === correctAnswer[i]" 
+                                        [class.inCorrect]="correctAnswer[i] !== chosenAnswers[i]">
+                                    </i>
+                                    <label for="a_{{i}}_{{j}}">
+                                        {{alphaArr[j]}}. {{answer['content']}}
+                                        {{answer['content']}}
+                                    </label>    
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <!-- <ul class="pagination" *ngIf="showTest">
+                <li><a (click)="onPrevious()">&laquo;</a></li>
+                <ng-container *ngFor="let no of arrayV(); let i= index;">
+                    <li (click)="toPage(i+1)" [class.active]="i == page - 1">
+                        <a>
+                            {{i+1}}
+                        </a>
+                    </li>
+                </ng-container>
+                <li><a (click)="onNext()">&raquo;</a></li>
+            </ul> -->
+        </div>
+        
+    </div>
+
+

@@ -1,7 +1,7 @@
-.add-question-container{
+/* .add-question-container{
     display: flex;
     flex-flow: row nowrap;
-}
+} */
 .showNewQuestion{
     width: 40%;
     display: flex;
@@ -10,7 +10,7 @@
 }
 .panel{
     position: relative;
-    width: 60%;
+    /* width: 80%; */
 }
 .panel-heading > i{
     position: absolute;
@@ -18,6 +18,7 @@
     right: 10px;
     font-weight: 100;
     font-size: 1.2em;
+    -webkit-text-stroke: 2px #f2f2f2;
 }
 .panel{
     margin-top: 20px;
@@ -31,13 +32,18 @@ form.add-question div button.btn-primary{
 }
 form.add-question button.add-answer{
     background-color: #337ab7;
+    margin-bottom: 10px;
     font-size: 1em;
     text-align: center;
     padding: 0 3px;
 }
-form.add-question textarea{
-    width: 85%;
+form.add-question textarea, form.add-question span{
+    width: 80%;
     resize: vertical;
+}
+form.add-question label{
+    width: 10%;
+    font-weight: normal;
 }
 form.add-question select{
     width:105px;
@@ -50,11 +56,16 @@ div.answer-container{
     align-items: center;
     margin-top: 5px;
 }
+div.answer-container label{
+    margin-bottom: 0;
+    text-align: center;
+}
 form.add-question  input[type=checkbox]{
-    margin-right: 6px;
+    /* margin-right: 6px; */
+    margin: 0;
 }
 
 i{
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 1em;
 }

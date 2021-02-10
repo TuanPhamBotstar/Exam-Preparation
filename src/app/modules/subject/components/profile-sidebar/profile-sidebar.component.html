@@ -1,4 +1,4 @@
-
+<div>
     <div class="profile-sidebar" *ngIf="show">
         <!-- <div class="bar-btn">
             <i class="glyphicon glyphicon-menu-hamburger" (click)="onToggle()"></i>
@@ -23,32 +23,65 @@
         <div class="profile-usermenu">
             <ul class="nav">
                 <li>
-                    <a href="#">
-                    <i class="glyphicon glyphicon-th-list"></i>
-                    Tổng Quan </a>
+                    <a>
+                        <i class="glyphicon glyphicon-th-list"></i>
+                        Tổng Quan </a>
                 </li>
-                <li class="active">
-                    <a (click) = "toSubject()">
-                    <i class="glyphicon glyphicon-folder-open"></i>
-                    Bộ Đề </a>
+                <!-- class="active" -->
+                <li routerLinkActive="active">
+                    <!-- (click)="toSubject()" -->
+                    <a [routerLink]="['/bo-de']" [queryParams]="{trang: 1}">
+                        <i class="glyphicon glyphicon-folder-open"></i>
+                        Bộ Đề
+                    </a>
+                    <ng-container *ngIf="caret_down">
+                        <i class="fa fa-caret-down" aria-hidden="true" (click)="onToggleSubmenu()"></i>
+                    </ng-container>
+
+                    <ul class="nav" *ngIf="submenu">
+                        <li>
+                            <a (click)="overviewTests()">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                                Đề Thi
+                            </a>
+                        </li>
+                        <li>
+                            <a (click)=onAddQuestion()>
+                                <i class="glyphicon glyphicon-question-sign"></i>
+                                Thêm Câu Hỏi
+                            </a>
+                        </li>
+                        <li>
+                            <a (click) = "openConfirmBlock()">
+                                <i class="glyphicon glyphicon-minus"></i>
+                                Xóa Bộ Đề
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="#" target="_blank">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                    Lịch Sử Thi </a>
-                </li>
-                <li>
-                    <a href="#">
-                    
-                    <i class="glyphicon glyphicon-user"></i>
-                    Chỉnh Sửa Thông Tin </a>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/lich-su-thi']">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        Lịch Sử Thi </a>
                 </li>
             </ul>
         </div>
-        <div class="logout" (click)="onLogOut()">
-            <a href="#" class="btn btn-info btn-lg">
-            <span class="glyphicon glyphicon-log-out"></span> Log out
-            </a>
-        </div> 
         <!-- END MENU -->
     </div>
+</div>
+
+<div class="panel panel-danger confirm-del-subject" *ngIf="confirmBlock">
+    <div class="panel-heading">
+          <h3 class="panel-title">Xóa Bộ Đề</h3>
+          <i class="glyphicon glyphicon-remove" (click)="openConfirmBlock()"></i>
+    </div>
+    <div class="panel-body">
+          Bạn có chắc chắn muốn xóa bộ đề này không ?
+          <div>
+
+              <button type="button" class="btn btn-primary" (click) = "openConfirmBlock()">Không</button>
+              
+              <button type="button" class="btn btn-danger" (click) = "onDelSubject()">Có</button>
+          </div>
+    </div>
+</div>  

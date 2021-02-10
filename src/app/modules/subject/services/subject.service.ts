@@ -12,23 +12,26 @@ import { Question } from '../models/question.model';
 export class SubjectService {
 
   constructor(
-    private store: Store<Appstate>, 
+    private store: Store<Appstate>,
   ) { }
   // subjects handle
-  getSubject(){
+  getSubject() {
     return this.store.select('subject');
   }
-  loadSubjects(user_id: string, page: number){
+  loadSubjects(user_id: string, page: number) {
     this.store.dispatch(new SubjectActions.LoadSubjects(user_id, page));
   }
-  addSubject(subject:Subject){
+  addSubject(subject: Subject) {
     this.store.dispatch(new SubjectActions.AddSubjects(subject));
   }
+  removeSubject(subject_id: string) {
+    this.store.dispatch(new SubjectActions.RemoveSubjects(subject_id));
+  }
   // questions handle
-  loadQuestions(subject_id, page){
+  loadQuestions(subject_id, page) {
     this.store.dispatch(new QuestionActions.LoadQuestions(subject_id, page));
   }
-  addQuestion(question:Question){
+  addQuestion(question: Question) {
     this.store.dispatch(new QuestionActions.AddQuestions(question));
   }
 }

@@ -24,7 +24,7 @@ export class SubjectApiService {
   getSubjectName(subject_id:string):Observable<any>{
     return this.http.get(`${subjectUrl}/${subject_id}`);
   }
-  delSubject(id:string):Observable<{}>{
+  removeSubject(id:string):Observable<{}>{
     return this.http.delete(`${subjectUrl}/delete/${id}`);
   }
   // question handle

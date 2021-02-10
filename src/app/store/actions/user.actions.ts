@@ -12,6 +12,11 @@ export const ADD_USER_FAILURE = '[USER] Add User Failure';
 export const LOGIN = '[Auth] Login';
 export const LOGIN_SUCCESS = '[Auth] Login Success';
 export const LOGIN_FAILURE = '[Auth] Login Failure';
+
+export const SAVE_TESTED = '[Auth] Save Tested';
+export const SAVE_TESTED_SUCCESS = '[Auth] Save Tested Success';
+export const SAVE_TESTED_FAILURE = '[Auth] Save Tested Failure';
+
 // Load users
 export class LoadUsers implements Action {
     readonly type = LOAD_USERS;
@@ -58,8 +63,23 @@ export class LoginFailure implements Action {
     readonly type = LOGIN_FAILURE;
     constructor(public payload: Error) { }
 }
+// Save tested
+export class SaveTested implements Action {
+    readonly type = SAVE_TESTED;
+    constructor(public payload: any) { }
+}
 
+export class SaveTestedSuccess implements Action {
+    readonly type = SAVE_TESTED_SUCCESS;
+    constructor(public payload: any) { }
+}
+
+export class SaveTestedFailure implements Action {
+    readonly type = SAVE_TESTED_FAILURE;
+    constructor(public payload: Error) { }
+}
 
 export type action = LoadUsers | LoadUsersSuccess | LoadUsersFailure |
     AddUser | AddUserSuccess | AddUserFailure |
-    Login | LoginSuccess | LoginFailure
+    Login | LoginSuccess | LoginFailure |
+    SaveTested |  SaveTestedSuccess | SaveTestedFailure

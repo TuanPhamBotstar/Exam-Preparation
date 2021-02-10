@@ -45,6 +45,7 @@ export function reducer(state: UserState = initialState, action: UserActions.act
                 loading: false,
             }
         case UserActions.ADD_USER_SUCCESS:
+            console.log(action.payload)
             return {
                 ...state,
                 list: [...state.list, action.payload],
@@ -78,6 +79,27 @@ export function reducer(state: UserState = initialState, action: UserActions.act
                 error:action.payload,
                 loading:false,
             }
+        // // save tested
+        // case UserActions.SAVE_TESTED:
+        //     return {
+        //         ...state,
+        //         loading:true,
+        //     }
+        // case UserActions.SAVE_TESTED_SUCCESS:
+        //     console.log(action.payload)
+        //     return {
+        //         ...state,
+        //         isAuthenticated:action.payload.success,
+        //         user_id: action.payload.id,
+        //         loading:false,
+        //     }
+        // case UserActions.SAVE_TESTED_FAILURE:
+        //     console.log(action.payload)
+        //     return {
+        //         ...state,
+        //         error:action.payload,
+        //         loading:false,
+        //     }
         default:
             return state;
     }

@@ -31,7 +31,15 @@ export class SubjectEffects {
             )
         )
     );
-
+    
+    @Effect() removeSubject$ = this.actions$.pipe(
+        ofType(SubjectActions.REMOVE_SUBJECTS),
+        mergeMap((action:SubjectActions.RemoveSubjects) => this.subjectApi.removeSubject(action.subject_id)
+          .pipe(
+            map((data) => new SubjectActions.RemoveSubjectsSuccess(data)),
+            catchError(error => of(new SubjectActions.RemoveSubjectsFailure(error)))
+          ))
+      );    
     constructor(
         private actions$: Actions,
         private subjectApi: SubjectApiService,

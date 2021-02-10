@@ -40,6 +40,35 @@
             </div>
         </div>
 </div>
+<div class="panel panel-primary confirm-del-subject" *ngIf="confirmBlock">
+    <div class="panel-heading">
+          <h3 class="panel-title">Nộp Bài Thi</h3>
+          <i class="glyphicon glyphicon-remove" (click)="openConfirm()"></i>
+    </div>
+    <div class="panel-body">
+          <p>Thời gian vẫn còn.<br />
+            Bạn có chắc chắn muốn nộp bài không ?</p>
+          <div>
+
+              <button type="button" class="btn btn-primary" (click) = "openConfirm()">Không</button>
+              
+              <button type="button" class="btn btn-danger" (click) = "onReport()">Có</button>
+          </div>
+    </div>
+</div>
+<div class="panel panel-primary confirm-del-subject" *ngIf="resBlock">
+    <div class="panel-heading">
+          <h3 class="panel-title">Kết Quả</h3>
+          <i class="glyphicon glyphicon-remove" (click)="closeResBlock()"></i>
+    </div>
+    <div class="panel-body">
+          <p>Bạn trả lời đúng {{point/10}}/{{totalQs}} câu.</p>
+           <p>Số điểm là {{point}}</p>
+          <div>
+              <button type="button" class="btn btn-primary" (click) = "closeResBlock()">Thoát</button>
+          </div>
+    </div>
+</div>
 <div class="testing">
     <div class="test-content">
         <div class="panel panel-default" *ngIf="test">
@@ -47,14 +76,14 @@
                 <h3 class="panel-title">ĐỀ THI {{test.testTitle | uppercase}}</h3>
                 <i>({{test.easyQty+test.normalQty+test.hardQty}} câu hỏi)</i>
                 <p>Thời gian: {{test.timeTest}} phút</p>
-                <p>Mã đề: {{test.testCode}}</p>
+                <p *ngIf="showTest">Mã đề: {{test.testCode}}</p>
             </div>
             <div class="panel-body" *ngIf="showTest">
                 <div class="questions-container">
-                    <div class="question" *ngFor="let question of questions; let i = index">
+                    <div class="question" *ngFor="let question of qsOnePage; let i = index">
                         <div class="question-elemment">
                             <h4>
-                                <strong>Câu {{i+1}}:</strong>
+                                <strong>Câu {{i+1+(page-1)*5}}:</strong>
                             </h4>
                             <p>
                                 {{question.title}}
@@ -65,12 +94,12 @@
                                 <div class="answer-elemnt">
                                     <input type="radio" name="a_{{i}}" id="a_{{i}}_{{j}}" #isCorrect (change)="showRes($event,i,j)">
                                     <label for="a_{{i}}_{{j}}">
-                                        {{alphaArr[j]}}. {{answer.content}}
+                                        {{alphaArr[j]}}. {{answer['content']}}
                                     </label>    
                                 </div>
                             </div>
                         </div>
-                        <div class="answers" *ngIf="total">
+                        <div class="answers" *ngIf="ansFromServer">
                             <div class="" *ngFor="let answer of question.answers; let j = index" >
                                 <div class="answer-elemnt" *ngIf="j==correctAnswer[i]">
                                     <i class="isTrue">Đáp án: {{alphaArr[j]}}. </i>
@@ -83,37 +112,21 @@
                     </div> 
                 </div>
             </div>
+            <ul class="pagination" *ngIf="showTest">
+                <li><a (click)="onPrevious()">&laquo;</a></li>
+                <ng-container *ngFor="let no of arrayV(); let i= index;">
+                    <li (click)="toPage(i+1)" [class.active]="i == page - 1">
+                        <a>
+                            {{i+1}}
+                        </a>
+                    </li>
+                </ng-container>
+                <li><a (click)="onNext()">&raquo;</a></li>
+            </ul>
         </div>
-        <div class="panel panel-primary confirm-del-subject" *ngIf="confirmBlock">
-            <div class="panel-heading">
-                  <h3 class="panel-title">Nộp Bài Thi</h3>
-                  <i class="glyphicon glyphicon-remove" (click)="openConfirm()"></i>
-            </div>
-            <div class="panel-body">
-                  <p>Thời gian vẫn còn.<br />
-                    Bạn có chắc chắn muốn nộp bài không ?</p>
-                  <div>
-      
-                      <button type="button" class="btn btn-primary" (click) = "openConfirm()">Không</button>
-                      
-                      <button type="button" class="btn btn-danger" (click) = "onReport()">Có</button>
-                  </div>
-            </div>
-        </div>
-        <div class="panel panel-primary confirm-del-subject" *ngIf="resBlock">
-            <div class="panel-heading">
-                  <h3 class="panel-title">Kết Quả</h3>
-                  <i class="glyphicon glyphicon-remove" (click)="closeResBlock()"></i>
-            </div>
-            <div class="panel-body">
-                  <p>Bạn trả lời đúng {{point/10}}/{{total}} câu.</p>
-                   <p>Số điểm là {{point}}</p>
-                  <div>
-                      <button type="button" class="btn btn-primary" (click) = "closeResBlock()">Thoát</button>
-                  </div>
-            </div>
-        </div>
+        
     </div>
+
     <div class="testing-sidebar" *ngIf="showTest"> 
         <div class="count-down-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -123,5 +136,6 @@
             <button type="submit" class="btn btn-success" (click)="openConfirm()">Nộp Bài</button>
         </div>
     </div>
+
 </div>
-    
+

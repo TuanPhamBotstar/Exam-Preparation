@@ -4,7 +4,7 @@ import * as SubjectActions from '../actions/subject.action';
 import * as storage from '../states/storage';
 
 export interface SubjectState {
-    list: Subject[],
+    list: any,
     loading: boolean,
     error: Error,
     subject_id: string,
@@ -13,6 +13,7 @@ export interface SubjectState {
 
 const initialState: SubjectState = {
     list: storage.getItem('subjects'),
+    // list: [],
     loading: false,
     error: undefined,
     subject_id: '',
@@ -29,7 +30,7 @@ export function subjectReducer(state: SubjectState = initialState, action: Subje
             }
         case SubjectActions.LOAD_SUBJECTS_SUCCESS:
             storage.saveItem('subjects', action.payload.subjectsOnePage)
-            // console.log(action.payload)
+            console.log(action.payload)
             return {
                 ...state,
                 list: action.payload.subjectsOnePage,
@@ -59,6 +60,26 @@ export function subjectReducer(state: SubjectState = initialState, action: Subje
                 loading: false,
             }
         case SubjectActions.ADD_SUBJECTS_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+                loading: false,
+            }
+        // remove subject
+        case SubjectActions.REMOVE_SUBJECTS:
+            return {
+                ...state,
+                loading: true,
+            }
+        case SubjectActions.REMOVE_SUBJECTS_SUCCESS:
+            console.log(action.payload)
+            return {
+                ...state,
+                list:state.list.filter(subject => subject._id != action.payload),
+                
+                loading: false,
+            }
+        case SubjectActions.REMOVE_SUBJECTS_FAILURE:
             return {
                 ...state,
                 error: action.payload,

@@ -7,25 +7,18 @@
 .btn-container span{
     margin-left: 10px;
 }
-.confirm-del-subject{
-    position: absolute;
-    top: 60px;
-    right: 50%;
-    transform: translateX(50%);
-    width: 60%;
-    z-index: 100;
-}
-.confirm-del-subject i{
-    position: absolute;
-    top:10px;
-    right: 10px;
-}
-.confirm-del-subject button{
-    margin: 20px 40px;
-}
+
 /* navigation */
 .navbar{
     height: 30px;
+    margin-bottom: 0;
+}
+.navbar ul{
+    height: 50px;
+}
+.navbar-nav>li>a{
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .active{
     color:#062f53;
@@ -36,7 +29,9 @@
     color: red;
     margin: 30px;
 }
-
+.pagination{
+    margin-left: 10px;
+}
 /* .question{
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);

@@ -1,7 +1,7 @@
 .overview-test-container{
     position: relative;
-    top:-40px;
-    padding: 20px;
+    top:0px;
+    padding: 10px;
     background: #f2f2f2;
     min-height: 100vh;
     /* border: 1px solid rgba(0, 0, 0, 0.2); */
@@ -29,9 +29,20 @@
   .subject:hover{
   box-shadow: 2px 2px 5px  #5b9bd1 inset,-2px -2px 5px  #5b9bd1 inset;
   }
-  .subject.add{
-    border: none;
-    box-shadow: none;
+  
+  .subject.add .glyphicon-list-alt{
+    position: relative;
+    font-size: 3.7em;
+  }
+  .subject.add .fa-plus{
+    color: #5b9bd1;
+    position: absolute;
+    font-size: 32px;
+    bottom: -10px;
+    right: -10px;
+  }
+  .subject.add:hover .fa-plus{
+    color: #67a7db;
   }
   .subject.add span{
     font-size: 1em;
@@ -45,7 +56,6 @@
   }
   .subject p{
     margin-top: 10px;
-    font-weight: 600;
     width: 130px;
     font-size: 1em;
     white-space: nowrap; 

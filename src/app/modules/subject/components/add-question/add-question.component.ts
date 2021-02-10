@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from "../../models/question.model";
@@ -7,13 +7,17 @@ import { Question } from "../../models/question.model";
 import {Location} from '@angular/common';
 import { SubjectApiService } from '../../services/subject-api.service ';
 import { SubjectService } from '../../services/subject.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-question',
   templateUrl: './add-question.component.html',
   styleUrls: ['./add-question.component.css']
 })
-export class AddQuestionComponent implements OnInit {
+export class AddQuestionComponent implements OnInit, OnDestroy {
+  subcription: Subscription;
+  perPage: number = 10;
+  page: number;
   showNewQuestion: boolean = false;
   newQs: any;
   public question: Question;
@@ -28,13 +32,18 @@ export class AddQuestionComponent implements OnInit {
   constructor(
     public activatedRoute: ActivatedRoute,
     public formBuilder:FormBuilder,
-    public http: HttpClient,
+    private router: Router,
     private _location:Location,
     public subjectService: SubjectService,
   ) { }
 
   ngOnInit(): void {
     this.createAddQuestionForm();
+  }
+  ngOnDestroy():void {
+    if(this.subcription){
+      this.subcription.unsubscribe();
+    }
   }
   getSubject_id(id:string){
       this.subject_id = id;
@@ -77,10 +86,20 @@ export class AddQuestionComponent implements OnInit {
     this.subjectService.addQuestion(newQuestion);
     this.showNewQuestion = true;
     this.addQuestionForm.reset();
+    // this.subcription = this.subjectService.getSubject().subscribe(data => {
+    //   console.log(data.question.total)
+    //   this.page = Math.ceil(data.question.total/this.perPage);
+    // })
   }
   onBack(){
-    this._location.back();
     this.showNewQuestion = false;
+    this.subcription = this.subjectService.getSubject().subscribe(data => {
+      console.log(data.question.total)
+      this.page = Math.ceil(data.question.total/this.perPage);
+    })
+    this.router.navigate(['/chi-tiet'], {queryParams: {bo_de: this.subject_id, trang: this.page}})
+    // this._location.back();
+    
   }
   
 }

@@ -22,16 +22,27 @@
   .subject:hover{
   box-shadow: 2px 2px 5px  #5b9bd1 inset,-2px -2px 5px  #5b9bd1 inset;
   }
-  .subject.add{
-    border: none;
-    box-shadow: none;
-  }
   .subject.add span{
     font-size: 1.2em;
   }
   .subject.add button{
     border-radius: 5px;
     outline: none;
+  }
+  .subject.add .fa-folder{
+    color: darkgoldenrod;
+    position: relative;
+    font-size: 3.7em;
+  }
+  .subject.add .fa-plus-circle{
+    color: #bbb;
+    position: absolute;
+    font-size: 32px;
+    bottom: 2px;
+    right: 0;
+  }
+  .subject.add:hover .fa-plus-circle{
+    color: #ccc;
   }
   .subject i{
     font-size: 2.5em;
@@ -41,10 +52,9 @@
   }
   .subject p{
     margin-top: 10px;
-    font-weight: 600;
     font-size: 1.2em;
     white-space: nowrap; 
-    width: 170px; 
+    width: 160px; 
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -54,5 +64,8 @@
 
 /* pagination */
 .pagination{
+  position: absolute;
+  bottom: 25px;
+  left: 35px;
   margin: 10px 0 0;
 }

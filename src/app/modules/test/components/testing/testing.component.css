@@ -74,11 +74,11 @@ label, input{
 
 /*  confirm block */
 .confirm-del-subject{
-    position: absolute;
-    top: 50%;
+    position:sticky;
+    top: 20px;
     right: 50%;
-    transform: translate(50%,-80%);
-    width: 50%;
+    transform: translate(50%,0%);
+    width: 40%;
     z-index: 1000;
 }
 .confirm-del-subject .panel-body{
@@ -125,4 +125,8 @@ label, input{
 .type-code button{
     width: auto;
     height: auto;
+}
+/* pagination */
+.pagination{
+    margin: 0 10px 10px;
 }

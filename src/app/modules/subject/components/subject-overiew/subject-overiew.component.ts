@@ -16,7 +16,7 @@ export class SubjectOveriewComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   page: number;
   totalPage: number;
-  perPage: number = 10;
+  perPage: number = 9;
   total: number;
   public subjects: any;
   constructor(
@@ -47,7 +47,7 @@ export class SubjectOveriewComponent implements OnInit, OnDestroy {
   }
   onCreateSubject() {
     console.log('create subject test')
-    this.router.navigate(['/bo-de/tao-bo-de']);
+    this.router.navigate(['/bo-de/tao-bo-de'], {queryParams: {trang: this.page}});
   }
   detailSubject(subject_id) {
     this.router.navigate(['/chi-tiet'], { queryParams: { bo_de: subject_id, trang: 1 } });
