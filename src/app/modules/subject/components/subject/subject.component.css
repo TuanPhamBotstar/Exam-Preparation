@@ -29,4 +29,5 @@
   background-color: #fff;
   min-height: calc(100vh - 140px);
   border-radius: 5px;
+  padding-bottom: 20px;
 }

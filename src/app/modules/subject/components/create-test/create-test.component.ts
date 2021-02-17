@@ -6,6 +6,8 @@ import { SubjectApiService } from '../../services/subject-api.service ';
 import { TestApiService } from '../../services/test-api.service';
 import { Router } from '@angular/router';
 import { TestService } from '../../services/test.service';
+// ng5-slider
+import { Options, LabelType } from 'ng5-slider';
 @Component({
   selector: 'app-create-test',
   templateUrl: './create-test.component.html',
@@ -18,9 +20,38 @@ export class CreateTestComponent implements OnInit, OnDestroy{
   easyTotal: number;
   normalTotal: number;
   hardTotal: number;
+  easyQty: number;
+  normalQty: number;
+  hardQty: number;
   public createTestForm: FormGroup;
+  public author: string;
   public subject_id: string;
   public subjectname: string;
+  // ng5-slider
+  minValue: number = 0;
+  maxValue: number = 0;
+  options: Options = {
+    floor: 0,
+    ceil: 0,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          this.easyQty = value;
+          return `<lablel>Dễ: </lablel>` + value;
+        case LabelType.High:
+          this.hardQty = value;
+          value = value - this.easyQty
+          return `<lablel>Khó: </lablel>` + value;
+        default:
+          return ''+value;
+      }
+    }
+  };
+  totalQty: number = 0;
+  optionsTotal: Options = {
+    floor: 0,
+    ceil: 0,
+  };
   constructor(
     private _location: Location,
     private subjectApi: SubjectApiService,
@@ -30,6 +61,18 @@ export class CreateTestComponent implements OnInit, OnDestroy{
   ) { }
 
   ngOnInit(): void {
+    this.author = JSON.parse(localStorage.getItem('user')).user_id;
+    this.subjectApi.getQtyQs(this.subject_id).subscribe(data => {
+      console.log(data)
+      this.easyTotal = data['easyQty'];
+      this.normalTotal = data['normalQty'];
+      this.hardTotal = data['hardQty'];
+      this.totalQty = data['easyQty'] + data['hardQty'];
+      this.minValue = data['easyQty'];
+      this.maxValue = data['hardQty'] + data['easyQty'];
+      this.optionsTotal.ceil = data['easyQty'] + data['hardQty'] + data['normalQty'];
+      this.options.ceil = data['easyQty'] + data['hardQty'] + data['normalQty'];
+    })
     this.initialTestForm();
   }
   ngOnDestroy():void{
@@ -48,29 +91,18 @@ export class CreateTestComponent implements OnInit, OnDestroy{
       testTitle: ['', [Validators.required]],
       timeTest: ['', Validators.required],
       codeTest: ['', [Validators.pattern('[0-9]{4}$'), Validators.required]],
-      hardQty: ['', [Validators.required]],
-      normalQty: ['', [Validators.required]],
-      easyQty: ['', [Validators.required]]
+      // hardQty: ['', [Validators.required]],
+      // normalQty: ['', [Validators.required]],
+      // easyQty: ['', [Validators.required]],
+      author: [this.author],
     });
-    console.log(this.createTestForm.controls)
+    console.log(this.createTestForm.value)
   }
   onCreateTest() {
     console.log('create test', this.createTestForm.value)
-    // this.testApi.addNewTest(this.createTestForm.value)
-    //   .subscribe(data => {
-    //     console.log(data);
-    //     const test_id = data['_id']
-    //     this.subjectApi.putQuestionsForTest(data).subscribe(data2 => {
-    //       console.log(data2['susscess']);
-    //       if(data2['susscess']){
-    //         this.testApi.putQuestions(data2).subscribe(finish => {
-    //           console.log(finish);
-    //           if (finish) this.router.navigate(['chi-tiet/de-thi/noi-dung-de-thi'],{queryParams: {de_thi: test_id}});
-    //         });
-    //       }
-    //     })
-    //   });
-    // this.createTestForm.reset();
+    this.createTestForm.value.hardQty = this.hardQty - this.easyQty;
+    this.createTestForm.value.normalQty = this.totalQty - this.hardQty;
+    this.createTestForm.value.easyQty = this.easyQty
     this.subjectApi.putQuestionsForTest(this.createTestForm.value).subscribe(data => {
       console.log(data)
       if(data['susscess']){
@@ -85,9 +117,6 @@ export class CreateTestComponent implements OnInit, OnDestroy{
             {queryParams: {bo_de: this.subject_id, de_thi: data.test.test_id, trang: 1}});
           }
         })
-        // .subscribe(data => {
-        //   this.router.navigate(['chi-tiet/de-thi/noi-dung-de-thi'],{queryParams: {bo_de: this.subject_id, de_thi: data}});
-        // })
       }
       else{
         this.errQty = true;

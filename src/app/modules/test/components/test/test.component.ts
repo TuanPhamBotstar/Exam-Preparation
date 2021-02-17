@@ -13,12 +13,14 @@ import { ofType } from "@ngrx/effects";
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
+
 export class TestComponent implements OnInit, OnDestroy {
   totalPage: number;
   total: number;
   page: number;
   perPage: number = 5;
   subcription: Subscription;
+  alphaArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
   isShareSuccess: boolean = false;
   public shareBox: boolean = false;
   public confirmBlock: boolean = false;

@@ -18,7 +18,8 @@ import { reducers } from './store/reducers';
 import { SubjectEffects } from './store/effects/subject.effects';
 import { QuestionEffects } from './store/effects/question.effects';
 import { TestEffects } from './store/effects/test.effects';
-
+//ng5-slider
+import { Ng5SliderModule } from 'ng5-slider';
 @NgModule({
   declarations: [
     SubjectComponent,
@@ -34,6 +35,7 @@ import { TestEffects } from './store/effects/test.effects';
     ReactiveFormsModule,
     SubjectRoutingModule,
     HttpClientModule,
+    Ng5SliderModule,
     StoreModule.forFeature('subject', reducers),
     EffectsModule.forFeature(
       [

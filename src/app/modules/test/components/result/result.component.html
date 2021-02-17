@@ -1,15 +1,19 @@
 
 <table>
+    <caption>Lịch Sử Thi Của Bạn</caption>
     <tr>
         <th>STT</th>
         <th>Đề Thi</th>
         <th>Điểm</th>
         <th>Thời Gian Thi (giây)</th>
     </tr>
-    <tr *ngFor="let result of results; let i = index">
+    <tr *ngFor="let result of results; let i = index"
+    (click)="viewChosenAnswer(result.test_id, result.chosenAnswers, result.correctAnswer, i)" class="res-detail"
+    [class.active] = "i === active"
+    >
         <td>{{i+1}}</td>
-        <td (click)="viewChosenAnswer(result.test_id, result.chosenAnswers, result.correctAnswer)" class="res-detail">
-            {{result.nameTest}}
+        <td>
+            {{result.nameTest | uppercase}}
         </td>
         <td>{{result.point}}</td>
         <td>{{result.time}}</td>
@@ -23,6 +27,7 @@
                 <i>({{test.easyQty+test.normalQty+test.hardQty}} câu hỏi)</i>
                 <p>Thời gian: {{test.timeTest}} phút</p>
                 <p>Mã đề: {{test.testCode}}</p>
+                <i class="fa fa-times" aria-hidden="true" (click)="closeDetailRes()"></i>
             </div>
             <div class="panel-body" >
                 <div class="questions-container">
@@ -41,12 +46,13 @@
                                 <div class="answer-elemnt">
                                     <input type="radio" *ngIf="j !== chosenAnswers[i] && j !== correctAnswer[i]" disabled="1">
                                     <i *ngIf="j === chosenAnswers[i] || j === correctAnswer[i]" class="fa fa-check-circle-o" aria-hidden="true" 
+                                        [class.noChosen]="chosenAnswers[i] === undefined || chosenAnswers[i] === null"
                                         [class.isCorrect]="correctAnswer[i] === chosenAnswers[i] || j === correctAnswer[i]" 
-                                        [class.inCorrect]="correctAnswer[i] !== chosenAnswers[i]">
+                                        [class.inCorrect]="correctAnswer[i] !== chosenAnswers[i]"
+                                    >
                                     </i>
                                     <label for="a_{{i}}_{{j}}">
                                         {{alphaArr[j]}}. {{answer['content']}}
-                                        {{answer['content']}}
                                     </label>    
                                 </div>
                             </div>

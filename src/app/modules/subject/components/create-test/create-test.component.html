@@ -18,7 +18,7 @@
             (ngSubmit)="onCreateTest()"
         >
             <div class="form-group">
-                <h3> Tên Đề Thi</h3>
+                <label> Tên Đề Thi</label>
                 <input type="text" 
                 class="form-control"
                 placeholder="Tên đề thi"
@@ -67,14 +67,14 @@
                 Mã code phải gồm 4 chữ số !
                 </span>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label>Số lượng câu hỏi</label>
-                <!-- <input type="number" min="5" step="5" class="form-control"> -->
             </div>
             <div class="qty-config">
                 <input type="text" class="hide"
                 formControlName="subject_id">
-               
+                <input type="text" class="hide"
+                formControlName="author">
                 <div class="form-group">
                     <label>Khó</label>
                     <input type="number"  class="" placeholder="0" min="0"
@@ -132,9 +132,21 @@
                     Phải nhỏ hơn hoặc bằng {{easyTotal}} !
                     </span>
                 </div>
+            </div> -->
+            <div class="form-group">
+                <label>Số lượng câu hỏi: {{totalQty}}</label>
             </div>
-            
-        
+            <ng5-slider *ngIf="easyTotal" [(value)]="totalQty" [options]="optionsTotal"></ng5-slider>
+            <div class="form-group">
+                <label [class.error] = "hardQty - easyQty > hardTotal || easyQty > hardQty">Số lượng câu hỏi khó: {{hardQty - easyQty}}</label>
+            </div>
+            <div class="form-group">
+                <label [class.error] = "totalQty - hardQty > normalTotal || hardQty > totalQty">Số lượng câu hỏi trung bình: {{totalQty - hardQty}}</label>
+            </div>
+            <div class="form-group">
+                <label [class.error] = "easyQty > easyTotal">Số lượng câu hỏi dễ: {{easyQty}}</label>
+            </div>
+            <ng5-slider *ngIf="easyTotal" [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
             <!-- {{this.addQuestionForm.value | json}}   -->
             <div class="form-group">
                 

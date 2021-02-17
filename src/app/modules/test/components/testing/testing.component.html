@@ -92,7 +92,10 @@
                         <div class="answers">
                             <div class="" *ngFor="let answer of question.answers; let j = index">
                                 <div class="answer-elemnt">
-                                    <input type="radio" name="a_{{i}}" id="a_{{i}}_{{j}}" #isCorrect (change)="showRes($event,i,j)">
+                                    <input *ngIf="chosenAnsers[i+(this.page-1)*this.perPage] !== undefined && j == chosenAnsers[i+(this.page-1)*this.perPage]" 
+                                    type="radio" name="a_{{i}}" id="a_{{i}}_{{j}}" #isCorrect (change)="showRes($event,i,j)" checked>
+                                    <input *ngIf="j != chosenAnsers[i+(this.page-1)*this.perPage]" 
+                                    type="radio" name="a_{{i}}" id="a_{{i}}_{{j}}" #isCorrect (change)="showRes($event,i,j)">
                                     <label for="a_{{i}}_{{j}}">
                                         {{alphaArr[j]}}. {{answer['content']}}
                                     </label>    

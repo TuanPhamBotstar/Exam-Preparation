@@ -11,9 +11,13 @@
 }
 .panel-heading i{
     position: absolute;
-    top: 20px;
-    right: 15px;
+    top: 10px;
+    right: 10px;
     font-size: 1.2em;
+    -webkit-text-stroke: 2px #f2f2f2;
+}
+.form-group label{
+    font-weight: initial;
 }
 .qty-config .form-group{
     display: flex;
@@ -46,4 +50,11 @@ form div button[type=submit] {
 }
 .hide{
     display: none;
+}
+.error{
+    color: red;
+}
+/* range slide */
+ng5-slider{
+    margin-bottom: 30px;
 }

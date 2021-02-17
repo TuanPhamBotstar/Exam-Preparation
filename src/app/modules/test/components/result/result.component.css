@@ -1,11 +1,28 @@
+/* result table */
 table{
     border-collapse: 2px;
     margin: auto;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
 }
+
 table, tr, td, th{
-    border: 1px solid;  
-    padding: 10px;
+    border: 1px solid #eee;  
+    padding: 15px 50px;
+    margin-top: 20px;
     text-align: center;
+}
+table tr{
+    background-color: #9fcdf3;
+}
+table tr:hover, table tr.active{
+    background-color: #8cc5f3;
+}
+
+caption{
+    text-align: center;
+    font-size: 1.5em;
+    color: black;
+    font-weight: 500;
 }
 .res-detail{
     cursor: pointer;
@@ -13,7 +30,8 @@ table, tr, td, th{
 /* --- */
 .test-content{
     position: relative;
-    top:0px;
+    top: 20px;
+    left: 0;
     background-color: #f2f2f2;
     padding-top: 0px;
     z-index: 10;
@@ -41,7 +59,23 @@ table, tr, td, th{
 }
 label, input{
     font-weight: initial;
-    cursor: pointer;
+    display: initial;
+}
+.answer-elemnt{
+    display: flex;
+    align-items: center;
+}
+.answer-elemnt label{
+    margin-bottom: 0;
+}
+.answer-elemnt input{
+    margin-bottom: 4px;
+}
+.fa-times{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    -webkit-text-stroke: 1px #fff;
 }
 /* show isCorrect answer */
 i.inCorrect{
@@ -49,6 +83,11 @@ i.inCorrect{
     margin-right: 10px;
 }
 i.isCorrect{
+    display: inline-block;
     color: green;
+    margin-right: 10px;
+}
+i.noChosen{
+    color: #8cc5f3;
     margin-right: 10px;
 }

@@ -9,6 +9,7 @@ import { ResApiService } from '../../services/res-api.service';
   styleUrls: ['./result.component.css']
 })
 export class ResultComponent implements OnInit {
+  public active: number;
   public user_id: string;
   public results: any;
   public test: any;
@@ -36,7 +37,8 @@ export class ResultComponent implements OnInit {
       })
     }
   }
-  viewChosenAnswer(test_id, chosenAnswers, correctAnswer) {
+  viewChosenAnswer(test_id, chosenAnswers, correctAnswer, i) {
+    this.active = i;
     this.chosenAnswers = chosenAnswers;
     console.log(this.correctAnswer)
     this.correctAnswer = correctAnswer;
@@ -44,5 +46,7 @@ export class ResultComponent implements OnInit {
       this.test = data;
     })
   }
-
+  closeDetailRes(){
+    this.test = null;
+  }
 }

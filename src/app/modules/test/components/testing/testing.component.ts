@@ -38,6 +38,7 @@ export class TestingComponent implements OnInit, OnDestroy {
   public chosenAnsers: any = [];
   public correctAnswer: any;
   public testing: any;
+  public author: string;
   public test: any;
   public resBlock: boolean = false;
   public confirmBlock: boolean = false;
@@ -75,8 +76,9 @@ export class TestingComponent implements OnInit, OnDestroy {
     this.subscription = this.testService.getTests().subscribe(data => {
       console.log(data.test.testing)
       if(!data.test.loading && data.test.testing){
-        this.nameTest = data.test.testing.testTitle;
         this.test = data.test.testing;
+        this.nameTest = this.test.testTitle;
+        this.author = this.test.author;
         this.isTypeCode = this.test.typeCode;
         this.testCode = this.test.testCode;
         this.questions = this.test.questions;
@@ -118,6 +120,7 @@ export class TestingComponent implements OnInit, OnDestroy {
       this.result = {
         user_id: this.user_id,
         test_id: this.test_id,
+        author: this.author,
         nameTest: this.nameTest,
         point: this.point,
         time:this.saveTimeTest,
@@ -141,7 +144,8 @@ export class TestingComponent implements OnInit, OnDestroy {
     }
   }
   showRes(e, i, j) { //record answer'user
-    this.chosenAnsers[i+(this.page-1)*this.perPage] = j;
+  this.chosenAnsers[i+(this.page-1)*this.perPage] = j;
+  console.log('chosenAnsers', this.chosenAnsers);
     console.log(e.target.checked)
   }
   closeResBlock() {

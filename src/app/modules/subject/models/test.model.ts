@@ -10,9 +10,11 @@ export class Test{
     public hardQty: number;
     public normalQty: number;
     public easyQty: number;
+    public author: string;
     constructor(id:string, subject_id: string, link: string,
         testCode: number, testTitle: string, timetest: string, 
-        hardQty: number, normalQty: number, easyQty: number)
+        hardQty: number, normalQty: number, easyQty: number,
+        author: string)
         {
         this._id = id;
         this.subject_id = subject_id;
@@ -23,5 +25,6 @@ export class Test{
         this.hardQty = hardQty;
         this.normalQty = normalQty;
         this.easyQty = easyQty;
+        this.author = author;
     }
 };
