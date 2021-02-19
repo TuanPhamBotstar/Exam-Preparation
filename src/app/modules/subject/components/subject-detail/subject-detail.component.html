@@ -68,7 +68,7 @@
             <div class="answers">
                 <div class="" *ngFor="let answer of question.answers; let j = index">
                     <div class="answer-elemnt is{{answer.isCorrect}}">
-                        <input type="checkbox" id="a_{{i}}_{{j}}" value="j" name="a_{{i}}">
+                        <!-- <input type="checkbox" id="a_{{i}}_{{j}}" value="j" name="a_{{i}}"> -->
                         <label for="a_{{i}}_{{j}}">
                             {{answer.content}}
                         </label>
@@ -77,7 +77,7 @@
             </div>
         </div> 
     </div>
-    <ul class="pagination">
+    <ul class="pagination" *ngIf="totalPage > 1">
         <li><a (click)="onPrevious()">&laquo;</a></li>
         <ng-container *ngFor="let page of arrayV(); let i= index;">
             <li routerLinkActive="active">

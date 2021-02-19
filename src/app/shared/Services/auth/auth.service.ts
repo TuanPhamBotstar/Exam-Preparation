@@ -27,5 +27,5 @@ export class AuthService {
   login(user:User) {
     return this.store.dispatch(new Actions.Login(user));
   }
-
+  
 }

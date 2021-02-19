@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/Services/guard/auth-guard.guard';
 import { pathToFileURL } from 'url';
 import { NotFoundComponent } from '../auth/components/page-not-found/not-found.component';
+import { AnalyticComponent } from '../test/components/analytic/analytic.component';
 import { OverviewTestComponent } from '../test/components/overview-test/overview-test.component';
 import { ResultComponent } from '../test/components/result/result.component';
 import { TestComponent } from '../test/components/test/test.component';
@@ -40,6 +41,10 @@ const routes: Routes = [
             component: AddQuestionComponent
           },
           {
+            path: 'chinh-sua-cau-hoi',
+            component: AddQuestionComponent
+          },
+          {
             path: 'de-thi',
             component: OverviewTestComponent,
             children: [
@@ -72,7 +77,11 @@ const routes: Routes = [
       {
         path: 'lich-su-thi',
         component: ResultComponent,
-      }
+      },
+      {
+        path: 'tong-quan',
+        component: AnalyticComponent,
+      },
     ],
   },
   {

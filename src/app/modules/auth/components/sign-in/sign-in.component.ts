@@ -72,7 +72,7 @@ export class SignInComponent implements OnInit {
             saveUser.username = data['username'];
           }
           localStorage.setItem('user',JSON.stringify(saveUser));
-          this.router.navigate(['']);
+          this.router.navigate(['/tong-quan']);
         }
         else{
           this.error = -1;

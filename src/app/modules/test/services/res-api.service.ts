@@ -19,7 +19,10 @@ export class ResApiService {
   saveTested(result: any): Observable<{}>{
     return this.http.post(`${resUrl}`, result);
   }
-  getResults(user_id: string):Observable<{}>{
+  getResults(user_id: string):Observable<any>{
     return this.http.get(`${resUrl}/${user_id}`);
+  }
+  getResultByAuthor(author: string):Observable<any>{
+    return this.http.get(`${resUrl}/author/${author}`);
   }
 }

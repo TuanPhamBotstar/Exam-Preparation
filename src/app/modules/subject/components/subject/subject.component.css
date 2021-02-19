@@ -20,6 +20,11 @@
   cursor: pointer;
   z-index: 200;
 }
+.bar-btn.hamburger{
+  z-index: 100;
+  left: 3px;  
+  top: 5px;
+}
 .bar-btn i{
   -webkit-text-stroke: 2px white;
 }

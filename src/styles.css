@@ -287,7 +287,9 @@ footer p{
 .question-elemment{
     position: relative;
 }
-
+.question-elemment p{
+    font-weight: bold;
+}
 .question-elemment .fa-pencil-square-o{
     position: absolute;
     top:0px;
@@ -300,6 +302,9 @@ footer p{
 .answer-elemnt input{
     margin-right: 10px;
 }
+.answer-elemnt label{
+    font-weight: initial;
+}
 
 /* pagination */
 .pagination>li>a{
@@ -307,4 +312,59 @@ footer p{
 }
 .pagination>li>a:active{
     background-color: #69abe6;
+}
+
+/* result table */
+/* .result-table{
+    height: 50vh;
+    overflow-y: scroll;
+} */
+.result-table table{
+    margin: auto;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.result-table thead{
+    background-color: #daeaf7;
+}
+.result-table table tbody{
+    height: 300px;
+    overflow-y: auto;
+}
+table, tr, td, th{
+    border: 1px solid #eee;  
+    padding: 15px 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+table tr:nth-child(even){
+    background-color: #daeaf7;
+}
+table tr:hover, table tr.active{
+    background-color: #8cc5f3;
+}
+
+caption{
+    text-align: center;
+    font-size: 1.5em;
+    color: black;
+    font-weight: 500;
+}
+.res-detail{
+    cursor: pointer;
+}
+.chart-containter{
+    width: 100%;
+    margin: 10px auto;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+}
+.name-chart{
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 10px;
+    font-weight: bold;
 }

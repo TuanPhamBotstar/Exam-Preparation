@@ -1,5 +1,6 @@
 
 <div class="subject-content">
+    <div class="subject-container">
     <div class="subject add" (click)="onCreateSubject()">
         <div class="subject-element">
             <i class="fa fa-folder" aria-hidden="true">
@@ -10,8 +11,9 @@
             </button>                    -->
         </div>
     </div>
+    </div>
+    <div class="subject-container" *ngFor="let subject of subjects">
     <div class="subject" 
-        *ngFor="let subject of subjects"
         (click)="detailSubject(subject._id)"
     >   
         <div class="subject-element">
@@ -19,6 +21,7 @@
             <i class="glyphicon glyphicon-folder-open"></i>
             <p>Bộ Đề - {{subject.subjectname | uppercase}}</p>
         </div>  
+    </div>
     </div>
     <router-outlet (activate)="onActive($event)"></router-outlet>
 </div>

@@ -2,6 +2,7 @@
 <div class="overview-test-container" *ngIf="show">
     <!-- <i class="fa fa-long-arrow-left" aria-hidden="true" (click)="onBack()"> Quay lại</i> -->
     <div class="subject-content">
+        <div class="subject-container">
         <div class="subject add">
             <div class="subject-element" (click)="onCreateTest()">
                 <i class="glyphicon glyphicon-list-alt">
@@ -12,15 +13,24 @@
                 </button> -->
             </div>
         </div>
+        </div>
+        <div class="subject-container" *ngFor="let test of tests; let i = index">
         <div class="subject" 
-        *ngFor="let test of tests; let i = index"
         (click)="getDetailTest(i)"       
         >
             <div class="subject-element">
-    
                 <i class="glyphicon glyphicon-list-alt"></i>
                 <p>Đề thi - {{test.testTitle | uppercase}}</p>
+                <div class="questions-quantity">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    {{test.questions.length}}
+                </div>
+                <div>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    {{test.timeTest}} phút
+                </div>
             </div>
+        </div>
         </div>
     </div>
 </div>

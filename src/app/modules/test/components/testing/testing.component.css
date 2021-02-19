@@ -3,6 +3,7 @@
     display: flex;
     /* flex-flow: row nowrap; */
     width: 100%;
+    min-height: 100vh;
 }
 .testing-sidebar{
     height: 250px;
@@ -22,6 +23,9 @@
     background: var(--gradient-to-color) linear-gradient(180deg,var(--gradient-from-color),var(--gradient-to-color) 51%,var(--gradient-from-color));
     border-radius: 5px;
     color: #fff;
+}
+.panel-body .question-elemment p{
+    margin: 0;
 }
 .count-down-time{
     text-align: center;
@@ -85,7 +89,7 @@ label, input{
     text-align: center;
 }
 .panel-body p{
-    margin: 0 0 10px;
+    margin: 20px 0 10px;
 }
 .confirm-del-subject i{
     position: absolute;

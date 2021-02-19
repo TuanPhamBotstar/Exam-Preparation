@@ -28,12 +28,14 @@ export class TestingComponent implements OnInit, OnDestroy {
   errCode: boolean = false;
   testCode: number;
   user_id: string;
+  user_name: string;
   test_id: string;
   nameTest: string;
   result: any;
   showTest: boolean = false;
   confirmCode: FormGroup;
   public point: number;
+  public count: number;
   public ansFromServer: number;
   public chosenAnsers: any = [];
   public correctAnswer: any;
@@ -60,6 +62,7 @@ export class TestingComponent implements OnInit, OnDestroy {
     const user = JSON.parse(localStorage.getItem('user'));
     if(user){
       this.user_id = user.user_id;
+      this.user_name = user.username;
     }
 
     // 
@@ -115,10 +118,12 @@ export class TestingComponent implements OnInit, OnDestroy {
     this.resAPi.checkAnswers(check).subscribe(data => {
       console.log(data)
       this.point = data['point'];
+      this.count = data['count'];
       this.correctAnswer = data['correctAnswer'];
       this.ansFromServer = data['correctAnswer'].length;
       this.result = {
         user_id: this.user_id,
+        user_name: this.user_name,
         test_id: this.test_id,
         author: this.author,
         nameTest: this.nameTest,

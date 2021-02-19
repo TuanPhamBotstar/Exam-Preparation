@@ -7,6 +7,7 @@ export interface QuestionState {
     error: Error,
     list: Question[],
     total:number,
+    question: Question,
 }
 
 const initialState: QuestionState = {
@@ -14,6 +15,7 @@ const initialState: QuestionState = {
     error: undefined,
     list: [],
     total:0,
+    question: null
 }
 
 export function questionReducer(state: QuestionState = initialState, action: QuestionActions.action) {
@@ -38,6 +40,25 @@ export function questionReducer(state: QuestionState = initialState, action: Que
                 loading: false,
                 error: action.payload,
             }
+        // load question
+        case QuestionActions.LOAD_QUESTION:
+            return {
+                ...state,
+                loading: true,
+            }
+        case QuestionActions.LOAD_QUESTION_SUCCESS:
+            console.log(action.payload)
+            return {
+                ...state,
+                question: action.payload,
+                loading: false
+            }
+        case QuestionActions.LOAD_QUESTION_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
         // add question
         case QuestionActions.ADD_QUESTION:
             return {
@@ -53,6 +74,25 @@ export function questionReducer(state: QuestionState = initialState, action: Que
                 loading: false
             }
         case QuestionActions.ADD_QUESTION_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+        // edit question
+        case QuestionActions.EDIT_QUESTION:
+            return {
+                ...state,
+                loading: true,
+            }
+        case QuestionActions.EDIT_QUESTION_SUCCESS:
+            console.log(action.payload)
+            return {
+                ...state,
+                // list: [...state.list, action.payload],
+                loading: false
+            }
+        case QuestionActions.EDIT_QUESTION_FAILURE:
             return {
                 ...state,
                 loading: false,

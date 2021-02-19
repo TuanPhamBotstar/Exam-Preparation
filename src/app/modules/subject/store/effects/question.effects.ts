@@ -22,12 +22,32 @@ export class QuestionEffects {
         )
     )
 
+    @Effect() loadQuestion$ = this.actions$.pipe(
+        ofType(QuestionActions.LOAD_QUESTION),
+        mergeMap((action: QuestionActions.LoadQuestion) => this.subjectApi.getQuestion(action.id)
+            .pipe(
+                map((data) => new QuestionActions.LoadQuestionSuccess(data)),
+                catchError(error => of(new QuestionActions.LoadQuestionFailure(error))) 
+            )
+        )
+    )
+
     @Effect() addQuestion$ = this.actions$.pipe(
         ofType(QuestionActions.ADD_QUESTION),
         mergeMap((action: QuestionActions.AddQuestions) => this.subjectApi.addQuestion(action.payload)
             .pipe(
                 map((data) => new QuestionActions.AddQuestionsSuccess(data)),
                 catchError(error => of(new QuestionActions.AddQuestionsFailure(error)))
+            )
+        )
+    )
+
+    @Effect() editQuestion$ = this.actions$.pipe(
+        ofType(QuestionActions.EDIT_QUESTION),
+        mergeMap((action: QuestionActions.EditQuestion) => this.subjectApi.editQuestion(action.qs_id, action.payload)
+            .pipe(
+                map((data) => new QuestionActions.EditQuestionSuccess(data)),
+                catchError(error => of(new QuestionActions.EditQuestionFailure(error)))
             )
         )
     )

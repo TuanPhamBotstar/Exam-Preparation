@@ -93,7 +93,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/chart.js/dist/Chart.bundle.min.js"]
           }
         },
         "lint": {

@@ -15,6 +15,7 @@ export class ProfileSidebarComponent implements OnInit {
   submenu: boolean = false;
   username: any;
   subject_id: string;
+  page: number;
   public show: boolean = true;
   constructor(
     public router: Router,
@@ -37,10 +38,13 @@ export class ProfileSidebarComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(data => {
       if (data.bo_de) {
         this.subject_id = data.bo_de;
+        this.page = data.trang;
         this.caret_down = true;
+        this.submenu = true;
       }
       else {
         this.caret_down = false;
+        this.submenu = false;
       }
     })
   }
@@ -57,7 +61,7 @@ export class ProfileSidebarComponent implements OnInit {
   }
   onAddQuestion() {
     if (1) {
-      this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subject_id } });
+      this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subject_id, trang: this.page } });
     }
   }
   overviewTests() {

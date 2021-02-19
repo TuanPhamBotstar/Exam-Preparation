@@ -1,4 +1,17 @@
-
+<div class="your-res-chart" *ngIf="pieChartData.length > 0">
+    <div style="display: block">
+        <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [options]="pieChartOptions"
+                [chartType]="pieChartType">
+                [plugins]="pieChartPlugins"
+                [legend]="pieChartLegend">
+        </canvas>
+      </div>
+      <p class="name-chart">Tỉ lệ thành tích thi của bạn</p>
+</div>
+<div class="result-table">
 <table>
     <caption>Lịch Sử Thi Của Bạn</caption>
     <tr>
@@ -6,19 +19,21 @@
         <th>Đề Thi</th>
         <th>Điểm</th>
         <th>Thời Gian Thi (giây)</th>
+        <th>Chi Tiết</th>
     </tr>
     <tr *ngFor="let result of results; let i = index"
-    (click)="viewChosenAnswer(result.test_id, result.chosenAnswers, result.correctAnswer, i)" class="res-detail"
     [class.active] = "i === active"
     >
         <td>{{i+1}}</td>
         <td>
             {{result.nameTest | uppercase}}
         </td>
-        <td>{{result.point}}</td>
+        <td>{{result.point}}/100</td>
         <td>{{result.time}}</td>
+        <td (click)="viewChosenAnswer(result.test_id, result.chosenAnswers, result.correctAnswer, i)" class="res-detail">Xem chi tiết</td>
     </tr>
 </table>
+</div>
 
     <div class="test-content">
         <div class="panel panel-default" *ngIf="test">

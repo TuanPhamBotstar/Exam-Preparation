@@ -85,7 +85,7 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
   }
   onAddQuestion() {
     if (!this.isExistSubject) {
-      this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subject_id } });
+      this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subject_id} });
     }
   }
   openConfirmBlock() {
@@ -105,7 +105,8 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
   }
   onEditQuestion(question) {
     console.log(question)
-    this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subject_id } });
+    this.router.navigate(['/chi-tiet/chinh-sua-cau-hoi'], { queryParams: { bo_de: this.subject_id, cau_hoi: question._id, trang: this.page } });
+    // this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subject_id, trang: this.page } });
   }
   // test handle
   overviewTests() {

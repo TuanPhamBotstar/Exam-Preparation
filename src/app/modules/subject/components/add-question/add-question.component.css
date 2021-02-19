@@ -20,6 +20,9 @@
     font-size: 1.2em;
     -webkit-text-stroke: 2px #f2f2f2;
 }
+.panel-heading h3:not(.panel-title){
+    font-size: 1.2em;
+}
 .panel{
     margin-top: 20px;
     background-color: #f2f2f2;
@@ -29,6 +32,8 @@
 form.add-question div button.btn-primary{
     width: auto;
     height: auto;
+    padding: 6px 10px;
+    font-size: 1em;
 }
 form.add-question button.add-answer{
     background-color: #337ab7;

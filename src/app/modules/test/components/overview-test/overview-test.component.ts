@@ -35,6 +35,7 @@ export class OverviewTestComponent implements OnInit {
       this.subjectname = subjectname;
       console.log(this.subject_id)
   }
+  
   getDetailTest(i: number) {
     this.router.navigate(['/chi-tiet/de-thi/noi-dung-de-thi'], { queryParams: {bo_de: this.subject_id, de_thi: this.tests[i]._id, trang: 1 } });
   }

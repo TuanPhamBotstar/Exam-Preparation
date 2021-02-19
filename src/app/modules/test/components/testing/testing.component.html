@@ -62,7 +62,7 @@
           <i class="glyphicon glyphicon-remove" (click)="closeResBlock()"></i>
     </div>
     <div class="panel-body">
-          <p>Bạn trả lời đúng {{point/10}}/{{totalQs}} câu.</p>
+          <p>Bạn trả lời đúng {{count}}/{{totalQs}} câu.</p>
            <p>Số điểm là {{point}}</p>
           <div>
               <button type="button" class="btn btn-primary" (click) = "closeResBlock()">Thoát</button>
@@ -91,6 +91,7 @@
                         </div>
                         <div class="answers">
                             <div class="" *ngFor="let answer of question.answers; let j = index">
+                                <form>
                                 <div class="answer-elemnt">
                                     <input *ngIf="chosenAnsers[i+(this.page-1)*this.perPage] !== undefined && j == chosenAnsers[i+(this.page-1)*this.perPage]" 
                                     type="radio" name="a_{{i}}" id="a_{{i}}_{{j}}" #isCorrect (change)="showRes($event,i,j)" checked>
@@ -100,6 +101,7 @@
                                         {{alphaArr[j]}}. {{answer['content']}}
                                     </label>    
                                 </div>
+                            </form>
                             </div>
                         </div>
                         <div class="answers" *ngIf="ansFromServer">
@@ -115,7 +117,7 @@
                     </div> 
                 </div>
             </div>
-            <ul class="pagination" *ngIf="showTest">
+            <ul class="pagination" *ngIf="totalPage > 1 && showTest">
                 <li><a (click)="onPrevious()">&laquo;</a></li>
                 <ng-container *ngFor="let no of arrayV(); let i= index;">
                     <li (click)="toPage(i+1)" [class.active]="i == page - 1">

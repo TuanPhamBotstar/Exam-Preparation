@@ -3,7 +3,6 @@
     top:-40px;
     background-color: #fff;
     padding-top: 20px;
-    z-index: 10;
 }
 .test-btn{
     display: flex;
@@ -36,7 +35,6 @@
 }
 label, input{
     font-weight: initial;
-    cursor: pointer;
 }
 /*  confirm block */
 .confirm-del-subject{

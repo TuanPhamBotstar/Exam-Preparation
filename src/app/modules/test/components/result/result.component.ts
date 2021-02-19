@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, RouteReuseStrategy } from '@angular/router';
 import { TestApiService } from 'src/app/modules/subject/services/test-api.service';
 import { ResApiService } from '../../services/res-api.service';
-
+// ng2-chart
+import { ChartType, ChartOptions } from 'chart.js';
+import { SingleDataSet, Label } from 'ng2-charts';
+import * as pluginLabels from 'chartjs-plugin-labels';
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -15,7 +18,34 @@ export class ResultComponent implements OnInit {
   public test: any;
   public chosenAnswers: any;
   public correctAnswer: any;
-  public alphaArr = ['A', 'B', 'C', 'D', 'E', 'F']
+  public alphaArr = ['A', 'B', 'C', 'D', 'E', 'F'];
+  // your res chart
+  public pieChartLabels: Label[]= ['Not Good', 'Good', 'Excellent'];
+  public pieChartData = [];
+  public pieChartType: any = 'pie';
+  pieChartOptions: ChartOptions = {
+    maintainAspectRatio: true,
+    responsive: true,
+    plugins: {
+        labels: {
+        render: 'percentage',
+        // fontColor: ['green', 'white', 'red'],
+        fontSize: 16,
+        precision: 0
+        },
+        datalabels:{
+          display: false
+        }
+      },
+  };
+  pieChartLegend: boolean;
+  pieChartPlugins = [pluginLabels];
+  levelPoint = { 
+    bad: 0 ,
+    good: 0 ,
+    excellent: 0 
+  };
+  total: number = 0;
   constructor(
     private resApi: ResApiService,
     private testApi: TestApiService,
@@ -34,6 +64,24 @@ export class ResultComponent implements OnInit {
           }
           return b.point > a.point ? 1 : -1
         })
+        data.forEach(item => {
+          if(item.point > 80){
+            this.levelPoint.excellent ++;
+          }
+          else if(item.point > 50){
+            this.levelPoint.good ++;
+          }
+          else{
+            this.levelPoint.bad ++;
+          }
+        })
+        this.total = data.length;
+        this.pieChartData = [
+          this.levelPoint.bad, 
+          this.levelPoint.good, 
+          this.levelPoint.excellent,
+        ];
+        console.log(this.levelPoint)
       })
     }
   }
@@ -46,7 +94,9 @@ export class ResultComponent implements OnInit {
       this.test = data;
     })
   }
-  closeDetailRes(){
+  closeDetailRes() {
     this.test = null;
+    this.active = null;
   }
+
 }

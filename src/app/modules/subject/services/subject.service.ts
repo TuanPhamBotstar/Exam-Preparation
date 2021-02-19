@@ -31,7 +31,13 @@ export class SubjectService {
   loadQuestions(subject_id, page) {
     this.store.dispatch(new QuestionActions.LoadQuestions(subject_id, page));
   }
+  loadQuestion(id) {
+    this.store.dispatch(new QuestionActions.LoadQuestion(id));
+  }
   addQuestion(question: Question) {
     this.store.dispatch(new QuestionActions.AddQuestions(question));
+  }
+  editQuestion(qs_id: string, question: Question) {
+    this.store.dispatch(new QuestionActions.EditQuestion(qs_id, question));
   }
 }

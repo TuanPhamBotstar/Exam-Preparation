@@ -15,10 +15,10 @@
 }
 .navbar ul{
     height: 50px;
+    margin-left: 10px;
 }
 .navbar-nav>li>a{
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px;
 }
 .active{
     color:#062f53;
