@@ -1,17 +1,11 @@
 <div class="main-container">
-    <section class="feature-section">
-        <div *ngFor="let introduce of introduces"
-        class="feature">
-            <img src="{{introduce.imgUrl}}">
-            <div class="content">
-                <h3>{{introduce.title}}</h3>
-                <p>
-                    {{introduce.content}}
-                </p>
-            </div>
-            <button (click)="onSignUp()">
-                {{introduce.action}}
-            </button>
+        <div class="introduce">
+            <p>Best Online</p>
+            <p>Training Exam</p>
+            <p>Platform</p>
+            <button type="button" class="btn btn-primary" (click)="onSignUp()">Sign up</button>
         </div>
-    </section>
+        <div class="introduce img">
+            <img src="assets/img/3442.png">
+        </div>
 </div>

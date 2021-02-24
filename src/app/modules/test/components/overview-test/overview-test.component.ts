@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TestService } from 'src/app/modules/subject/services/test.service';
 
 @Component({
@@ -17,30 +17,34 @@ export class OverviewTestComponent implements OnInit {
   constructor(
     private _location: Location,
     private testService: TestService,
+    private activatedRouter: ActivatedRoute,
     public router: Router,
   ) { }
 
   ngOnInit(): void {
-    if (this.subject_id) {
-      this.testService.loadTests(this.subject_id);
-      this.testService.getTests()
-        .subscribe(data => {
-          console.log(data)
-          this.tests = data.test.list;
-        })
-    }
+    this.activatedRouter.queryParams.subscribe(data => {
+      this.subject_id = data.subject;
+      if (this.subject_id) {
+        this.testService.loadTests(this.subject_id);
+        this.testService.getTests()
+          .subscribe(data => {
+            console.log(data)
+            this.tests = data.test.list;
+          })
+      }
+    })  
   }
-  getSubject_id(id: string, subjectname: string) {
-      this.subject_id = id;
+  setSubject_id(id: string, subjectname: string) {
+      // this.subject_id = id;
       this.subjectname = subjectname;
       console.log(this.subject_id)
   }
   
   getDetailTest(i: number) {
-    this.router.navigate(['/chi-tiet/de-thi/noi-dung-de-thi'], { queryParams: {bo_de: this.subject_id, de_thi: this.tests[i]._id, trang: 1 } });
+    this.router.navigate(['/detail/tests/content-test'], { queryParams: {subject: this.subject_id, test: this.tests[i]._id, page: 1 } });
   }
   onCreateTest() {
-    this.router.navigate(['/chi-tiet/de-thi/tao-de-thi'], { queryParams: { bo_de: this.subject_id}});
+    this.router.navigate(['/detail/tests/create-test'], { queryParams: { subject: this.subject_id}});
   }
   onBack() {
     this._location.back();

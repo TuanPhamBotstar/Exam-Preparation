@@ -48,7 +48,7 @@ export class SubjectApiService {
     return this.http.get(`${questionUrl}/edit/${question_id}`);
   }
   // test handle
-  getQtyQs(subject_id):Observable<{}>{
+  getQtyQs(subject_id):Observable<any>{
     return this.http.get(`${questionUrl}/${subject_id}`);
   }
 

@@ -1,0 +1,44 @@
+<div class="component-container">
+    <div class="add-question">
+        <button type="button" class="btn btn-primary" (click)=onAddQuestion()>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add Question
+        </button>
+    </div>
+    <ng-container>
+        <div class="questions-container">
+            <div class="question" *ngFor="let question of questions; let i = index">
+                <div class="question-elemment">
+                    <h4>
+                        <strong>Question {{i+1+(page-1)*10}}:</strong> ({{levels[question.level]}})
+                    </h4>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEditQuestion(question)"></i>
+                    <p>
+                        {{question.title}}
+                    </p>
+                </div>
+                <div class="answers">
+                    <div class="" *ngFor="let answer of question.answers; let j = index">
+                        <div class="answer-elemnt is{{answer.isCorrect}}">
+                            <!-- <input type="checkbox" id="a_{{i}}_{{j}}" value="j" name="a_{{i}}"> -->
+                            <label for="a_{{i}}_{{j}}">
+                                {{alphaArr[j]}}. {{answer.content}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <ul class="pagination" *ngIf="totalPage > 1">
+            <li><a (click)="onPrevious()">&laquo;</a></li>
+            <ng-container *ngFor="let page of arrayV(); let i= index;">
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/detail/questions']" [queryParams]="{subject: subject_id, page: i+1}">
+                        {{i+1}}
+                    </a>
+                </li>
+            </ng-container>
+            <li><a (click)="onNext()">&raquo;</a></li>
+        </ul>  
+    </ng-container>
+</div>

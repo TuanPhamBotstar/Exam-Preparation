@@ -1,0 +1,17 @@
+.component-container{
+    position: relative;
+}
+.add-question{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+.add-question button{
+    margin-right: 10px;
+}
+.pagination{
+    margin-left: 15px;
+}
+.answer-elemnt{
+    margin: 10px 0;
+}

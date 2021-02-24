@@ -36,9 +36,9 @@ export class ProfileSidebarComponent implements OnInit {
       }
     }
     this.activatedRoute.queryParams.subscribe(data => {
-      if (data.bo_de) {
-        this.subject_id = data.bo_de;
-        this.page = data.trang;
+      if (data.subject) {
+        this.subject_id = data.subject;
+        this.page = data.page;
         this.caret_down = true;
         this.submenu = true;
       }
@@ -49,7 +49,7 @@ export class ProfileSidebarComponent implements OnInit {
     })
   }
   toSubject() {
-    this.router.navigate(['/bo-de'], { queryParams: { trang: 1 } });
+    this.router.navigate(['/subjects'], { queryParams: { page: 1 } });
   }
   // toggle frofile side bar
   onToggle() {
@@ -59,24 +59,24 @@ export class ProfileSidebarComponent implements OnInit {
   onToggleSubmenu() {
     this.submenu = !this.submenu;
   }
+  onDashboard() {
+    this.router.navigate(['detail/dashboard'], { queryParams: { subject: this.subject_id } });
+  }
   onAddQuestion() {
-    if (1) {
-      this.router.navigate(['/chi-tiet/them-cau-hoi'], { queryParams: { bo_de: this.subject_id, trang: this.page } });
-    }
+    this.router.navigate(['/detail/add-question'], { queryParams: { subject: this.subject_id, page: this.page } });
   }
   overviewTests() {
-    if (1) {
-      this.router.navigate(['chi-tiet/de-thi'], { queryParams: { bo_de: this.subject_id } });
-    }
+    this.router.navigate(['detail/tests'], { queryParams: { subject: this.subject_id } });
+  }
+  allQuestions() {
+    this.router.navigate(['detail/questions'], { queryParams: { subject: this.subject_id, page: 1 } });
   }
   onDelSubject() {
     this.subjectService.removeSubject(this.subject_id);
-    this._location.back();
+    this.router.navigate(['/subjects'], { queryParams: { page: this.page } });
     this.confirmBlock = !this.confirmBlock;
-  } 
+  }
   openConfirmBlock() {
-    if (1) {
-      this.confirmBlock = !this.confirmBlock;
-    }
+    this.confirmBlock = !this.confirmBlock;
   }
 }

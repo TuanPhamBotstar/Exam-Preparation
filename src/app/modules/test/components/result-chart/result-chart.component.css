@@ -1,0 +1,7 @@
+/* chart */
+.your-res-chart{
+    width: 60%;
+    margin: 10px auto;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+}

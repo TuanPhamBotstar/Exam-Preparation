@@ -19,7 +19,7 @@
         <div class="subject-element">
 
             <i class="glyphicon glyphicon-folder-open"></i>
-            <p>Bộ Đề - {{subject.subjectname | uppercase}}</p>
+            <p>{{subject.subjectname | uppercase}}</p>
         </div>  
     </div>
     </div>
@@ -29,7 +29,7 @@
     <li><a (click)="onBack()">&laquo;</a></li>
     <ng-container *ngFor="let page of arrayV(); let i= index;">
         <li routerLinkActive="active">
-            <a [routerLink]="['/bo-de']" [queryParams]="{trang: i+1}">
+            <a [routerLink]="['/subjects']" [queryParams]="{page: i+1}">
                 {{i+1}}
             </a>
         </li>

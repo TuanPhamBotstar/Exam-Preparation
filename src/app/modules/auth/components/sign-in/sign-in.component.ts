@@ -33,7 +33,7 @@ export class SignInComponent implements OnInit {
   }
   onSignUp() {
     this.isSignUp = true;
-    this.router.navigate(['dang-ky'], { relativeTo: this.activatedRouter.parent });
+    this.router.navigate(['sign-up'], { relativeTo: this.activatedRouter.parent });
   }
   createSignInForm() {
     this.signInForm = this.formBuilder.group(
@@ -72,7 +72,7 @@ export class SignInComponent implements OnInit {
             saveUser.username = data['username'];
           }
           localStorage.setItem('user',JSON.stringify(saveUser));
-          this.router.navigate(['/tong-quan']);
+          this.router.navigate(['/overviews']);
         }
         else{
           this.error = -1;

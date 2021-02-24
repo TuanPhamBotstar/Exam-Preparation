@@ -1,7 +1,7 @@
 <div class="type-code" *ngIf="tutorialBox">
         <div class="panel panel-heading">
             <div class="panel-heading">
-                    <h3 class="panel-title">Hướng dẫn làm bài thi trắc nghiệm</h3>
+                    <h3 class="panel-title">Tutorial do quiz</h3>
             </div>
             <div class="">
                 <form 
@@ -12,7 +12,7 @@
                 > 
                 <div class="form-group">
                     <input type="radio" checked="'checked'">
-                    <label>Chọn câu trả lời đúng nhất</label>
+                    <label>Choose the best answer</label>
                 </div>
                 <div class="form-group" *ngIf="isTypeCode">
                     <label>Nhập mã code</label>
@@ -25,7 +25,7 @@
                     class="label label-danger"
                     *ngIf="errCode"
                     >
-                    Mã code không đúng !
+                    Code is incorrect.
                     </span>
                 </div>
                 <div class="form-group">
@@ -33,7 +33,7 @@
                     <button 
                         type="submit" class="btn btn-primary"
                     >
-                        Làm Bài Thi
+                        Start
                     </button>
                 </div>
             </form>
@@ -42,40 +42,43 @@
 </div>
 <div class="panel panel-primary confirm-del-subject" *ngIf="confirmBlock">
     <div class="panel-heading">
-          <h3 class="panel-title">Nộp Bài Thi</h3>
+          <h3 class="panel-title">Submit</h3>
           <i class="glyphicon glyphicon-remove" (click)="openConfirm()"></i>
     </div>
     <div class="panel-body">
-          <p>Thời gian vẫn còn.<br />
-            Bạn có chắc chắn muốn nộp bài không ?</p>
+          <p>Time still remain. Submit anyway ?</p>
           <div>
 
-              <button type="button" class="btn btn-primary" (click) = "openConfirm()">Không</button>
+              <button type="button" class="btn btn-primary" (click) = "openConfirm()">No</button>
               
-              <button type="button" class="btn btn-danger" (click) = "onReport()">Có</button>
+              <button type="button" class="btn btn-danger" (click) = "onReport()">Yes</button>
           </div>
     </div>
 </div>
 <div class="panel panel-primary confirm-del-subject" *ngIf="resBlock">
     <div class="panel-heading">
-          <h3 class="panel-title">Kết Quả</h3>
+          <h3 class="panel-title">Result</h3>
           <i class="glyphicon glyphicon-remove" (click)="closeResBlock()"></i>
     </div>
     <div class="panel-body">
-          <p>Bạn trả lời đúng {{count}}/{{totalQs}} câu.</p>
-           <p>Số điểm là {{point}}</p>
-          <div>
-              <button type="button" class="btn btn-primary" (click) = "closeResBlock()">Thoát</button>
-          </div>
+        <div class="result-content">
+            <p>You answered</p>
+            <p class="score">{{count}}/{{totalQs}}</p>
+            <p>questions correct</p>
+            <p class="score">Score is {{point}}</p>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" (click) = "closeResBlock()">Ok</button>
+        </div>
     </div>
 </div>
 <div class="testing">
     <div class="test-content">
         <div class="panel panel-default" *ngIf="test">
             <div class="panel-heading">
-                <h3 class="panel-title">ĐỀ THI {{test.testTitle | uppercase}}</h3>
-                <i>({{test.easyQty+test.normalQty+test.hardQty}} câu hỏi)</i>
-                <p>Thời gian: {{test.timeTest}} phút</p>
+                <h3 class="panel-title">{{test.testTitle | uppercase}} Test</h3>
+                <i>({{test.easyQty+test.normalQty+test.hardQty}} questions)</i>
+                <p>Time: {{test.timeTest}} min</p>
                 <p *ngIf="showTest">Mã đề: {{test.testCode}}</p>
             </div>
             <div class="panel-body" *ngIf="showTest">
@@ -83,7 +86,7 @@
                     <div class="question" *ngFor="let question of qsOnePage; let i = index">
                         <div class="question-elemment">
                             <h4>
-                                <strong>Câu {{i+1+(page-1)*5}}:</strong>
+                                <strong>Question {{i+1+(page-1)*5}}:</strong>
                             </h4>
                             <p>
                                 {{question.title}}
@@ -138,7 +141,7 @@
             <p>{{m}} : {{s}}</p>
         </div>
         <div>
-            <button type="submit" class="btn btn-success" (click)="openConfirm()">Nộp Bài</button>
+            <button type="submit" class="btn btn-success" (click)="openConfirm()">Submit</button>
         </div>
     </div>
 

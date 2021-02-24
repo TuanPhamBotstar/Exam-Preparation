@@ -4,6 +4,7 @@
     /* flex-flow: row nowrap; */
     width: 100%;
     min-height: 100vh;
+    z-index: 0;
 }
 .testing-sidebar{
     height: 250px;
@@ -88,9 +89,6 @@ label, input{
 .confirm-del-subject .panel-body{
     text-align: center;
 }
-.panel-body p{
-    margin: 20px 0 10px;
-}
 .confirm-del-subject i{
     position: absolute;
     top:10px;
@@ -107,6 +105,7 @@ label, input{
 /* type code */
 .type-code{
     position: absolute ;
+    width: 40%;
     top: 40%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -129,6 +128,17 @@ label, input{
 .type-code button{
     width: auto;
     height: auto;
+    padding: 5px 10px;
+}
+
+/* result box */
+.panel-body .result-content{
+    margin: 20px 0 10px;
+}
+.result-content .score{
+    font-size: 1.2em;
+    color: #5cb85c;
+    font-weight: bold;
 }
 /* pagination */
 .pagination{

@@ -14,7 +14,7 @@ const initialState: UserState = {
     list: [],
     loading: false,
     error: undefined,
-    isAuthenticated:false,
+    isAuthenticated:null,
     user_id:'',
 }
 
@@ -45,10 +45,10 @@ export function reducer(state: UserState = initialState, action: UserActions.act
                 loading: false,
             }
         case UserActions.ADD_USER_SUCCESS:
-            console.log(action.payload)
+            console.log(action.message)
             return {
                 ...state,
-                list: [...state.list, action.payload],
+                list: action.payload,
                 isAuthenticated: action.message.success,
                 loading: false,
             }

@@ -7,7 +7,7 @@
 
     <div class="panel panel-heading">
         <div class="panel-heading">
-                <h3 class="panel-title">Tạo Đề Thi</h3>
+                <h3 class="panel-title">Create new Test</h3>
                 <i class="glyphicon glyphicon-remove" (click)="onBack()"></i>
         </div>
         <div class="">
@@ -18,10 +18,10 @@
             (ngSubmit)="onCreateTest()"
         >
             <div class="form-group">
-                <label> Tên Đề Thi</label>
+                <label>Test name</label>
                 <input type="text" 
                 class="form-control"
-                placeholder="Tên đề thi"
+                placeholder="Test name"
                 formControlName="testTitle"
                 #testTitle
                 >
@@ -30,11 +30,11 @@
                 class="label label-danger"
                 *ngIf="createTestForm.controls.testTitle.touched && createTestForm.controls.testTitle.errors?.required"
                 >
-                Vui lòng nhập tên đề thi !
+                Please enter test name.
                 </span>
             </div> 
             <div class="form-group">
-                <label>Thời gian thi (phút)</label>
+                <label>Time (min)</label>
                 <input type="number" min="15" step="5" 
                 class="form-control" placeholder="00"
                 formControlName="timeTest"
@@ -44,11 +44,11 @@
                 class="label label-danger"
                 *ngIf="createTestForm.controls.timeTest.touched && createTestForm.controls.timeTest.errors?.required"
                 >
-                Vui lòng nhập thời gian thi !
+                Please enter time.
                 </span>
             </div>
             <div class="form-group">
-                <label>Mã Code</label>
+                <label>Code</label>
                 <input type="text"  
                 class="form-control" placeholder="0000"
                 formControlName="codeTest"
@@ -58,13 +58,13 @@
                 class="label label-danger"
                 *ngIf="createTestForm.controls.codeTest.touched && createTestForm.controls.codeTest.errors?.required"
                 >
-                Vui lòng nhập mã Code !
+                Please enter Code.
                 </span>
                 <span 
                 class="label label-danger"
                 *ngIf="createTestForm.controls.codeTest.touched && createTestForm.controls.codeTest.errors?.pattern"
                 >
-                Mã code phải gồm 4 chữ số !
+                Code must include 4 digit characters.
                 </span>
             </div>
             <!-- <div class="form-group">
@@ -134,17 +134,23 @@
                 </div>
             </div> -->
             <div class="form-group">
-                <label>Số lượng câu hỏi: {{totalQty}}</label>
+                <label>Total quantity of questions: {{totalQty}}</label>
             </div>
             <ng5-slider *ngIf="easyTotal" [(value)]="totalQty" [options]="optionsTotal"></ng5-slider>
             <div class="form-group">
-                <label [class.error] = "hardQty - easyQty > hardTotal || easyQty > hardQty">Số lượng câu hỏi khó: {{hardQty - easyQty}}</label>
+                <label [class.error] = "hardQty - easyQty > hardTotal || easyQty > hardQty">
+                    Total quantity of hard questions: {{hardQty - easyQty}}/{{hardTotal}}
+                </label>
             </div>
             <div class="form-group">
-                <label [class.error] = "totalQty - hardQty > normalTotal || hardQty > totalQty">Số lượng câu hỏi trung bình: {{totalQty - hardQty}}</label>
+                <label [class.error] = "totalQty - hardQty > normalTotal || hardQty > totalQty">
+                    Total quantity of normal questions: {{totalQty - hardQty}}/{{normalTotal}}
+                </label>
             </div>
             <div class="form-group">
-                <label [class.error] = "easyQty > easyTotal">Số lượng câu hỏi dễ: {{easyQty}}</label>
+                <label [class.error] = "easyQty > easyTotal">
+                    Total quantity of easy questions: {{easyQty}}/{{easyTotal}}
+                </label>
             </div>
             <ng5-slider *ngIf="easyTotal" [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
             <!-- {{this.addQuestionForm.value | json}}   -->
@@ -154,7 +160,7 @@
                     type="submit" class="btn btn-primary"
                     [disabled]="createTestForm.invalid"
                     >
-                        Tạo đề thi
+                        Create new Test
                     </button>
                 
             </div>

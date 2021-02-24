@@ -1,0 +1,14 @@
+
+<div class="your-res-chart" *ngIf="pieChartData.length > 0">
+    <div style="display: block">
+        <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [options]="pieChartOptions"
+                [chartType]="pieChartType">
+                [plugins]="pieChartPlugins"
+                [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    <p class="name-chart">Your's achievements ratio </p>
+</div>

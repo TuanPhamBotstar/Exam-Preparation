@@ -40,4 +40,7 @@ export class SubjectService {
   editQuestion(qs_id: string, question: Question) {
     this.store.dispatch(new QuestionActions.EditQuestion(qs_id, question));
   }
+  deleteQuestion(qs_id: string){
+    this.store.dispatch(new QuestionActions.DelQuestion(qs_id));
+  }
 }

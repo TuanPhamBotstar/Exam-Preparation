@@ -22,6 +22,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    background-color: #efefef;
   }
   .subject:hover{
   box-shadow: 2px 2px 5px  #5b9bd1 inset,-2px -2px 5px  #5b9bd1 inset;
@@ -68,9 +69,9 @@
 
 /* pagination */
 .pagination{
-  position: absolute;
-  bottom: 25px;
-  left: 35px;
+  position: relative;
+  bottom: 0px;
+  left: 10px;
   margin: 10px 0 0;
 }
 /* responsive */

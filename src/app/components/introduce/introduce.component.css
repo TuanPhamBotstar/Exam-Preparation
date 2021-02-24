@@ -1,6 +1,40 @@
 .main-container{
     width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;
+    height: calc(100vh - 140px);
 }
+/* introduce */
+.introduce{
+    width: 30%;
+    padding-left: 150px;
+}
+.introduce p{
+    color: #2672ab;
+    font-size: 3em;
+    text-align: left;
+    margin-bottom: 0;   
+}
+.introduce button{
+    margin-top: 10px;
+    font-size: 1.5em;
+    border-radius: 24px;
+}
+.introduce button:focus{
+    outline: none;
+}
+.introduce.img{
+    width: 70%;
+}
+.introduce.img img{
+    width: 70%;
+    height:auto;
+    display: block;
+    margin: auto;
+}
+/* old */
 section.feature-section{
     /* margin: 50px 0 120px 0; */
     display: flex;

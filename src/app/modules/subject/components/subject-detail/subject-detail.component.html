@@ -3,13 +3,16 @@
 <div class="navbar">
     <ul class="nav navbar-nav">
         <li >
-            <a [routerLink]="['/bo-de']" [queryParams]="{trang: 1}">Tất cả bộ đề</a>
-        </li>
+            <a [routerLink]="['/subjects']" [queryParams]="{page: 1}">All subject tests</a>
+        </li><span [ngStyle]="{color:'#337ab7'}">/</span>
         <li routerLinkActive = "active">
-            <a [routerLink]="['/chi-tiet']" [queryParams]="{bo_de: subject_id, trang: 1}">Bộ đề {{subjectname | uppercase}} ( Tổng {{total}} câu hỏi )</a>
-        </li>
-        <li routerLinkActive = "active" *ngIf="!showQuestions">
-            <a [routerLink]="['/chi-tiet/de-thi']" [queryParams]="{bo_de: subject_id}">Tất cả đề thi</a>
+            <a [routerLink]="['/detail/dashboard']" [queryParams]="{subject: subject_id}">{{subjectname | uppercase}} ({{total}} questions)</a>
+        </li><span [ngStyle]="{color:'#337ab7'}">/</span>
+        <li routerLinkActive = "active">
+            <a [routerLink]="['/detail/questions']" [queryParams]="{subject: subject_id, page: 1}">Questions</a>
+        </li><span [ngStyle]="{color:'#337ab7'}">/</span>
+        <li routerLinkActive = "active" >
+            <a [routerLink]="['/detail/tests']" [queryParams]="{subject: subject_id}">Tests</a>
         </li>
     </ul>
 </div>
@@ -28,18 +31,17 @@
         <span>Xóa bộ đề</span>
     </button>
 </div> -->
-
-<router-outlet (activate)="onActive($event)" (deactivate)="onToggle()"></router-outlet>
+<!-- (activate)="onActive($event)" -->
+<router-outlet *ngIf="!isExistSubject"></router-outlet>
 
 <div class="panel panel-danger confirm-del-subject" *ngIf="confirmBlock">
       <div class="panel-heading">
-            <h3 class="panel-title">Xóa Bộ Đề</h3>
+            <h3 class="panel-title">Delete Subject Test</h3>
             <i class="glyphicon glyphicon-remove" (click)="openConfirmBlock()"></i>
       </div>
       <div class="panel-body">
-            Bạn có chắc chắn muốn xóa bộ đề {{subjectname | uppercase}} không ?
+            Are you sure you want to delete {{subjectname | uppercase}} subject test ?
             <div>
-
                 <button type="button" class="btn btn-primary" (click) = "openConfirmBlock()">Không</button>
                 
                 <button type="button" class="btn btn-danger" (click) = "onDelSubject(subject_id)">Có</button>
@@ -48,17 +50,15 @@
 </div>
 
 <div class="isExistSubject" *ngIf="isExistSubject">
-        Bộ đề không tồn tại
+        Subject test does not exist.
 </div>
 
-<ng-container *ngIf="showQuestions">
-    <!-- <h3>Danh sách câu hỏi</h3>
-    <i *ngIf="questions">( Tổng {{total}} câu hỏi )</i> -->
+<!-- <ng-container *ngIf="showQuestions">
     <div class="questions-container">
         <div class="question" *ngFor="let question of questions; let i = index">
             <div class="question-elemment">
                 <h4 (click)="onEditQuestion(i)">
-                    <strong>Câu {{i+1+(page-1)*10}}:</strong> ({{levels[question.level]}})
+                    <strong>Question {{i+1+(page-1)*10}}:</strong> ({{levels[question.level]}})
                 </h4>
                 <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEditQuestion(question)"></i>
                 <p>
@@ -68,9 +68,8 @@
             <div class="answers">
                 <div class="" *ngFor="let answer of question.answers; let j = index">
                     <div class="answer-elemnt is{{answer.isCorrect}}">
-                        <!-- <input type="checkbox" id="a_{{i}}_{{j}}" value="j" name="a_{{i}}"> -->
                         <label for="a_{{i}}_{{j}}">
-                            {{answer.content}}
+                            {{alphaArr[j]}}. {{answer.content}}
                         </label>
                     </div>
                 </div>
@@ -81,14 +80,14 @@
         <li><a (click)="onPrevious()">&laquo;</a></li>
         <ng-container *ngFor="let page of arrayV(); let i= index;">
             <li routerLinkActive="active">
-                <a [routerLink]="['/chi-tiet']" [queryParams]="{bo_de: subject_id, trang: i+1}">
+                <a [routerLink]="['/detail']" [queryParams]="{subject: subject_id, page: i+1}">
                     {{i+1}}
                 </a>
             </li>
         </ng-container>
         <li><a (click)="onNext()">&raquo;</a></li>
     </ul>  
-</ng-container>
+</ng-container> -->
 
     
 

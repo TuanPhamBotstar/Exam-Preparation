@@ -17,19 +17,19 @@ const routes: Routes = [
       canActivate:[AuthGuard],
     },
     {
-      path:'gioi-thieu',
+      path:'introduce',
       component:IntroduceComponent
     },
     {
-      path:'tai-khoan',
+      path:'account',
       component:AccountComponent,
       children:[
         {
-          path:'dang-nhap',
+          path:'log-in',
           component: SignInComponent
         },
         {
-          path:'dang-ky',
+          path:'sign-up',
           component: SignUpComponent,
         },
       ]

@@ -11,6 +11,8 @@ import { TestingComponent } from '../test/components/testing/testing.component';
 import { AddQuestionComponent } from './components/add-question/add-question.component';
 import { CreateSubjectComponent } from './components/create-subject/create-subject.component';
 import { CreateTestComponent } from './components/create-test/create-test.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { QuestionsComponent } from './components/questions/questions.component';
 import { SubjectDetailComponent } from './components/subject-detail/subject-detail.component';
 import { SubjectOveriewComponent } from './components/subject-overiew/subject-overiew.component';
 import { SubjectComponent } from './components/subject/subject.component';
@@ -22,41 +24,49 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'bo-de',
+        path: 'subjects',
         component: SubjectOveriewComponent,
         children: [
           {
-            path: 'tao-bo-de',
+            path: 'create-subject',
             component: CreateSubjectComponent
           },
 
         ]
       },
       {
-        path: 'chi-tiet',
+        path: 'detail',
         component: SubjectDetailComponent,
         children: [
           {
-            path: 'them-cau-hoi',
+            path: 'add-question',
             component: AddQuestionComponent
           },
           {
-            path: 'chinh-sua-cau-hoi',
+            path: 'edit-question',
             component: AddQuestionComponent
           },
           {
-            path: 'de-thi',
+            path: 'tests',
             component: OverviewTestComponent,
             children: [
               {
-                path: 'tao-de-thi',
+                path: 'create-test',
                 component: CreateTestComponent,
               },
               {
-                path: 'noi-dung-de-thi',
+                path: 'content-test',
                 component: TestComponent
               }
             ]
+          },
+          {
+            path: 'questions',
+            component: QuestionsComponent
+          },
+          {
+            path: 'dashboard',
+            component: DashboardComponent
           },
           // {
           //   path:'noi-dung-de-thi',
@@ -65,7 +75,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'lam-bai-thi',
+        path: 'testing',
         component: TestingComponent,
         // children: [
         //   {
@@ -75,11 +85,11 @@ const routes: Routes = [
         // ]
       },
       {
-        path: 'lich-su-thi',
+        path: 'activity-logs',
         component: ResultComponent,
       },
       {
-        path: 'tong-quan',
+        path: 'overviews',
         component: AnalyticComponent,
       },
     ],

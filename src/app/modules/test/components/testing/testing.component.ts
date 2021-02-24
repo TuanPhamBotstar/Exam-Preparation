@@ -15,6 +15,7 @@ import { ResApiService } from '../../services/res-api.service';
   styleUrls: ['./testing.component.css']
 })
 export class TestingComponent implements OnInit, OnDestroy {
+  currentDate: any;
   saveTimeTest: number;
   totalPage: number;
   totalQs: number;
@@ -60,7 +61,7 @@ export class TestingComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // get user_id
     const user = JSON.parse(localStorage.getItem('user'));
-    if(user){
+    if (user) {
       this.user_id = user.user_id;
       this.user_name = user.username;
     }
@@ -70,15 +71,15 @@ export class TestingComponent implements OnInit, OnDestroy {
       codeTyped: ['']
     })
     this.activatedRouter.queryParams.subscribe(data => {
-      this.test_id = data.de_thi;
+      this.test_id = data.test;
       // this.page = data.trang;
-      if(this.test_id){
+      if (this.test_id) {
         this.testService.loadTesting(this.test_id);
       }
     })
     this.subscription = this.testService.getTests().subscribe(data => {
       console.log(data.test.testing)
-      if(!data.test.loading && data.test.testing){
+      if (!data.test.loading && data.test.testing) {
         this.test = data.test.testing;
         this.nameTest = this.test.testTitle;
         this.author = this.test.author;
@@ -98,16 +99,18 @@ export class TestingComponent implements OnInit, OnDestroy {
         this.loadPagination()
       }
     })
-    
+
   }
-  ngOnDestroy():void{
-    if(this.subscription){
+  ngOnDestroy(): void {
+    if (this.subscription) {
       console.log('testing is destroyed')
       this.subscription.unsubscribe();
     }
   }
   onReport() {
     clearInterval(this.testing);
+    this.currentDate = new Date().toISOString();
+    console.log(this.currentDate)
     console.log(this.chosenAnsers)
     const check = {
       test_id: this.test_id,
@@ -128,9 +131,10 @@ export class TestingComponent implements OnInit, OnDestroy {
         author: this.author,
         nameTest: this.nameTest,
         point: this.point,
-        time:this.saveTimeTest,
+        time: this.saveTimeTest,
         chosenAnsers: this.chosenAnsers,
         correctAnswer: this.correctAnswer,
+        date: this.currentDate,
       }
       this.resAPi.saveTested(this.result).subscribe(data => {
         console.log(data)
@@ -149,8 +153,8 @@ export class TestingComponent implements OnInit, OnDestroy {
     }
   }
   showRes(e, i, j) { //record answer'user
-  this.chosenAnsers[i+(this.page-1)*this.perPage] = j;
-  console.log('chosenAnsers', this.chosenAnsers);
+    this.chosenAnsers[i + (this.page - 1) * this.perPage] = j;
+    console.log('chosenAnsers', this.chosenAnsers);
     console.log(e.target.checked)
   }
   closeResBlock() {
@@ -158,7 +162,7 @@ export class TestingComponent implements OnInit, OnDestroy {
   }
   onStartTesting() {
     console.log(this.confirmCode.value)
-    if(this.isTypeCode){
+    if (this.isTypeCode) {
       if (this.confirmCode.value.codeTyped === this.testCode) {
         this.tutorialBox = false;
         this.showTest = true;
@@ -177,26 +181,26 @@ export class TestingComponent implements OnInit, OnDestroy {
         this.errCode = true;
       }
     }
-    else{
-        this.tutorialBox = false;
-        this.showTest = true;
-        this.testing = setInterval(() => {
-          this.timeTest--;
-          if (this.timeTest == 0) {
-            this.onReport();
-          }
-          this.m = Math.floor(this.timeTest / 60)
-          this.s = this.timeTest - 60 * this.m;
-          if (this.m < 10) { this.m = '0' + this.m }
-          if (this.s < 10) { this.s = '0' + this.s }
-        }, 1000)
+    else {
+      this.tutorialBox = false;
+      this.showTest = true;
+      this.testing = setInterval(() => {
+        this.timeTest--;
+        if (this.timeTest == 0) {
+          this.onReport();
+        }
+        this.m = Math.floor(this.timeTest / 60)
+        this.s = this.timeTest - 60 * this.m;
+        if (this.m < 10) { this.m = '0' + this.m }
+        if (this.s < 10) { this.s = '0' + this.s }
+      }, 1000)
     }
   }
   //pagination
-  loadPagination(){
+  loadPagination() {
     this.totalQs = this.questions.length;
     console.log(this.totalQs)
-    this.totalPage = Math.ceil(this.totalQs/this.perPage);
+    this.totalPage = Math.ceil(this.totalQs / this.perPage);
     let limit = this.page * this.perPage
     let start = this.perPage * (this.page - 1)
     this.qsOnePage = [];
@@ -213,7 +217,7 @@ export class TestingComponent implements OnInit, OnDestroy {
   arrayV() {
     return Array(this.totalPage);
   }
-  toPage(no: number){
+  toPage(no: number) {
     this.page = no;
     this.loadPagination()
   }
@@ -223,7 +227,7 @@ export class TestingComponent implements OnInit, OnDestroy {
     }
     this.loadPagination()
     // this.router.navigate(['/lam-bai-thi'],
-    //   { queryParams: { de_thi: this.test_id, trang: this.page } });
+    //   { queryParams: { test: this.test_id, trang: this.page } });
   }
   onNext() {
     if (this.page < this.totalPage) {
@@ -231,6 +235,6 @@ export class TestingComponent implements OnInit, OnDestroy {
     }
     this.loadPagination()
     // this.router.navigate(['/lam-bai-thi'],
-    //   { queryParams: { de_thi: this.test_id, trang: this.page } });
+    //   { queryParams: { test: this.test_id, trang: this.page } });
   }
 }

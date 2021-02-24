@@ -15,7 +15,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit, OnDestroy {
-  subcription: Subscription;
+  subscription: Subscription;
+  subscription2: Subscription;
+  confirmBlock: boolean = false;
   perPage: number = 10;
   page: number;
   showNewQuestion: boolean = false;
@@ -25,11 +27,11 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
   editQuestion: number = 0;
   public question_id: string;
   public question: Question = null;
-  public textLevel = ['', 'Dễ', 'Trung bình', 'Khó'];
+  public textLevel = ['', 'Easy', 'Normal', 'Hard'];
   public levels = [ 
-    {name:"Dễ", value : 1},
-    {name: "Trung bình", value: 2},
-    {name: "Khó", value:3}];  
+    {name:"Easy", value : 1},
+    {name: "Normal", value: 2},
+    {name: "Hard", value:3}];  
   public subjectname: string;
   public subject_id: string;
   public addQuestionForm:FormGroup;
@@ -43,10 +45,11 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(data => {
-      if(data.bo_de){
-        this.page = data.trang;
-        if(data.cau_hoi){
-          this.question_id = data.cau_hoi;
+      if(data.subject){
+        this.subject_id =data.subject;
+        this.page = data.page;
+        if(data.question){
+          this.question_id = data.question;
           this.subjectService.loadQuestion(this.question_id);
           this.editQuestion = 1;
           this.addQuestion = -1;
@@ -54,31 +57,36 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
         else{
           this.editQuestion = -1;
           this.addQuestion = 1;
+          console.log('add qs')
+          this.createAddQuestionForm();
+          console.log('exit edit qs', this.answers)
         }
       }
       console.log(data)
     });
-    this.subjectService.getSubject().subscribe(data => {
-      if(data.question.question){
-        console.log(data.question.question[0])
+
+    this.subscription2 = this.subjectService.getSubject().subscribe(data => {  
+      if(data.question.question && !data.question.loading){
+        console.log(data)
         this.question = data.question.question[0];
-        this.createEditQuestionForm();
-        this.question.answers.forEach(answer => {
-          this.answers.push(this.formBuilder.group({
-            content:[answer['content'],Validators.required],
-            isCorrect:[answer['isCorrect']]
-          }))
-        })
-      }
-      else{
-         
+        if(this.editQuestion === 1){
+          this.createEditQuestionForm();
+          this.question.answers.forEach(answer => {
+            this.answers.push(this.formBuilder.group({
+              content:[answer['content'],Validators.required],
+              isCorrect:[answer['isCorrect']]
+            }))
+          })
+        }
       }
     })
-    this.createAddQuestionForm();
   }
   ngOnDestroy():void {
-    if(this.subcription){
-      this.subcription.unsubscribe();
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+    if(this.subscription2){
+      this.subscription2.unsubscribe();
     }
   }
   getSubject_id(id:string){
@@ -129,25 +137,34 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
     // this.subjectApi.addQuestion(newQuestion).subscribe(data => console.log(data));
     if(this.addQuestion === 1){
       this.subjectService.addQuestion(newQuestion);
+      this.showNewQuestion = true;
+      setTimeout(() => {this.showNewQuestion = false; this.addQuestionForm.reset();}, 1000);
     }
     if(this.editQuestion === 1){
       this.subjectService.editQuestion(this.question_id, newQuestion);
+      this.subjectService.loadQuestion(this.question_id);
+      this.showNewQuestion = true;
+      setTimeout(() => {this.showNewQuestion = false}, 1000);
     }
-    this.showNewQuestion = true;
-    // this.addQuestionForm.reset();
-    // this.subcription = this.subjectService.getSubject().subscribe(data => {
+    // this.subscription = this.subjectService.getSubject().subscribe(data => {
     //   console.log(data.question.total)
     //   this.page = Math.ceil(data.question.total/this.perPage);
     // })
   }
+  onDeleteQuestion(){
+    this.subjectService.deleteQuestion(this.question_id);
+    this.onBack();
+  }
   onBack(){
     this.showNewQuestion = false;
-    this.subcription = this.subjectService.getSubject().subscribe(data => {
-      console.log(data.question.total)
-    })
-    this.router.navigate(['/chi-tiet'], {queryParams: {bo_de: this.subject_id, trang: this.page}})
-    // this._location.back();
+    // this.subscription = this.subjectService.getSubject().subscribe(data => {
+    //   console.log(data.question.total)
+    // })
+    this.router.navigate(['/detail/questions'], {queryParams: {subject: this.subject_id, page: this.page}})
     
+  }
+  openConfirmBlock(){
+    this.confirmBlock = !this.confirmBlock;
   }
   
 }

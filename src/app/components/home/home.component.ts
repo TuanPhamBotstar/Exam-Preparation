@@ -67,6 +67,6 @@ export class HomeComponent implements OnInit {
     this.isShowChangeProfileBox = false;
     this.username = null;
     console.log(this.isShowChangeProfileBox)
-    this.router.navigate(['/gioi-thieu']);
+    this.router.navigate(['/introduce']);
   }
 }

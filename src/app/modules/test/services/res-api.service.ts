@@ -19,10 +19,16 @@ export class ResApiService {
   saveTested(result: any): Observable<{}>{
     return this.http.post(`${resUrl}`, result);
   }
-  getResults(user_id: string):Observable<any>{
-    return this.http.get(`${resUrl}/${user_id}`);
+  getResults(user_id: string, time: string):Observable<any>{
+    return this.http.get(`${resUrl}/${user_id}/${time}`);
   }
-  getResultByAuthor(author: string):Observable<any>{
-    return this.http.get(`${resUrl}/author/${author}`);
+  getResultByAuthor(author: string, time: string):Observable<any>{
+    return this.http.get(`${resUrl}/admin/${author}/${time}`);
+  }
+  getResultBySubject(author: string, subject_id: string):Observable<any>{
+    return this.http.get(`${resUrl}/dashboard/${author}/${subject_id}`);
+  }
+  getResultByTest(test_id: string, time: string):Observable<any>{
+    return this.http.get(`${resUrl}/test/${test_id}/${time}`);
   }
 }

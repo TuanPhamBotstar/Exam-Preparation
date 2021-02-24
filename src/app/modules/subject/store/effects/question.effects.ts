@@ -51,7 +51,16 @@ export class QuestionEffects {
             )
         )
     )
-
+    
+    @Effect() delQuestion$ = this.actions$.pipe(
+        ofType(QuestionActions.DEL_QUESTION),
+        mergeMap((action: QuestionActions.DelQuestion) => this.subjectApi.delQuestion(action.payload)
+            .pipe(
+                map((data) => new QuestionActions.DelQuestionSuccess(data)),
+                catchError(error => of(new QuestionActions.DelQuestionFailure(error)))
+            )
+        )
+    )
     constructor(
         private actions$: Actions,
         private subjectApi: SubjectApiService,

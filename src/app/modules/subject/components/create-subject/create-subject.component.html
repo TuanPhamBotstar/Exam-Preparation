@@ -2,7 +2,7 @@
 <div class="popup-subject">
     <div class="panel panel-primary">
         <div class="panel-heading">
-                <h3 class="panel-title">Tạo Bộ Đề</h3>
+                <h3 class="panel-title">Create new Subject Test</h3>
                 <i class="glyphicon glyphicon-remove" (click)="onClose()"></i>
         </div>
         <div class="panel-body">
@@ -16,13 +16,13 @@
                 type="text" 
                 class="form-control" 
                 formControlName="subjectname"
-                placeholder="Tên bộ đề"
+                placeholder="Subject test name"
                 #subjectname
                 > 
                 <span 
                 *ngIf="subjectForm.controls.subjectname.touched && subjectForm.controls.subjectname.errors?.required"
                 >
-                Vui lòng nhập tên bộ đề !
+                Please enter subject test name.
                 </span>
             </div> 
             
@@ -32,7 +32,7 @@
                     type="submit"  class="btn btn-primary"
                     [disabled]="subjectForm.invalid"
                     >
-                        Tạo Bộ Đề
+                        Create New
                     </button>
                 </div>
             </div>

@@ -57,7 +57,8 @@ i{
     top:50%;
     right: 50%;
     transform: translate(50%,-45%); */
-    margin: 60px auto 120px;
+    width: 100%;
+    margin: 60px 0 120px;
     display: flex;
     flex-flow: nowrap wrap;
     align-items: center;
@@ -115,7 +116,7 @@ form div button[type=submit]{
     outline: none;
     border: none;
 }
-form div button[type=button]{
+form div button.singup_btn{
     width: 220px;
     height: 50px;
     font-size: 20px;
@@ -124,7 +125,7 @@ form div button[type=button]{
     outline: none;
     border: none;
 }
-form div button[type=button]:hover{
+form div button.singup_btn:hover{
     background-color: #11F38A;
 }
 
@@ -137,11 +138,10 @@ form div button[type=button]:hover{
 
 /* ---------- */
 .slogan{
-    background-color: #F2F3F5;
     padding: 15px;
 }
 .slogan img{
-    width:200px;
+    width:450px;
     border-radius: 5px;
     display: block;
     margin: auto;
@@ -149,7 +149,8 @@ form div button[type=button]:hover{
 .slogan p{
     text-align: center;
     margin-top: 20px;
-    font-size: 25px;
+    font-size: 2em;
+    color: #2672ab;
 }
 hr{
     height: 1px;
@@ -323,6 +324,7 @@ footer p{
     margin: auto;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
     width: 100%;
+    margin-top: 30px;
 }
 
 .result-table thead{

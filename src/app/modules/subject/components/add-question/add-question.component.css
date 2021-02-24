@@ -1,7 +1,17 @@
-/* .add-question-container{
-    display: flex;
-    flex-flow: row nowrap;
-} */
+.add-question-container{
+    position: relative;
+}
+.alert-status{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 15px 20px;
+}
+.alert-status span{
+    font-size: 1em;
+    font-weight: initial;
+}
 .showNewQuestion{
     width: 40%;
     display: flex;
@@ -29,11 +39,13 @@
     border: 1px solid rgba(0,0,0,0.2);
     box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
 }
-form.add-question div button.btn-primary{
+form.add-question div button{
     width: auto;
     height: auto;
     padding: 6px 10px;
     font-size: 1em;
+    margin-top: 10px;
+    line-height: initial;
 }
 form.add-question button.add-answer{
     background-color: #337ab7;
@@ -41,6 +53,10 @@ form.add-question button.add-answer{
     font-size: 1em;
     text-align: center;
     padding: 0 3px;
+}
+.delQs_btn{
+    float: right;
+    border: none;
 }
 form.add-question textarea, form.add-question span{
     width: 80%;
@@ -74,3 +90,38 @@ i{
     cursor: pointer;
     font-size: 1em;
 }
+
+.confirm-del-subject{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    width: 45%;
+    z-index: 100;
+  }
+/* delete confirm aler */
+
+.confirm-del-subject .panel-heading{
+    background-color: #d9534f;
+  }
+  .confirm-del-subject .panel-heading h4{
+    color: #fff;
+    text-align: left;
+  }
+  .confirm-del-subject .panel-body h4{
+    color: initial;
+  }
+  .confirm-del-subject i{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    -webkit-text-stroke: 2px #d9534f;
+    font-size: 0.8em;
+    color: white;
+  }
+  .confirm-del-subject button{
+    margin: 20px 10px;
+    width: 45px;
+    text-align: center;
+    padding: 6px 0px;
+  }

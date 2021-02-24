@@ -16,7 +16,7 @@ export class SubjectOveriewComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   page: number;
   totalPage: number;
-  perPage: number = 9;
+  perPage: number = 15;
   total: number;
   public subjects: any;
   constructor(
@@ -29,7 +29,7 @@ export class SubjectOveriewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const user_id = JSON.parse(localStorage.getItem('user')).user_id;
     this.activatedRoute.queryParams.subscribe(data => {
-      this.page = data.trang;
+      this.page = data.page;
       this.subjectService.loadSubjects(user_id, this.page);
     });
     this.subscription = this.subjectService.getSubject().subscribe(data => {
@@ -47,10 +47,10 @@ export class SubjectOveriewComponent implements OnInit, OnDestroy {
   }
   onCreateSubject() {
     console.log('create subject test')
-    this.router.navigate(['/bo-de/tao-bo-de'], {queryParams: {trang: this.page}});
+    this.router.navigate(['/subjects/create-subject'], {queryParams: {page: this.page}});
   }
   detailSubject(subject_id) {
-    this.router.navigate(['/chi-tiet'], { queryParams: { bo_de: subject_id, trang: 1 } });
+    this.router.navigate(['/detail/dashboard'], { queryParams: { subject: subject_id } });
   }
   ///
   onActive(cpnRef) {
@@ -64,12 +64,12 @@ export class SubjectOveriewComponent implements OnInit, OnDestroy {
     if (this.page > 1) {
       this.page--;
     }
-    this.router.navigate(['/bo-de'], { queryParams: { trang: this.page } });
+    this.router.navigate(['/subjects'], { queryParams: { page: this.page } });
   }
   onPrevious() {
     if (this.page < this.totalPage) {
       this.page++;
     }
-    this.router.navigate(['/bo-de'], { queryParams: { trang: this.page } });
+    this.router.navigate(['/subjects'], { queryParams: { page: this.page } });
   }
 }

@@ -37,11 +37,11 @@ export class CreateTestComponent implements OnInit, OnDestroy{
       switch (label) {
         case LabelType.Low:
           this.easyQty = value;
-          return `<lablel>Dễ: </lablel>` + value;
+          return `<lablel>Easy: </lablel>` + value;
         case LabelType.High:
           this.hardQty = value;
           value = value - this.easyQty
-          return `<lablel>Khó: </lablel>` + value;
+          return `<lablel>Hard: </lablel>` + value;
         default:
           return ''+value;
       }
@@ -113,8 +113,8 @@ export class CreateTestComponent implements OnInit, OnDestroy{
         this.subcription = this.testService.getTests().subscribe(data => {
           console.log(data)
           if(data.test.test_id){
-            this.router.navigate(['chi-tiet/de-thi/noi-dung-de-thi'],
-            {queryParams: {bo_de: this.subject_id, de_thi: data.test.test_id, trang: 1}});
+            this.router.navigate(['detail/tests/content-test'],
+            {queryParams: {subject: this.subject_id, test: data.test.test_id, page: 1}});
           }
         })
       }

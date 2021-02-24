@@ -1,16 +1,16 @@
 <nav class="navbar">
     <ul>
         <li class="logo">
-            <a [routerLink]="['/tong-quan']">
+            <a [routerLink]="['/overviews']">
                 <img class="images" src="assets/img/logo.png" alt="PT Exam Prep">
             </a>
         </li>
         <li *ngIf="!username; else signedIn">
             <a 
-            [routerLink]="['/tai-khoan/dang-nhap']"
+            [routerLink]="['/account/log-in']"
             >
                 <div class="user">
-                    <span>Đăng Nhập</span>
+                    <span>Log in</span>
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                 </div>
             </a>
@@ -31,14 +31,14 @@
                         <li>
                             <a>
                             <i class="glyphicon glyphicon-user"></i>
-                            Chỉnh Sửa Thông Tin </a>
+                            Edit Profile </a>
                         </li>
                         <li>
                             <!-- class="btn btn-info btn-lg" -->
                             <a (click)="onLogOut()" >
                                 <!-- <i class="fa fa-sign-out" aria-hidden="true"></i> -->
                                 <span class="glyphicon glyphicon-log-out"></span>
-                                Log out
+                                Log Out
                             </a>
                         </li>
                     </ul>
@@ -51,6 +51,7 @@
 <router-outlet (activate)="onActive($event)"></router-outlet>
 
 <footer>
+    <!-- <img src='assets/img/footer-wave.png'> -->
     <p>
         Copyright <i class="fa fa-copyright" aria-hidden="true"></i>
         2021 by PTExamprep.com

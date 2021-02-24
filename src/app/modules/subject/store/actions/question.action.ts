@@ -20,6 +20,10 @@ export const EDIT_QUESTION = '[QUESTION] Edit Question';
 export const EDIT_QUESTION_SUCCESS = '[QUESTION] Edit Question Success';
 export const EDIT_QUESTION_FAILURE = '[QUESTION] Edit Question Failure';
 
+export const DEL_QUESTION = '[QUESTION] Del Question';
+export const DEL_QUESTION_SUCCESS = '[QUESTION] Del Question Success';
+export const DEL_QUESTION_FAILURE = '[QUESTION] Del Question Failure';
+
 // load questions
 export class LoadQuestions implements Action {
     readonly type = LOAD_QUESTIONS;
@@ -80,8 +84,25 @@ export class EditQuestionFailure implements Action {
     readonly type = EDIT_QUESTION_FAILURE;
     constructor(public payload: Error) { }
 }
+
+// delete question
+export class DelQuestion implements Action {
+    readonly type = DEL_QUESTION;
+    constructor(public payload: string) { }
+}
+
+export class DelQuestionSuccess implements Action {
+    readonly type = DEL_QUESTION_SUCCESS;
+    constructor(public payload: any) { }
+}
+
+export class DelQuestionFailure implements Action {
+    readonly type = DEL_QUESTION_FAILURE;
+    constructor(public payload: Error) { }
+}
 export type action = LoadQuestions | LoadQuestionsSuccess | LoadQuestionsFailure |
                      AddQuestions | AddQuestionsSuccess | AddQuestionsFailure |
                      LoadQuestion | LoadQuestionSuccess | LoadQuestionFailure |
-                     EditQuestion | EditQuestionSuccess | EditQuestionFailure 
+                     EditQuestion | EditQuestionSuccess | EditQuestionFailure |
+                     DelQuestion | DelQuestionSuccess | DelQuestionFailure
                     

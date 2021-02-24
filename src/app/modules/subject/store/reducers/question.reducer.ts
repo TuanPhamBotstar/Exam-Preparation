@@ -98,6 +98,25 @@ export function questionReducer(state: QuestionState = initialState, action: Que
                 loading: false,
                 error: action.payload,
             }
+        // delete question
+        case QuestionActions.DEL_QUESTION:
+            return {
+                ...state,
+                loading: true,
+            }
+        case QuestionActions.DEL_QUESTION_SUCCESS:
+            console.log(action.payload)
+            return {
+                ...state,
+                question: action.payload.success,
+                loading: false
+            }
+        case QuestionActions.DEL_QUESTION_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
         default:
             return {
                 ...state

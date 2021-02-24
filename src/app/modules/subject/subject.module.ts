@@ -20,6 +20,12 @@ import { QuestionEffects } from './store/effects/question.effects';
 import { TestEffects } from './store/effects/test.effects';
 //ng5-slider
 import { Ng5SliderModule } from 'ng5-slider';
+import { QuestionsComponent } from './components/questions/questions.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AvgScoreChartComponent } from './components/dashboard/avg-score-chart/avg-score-chart.component';
+import { TypeQsChartComponent } from './components/dashboard/type-qs-chart/type-qs-chart.component';
+// ng2-chart
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     SubjectComponent,
@@ -29,6 +35,10 @@ import { Ng5SliderModule } from 'ng5-slider';
     SubjectDetailComponent,
     SubjectOveriewComponent,
     CreateTestComponent,
+    QuestionsComponent,
+    DashboardComponent,
+    AvgScoreChartComponent,
+    TypeQsChartComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +46,7 @@ import { Ng5SliderModule } from 'ng5-slider';
     SubjectRoutingModule,
     HttpClientModule,
     Ng5SliderModule,
+    ChartsModule,
     StoreModule.forFeature('subject', reducers),
     EffectsModule.forFeature(
       [

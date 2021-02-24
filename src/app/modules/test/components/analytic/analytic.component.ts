@@ -23,64 +23,64 @@ export class AnalyticComponent implements OnInit {
     // scaleShowVerticalLines: false,
     responsive: true,
     plugins: {
-      labels:false,
+      labels: false,
       datalabels: {
         anchor: 'end',
         align: 'end',
       }
     },
     scales: {
-      yAxes: [  
+      yAxes: [
         {
-        position:'left',
-        id:'yAxes1',
+          position: 'left',
+          id: 'yAxes1',
+          scaleLabel: {
+            display: true,
+            labelString: "Average score",
+            fontSize: 16,
+          },
+          ticks: {
+            // steps: 10,
+            // stepValue: 10,
+            max: 100,
+            min: 0
+          }
+        },
+        {
+          position: 'right',
+          id: 'yAxes2',
+          scaleLabel: {
+            display: true,
+            labelString: "Quantity of users",
+            fontSize: 16,
+          },
+          ticks: {
+            // steps: 10,
+            // stepValue: 10,
+            max: 30,
+            min: 0
+          }
+        },
+      ],
+      xAxes: [{
         scaleLabel: {
           display: true,
-          labelString: "Điểm Thi Trung Bình",
+          labelString: "Name test",
           fontSize: 16,
-         },
-        ticks: {
-          // steps: 10,
-          // stepValue: 10,
-          max: 100,
-          min: 0
+        },
+        gridLines: {
+          display: false
         }
-      },
-      {
-        position:'right',
-        id:'yAxes2',
-        scaleLabel: {
-          display: true,
-          labelString: "Số Người Thi",
-          fontSize: 16,
-         },
-        ticks: {
-          // steps: 10,
-          // stepValue: 10,
-          max: 30,
-          min: 0
-        }
-      },
-    ],
-    xAxes : [ {
-      scaleLabel: {
-        display: true,
-        labelString: "Đề Thi",
-        fontSize: 16,
-       },
-      gridLines : {
-          display : false
-      }
-      } ]
+      }]
     }
   };
-  public barChartPlugins: any =[pluginDataLabels];
+  public barChartPlugins: any = [pluginDataLabels];
   public barChartLabels = [];
   public barChartType: any = 'bar';
   public barChartLegend = true;
   public barChartData = [
-    { data: [], label: 'Điểm Thi Trung Bình', yAxisID: 'yAxes1'},
-    { data: [], label: 'Số Người Thi', yAxisID: 'yAxes2'}
+    { data: [], label: 'Average score', yAxisID: 'yAxes1' },
+    { data: [], label: 'Quantity of users', yAxisID: 'yAxes2' }
     // {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
     // {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
   ];
@@ -88,7 +88,7 @@ export class AnalyticComponent implements OnInit {
     this.author = JSON.parse(localStorage.getItem('user')).user_id;
     // console.log(localStorage.getItem('user'))
     if (this.author) {
-      this.resApi.getResultByAuthor(this.author).subscribe(data => {
+      this.resApi.getResultByAuthor(this.author, 'all').subscribe(data => {
         console.log(data)
         this.results = data;
         data.forEach(element => {
@@ -99,6 +99,7 @@ export class AnalyticComponent implements OnInit {
           else {
             let idx = this.testsArr.indexOf(element.test_id);
             this.dataAnalytic[idx].count++;
+            this.dataAnalytic[idx].point += element.point;
           }
         });
         console.log(this.testsArr)
