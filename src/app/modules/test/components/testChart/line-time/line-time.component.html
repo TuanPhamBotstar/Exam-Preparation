@@ -1,11 +1,15 @@
-<div style="display: block;">
-    <canvas baseChart width="400" height="400"
-      [datasets]="lineChartData"
-      [labels]="lineChartLabels"
-      [options]="lineChartOptions"
-      [colors]="lineChartColors"
-      [legend]="lineChartLegend"
-      [chartType]="lineChartType"
-      [plugins]="lineChartPlugins">
-    </canvas>
+<div class="line-chart-container" *ngIf="results.length > 0">
+  <div style="display: block;">
+      <canvas baseChart width="400" height="100"
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
   </div>
+  <!-- <h4 [ngStyle]="{textAlign: 'center'}">Realtime Users</h4> -->
+  <p class="name-chart">Real Times Users</p>
+</div>

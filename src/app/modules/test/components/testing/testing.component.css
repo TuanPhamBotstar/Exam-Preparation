@@ -89,6 +89,9 @@ label, input{
 .confirm-del-subject .panel-body{
     text-align: center;
 }
+.confirm-del-subject .panel-body p{
+    margin-top: 20px;
+}
 .confirm-del-subject i{
     position: absolute;
     top:10px;

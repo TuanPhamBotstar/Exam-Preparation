@@ -18,22 +18,26 @@ import { ResApiService } from '../../services/res-api.service';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit, OnDestroy {
+  startDate: any;
+  endDate: any;
   testTitle: string;
   totalPage: number;
   total: number;
   page: number;
   perPage: number = 5;
+  time: string;
   subcription: Subscription;
   alphaArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
   isShareSuccess: boolean = false;
-  public shareBox: boolean = false;
-  public confirmBlock: boolean = false;
-  public test_id: string;
-  public subject_id: string;
-  public test: any;
-  public questions: Question[] = [];
-  public qsOnePage: Question[] = [];
-  public shareForm: FormGroup;
+  shareBox: boolean = false;
+  confirmBlock: boolean = false;
+  test_id: string;
+  subject_id: string;
+  test: any;
+  questions: Question[] = [];
+  qsOnePage: Question[] = [];
+  shareForm: FormGroup;
+  showContent: boolean = false;
   // viewChild
   setData: any = null;
   @ViewChild(LineTimeComponent) linetTime: LineTimeComponent;
@@ -41,8 +45,11 @@ export class TestComponent implements OnInit, OnDestroy {
   ngAfterViewInit(){
     if(this.setData){
       this.setData.subscribe(data => {
+        console.log(data)
+        console.log(this.startDate)
         this.scoreChart.setResults(data);
         this.linetTime.setResults(data);
+        this.linetTime.setDate(this.startDate, this.endDate)
       })
     }
   }
@@ -63,14 +70,19 @@ export class TestComponent implements OnInit, OnDestroy {
       this.test_id = data.test;
       this.subject_id = data.subject;
       this.page = data.page;
+      this.time = data.time;
       if (this.test_id && this.subject_id) {
         this.testService.loadDetaitTest(this.subject_id, this.test_id);
-        this.resultApi.getResultByTest(this.test_id, 'all').subscribe(data => {
-          console.log(data.results)
-          this.setData.next(data.results);
-        })
+        this.resultApi.getResultByTest(this.test_id, this.time).subscribe(data => {
+          console.log('result api',data)
+          if(data){
+            this.startDate = data.dateArr;
+            this.endDate = data.userArr;
+            this.setData.next(data.results);
+          }
+        });
       }
-    })
+    });
     this.subcription = this.testService.getTests().subscribe(data => {
       console.log(data.test)
       if (data.test.testing && !data.test.loading) {
@@ -113,7 +125,7 @@ export class TestComponent implements OnInit, OnDestroy {
   onDelTest() {
     // this.testApi.delTest(this.test_id).subscribe(data => console.log(data));
     this.testService.deleteTest(this.test_id);
-    this.router.navigate(['/detail/tests'], {queryParams: {subject: this.subject_id}})
+    this.router.navigate(['/subject/tests'], {queryParams: {subject: this.subject_id}})
   }
   onShareTest() {
     this.shareForm.value.test_id = this.test_id;
@@ -152,14 +164,21 @@ export class TestComponent implements OnInit, OnDestroy {
     if (this.page > 1) {
       this.page--;
     }
-    this.router.navigate(['/detail/tests/content-test'],
+    this.router.navigate(['/subject/tests/content-test'],
       { queryParams: { subject: this.subject_id, test: this.test_id, page: this.page } });
   }
   onNext() {
     if (this.page < this.totalPage) {
       this.page++;
     }
-    this.router.navigate(['/detail/tests/content-test'],
+    this.router.navigate(['/subject/tests/content-test'],
       { queryParams: { subject: this.subject_id, test: this.test_id, page: this.page } });
+  }
+  onShowContent(){
+    this.showContent = true;
+    console.log('showContent',this.showContent)
+  }
+  onShowChart(){
+    this.showContent = false;
   }
 }

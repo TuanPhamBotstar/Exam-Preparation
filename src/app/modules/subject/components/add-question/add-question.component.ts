@@ -69,7 +69,7 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
       if(data.question.question && !data.question.loading){
         console.log(data)
         this.question = data.question.question[0];
-        if(this.editQuestion === 1){
+        if(this.editQuestion === 1 && this.question){
           this.createEditQuestionForm();
           this.question.answers.forEach(answer => {
             this.answers.push(this.formBuilder.group({
@@ -153,14 +153,14 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
   }
   onDeleteQuestion(){
     this.subjectService.deleteQuestion(this.question_id);
-    this.onBack();
+    this.router.navigate(['/subject/questions'], {queryParams: {subject: this.subject_id, page: this.page}});
   }
   onBack(){
     this.showNewQuestion = false;
     // this.subscription = this.subjectService.getSubject().subscribe(data => {
     //   console.log(data.question.total)
     // })
-    this.router.navigate(['/detail/questions'], {queryParams: {subject: this.subject_id, page: this.page}})
+    this.router.navigate(['/subject/questions'], {queryParams: {subject: this.subject_id, page: this.page}})
     
   }
   openConfirmBlock(){

@@ -48,7 +48,7 @@ export class CreateSubjectComponent implements OnInit {
     this.subscription = this.subjectService.getSubject().subscribe(data => {
       console.log(data)
       if(!data.subject.loading){
-        this.router.navigate(['/detail/questions'], {queryParams: {subject: data.subject.subject_id, page: 1}});
+        this.router.navigate(['/subject/questions'], {queryParams: {subject: data.subject.subject_id, page: 1}});
       }
     })
   }

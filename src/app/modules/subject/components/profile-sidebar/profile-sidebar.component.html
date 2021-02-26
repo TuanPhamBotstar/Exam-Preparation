@@ -4,11 +4,10 @@
             <i class="glyphicon glyphicon-menu-hamburger" (click)="onToggle()"></i>
         </div> -->
         <!-- SIDEBAR USERPIC -->
-        <div class="profile-userpic">
+        <!-- <div class="profile-userpic">
             <img src="/assets/img/avatar.png" class="img-responsive" alt="">
         </div>
-        <!-- END SIDEBAR USERPIC -->
-        <!-- SIDEBAR USER TITLE -->
+        
         <div class="profile-usertitle">
             <div class="profile-usertitle-name">
                 {{ username | titlecase}}
@@ -16,14 +15,14 @@
             <div class="profile-usertitle-job">
                 Student
             </div>
-        </div>
+        </div> -->
         <!-- END SIDEBAR USER TITLE -->
 
         <!-- SIDEBAR MENU -->
         <div class="profile-usermenu">
             <ul class="nav">
                 <li routerLinkActive="active">
-                    <a [routerLink]="['/overviews']">
+                    <a routerLink="/overviews" [queryParams]="{time: time}">
                         <i class="glyphicon glyphicon-th-list"></i>
                         Overview
                     </a>
@@ -31,7 +30,7 @@
                 <!-- class="active" -->
                 <li routerLinkActive="active">
                     <!-- (click)="toSubject()" -->
-                    <a [routerLink]="['/subjects']" [queryParams]="{page: 1}">
+                    <a [routerLink]="['/subjects']" [queryParams]="{page: page}">
                         <i class="glyphicon glyphicon-folder-open"></i>
                         Subject Tests
                     </a>
@@ -40,34 +39,59 @@
                     </ng-container>
 
                     <ul class="nav" *ngIf="submenu">
-                        <li>
-                            <a (click)="onDashboard()">
+                        <li routerLinkActive="active">
+                            <a (click)="onDashboard()" routerLink = "/subject/dashboard">
                                 <i class="glyphicon glyphicon-th-list"></i>
                                 Dashboard
                             </a>
                         </li>
-                        <li>
-                            <a (click)="overviewTests()">
+                        <li routerLinkActive="active">
+                            <a (click)="overviewTests()" routerLink = "subject/tests">
                                 <i class="glyphicon glyphicon-list-alt"></i>
                                 Tests
                             </a>
+                            <!-- <ul class="nav">
+                                <li>
+                                    <a >Dashboard</a>
+                                </li>
+                                <li>
+                                    <a >Contents</a>
+                                </li>
+                            </ul> -->
                         </li>
-                        <li>
-                            <a (click)=allQuestions()>
+                        <li routerLinkActive="active">
+                            <a (click)=allQuestions() routerLink = "subject/questions">
                                 <i class="glyphicon glyphicon-question-sign"></i>
                                 Questions
                             </a>
                         </li>                 
-                        <li>
+                        <!-- <li routerLinkActive="active">
+                            <a (click) = "openConfig()"> 
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                Configure
+                            </a>
+                            <ng-container *ngIf="caret_down">
+                                <i class="fa fa-caret-down" aria-hidden="true" (click)="openConfig()"></i>
+                            </ng-container>
+                            <ul class="nav">
+                                <li routerLinkActive="active">
+                                    <a (click) = "openConfirmBlock()" routerLink = ""
+                                    *ngIf="config" class="remove-subject">
+                                        Remove Subject
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> -->
+                        <!-- <li>
                             <a (click) = "openConfirmBlock()">
                                 <i class="glyphicon glyphicon-minus"></i>
                                 Remove Subject Test
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li routerLinkActive="active">
-                    <a [routerLink]="['/activity-logs']" [queryParams]="{time: 'month'}">
+                    <a [routerLink]="['/activity-logs']" [queryParams]="{time: time}">
                         <i class="glyphicon glyphicon-calendar"></i>
                         Activity Logs </a>
                 </li>

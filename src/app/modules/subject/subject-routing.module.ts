@@ -35,17 +35,17 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'detail',
+        path: 'subject',
         component: SubjectDetailComponent,
         children: [
-          {
-            path: 'add-question',
-            component: AddQuestionComponent
-          },
-          {
-            path: 'edit-question',
-            component: AddQuestionComponent
-          },
+          // {
+          //   path: 'add-question',
+          //   component: AddQuestionComponent
+          // },
+          // {
+          //   path: 'edit-question',
+          //   component: AddQuestionComponent
+          // },
           {
             path: 'tests',
             component: OverviewTestComponent,
@@ -62,7 +62,17 @@ const routes: Routes = [
           },
           {
             path: 'questions',
-            component: QuestionsComponent
+            component: QuestionsComponent,
+            children:[
+              {
+                path: 'add-question',
+                component: AddQuestionComponent
+              },
+              {
+                path: 'edit-question',
+                component: AddQuestionComponent
+              },
+            ]
           },
           {
             path: 'dashboard',

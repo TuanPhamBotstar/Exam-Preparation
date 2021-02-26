@@ -9,6 +9,7 @@ import { SubjectService } from '../../services/subject.service';
   styleUrls: ['./questions.component.css']
 })
 export class QuestionsComponent implements OnInit {
+  show: boolean = true;
   subscription: Subscription;
   subscription2: Subscription;
   subscription3: Subscription;
@@ -36,7 +37,7 @@ export class QuestionsComponent implements OnInit {
       this.subject_id = data.subject;
       this.page = data.page;
       this.subjectService.loadQuestions(this.subject_id, this.page);
-      // console.log(data.subject) 
+      console.log('get questions') 
       this.author = JSON.parse(localStorage.getItem('user')).user_id;
     });
     this.subscription2 = this.subjectService.getSubject().subscribe(data => { // get data from store
@@ -60,7 +61,7 @@ export class QuestionsComponent implements OnInit {
     }); 
    
     this.subscription3 = this.subjectService.getSubject().subscribe(data => {
-      // console.log(data)
+      console.log('get questions',data)
       if(!data.question.loading){
         this.questions = data.question.list;
         this.total = data.question.total;
@@ -83,11 +84,11 @@ export class QuestionsComponent implements OnInit {
     console.log(id)
   } 
   onAddQuestion() {
-    this.router.navigate(['/detail/add-question'], { queryParams: { subject: this.subject_id, page: this.page } });
+    this.router.navigate(['/subject/questions/add-question'], { queryParams: { subject: this.subject_id, page: this.page } });
   }
   onEditQuestion(question) {
     console.log(question)
-    this.router.navigate(['/detail/edit-question'], { queryParams: { subject: this.subject_id, question: question._id, page: this.page } });
+    this.router.navigate(['/subject/questions/edit-question'], { queryParams: { subject: this.subject_id, question: question._id, page: this.page } });
   }
    //pagination
    arrayV() {
@@ -97,12 +98,18 @@ export class QuestionsComponent implements OnInit {
     if (this.page > 1) {
       this.page--;
     }
-    this.router.navigate(['/detail/questions'], { queryParams: { subject: this.subject_id, page: this.page } });
+    this.router.navigate(['/subject/questions'], { queryParams: { subject: this.subject_id, page: this.page } });
   }
   onNext() {
     if (this.page < this.totalPage) {
       this.page++;
     }
-    this.router.navigate(['/detail/questions'], { queryParams: { subject: this.subject_id, page: this.page } });
+    this.router.navigate(['/subject/questions'], { queryParams: { subject: this.subject_id, page: this.page } });
+  }
+  onActive(childCpn) {
+    this.show = false;
+  }
+  onDeactivate() {
+    this.show = true;
   }
 }

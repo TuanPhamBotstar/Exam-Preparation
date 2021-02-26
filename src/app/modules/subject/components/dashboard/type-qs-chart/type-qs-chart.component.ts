@@ -4,6 +4,8 @@ import { SubjectApiService } from '../../../services/subject-api.service ';
 import { ChartType, ChartOptions } from 'chart.js';
 import { SingleDataSet, Label } from 'ng2-charts';
 import * as pluginLabels from 'chartjs-plugin-labels';
+import { TestService } from '../../../services/test.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-type-qs-chart',
   templateUrl: './type-qs-chart.component.html',
@@ -12,6 +14,8 @@ import * as pluginLabels from 'chartjs-plugin-labels';
 export class TypeQsChartComponent implements OnInit {
   @Input() author: string;
   @Input() subject_id: string;
+  totalQs: number;
+  totalTests: number;
   results: any;
   public pieChartLabels: Label[]= ['Esay','Normal', 'Hard'];
   public pieChartData = [];
@@ -36,9 +40,17 @@ export class TypeQsChartComponent implements OnInit {
 
   constructor(
     private subjectApi: SubjectApiService,
+    private testService: TestService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
+    this.testService.loadTests(this.subject_id);
+    this.testService.getTests().subscribe(data => {
+      if(!data.test.loading && data.test.list){
+        this.totalTests = data.test.list.length;
+      }
+    })
     this.subjectApi.getQtyQs(this.subject_id).subscribe(data => {
       console.log(data)
       if(data){
@@ -47,9 +59,17 @@ export class TypeQsChartComponent implements OnInit {
           data.normalQty,
           data.hardQty, 
         ];
+        this.totalQs = this.pieChartData.reduce((acc, curr) =>  acc + curr);
         console.log(this.pieChartData)
         }
       })
   }
 
+  // overviewTests() {
+  //   console.log('on overview tests')
+  //   this.router.navigate(['subject/tests'], { queryParams: { subject: this.subject_id } });
+  // }
+  // allQuestions() {
+  //   this.router.navigate(['subject/questions'], { queryParams: { subject: this.subject_id, page: 1 } });
+  // }
 }

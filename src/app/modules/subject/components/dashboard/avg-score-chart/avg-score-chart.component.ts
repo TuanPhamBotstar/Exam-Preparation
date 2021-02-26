@@ -95,7 +95,7 @@ export class AvgScoreChartComponent implements OnInit {
             if(result.totalUsers > 0){
               this.barChartData[0].data.push(result.avgScore.toFixed(2));
               this.barChartData[1].data.push(result.totalUsers);
-              this.barChartLabels.push(result._id)
+              this.barChartLabels.push(result._id.toUpperCase())
             }
           })
         }

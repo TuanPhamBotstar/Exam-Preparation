@@ -1,8 +1,7 @@
 .test-content{
     position: relative;
-    top:-40px;
+    top:0px;
     background-color: #fff;
-    padding-top: 20px;
 }
 .test-btn{
     display: flex;
@@ -119,4 +118,16 @@ label, input{
 /* pagination */
 .pagination{
     margin-left: 10px;
+}
+/* app-chart */
+.show-chart-false{
+    /* visibility: hidden; */
+    display: none;
+}
+.show-chart-true{
+    visibility: visible;
+}
+/* tabs */
+.nav-tabs li.share{
+    float: right;
 }

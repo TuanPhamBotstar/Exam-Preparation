@@ -5,7 +5,7 @@ import * as storage from '../states/storage';
 export interface QuestionState {
     loading: boolean,
     error: Error,
-    list: Question[],
+    list: any,
     total:number,
     question: Question,
 }
@@ -108,6 +108,7 @@ export function questionReducer(state: QuestionState = initialState, action: Que
             console.log(action.payload)
             return {
                 ...state,
+                // list: [...state.list].filter(qs => qs._id != action.payload.id),
                 question: action.payload.success,
                 loading: false
             }

@@ -1,13 +1,35 @@
-<div class="typeQs-chart" *ngIf="pieChartData.length > 0">
-    <div style="display: block">
-        <canvas baseChart
-        [data]="pieChartData"
-        [labels]="pieChartLabels"
-        [options]="pieChartOptions"
-        [chartType]="pieChartType">
-        [plugins]="pieChartPlugins"
-        [legend]="pieChartLegend">
-</canvas>
+<div class="chart-container">
+    <div class="overview-analytics" *ngIf="1">
+        <div class="data-analytic-container">
+            <div class="data-analytic">
+                <i class="glyphicon glyphicon-list-alt"></i>
+                <div class="data-title">
+                    <p>Total Tests</p>
+                    <p class='data'>{{totalTests}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="data-analytic-container">
+            <div class="data-analytic">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                <div class="data-title">
+                    <p>Total Questions</p>
+                    <p class='data'>{{totalQs}}</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <p class="name-chart">Levels of Questions</p>
+    <div class="typeQs-chart" *ngIf="pieChartData.length > 0">
+        <div style="display: block">
+            <canvas baseChart
+            [data]="pieChartData"
+            [labels]="pieChartLabels"
+            [options]="pieChartOptions"
+            [chartType]="pieChartType">
+            [plugins]="pieChartPlugins"
+            [legend]="pieChartLegend">
+    </canvas>
+        </div>
+        <p class="name-chart">Levels of Questions</p>
+    </div>
 </div>

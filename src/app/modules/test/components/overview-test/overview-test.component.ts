@@ -28,8 +28,10 @@ export class OverviewTestComponent implements OnInit {
         this.testService.loadTests(this.subject_id);
         this.testService.getTests()
           .subscribe(data => {
-            console.log(data)
-            this.tests = data.test.list;
+            if(!data.test.loading && data.test.list){
+              console.log(data)
+              this.tests = data.test.list;
+            }
           })
       }
     })  
@@ -41,10 +43,10 @@ export class OverviewTestComponent implements OnInit {
   }
   
   getDetailTest(i: number) {
-    this.router.navigate(['/detail/tests/content-test'], { queryParams: {subject: this.subject_id, test: this.tests[i]._id, page: 1 } });
+    this.router.navigate(['/subject/tests/content-test'], { queryParams: {subject: this.subject_id, test: this.tests[i]._id, page: 1, time: 'all' } });
   }
   onCreateTest() {
-    this.router.navigate(['/detail/tests/create-test'], { queryParams: { subject: this.subject_id}});
+    this.router.navigate(['/subject/tests/create-test'], { queryParams: { subject: this.subject_id}});
   }
   onBack() {
     this._location.back();

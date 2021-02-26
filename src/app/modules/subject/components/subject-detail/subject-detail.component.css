@@ -8,22 +8,45 @@
     margin-left: 10px;
 }
 
-/* navigation */
+/* navbar */
 .navbar{
     height: 30px;
     margin-bottom: 0;
+    margin: 10px 0px 0px;
 }
 .navbar ul{
-    height: 50px;
-    margin-left: 10px;
-}
-.navbar-nav>li>a{
-    padding: 5px;
+    height: auto;
+    margin-left: 0px;  
 }
 .active{
     color:#062f53;
     font-weight: 700;
 }
+ul li {
+    cursor: pointer;
+    position: relative;
+  }
+  ul li :last-child{
+      border-right: none;
+  }
+ul li a{
+    display: inline-block;
+    padding: 10px 20px;
+}
+
+ul li.active > a {
+    color: #5b9bd1;
+    background-color: #f6f9fb;  
+  }
+
+ul li:nth-child(n+3){
+    display: none;
+}
+ul li:nth-child(n+3).active{
+    display: inline-block;
+}
+
+/*  */
 .isExistSubject{
     text-align: center;
     margin: 30px;
@@ -31,27 +54,56 @@
 .pagination{
     margin-left: 10px;
 }
-/* .question{
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
-    margin-top: 10px;
-    padding: 0 10px;
-    background-color: #f2f2f2;
-    border-radius: 15px;
-}
-.question-elemment{
-    position: relative;
-}
 
-.question-elemment .glyphicon-minus{
+/*  */
+.confirm-del-subject{
+    position: fixed;
+    top: 110px;
+    right: 37.5%;
+    transform: translateX(50%);
+    width: 30%;
+    z-index: 100;
+  }
+  .confirm-del-subject .panel-heading{
+    background-color: #d9534f;
+  }
+  .confirm-del-subject .panel-heading h4{
+    color: #fff;
+    text-align: left;
+  }
+  .confirm-del-subject .panel-body h4{
+    color: initial;
+  }
+  .confirm-del-subject i{
     position: absolute;
-    top:0px;
-    right: 15px;
+    top:10px;
+    right: 10px;
+    -webkit-text-stroke: 2px #d9534f;
+    font-size: 0.8em;
+    color: white;
+  }
+  .confirm-del-subject button{
+    margin: 20px 10px;
+    width: 45px;
+    text-align: center;
+    padding: 6px 0px;
+  }
+  div.ellipsis {
+    position: relative;
+    float: right;
+    color:#062f53;
+    margin: 5px 4px;
 }
-.answer-elemnt.istrue{
-    color: green;
+.remove-subject{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 140px;
+    background-color: #f6f9fb;
+    text-align: left;
+    cursor: pointer;
+    padding: 10px 10px;
+    z-index: 10;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }
-
-.answer-elemnt input{
-    margin-right: 10px;
-} */

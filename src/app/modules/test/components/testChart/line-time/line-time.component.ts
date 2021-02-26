@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 // ng2-chart
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-line-time',
@@ -10,17 +11,34 @@ import { Color, Label } from 'ng2-charts';
   styleUrls: ['./line-time.component.css']
 })
 export class LineTimeComponent implements OnInit {
-  @Input() test_id: string;
+  // @Input() startDate: any;
+  // @Input() endDate: any;
   emit: any;
   results: any;
-  dateArr: any = [];
+  dateArr: any;
+  dayArr: any;
+  userArr: any;
+  startDate: any;
+  endDate: any;
   // line-chart
   public lineChartData: ChartDataSets[] = [
-    { data: [5, 2, 1, 0, 2, 3, 1], label: 'Users' },
+    { data: [], label: 'Users',lineTension: 0, },
   ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels: Label[] = [];
   public lineChartOptions: (ChartOptions & { annotation?: any }) = {
     responsive: true,
+    scales: {
+      yAxes: [
+        {        
+          ticks: {
+            // steps: 10,
+            // stepValue: 10,
+            max: 10,
+            min: 0
+          }
+        },
+      ],
+    }
   };
   public lineChartColors: Color[] = [
     {
@@ -29,31 +47,34 @@ export class LineTimeComponent implements OnInit {
     },
   ];
   public lineChartLegend = true;
-  public lineChartType:any  = 'line';
+  public lineChartType: any = 'line';
   public lineChartPlugins = [];
-  constructor() { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
     this.emit = new BehaviorSubject([]);
     if (this.emit) {
       this.emit.subscribe(data => {
-        console.log(data)
-        if(data){
+        if (data) {
+          console.log(data)
           this.results = data;
-          this.results.forEach((result, idx) => {
-            if(this.dateArr.includes(result.date)){
-              this.dateArr[this.dateArr.indexOf(result.date)]++;
-            }
-            else{
-              this.dateArr[idx] = 1;
-            }
-          });
-          console.log(this.dateArr)
         }
       });
     }
   }
   setResults(results: any) {
     this.emit.next(results)
+  }
+  setDate(dateArr, userArr) {
+    this.dateArr = dateArr;
+    this.userArr = userArr;
+    this.lineChartData[0].data = [];
+    this.lineChartLabels = [];
+    if (this.dateArr) {
+      this.lineChartData[0].data = userArr;
+      this.lineChartLabels = dateArr;
+    }
   }
 }

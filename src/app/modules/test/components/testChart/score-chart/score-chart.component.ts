@@ -5,6 +5,7 @@ import { ChartType, ChartOptions } from 'chart.js';
 import { SingleDataSet, Label } from 'ng2-charts';
 import * as pluginLabels from 'chartjs-plugin-labels';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-score-chart',
   templateUrl: './score-chart.component.html',
@@ -12,7 +13,13 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class ScoreChartComponent implements OnInit {
   @Input() test_id: string;
+  @Input() subject_id: string;
+  @Input() time: string;
   emit: any;
+  rangeTimes = ['day', 'week', 'month', 'all'];
+  startDate: any;
+  endDate: any;
+
   results: any = null;
   avgScore: number = 0;
   public pieChartLabels: Label[] = ['Weak', 'Below Average', 'Average', 'Good', 'Excellent'];
@@ -42,13 +49,15 @@ export class ScoreChartComponent implements OnInit {
     good: 0,
     excellent: 0
   };
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.emit = new BehaviorSubject([]);
     if (this.emit) {
       this.emit.subscribe(data => {
-        console.log(data.results)
+        console.log(data)
         this.results = data;
         this.levelPoint = {
           weak: 0,
@@ -58,12 +67,7 @@ export class ScoreChartComponent implements OnInit {
           excellent: 0
         };
         if (this.results) {
-          this.results.sort((a, b) => {
-            if (a.point === b.point) {
-              return a.time > b.time ? 1 : -1;
-            }
-            return b.point > a.point ? 1 : -1
-          })
+          this.avgScore = 0;
           this.results.forEach(item => {
             // console.log(item.point)
             this.avgScore += item.point;
@@ -97,6 +101,10 @@ export class ScoreChartComponent implements OnInit {
     }
   }
   setResults(results: any) {
-    this.emit.next(results)
+    this.emit.next(results);
+  }
+  toTimes(times){
+    this.router.navigate(['/subject/tests/content-test'],
+     {queryParams: {subject: this.subject_id, test: this.test_id, page: 1, time: times}})
   }
 }

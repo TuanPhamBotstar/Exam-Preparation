@@ -1,0 +1,6 @@
+.line-chart-container{
+    margin: 30px auto;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}

@@ -11,7 +11,10 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-subject-detail',
   templateUrl: './subject-detail.component.html',
-  styleUrls: ['./subject-detail.component.css']
+  styleUrls: ['./subject-detail.component.css'],
+  host: {
+    '(document:click)': 'onClick($event)',
+  }
 })
 export class SubjectDetailComponent implements OnInit, OnDestroy {
   subscription: Subscription;
@@ -19,12 +22,16 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
   subscription3: Subscription;
   total: number;
   page: number;
+  test_id: string;
+  testTitle: string;
   author: string;
-  public isExistSubject: boolean = false;
-  public questions: any;
-  public confirmBlock: boolean = false;
-  public subjectname: string;
-  public subject_id: string;
+  isExistSubject: boolean = false;
+  questions: any;
+  confirmBlock: boolean = false;
+  config: boolean = false;
+  outEllipsis: boolean = false;
+  subjectname: string;
+  subject_id: string;
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute,
@@ -36,12 +43,17 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.activatedRoute.queryParams.subscribe(data => { 
       this.subject_id = data.subject;
+      this.test_id = data.test;
+      this.page = data.page;
       this.subjectService.loadQuestions(this.subject_id, this.page);
       // console.log(data.subject) 
       this.author = JSON.parse(localStorage.getItem('user')).user_id;
     });
     this.subscription2 = this.subjectService.getSubject().subscribe(data => { // get data from store
-      console.log(data.subject.list)
+      console.log('get subject',data)
+      if(data.test.testing && !data.test.loading){
+        this.testTitle = data.test.testing.testTitle;
+      }
       if(!data.subject.loading){
         data.subject.list.forEach(subject => {
           if (subject._id == this.subject_id) {
@@ -76,19 +88,41 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
       this.subscription3.unsubscribe();
     }
   }
-  openConfirmBlock() {
-    if (!this.isExistSubject) {
-      this.confirmBlock = !this.confirmBlock;
-    }
+  onDashboard() {
+    this.router.navigate(['subject/dashboard'], { queryParams: { subject: this.subject_id } });
   }
-  onDelSubject(id: string) {
-    this.subjectApi.removeSubject(id).subscribe(data => console.log(data));
-    this._location.back();
+  overviewTests() {
+    this.router.navigate(['subject/tests'], { queryParams: { subject: this.subject_id } });
   }
-
- 
-  // onBack() {
-  //   this._location.back();
+  allQuestions() {
+    this.router.navigate(['subject/questions'], { queryParams: { subject: this.subject_id, page: 1 } });
+  }
+  // openConfirmBlock() {
+  //   if (!this.isExistSubject) {
+  //     this.confirmBlock = !this.confirmBlock;
+  //   }
   // }
+  onDelSubject() {
+    this.subjectService.removeSubject(this.subject_id);
+    this.router.navigate(['/subjects'], { queryParams: { page: 1 } });
+    this.confirmBlock = !this.confirmBlock;
+  }
+  openConfirmBlock() {
+    this.confirmBlock = !this.confirmBlock;
+  }
+  openConfig(){
+    this.outEllipsis = !this.outEllipsis
+    // this.config = !this.config;
+  }
+  onClick(event) {
+    if(this.outEllipsis){
+      this.config = !this.config;
+      this.outEllipsis = false;
+    }
+    else{
+      this.config = false;
+      this.outEllipsis = false;  
+    }
+   }
  
 }

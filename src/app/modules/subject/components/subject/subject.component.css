@@ -6,7 +6,7 @@
 .profile {
   margin: 20px 0;
 }
-.col-md-3{
+.sidebar-container{
   position: sticky;
   top: 0px;
   z-index: 1;

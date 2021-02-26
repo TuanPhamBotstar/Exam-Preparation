@@ -1,5 +1,53 @@
+
+.chart-container{
+    margin: 20px auto;
+    display: flex;
+}
+.overview-analytics {
+    width: 30%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 5px;
+    padding: 20px;
+}
+.overview-analytics .data-analytic-container{
+    width: 200px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    /* background-color: #eee; */
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.overview-analytics .data-analytic{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+.overview-analytics .data-analytic i{
+    font-size: 3em;
+    color: #8cc5f3;
+}
+.overview-analytics .data-analytic p{
+    margin: 0;
+}
+.overview-analytics .data-analytic .data-title{
+    padding: auto 10px;
+    margin-left: 10px;
+}
+.overview-analytics .data-analytic .data-title .data{
+    font-size: 2em;
+}
 .typeQs-chart{
-    margin-top: 30px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    width: 70%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 5px;
 }

@@ -16,7 +16,7 @@ export class SubjectOveriewComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   page: number;
   totalPage: number;
-  perPage: number = 15;
+  perPage: number = 14;
   total: number;
   public subjects: any;
   constructor(
@@ -50,7 +50,7 @@ export class SubjectOveriewComponent implements OnInit, OnDestroy {
     this.router.navigate(['/subjects/create-subject'], {queryParams: {page: this.page}});
   }
   detailSubject(subject_id) {
-    this.router.navigate(['/detail/dashboard'], { queryParams: { subject: subject_id } });
+    this.router.navigate(['/subject/dashboard'], { queryParams: { subject: subject_id } });
   }
   ///
   onActive(cpnRef) {

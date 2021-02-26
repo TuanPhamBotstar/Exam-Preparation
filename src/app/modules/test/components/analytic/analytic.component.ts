@@ -5,6 +5,7 @@ import { ChartType, ChartOptions } from 'chart.js';
 import { SingleDataSet, Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { flatten } from '@angular/compiler';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-analytic',
   templateUrl: './analytic.component.html',
@@ -12,11 +13,14 @@ import { flatten } from '@angular/compiler';
 })
 export class AnalyticComponent implements OnInit {
   author: string;
+  time: string;
   results: any;
-  testsArr: any = [];
-  dataAnalytic: any = [];
+  userArr: any;
+  rangeTimes = ['day', 'week', 'month', 'all'];
   constructor(
     private resApi: ResApiService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) { }
   // ng2 chart
   public barChartOptions: ChartOptions = {
@@ -36,22 +40,7 @@ export class AnalyticComponent implements OnInit {
           id: 'yAxes1',
           scaleLabel: {
             display: true,
-            labelString: "Average score",
-            fontSize: 16,
-          },
-          ticks: {
-            // steps: 10,
-            // stepValue: 10,
-            max: 100,
-            min: 0
-          }
-        },
-        {
-          position: 'right',
-          id: 'yAxes2',
-          scaleLabel: {
-            display: true,
-            labelString: "Quantity of users",
+            labelString: "Users",
             fontSize: 16,
           },
           ticks: {
@@ -65,7 +54,7 @@ export class AnalyticComponent implements OnInit {
       xAxes: [{
         scaleLabel: {
           display: true,
-          labelString: "Name test",
+          labelString: "Date",
           fontSize: 16,
         },
         gridLines: {
@@ -79,45 +68,33 @@ export class AnalyticComponent implements OnInit {
   public barChartType: any = 'bar';
   public barChartLegend = true;
   public barChartData = [
-    { data: [], label: 'Average score', yAxisID: 'yAxes1' },
-    { data: [], label: 'Quantity of users', yAxisID: 'yAxes2' }
-    // {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    // {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
+    { data: [], label: 'Users'},
   ];
   ngOnInit(): void {
     this.author = JSON.parse(localStorage.getItem('user')).user_id;
-    // console.log(localStorage.getItem('user'))
-    if (this.author) {
-      this.resApi.getResultByAuthor(this.author, 'all').subscribe(data => {
-        console.log(data)
-        this.results = data;
-        data.forEach(element => {
-          if (!this.testsArr.includes(element.test_id)) {
-            this.testsArr.push(element.test_id)
-            this.dataAnalytic.push({ nameTest: element.nameTest, count: 1, point: element.point })
+    this.activatedRoute.queryParams.subscribe(data => {
+      this.time =data.time ? data.time: '';
+      if(data.time){
+        this.resApi.getResultByAuthor(this.author, data.time).subscribe(data => {
+          console.log(data)
+          this.results = data.results;
+          this.barChartLabels = [];
+            this.barChartData[0].data = [];
+          if(this.results){
+            this.userArr = data.userArr;
+            this.barChartLabels = data.dateArr;
+            this.barChartData[0].data = data.userArr;
           }
-          else {
-            let idx = this.testsArr.indexOf(element.test_id);
-            this.dataAnalytic[idx].count++;
-            this.dataAnalytic[idx].point += element.point;
-          }
-        });
-        console.log(this.testsArr)
-        console.log(this.dataAnalytic)
-        this.dataAnalytic.forEach((item) => {
-          this.barChartLabels.push(item.nameTest.toUpperCase())
-          this.barChartData[0].data.push((item.point / item.count).toFixed(2));
-          this.barChartData[1].data.push(item.count);
+          console.log(this.barChartData)
+  
         })
-        console.log(this.barChartData)
-        // this.results.sort((a, b) => {
-        //   if (a.point === b.point) {
-        //     return a.time > b.time ? 1 : -1;
-        //   }
-        //   return b.point > a.point ? 1 : -1
-        // })
-      })
-    }
+      }
+    })
+ 
+  }
+  toTimes(times){
+    this.router.navigate(['/overviews'],
+     {queryParams: {time: times}})
   }
 
 }

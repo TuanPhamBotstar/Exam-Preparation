@@ -1,94 +1,59 @@
-<!-- [routerLink]="[]" [queryParams]="{page:no}" -->
 
 <div class="navbar">
     <ul class="nav navbar-nav">
-        <li >
-            <a [routerLink]="['/subjects']" [queryParams]="{page: 1}">All subject tests</a>
-        </li><span [ngStyle]="{color:'#337ab7'}">/</span>
+        <li class="active">
+            <a [routerLink]="['/subjects']" [queryParams]="{page: 1}">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+        </li>
+            
+        <li class="active">
+            <a (click)="onDashboard()">{{subjectname | uppercase}}</a>
+        </li>
         <li routerLinkActive = "active">
-            <a [routerLink]="['/detail/dashboard']" [queryParams]="{subject: subject_id}">{{subjectname | uppercase}} ({{total}} questions)</a>
-        </li><span [ngStyle]="{color:'#337ab7'}">/</span>
+            <a (click)="onDashboard()" routerLink = "/subject/dashboard">Dashboard</a>
+        </li>
         <li routerLinkActive = "active">
-            <a [routerLink]="['/detail/questions']" [queryParams]="{subject: subject_id, page: 1}">Questions</a>
-        </li><span [ngStyle]="{color:'#337ab7'}">/</span>
-        <li routerLinkActive = "active" >
-            <a [routerLink]="['/detail/tests']" [queryParams]="{subject: subject_id}">Tests</a>
+            <a (click)="overviewTests()" routerLink = "/subject/tests" >Tests</a>
+        </li>
+        <li 
+        class.acctive = "test_id" *ngIf="test_id" routerLinkActive = "active">
+            <a routerLink = "/subject/tests">{{testTitle | uppercase}} Test</a>
+        </li>
+        <li routerLinkActive = "active">
+            <a (click)=allQuestions() routerLink = "/subject/questions">Questions</a>
         </li>
     </ul>
-</div>
-
-<!-- <div class="btn-container">
-    <button type="button" class="btn btn-primary" (click)="onAddQuestion()">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        <span>Thêm câu hỏi</span>
-    </button>
-    <button type="button" class="btn btn-primary" (click)="overviewTests()">
-        <i class="glyphicon glyphicon-list-alt"></i>
-        <span>Đề thi</span>
-    </button>  
-    <button type="button" class="btn btn-danger" (click) = "openConfirmBlock()">
-        <i class="fa fa-minus-square-o" aria-hidden="true"></i>
-        <span>Xóa bộ đề</span>
-    </button>
-</div> -->
-<!-- (activate)="onActive($event)" -->
-<router-outlet *ngIf="!isExistSubject"></router-outlet>
-
-<div class="panel panel-danger confirm-del-subject" *ngIf="confirmBlock">
-      <div class="panel-heading">
-            <h3 class="panel-title">Delete Subject Test</h3>
-            <i class="glyphicon glyphicon-remove" (click)="openConfirmBlock()"></i>
-      </div>
-      <div class="panel-body">
-            Are you sure you want to delete {{subjectname | uppercase}} subject test ?
-            <div>
-                <button type="button" class="btn btn-primary" (click) = "openConfirmBlock()">Không</button>
+    <div class="ellipsis" (click)="openConfig()">
+        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+        <div (click) = "openConfirmBlock()"  class="remove-subject"
+            *ngIf="config" class="remove-subject">
                 
-                <button type="button" class="btn btn-danger" (click) = "onDelSubject(subject_id)">Có</button>
-            </div>
-      </div>
-</div>
+                <p>Remove Subject</p>
+                <p>Remove Test</p>
+        </div>
+    </div>
+</div>  
+
+<router-outlet *ngIf="!isExistSubject"></router-outlet>
 
 <div class="isExistSubject" *ngIf="isExistSubject">
         Subject test does not exist.
 </div>
 
-<!-- <ng-container *ngIf="showQuestions">
-    <div class="questions-container">
-        <div class="question" *ngFor="let question of questions; let i = index">
-            <div class="question-elemment">
-                <h4 (click)="onEditQuestion(i)">
-                    <strong>Question {{i+1+(page-1)*10}}:</strong> ({{levels[question.level]}})
-                </h4>
-                <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEditQuestion(question)"></i>
-                <p>
-                    {{question.title}}
-                </p>
-            </div>
-            <div class="answers">
-                <div class="" *ngFor="let answer of question.answers; let j = index">
-                    <div class="answer-elemnt is{{answer.isCorrect}}">
-                        <label for="a_{{i}}_{{j}}">
-                            {{alphaArr[j]}}. {{answer.content}}
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div> 
+<div class="panel panel-danger confirm-del-subject" *ngIf="confirmBlock">
+    <div class="panel-heading">
+          <h4 class="panel-title">Delete Subject Test</h4>
+          <i class="glyphicon glyphicon-remove" (click)="openConfirmBlock()"></i>
     </div>
-    <ul class="pagination" *ngIf="totalPage > 1">
-        <li><a (click)="onPrevious()">&laquo;</a></li>
-        <ng-container *ngFor="let page of arrayV(); let i= index;">
-            <li routerLinkActive="active">
-                <a [routerLink]="['/detail']" [queryParams]="{subject: subject_id, page: i+1}">
-                    {{i+1}}
-                </a>
-            </li>
-        </ng-container>
-        <li><a (click)="onNext()">&raquo;</a></li>
-    </ul>  
-</ng-container> -->
-
+    <div class="panel-body">
+            <h4>Are you sure you want to delete this subject test ?</h4>
+            <div>
+              <button type="button" class="btn btn-primary" (click) = "openConfirmBlock()">No</button>
+              <button type="button" class="btn btn-danger" (click) = "onDelSubject()">Yes</button>
+          </div>
+    </div>
+</div> 
     
 
 

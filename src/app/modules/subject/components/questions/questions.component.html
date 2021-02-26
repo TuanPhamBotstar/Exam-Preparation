@@ -1,4 +1,5 @@
-<div class="component-container">
+<router-outlet (activate)="onActive($event)" (deactivate)="onDeactivate()"></router-outlet>
+<div class="component-container" *ngIf="show">
     <div class="add-question">
         <button type="button" class="btn btn-primary" (click)=onAddQuestion()>
             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -33,7 +34,7 @@
             <li><a (click)="onPrevious()">&laquo;</a></li>
             <ng-container *ngFor="let page of arrayV(); let i= index;">
                 <li routerLinkActive="active">
-                    <a [routerLink]="['/detail/questions']" [queryParams]="{subject: subject_id, page: i+1}">
+                    <a [routerLink]="['/subject/questions']" [queryParams]="{subject: subject_id, page: i+1}">
                         {{i+1}}
                     </a>
                 </li>

@@ -1,22 +1,41 @@
 <div class="test-content">
-    <div class="test-btn">
-        <!-- <i class="fa fa-long-arrow-left" aria-hidden="true" (click)="onBack()"> Quay lại</i> -->
-
+    <!-- <div class="test-btn">
         <button type="button" class="btn btn-primary" (click)="openShareBox()">
             <i class="fa fa-share-alt" aria-hidden="true"></i>
             Share</button>
         <i class="fa fa-trash-o" aria-hidden="true" (click)="openConfirm()"></i>
+    </div> -->
+    
+    <div role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a  aria-controls="home" role="tab" data-toggle="tab"
+                (click)="onShowChart()"
+                >Dashboard</a>
+            </li>
+            <li role="presentation">
+                <a  aria-controls="tab" role="tab" data-toggle="tab"
+                (click)="onShowContent()"
+                >Contents</a>
+            </li>
+            <li class="share">
+                <button type="button" class="btn btn-primary" (click)="openShareBox()">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                    Share</button>
+            </li>
+        </ul>
     </div>
     
-    <h3 [ngStyle]="{textAlign: 'center'}">{{testTitle | uppercase}} Test Results</h3>
-
-    <app-score-chart [test_id]="test_id"></app-score-chart>
-    <app-line-time [test_id]="test_id"></app-line-time>
-    <div class="panel panel-default" *ngIf="test">
+    
+    
+    <!-- [startDate]="startDate" [endDate]="endDate" -->
+    <div class="panel panel-default" *ngIf="test&&showContent">
         <div class="panel-heading">
             <h3 class="panel-title"> {{test.testTitle | uppercase}} Test</h3>
             <i>({{test.easyQty+test.normalQty+test.hardQty}} questions)</i>
-            <p>Time: {{test.timeTest}} min</p>
+            <p *ngIf="test.timeTest > 1">Time: {{test.timeTest}} mins</p>
+            <p *ngIf="test.timeTest <= 1">Time: {{test.timeTest}} min</p>
             <p>Code: {{test.testCode}}</p>
         </div>
         <div class="panel-body">
@@ -50,7 +69,7 @@
             <li><a (click)="onPrevious()">&laquo;</a></li>
             <ng-container *ngFor="let page of arrayV(); let i= index;">
                 <li routerLinkActive="active">
-                    <a [routerLink]="['/detail/tests/content-test']"
+                    <a [routerLink]="['/subject/tests/content-test']"
                         [queryParams]="{subject: this.subject_id, test: this.test_id, page: i+1}">
                         {{i+1}}
                     </a>
@@ -60,6 +79,11 @@
         </ul>
     </div>
 
+    <div class="show-chart-{{!showContent}}">
+        <!-- <h3 [ngStyle]="{textAlign: 'center'}">{{testTitle | uppercase}} Test Results</h3> -->
+        <app-score-chart [test_id]="test_id" [subject_id]="subject_id" [time]="time"></app-score-chart>
+        <app-line-time ></app-line-time>
+    </div>
     <div class="panel panel-danger confirm-del-subject" *ngIf="confirmBlock">
         <div class="panel-heading">
             <h4 class="panel-title">Delete Test</h4>

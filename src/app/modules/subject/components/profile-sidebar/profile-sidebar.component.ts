@@ -13,9 +13,11 @@ export class ProfileSidebarComponent implements OnInit {
   confirmBlock: boolean = false;
   caret_down: boolean = false;
   submenu: boolean = false;
+  config: boolean = false;
   username: any;
   subject_id: string;
-  page: number;
+  page: number = 1;
+  time: string = 'all';
   public show: boolean = true;
   constructor(
     public router: Router,
@@ -36,9 +38,14 @@ export class ProfileSidebarComponent implements OnInit {
       }
     }
     this.activatedRoute.queryParams.subscribe(data => {
+      if(data.page){
+        this.page = data.page;
+      }
+      if(data.time){
+        this.time = data.time;
+      }
       if (data.subject) {
         this.subject_id = data.subject;
-        this.page = data.page;
         this.caret_down = true;
         this.submenu = true;
       }
@@ -60,16 +67,16 @@ export class ProfileSidebarComponent implements OnInit {
     this.submenu = !this.submenu;
   }
   onDashboard() {
-    this.router.navigate(['detail/dashboard'], { queryParams: { subject: this.subject_id } });
+    this.router.navigate(['subject/dashboard'], { queryParams: { subject: this.subject_id } });
   }
   onAddQuestion() {
-    this.router.navigate(['/detail/add-question'], { queryParams: { subject: this.subject_id, page: this.page } });
+    this.router.navigate(['/subject/add-question'], { queryParams: { subject: this.subject_id, page: this.page } });
   }
   overviewTests() {
-    this.router.navigate(['detail/tests'], { queryParams: { subject: this.subject_id } });
+    this.router.navigate(['subject/tests'], { queryParams: { subject: this.subject_id } });
   }
   allQuestions() {
-    this.router.navigate(['detail/questions'], { queryParams: { subject: this.subject_id, page: 1 } });
+    this.router.navigate(['subject/questions'], { queryParams: { subject: this.subject_id, page: 1 } });
   }
   onDelSubject() {
     this.subjectService.removeSubject(this.subject_id);
@@ -78,5 +85,8 @@ export class ProfileSidebarComponent implements OnInit {
   }
   openConfirmBlock() {
     this.confirmBlock = !this.confirmBlock;
+  }
+  openConfig(){
+    this.config = !this.config;
   }
 }

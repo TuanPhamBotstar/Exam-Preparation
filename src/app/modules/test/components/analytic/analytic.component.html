@@ -1,38 +1,22 @@
-<div *ngIf="dataAnalytic.length > 0" class="chart-containter">
-    <div style="display: block">
-      <canvas baseChart
-              [datasets]="barChartData"
-              [labels]="barChartLabels"
-              [options]="barChartOptions"
-              [legend]="barChartLegend"
-              [plugins]="barChartPlugins"
-              [chartType]="barChartType">
-      </canvas>
+<div *ngIf="results">
+    <div class="chart-containter">
+        <div style="display: block">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [plugins]="barChartPlugins"
+                [chartType]="barChartType">
+        </canvas>
+        </div>
+        <p class="name-chart">Real Times Users: {{results.length}} users</p>
     </div>
-    <p class="name-chart">Average score and quantity of user finished of each test</p>
-</div>
-<div class="result-table">
-<table>
-    <caption></caption>
-    <thead>
-    <tr>
-        <th>No.</th>
-        <th>Test name</th>
-        <th>Quantity of users</th>
-        <th>Average Score</th>
-    </tr>
-    </thead>   
-    <tbody>
-    <tr *ngFor="let data of dataAnalytic; let i = index"
-        class="res-detail"
-    >
-        <td>{{i+1}}</td>
-        <td>
-            {{data.nameTest | uppercase}}
-        </td>
-        <td>{{data.count}}</td>
-        <td>{{(data.point/data.count).toFixed(2)}}</td>
-    </tr>
-    </tbody> 
-</table>
+    <div class="time-select-btn">
+        <div *ngFor="let times of rangeTimes" 
+        class="time-btn {{times}}-select"   
+        [class.active] = "time === times"
+        (click)="toTimes(times)">
+        </div>
+    </div>
 </div>

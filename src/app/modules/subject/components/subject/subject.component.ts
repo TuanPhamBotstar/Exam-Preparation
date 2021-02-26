@@ -8,7 +8,7 @@ import { ProfileSidebarComponent } from '../profile-sidebar/profile-sidebar.comp
   styleUrls: ['./subject.component.css']
 })
 export class SubjectComponent implements OnInit  {
-  public colMd: number = 9;
+  public colMd: number = 10;
   isOpen: Boolean = false;
   constructor(
     public router:Router,
@@ -35,15 +35,15 @@ export class SubjectComponent implements OnInit  {
   }
   getShowSidebar(value){
     console.log(value)
-    this.colMd = 9;
+    this.colMd = 10;
   }
   onToggleSidebr(){
     this.child.onToggle();
-    if(this.colMd === 9){
+    if(this.colMd === 10){
       this.colMd = 12;
     }
     else{
-      this.colMd = 9;
+      this.colMd = 10;
     }
   }
 }

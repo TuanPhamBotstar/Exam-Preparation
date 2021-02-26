@@ -16,13 +16,13 @@ export class SignInComponent implements OnInit {
 
   public signInForm: FormGroup;
   isSignUp: boolean = false;
-  isSignedUp:boolean = false;
+  isSignedUp: boolean = false;
   error: number = 0;
   constructor(
     public activatedRouter: ActivatedRoute,
     public router: Router,
     public formBuilder: FormBuilder,
-    public auth:AuthService,
+    public auth: AuthService,
     public authApi: AuthApiService,
     private authGuard: AuthGuard,
   ) { }
@@ -42,42 +42,42 @@ export class SignInComponent implements OnInit {
         password: ['', [Validators.required]]
       }
     );
-    this.signInForm.valueChanges.subscribe(()=>{this.error=0})
+    this.signInForm.valueChanges.subscribe(() => { this.error = 0 })
   }
-  checkLogin(){
-    if(localStorage.getItem('user')){
+  checkLogin() {
+    if (localStorage.getItem('user')) {
       this.router.navigate(['']);
     }
   }
   onSignIn(username: string, password: string) {
     var currentUser, saveUser;
-    if(username.indexOf('@')>-1){
-      currentUser = {email: username, password: password};
-      saveUser = { email: username};
+    if (username.indexOf('@') > -1) {
+      currentUser = { email: username, password: password };
+      saveUser = { email: username };
     }
-    else{
-      currentUser = {username: username, password: password};
-      saveUser = { username: username};
+    else {
+      currentUser = { username: username, password: password };
+      saveUser = { username: username };
     }
     this.auth.login(currentUser);
     // this.auth.getUser()
     this.authApi.login(currentUser)
       .subscribe(data => {
-        if(data['success']){
+        if (data['success']) {
           // console.log('success',data);
           this.error = 1;
           saveUser.user_id = data['id'];
           // console.log(saveUser)
-          if(saveUser.email){
+          if (saveUser.email) {
             saveUser.username = data['username'];
           }
-          localStorage.setItem('user',JSON.stringify(saveUser));
-          this.router.navigate(['/overviews']);
+          localStorage.setItem('user', JSON.stringify(saveUser));
+          this.router.navigate(['/overviews'], { queryParams: { time: 'all' } });
         }
-        else{
+        else {
           this.error = -1;
         }
-    });
-  
+      });
+
   }
 }
