@@ -1,8 +1,11 @@
 <router-outlet (activate)="onActive($event)" (deactivate)="onDeactivate()"></router-outlet>
 <div class="overview-test-container" *ngIf="show">
+    <input type="text"  id="search" #search (input)="onSearch(search.value)"
+    class="form-control" placeholder="Search for Name" autocomplete="anyrandomstring">
+    <p class="resSearchEmpty" *ngIf="resSearchEmpty">No search results found</p>
     <!-- <i class="fa fa-long-arrow-left" aria-hidden="true" (click)="onBack()"> Quay lại</i> -->
     <div class="subject-content">
-        <div class="subject-container">
+        <div class="subject-container" *ngIf="!searching">
         <div class="subject add" (click)="onCreateTest()">
             <div class="subject-element">
                 <i class="glyphicon glyphicon-list-alt">

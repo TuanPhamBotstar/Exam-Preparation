@@ -1,0 +1,15 @@
+<div *ngIf="results">
+    <div class="chart-containter">
+        <div style="display: block;">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [plugins]="barChartPlugins"
+                [chartType]="barChartType">
+        </canvas>
+        </div>
+        <p class="name-chart">Score</p>
+    </div>
+</div>

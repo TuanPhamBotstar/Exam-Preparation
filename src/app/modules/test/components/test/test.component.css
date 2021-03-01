@@ -1,6 +1,6 @@
 .test-content{
     position: relative;
-    top:0px;
+    top:10px;
     background-color: #fff;
 }
 .test-btn{
@@ -12,7 +12,20 @@
     padding-right: 20px;
     padding-left: 20px;
 }
-
+.panel-default{
+    margin-top: 20px;
+    border: none;
+}
+.panel-default>.panel-heading{
+    background-color: #fff;
+    border: none;
+    position: relative;
+}
+.panel-heading .share{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
 .panel-body{
     padding: 0;
 }
@@ -127,7 +140,37 @@ label, input{
 .show-chart-true{
     visibility: visible;
 }
+.show-res-table-false{
+    display: none;
+}
 /* tabs */
-.nav-tabs li.share{
+.nav-tabs a{
+    color: #555;
+}
+.nav-tabs>li.active>a{
+    color: #337ab7;
+}
+.nav-tabs li.ellipsis{
+    position: relative;
     float: right;
+}
+div.ellipsis{
+    color:#062f53;
+    margin: 5px 4px;
+}
+.remove-test{
+    position: absolute;
+    top: 100%;
+    right: -5px;
+    width: 140px;
+    background-color: #f6f9fb;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    z-index: 10;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+.remove-test p{
+  margin-bottom: 0;
 }

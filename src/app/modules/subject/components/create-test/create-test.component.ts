@@ -113,8 +113,8 @@ export class CreateTestComponent implements OnInit, OnDestroy{
         this.subcription = this.testService.getTests().subscribe(data => {
           console.log(data)
           if(data.test.test_id){
-            this.router.navigate(['detail/tests/content-test'],
-            {queryParams: {subject: this.subject_id, test: data.test.test_id, page: 1}});
+            this.router.navigate(['subject/tests/content-test'],
+            {queryParams: {subject: this.subject_id, test: data.test.test_id, page: 1, time: 'all'}});
           }
         })
       }

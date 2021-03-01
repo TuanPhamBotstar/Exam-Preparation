@@ -58,7 +58,7 @@ export class LineTimeComponent implements OnInit {
     if (this.emit) {
       this.emit.subscribe(data => {
         if (data) {
-          console.log(data)
+          console.log('line time chart',data)
           this.results = data;
         }
       });
@@ -68,6 +68,8 @@ export class LineTimeComponent implements OnInit {
     this.emit.next(results)
   }
   setDate(dateArr, userArr) {
+    console.log('line time chart', dateArr)
+    console.log('line time chart', userArr)
     this.dateArr = dateArr;
     this.userArr = userArr;
     this.lineChartData[0].data = [];

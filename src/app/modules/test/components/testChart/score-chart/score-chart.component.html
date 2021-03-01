@@ -6,42 +6,42 @@
     </div>
 </div>
 <div class="chart-container">
-<div class="overview-analytics" *ngIf="results.length > 0">
-    <div class="data-analytic-container">
-        <div class="data-analytic">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>
-            <div class="data-title">
-                <p>Total Students</p>
-                <p class='data'>{{results.length}}</p>
+    <div class="overview-analytics" *ngIf="results.length > 0">
+        <div class="data-analytic-container">
+            <div class="data-analytic">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                <div class="data-title">
+                    <p>Total Students</p>
+                    <p class='data'>{{results.length}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="data-analytic-container">
+            <div class="data-analytic">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+                <div class="data-title">
+                    <p>Average Score</p>
+                    <p class='data'>{{(avgScore)}}</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="data-analytic-container">
-        <div class="data-analytic">
-            <i class="fa fa-star-o" aria-hidden="true"></i>
-            <div class="data-title">
-                <p>Average Score</p>
-                <p class='data'>{{(avgScore/results.length).toFixed(2)}}</p>
-            </div>
+    <div class="your-res-chart" *ngIf="results.length > 0">
+        <div style="display: block">
+            <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [options]="pieChartOptions"
+                    [chartType]="pieChartType">
+                    [plugins]="pieChartPlugins"
+                    [legend]="pieChartLegend">
+            </canvas>
         </div>
+        <p class="name-chart">Score Ratio</p>
     </div>
-</div>
-<div class="your-res-chart" *ngIf="results.length > 0">
-    <div style="display: block">
-        <canvas baseChart
-                [data]="pieChartData"
-                [labels]="pieChartLabels"
-                [options]="pieChartOptions"
-                [chartType]="pieChartType">
-                [plugins]="pieChartPlugins"
-                [legend]="pieChartLegend">
-        </canvas>
-    </div>
-    <p class="name-chart">Score Ratio</p>
-</div>
 </div>
 
-<div class="result-table">
+<!-- <div class="result-table">
     <table>
         <caption>Results Table</caption>
         <tr>
@@ -63,5 +63,5 @@
         </tr>
     </table>
     <p *ngIf="results.length == 0" [ngStyle]="{textAlign:'center', marginTop: '20px'}">Data empty</p>
-</div>
+</div> -->
 

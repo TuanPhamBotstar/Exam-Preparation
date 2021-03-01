@@ -13,7 +13,7 @@ export class TestEffects {
 
     @Effect() loadTests$ = this.actions$.pipe(
         ofType(TestActions.LOAD_TESTS),
-        mergeMap((action: TestActions.LoadTests) => this.testApi.getTestsBySubject_id(action.subject_id)
+        mergeMap((action: TestActions.LoadTests) => this.testApi.getTestsBySubject_id(action.author, action.subject_id)
             .pipe(
                 map((data) => new TestActions.LoadTestsSuccess(data)),
                 catchError(error => of(new TestActions.LoadTestsFailure(error))) 
@@ -31,7 +31,7 @@ export class TestEffects {
     )
     @Effect() loadDetailTest$ = this.actions$.pipe(
         ofType(TestActions.LOAD_DETAIL_TEST),
-        mergeMap((action: TestActions.LoadDetailTest) => this.testApi.getDetaiTest(action.subject_id, action.test_id)
+        mergeMap((action: TestActions.LoadDetailTest) => this.testApi.getDetaiTest(action.author, action.subject_id, action.test_id)
             .pipe(
                 map((data) => new TestActions.LoadDetailTestSuccess(data)),
                 catchError(error => of(new TestActions.LoadDetailTestFailure(error))) 

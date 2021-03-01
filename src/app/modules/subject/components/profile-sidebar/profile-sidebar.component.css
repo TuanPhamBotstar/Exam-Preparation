@@ -9,8 +9,8 @@
 /* Profile sidebar */
 .profile-sidebar {
   position: relative;
-  padding: 20px 0 100px 0;
-  min-height: calc(100vh - 140px);
+  padding: 60px 0 100px 0;
+  min-height: calc(100vh);
   background: #fff;
   box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
   border-radius: 5px;

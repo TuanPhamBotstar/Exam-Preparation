@@ -23,11 +23,20 @@ export class AvgScoreChartComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     // scaleShowVerticalLines: false,
     responsive: true,
+    legend: {
+      // position: 'right',
+      labels: {
+        fontSize: 16
+      }
+    },
     plugins: {
       labels: false,
       datalabels: {
         anchor: 'end',
         align: 'end',
+        font: {
+          size: 16,
+        }
       }
     },
     scales: {
@@ -43,6 +52,7 @@ export class AvgScoreChartComponent implements OnInit {
           ticks: {
             // steps: 10,
             // stepValue: 10,
+            fontSize: 16,
             max: 100,
             min: 0
           }
@@ -58,6 +68,7 @@ export class AvgScoreChartComponent implements OnInit {
           ticks: {
             // steps: 10,
             // stepValue: 10,
+            fontSize: 16,
             max: 30,
             min: 0
           }
@@ -71,6 +82,9 @@ export class AvgScoreChartComponent implements OnInit {
         },
         gridLines: {
           display: false
+        },
+        ticks: {
+          fontSize: 16,
         }
       }]
     }

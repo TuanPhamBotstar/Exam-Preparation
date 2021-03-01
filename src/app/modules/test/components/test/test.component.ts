@@ -12,14 +12,23 @@ import { ofType } from "@ngrx/effects";
 import { LineTimeComponent } from '../testChart/line-time/line-time.component';
 import { ScoreChartComponent } from '../testChart/score-chart/score-chart.component';
 import { ResApiService } from '../../services/res-api.service';
+import { ScoreBarChartComponent } from '../testChart/score-bar-chart/score-bar-chart.component';
+import { QuestionsAnalyticsComponent } from '../testChart/questions-analytics/questions-analytics.component';
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  styleUrls: ['./test.component.css'],
+  host: {
+    '(document:click)': 'onClick($event)',
+  }
 })
 export class TestComponent implements OnInit, OnDestroy {
   startDate: any;
   endDate: any;
+  evaluate: any;
+  userScore: any;
+  avgScore: any;
+  staticQuestions: any;
   testTitle: string;
   totalPage: number;
   total: number;
@@ -31,25 +40,35 @@ export class TestComponent implements OnInit, OnDestroy {
   isShareSuccess: boolean = false;
   shareBox: boolean = false;
   confirmBlock: boolean = false;
+  config: boolean = false;
+  outEllipsis: boolean = false;
   test_id: string;
   subject_id: string;
   test: any;
+  results: any;
   questions: Question[] = [];
   qsOnePage: Question[] = [];
   shareForm: FormGroup;
   showContent: boolean = false;
+  showResTable: boolean = false;
   // viewChild
   setData: any = null;
   @ViewChild(LineTimeComponent) linetTime: LineTimeComponent;
   @ViewChild(ScoreChartComponent) scoreChart: ScoreChartComponent;
+  @ViewChild(ScoreBarChartComponent) scoreBarChart: ScoreBarChartComponent;
+  @ViewChild(QuestionsAnalyticsComponent) questionAnalytic: QuestionsAnalyticsComponent;
   ngAfterViewInit(){
     if(this.setData){
       this.setData.subscribe(data => {
         console.log(data)
         console.log(this.startDate)
         this.scoreChart.setResults(data);
+        this.scoreChart.setEvaluate(this.evaluate, this.avgScore);
         this.linetTime.setResults(data);
+        // this.scoreBarChart.setResults(data);
+        this.scoreBarChart.setScores(this.userScore);
         this.linetTime.setDate(this.startDate, this.endDate)
+        this.questionAnalytic.setCorrectQty(this.staticQuestions);
       })
     }
   }
@@ -64,6 +83,7 @@ export class TestComponent implements OnInit, OnDestroy {
   ) { }
   
   ngOnInit(): void {
+    const author = JSON.parse(localStorage.getItem('user')).user_id;
     this.setData = new BehaviorSubject([]);
     this.activatedRoute.queryParams.subscribe(data => {
       console.log(data.test)
@@ -72,12 +92,17 @@ export class TestComponent implements OnInit, OnDestroy {
       this.page = data.page;
       this.time = data.time;
       if (this.test_id && this.subject_id) {
-        this.testService.loadDetaitTest(this.subject_id, this.test_id);
-        this.resultApi.getResultByTest(this.test_id, this.time).subscribe(data => {
+        this.testService.loadDetaitTest(author, this.subject_id, this.test_id);
+        this.resultApi.getResultByTest(author,this.test_id, this.time).subscribe(data => {
           console.log('result api',data)
           if(data){
             this.startDate = data.dateArr;
             this.endDate = data.userArr;
+            this.evaluate = data.evaluate;
+            this.avgScore = data.avgScore;
+            this.userScore = data.userScore;
+            this.staticQuestions = data.staticQuestions;
+            this.results = data.results;
             this.setData.next(data.results);
           }
         });
@@ -117,6 +142,20 @@ export class TestComponent implements OnInit, OnDestroy {
     this.confirmBlock = !this.confirmBlock;
     console.log('open confirm')
   }
+  openConfig(){
+    this.outEllipsis = !this.outEllipsis
+    // this.config = !this.config;
+  }
+  onClick(event) {
+    if(this.outEllipsis){
+      this.config = !this.config;
+      this.outEllipsis = false;
+    }
+    else{
+      this.config = false;
+      this.outEllipsis = false;  
+    }
+   }
   openShareBox() {
     this.createShareForm();
     this.shareBox = !this.shareBox;
@@ -165,20 +204,25 @@ export class TestComponent implements OnInit, OnDestroy {
       this.page--;
     }
     this.router.navigate(['/subject/tests/content-test'],
-      { queryParams: { subject: this.subject_id, test: this.test_id, page: this.page } });
+      { queryParams: { subject: this.subject_id, test: this.test_id, page: this.page, time: this.time} });
   }
   onNext() {
     if (this.page < this.totalPage) {
       this.page++;
     }
     this.router.navigate(['/subject/tests/content-test'],
-      { queryParams: { subject: this.subject_id, test: this.test_id, page: this.page } });
+      { queryParams: { subject: this.subject_id, test: this.test_id, page: this.page,  time: this.time } });
   }
   onShowContent(){
     this.showContent = true;
-    console.log('showContent',this.showContent)
+    this.showResTable = false;
   }
   onShowChart(){
     this.showContent = false;
+    this.showResTable = false;
+  }
+  onShowResTable(){
+    this.showContent = false;
+    this.showResTable = true;
   }
 }

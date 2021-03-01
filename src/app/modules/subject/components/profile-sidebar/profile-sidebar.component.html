@@ -1,8 +1,8 @@
 <div>
     <div class="profile-sidebar" *ngIf="show">
-        <!-- <div class="bar-btn">
-            <i class="glyphicon glyphicon-menu-hamburger" (click)="onToggle()"></i>
-        </div> -->
+            <!-- <div class="bar-btn">
+                <i class="glyphicon glyphicon-menu-hamburger" (click)="onToggle()"></i>
+            </div> -->
         <!-- SIDEBAR USERPIC -->
         <!-- <div class="profile-userpic">
             <img src="/assets/img/avatar.png" class="img-responsive" alt="">
@@ -65,7 +65,7 @@
                                 Questions
                             </a>
                         </li>                 
-                        <!-- <li routerLinkActive="active">
+                        <li routerLinkActive="active">
                             <a (click) = "openConfig()"> 
                                 <i class="fa fa-cog" aria-hidden="true"></i>
                                 Configure
@@ -75,13 +75,13 @@
                             </ng-container>
                             <ul class="nav">
                                 <li routerLinkActive="active">
-                                    <a (click) = "openConfirmBlock()" routerLink = ""
+                                    <a (click) = "openConfirmBlock()"
                                     *ngIf="config" class="remove-subject">
                                         Remove Subject
                                     </a>
                                 </li>
                             </ul>
-                        </li> -->
+                        </li>
                         <!-- <li>
                             <a (click) = "openConfirmBlock()">
                                 <i class="glyphicon glyphicon-minus"></i>

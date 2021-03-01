@@ -1,7 +1,7 @@
 <div class="chart-container">
     <div class="overview-analytics" *ngIf="1">
         <div class="data-analytic-container">
-            <div class="data-analytic">
+            <div class="data-analytic" (click)="overviewTests()">
                 <i class="glyphicon glyphicon-list-alt"></i>
                 <div class="data-title">
                     <p>Total Tests</p>
@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="data-analytic-container">
-            <div class="data-analytic">
+            <div class="data-analytic" (click)="allQuestions()">
                 <i class="fa fa-question-circle" aria-hidden="true"></i>
                 <div class="data-title">
                     <p>Total Questions</p>

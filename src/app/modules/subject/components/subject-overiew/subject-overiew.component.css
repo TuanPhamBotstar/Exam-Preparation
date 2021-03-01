@@ -35,25 +35,25 @@
     outline: none;
   }
   .subject.add .fa-folder{
-    color: darkgoldenrod;
+    color: coral;
     position: relative;
     font-size: 3.7em;
   }
   .subject.add .fa-plus-circle{
-    color: #bbb;
+    color: #f2f3f5;
     position: absolute;
     font-size: 32px;
     bottom: 2px;
     right: 0;
   }
   .subject.add:hover .fa-plus-circle{
-    color: #ccc;
+    color: #fff;
   }
   .subject i{
     font-size: 2.5em;
   }
   i.glyphicon-folder-open{
-    color: darkgoldenrod;
+    color: coral;
   }
   .subject p{
     margin-top: 10px;
@@ -80,3 +80,35 @@
     width: 25%;
   }
 }
+
+/* box search */
+.boxsearch{
+  display: flex;
+  flex-flow: row nowrap;
+  position: relative;
+  left: 10px;
+  align-items: center;
+  width: 50%;
+  border: 1px solid rgba(0, 0, 0,0.2);
+  border-radius: 10px;
+  padding: 0 10px;
+}   
+input{
+  width: 60%;
+  /* border: none;
+  outline: none; */
+  background-image: url('https://www.w3schools.com/howto/searchicon.png');
+  background-position: 10px 6px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  transition: width 0.4s ease-in-out;
+  font-size: 16px;
+  position: relative;
+  left: 10px;
+  margin-top: 10px;
+}
+.resSearchEmpty{
+  margin: 20px 10px ;
+}
+
+

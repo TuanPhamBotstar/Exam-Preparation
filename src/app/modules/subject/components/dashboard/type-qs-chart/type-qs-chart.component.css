@@ -2,6 +2,8 @@
 .chart-container{
     margin: 20px auto;
     display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 .overview-analytics {
     width: 30%;
@@ -9,8 +11,6 @@
     flex-flow: column nowrap;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
     margin: 5px;
     padding: 20px;
 }
@@ -21,8 +21,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    /* background-color: #eee; */
-    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 .overview-analytics .data-analytic{
@@ -47,7 +46,5 @@
 }
 .typeQs-chart{
     width: 70%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
     margin: 5px;
 }

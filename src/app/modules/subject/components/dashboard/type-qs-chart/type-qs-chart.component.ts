@@ -45,7 +45,8 @@ export class TypeQsChartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.testService.loadTests(this.subject_id);
+    const author = JSON.parse(localStorage.getItem('user')).user_id;
+    this.testService.loadTests(author, this.subject_id);
     this.testService.getTests().subscribe(data => {
       if(!data.test.loading && data.test.list){
         this.totalTests = data.test.list.length;
@@ -65,11 +66,11 @@ export class TypeQsChartComponent implements OnInit {
       })
   }
 
-  // overviewTests() {
-  //   console.log('on overview tests')
-  //   this.router.navigate(['subject/tests'], { queryParams: { subject: this.subject_id } });
-  // }
-  // allQuestions() {
-  //   this.router.navigate(['subject/questions'], { queryParams: { subject: this.subject_id, page: 1 } });
-  // }
+  overviewTests() {
+    console.log('on overview tests')
+    this.router.navigate(['subject/tests'], { queryParams: { subject: this.subject_id } });
+  }
+  allQuestions() {
+    this.router.navigate(['subject/questions'], { queryParams: { subject: this.subject_id, page: 1 } });
+  }
 }

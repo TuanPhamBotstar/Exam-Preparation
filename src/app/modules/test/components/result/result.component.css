@@ -2,6 +2,12 @@
     position: relative;
     min-height: 100vh;
 }
+.show-chart-false{
+    display: none;
+}
+.show-chart-true{
+    display: block;
+}
 /* chart */
 .your-res-chart{
     width: 60%;
@@ -112,5 +118,8 @@ i.isCorrect{
 }
 i.noChosen{
     color: #8cc5f3;
+    margin-right: 10px;
+}
+.fa-check-circle-o{
     margin-right: 10px;
 }

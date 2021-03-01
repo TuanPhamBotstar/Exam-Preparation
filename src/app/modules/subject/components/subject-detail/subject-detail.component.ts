@@ -41,20 +41,20 @@ export class SubjectDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.author = JSON.parse(localStorage.getItem('user')).user_id;
     this.subscription = this.activatedRoute.queryParams.subscribe(data => { 
       this.subject_id = data.subject;
       this.test_id = data.test;
       this.page = data.page;
-      this.subjectService.loadQuestions(this.subject_id, this.page);
+      // this.subjectService.loadQuestions(this.author, this.subject_id, this.page);
       // console.log(data.subject) 
-      this.author = JSON.parse(localStorage.getItem('user')).user_id;
     });
     this.subscription2 = this.subjectService.getSubject().subscribe(data => { // get data from store
       console.log('get subject',data)
       if(data.test.testing && !data.test.loading){
         this.testTitle = data.test.testing.testTitle;
       }
-      if(!data.subject.loading){
+      if(!data.subject.loading && data.subject.list.length > 0){
         data.subject.list.forEach(subject => {
           if (subject._id == this.subject_id) {
             console.log(subject._id)

@@ -15,14 +15,14 @@ export class TestService {
   getTests(){
     return this.store.select('subject');
   }
-  loadTests(subject_id: string){
-    this.store.dispatch(new TestActions.LoadTests(subject_id));
+  loadTests(author: string, subject_id: string){
+    this.store.dispatch(new TestActions.LoadTests(author, subject_id));
   }
   loadTesting(test_id: string){
     this.store.dispatch(new TestActions.LoadTesting(test_id));
   }
-  loadDetaitTest(subject_id: string, test_id: string){
-    this.store.dispatch(new TestActions.LoadDetailTest(subject_id, test_id));
+  loadDetaitTest(author: string, subject_id: string, test_id: string){
+    this.store.dispatch(new TestActions.LoadDetailTest(author, subject_id, test_id));
   }
   addNewTest(newTest: Test){
     this.store.dispatch(new TestActions.AddTest(newTest));

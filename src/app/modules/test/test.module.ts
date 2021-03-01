@@ -14,6 +14,8 @@ import { AnalyticsChartComponent } from './components/analytics-chart/analytics-
 import { ResultChartComponent } from './components/result-chart/result-chart.component';
 import { ScoreChartComponent } from './components/testChart/score-chart/score-chart.component';
 import { LineTimeComponent } from './components/testChart/line-time/line-time.component';
+import { ScoreBarChartComponent } from './components/testChart/score-bar-chart/score-bar-chart.component';
+import { QuestionsAnalyticsComponent } from './components/testChart/questions-analytics/questions-analytics.component';
 @NgModule({
   declarations: [
     TestComponent,
@@ -25,6 +27,8 @@ import { LineTimeComponent } from './components/testChart/line-time/line-time.co
     ResultChartComponent,
     ScoreChartComponent,
     LineTimeComponent,
+    ScoreBarChartComponent,
+    QuestionsAnalyticsComponent,
   ],
   imports: [
     CommonModule,

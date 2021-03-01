@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 export class AddQuestionComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   subscription2: Subscription;
+  author: string;
   confirmBlock: boolean = false;
   perPage: number = 10;
   page: number;
@@ -44,6 +45,7 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.author = JSON.parse(localStorage.getItem('user')).user_id;
     this.activatedRoute.queryParams.subscribe(data => {
       if(data.subject){
         this.subject_id =data.subject;
@@ -66,10 +68,10 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
     });
 
     this.subscription2 = this.subjectService.getSubject().subscribe(data => {  
-      if(data.question.question && !data.question.loading){
-        console.log(data)
-        this.question = data.question.question[0];
-        if(this.editQuestion === 1 && this.question){
+      if(data.question.question != true && !data.question.loading){
+        console.log('get question',data.question.question)
+        this.question = data.question.question;
+        if(this.editQuestion === 1 && this.question ){
           this.createEditQuestionForm();
           this.question.answers.forEach(answer => {
             this.answers.push(this.formBuilder.group({

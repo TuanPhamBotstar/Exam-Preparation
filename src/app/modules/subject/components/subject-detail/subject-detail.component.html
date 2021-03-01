@@ -1,5 +1,5 @@
 
-<div class="navbar">
+<!-- <div class="navbar">
     <ul class="nav navbar-nav">
         <li class="active">
             <a [routerLink]="['/subjects']" [queryParams]="{page: 1}">
@@ -21,19 +21,17 @@
             <a routerLink = "/subject/tests">{{testTitle | uppercase}} Test</a>
         </li>
         <li routerLinkActive = "active">
-            <a (click)=allQuestions() routerLink = "/subject/questions">Questions</a>
+            <a (click)=allQuestions() routerLink = "/subject/questions">Questions ({{total}})</a>
         </li>
     </ul>
-    <div class="ellipsis" (click)="openConfig()">
+    <div class="ellipsis" (click)="openConfig()" *ngIf="test_id">
         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-        <div (click) = "openConfirmBlock()"  class="remove-subject"
-            *ngIf="config" class="remove-subject">
-                
-                <p>Remove Subject</p>
+        <div (click) = "openConfirmBlock()" 
+            *ngIf="config" class="remove-test">
                 <p>Remove Test</p>
         </div>
     </div>
-</div>  
+</div>   -->
 
 <router-outlet *ngIf="!isExistSubject"></router-outlet>
 

@@ -28,7 +28,7 @@ export class ResApiService {
   getResultBySubject(author: string, subject_id: string):Observable<any>{
     return this.http.get(`${resUrl}/dashboard/${author}/${subject_id}`);
   }
-  getResultByTest(test_id: string, time: string):Observable<any>{
-    return this.http.get(`${resUrl}/test/${test_id}/${time}`);
+  getResultByTest(author: string, test_id: string, time: string):Observable<any>{
+    return this.http.get(`${resUrl}/test/${author}/${test_id}/${time}`);
   }
 }

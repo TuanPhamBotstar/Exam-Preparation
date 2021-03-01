@@ -1,7 +1,10 @@
 
+<input type="text"  id="search" #search (input)="onSearch(search.value)"
+    class="form-control" placeholder="Search for Name">
+<p class="resSearchEmpty" *ngIf="resSearchEmpty"> No search results found</p>
 <div class="subject-content">
-    <div class="subject-container">
-    <div class="subject add" (click)="onCreateSubject()">
+    <div class="subject-container" *ngIf="!searching">
+    <div class="subject add" (click)="onCreateSubject()" >
         <div class="subject-element">
             <i class="fa fa-folder" aria-hidden="true">
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>

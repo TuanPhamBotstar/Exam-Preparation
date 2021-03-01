@@ -27,7 +27,7 @@ export const DEL_QUESTION_FAILURE = '[QUESTION] Del Question Failure';
 // load questions
 export class LoadQuestions implements Action {
     readonly type = LOAD_QUESTIONS;
-    constructor(public subject_id: string, public page: number) {}
+    constructor(public author: string, public subject_id: string, public page: number) {}
 }
 
 export class LoadQuestionsSuccess implements Action {

@@ -14,7 +14,7 @@ export class QuestionEffects {
 
     @Effect() loadQuestions$ = this.actions$.pipe(
         ofType(QuestionActions.LOAD_QUESTIONS),
-        mergeMap((action: QuestionActions.LoadQuestions) => this.subjectApi.getQuestions(action.subject_id, action.page)
+        mergeMap((action: QuestionActions.LoadQuestions) => this.subjectApi.getQuestions(action.author, action.subject_id, action.page)
             .pipe(
                 map((data) => new QuestionActions.LoadQuestionsSuccess(data)),
                 catchError(error => of(new QuestionActions.LoadQuestionsFailure(error))) 

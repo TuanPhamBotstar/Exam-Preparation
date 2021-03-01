@@ -33,23 +33,24 @@ export class QuestionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const author = JSON.parse(localStorage.getItem('user')).user_id;
     this.subscription = this.activatedRoute.queryParams.subscribe(data => { 
       this.subject_id = data.subject;
       this.page = data.page;
-      this.subjectService.loadQuestions(this.subject_id, this.page);
-      console.log('get questions') 
+      this.subjectService.loadQuestions(author, this.subject_id, this.page);
+      console.log('load questions') 
       this.author = JSON.parse(localStorage.getItem('user')).user_id;
     });
-    this.subscription2 = this.subjectService.getSubject().subscribe(data => { // get data from store
+    this.subscription2 = this.subjectService.getSubject().subscribe (data => { // get data from store
       console.log(data.subject.list)
-      if(!data.subject.loading){
-        data.subject.list.forEach(subject => {
-          if (subject._id == this.subject_id) {
-            console.log(subject._id)
-            this.subjectname = subject.subjectname;
-            console.log(this.subjectname)
-          }
-        })
+      if(!data.subject.loading && data.subject.list.length > 0){
+          data.subject.list.forEach(subject => {
+            if (subject._id == this.subject_id) {
+              console.log(subject._id)
+              this.subjectname = subject.subjectname;
+              console.log(this.subjectname)
+            }
+          })        
       }
       if (!this.subjectname && !data.subject.loading) {
         console.log('subject is not exist')
@@ -61,7 +62,7 @@ export class QuestionsComponent implements OnInit {
     }); 
    
     this.subscription3 = this.subjectService.getSubject().subscribe(data => {
-      console.log('get questions',data)
+      console.log('get questions',data.question)
       if(!data.question.loading){
         this.questions = data.question.list;
         this.total = data.question.total;

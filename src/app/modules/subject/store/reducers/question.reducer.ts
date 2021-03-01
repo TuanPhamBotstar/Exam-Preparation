@@ -69,7 +69,7 @@ export function questionReducer(state: QuestionState = initialState, action: Que
             console.log(action.payload)
             return {
                 ...state,
-                list: [...state.list, action.payload],
+                list: state.list.length <10 ? [...state.list, action.payload]:[...state.list],
                 total: state.total + 1,
                 loading: false
             }

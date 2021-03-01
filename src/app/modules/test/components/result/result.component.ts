@@ -24,6 +24,7 @@ export class ResultComponent implements OnInit, AfterViewInit {
   public startDate: any;
   public endDate: any;
   public active: number;
+  public showChart: boolean = true;
   public user_id: string;
   public results: any;
   public test: any;
@@ -72,6 +73,7 @@ export class ResultComponent implements OnInit, AfterViewInit {
     
   }
   viewChosenAnswer(test_id, chosenAnswers, correctAnswer, i) {
+    this.showChart = false;
     this.active = i;
     this.chosenAnswers = chosenAnswers;
     console.log(this.correctAnswer)
@@ -83,6 +85,7 @@ export class ResultComponent implements OnInit, AfterViewInit {
   closeDetailRes() {
     this.test = null;
     this.active = null;
+    this.showChart = true;
   }
   toTimes(times){
     this.router.navigate(['/activity-logs'], {queryParams: {time: times}})

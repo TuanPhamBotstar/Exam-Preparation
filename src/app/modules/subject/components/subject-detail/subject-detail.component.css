@@ -94,16 +94,19 @@ ul li:nth-child(n+3).active{
     color:#062f53;
     margin: 5px 4px;
 }
-.remove-subject{
+.remove-test{
     position: absolute;
     top: 100%;
-    right: 0;
+    right: -5px;
     width: 140px;
     background-color: #f6f9fb;
-    text-align: left;
+    text-align: center;
     cursor: pointer;
     padding: 10px 10px;
     z-index: 10;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+}
+.remove-test p{
+  margin-bottom: 0;
 }

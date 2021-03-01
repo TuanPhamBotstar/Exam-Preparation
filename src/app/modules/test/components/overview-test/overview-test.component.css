@@ -87,3 +87,21 @@
       width: 25%;
     }
   }
+  /* box search */
+  input{
+    width: 60%;
+    /* border: none;
+    outline: none; */
+    background-image: url('https://www.w3schools.com/howto/searchicon.png');
+    background-position: 10px 6px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    transition: width 0.4s ease-in-out;
+    font-size: 16px;
+    position: relative;
+    left: 10px;
+    margin-top: 10px;
+  }
+  .resSearchEmpty{
+    margin: 20px 10px ;
+  }

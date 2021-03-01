@@ -19,19 +19,55 @@
                 (click)="onShowContent()"
                 >Contents</a>
             </li>
-            <li class="share">
-                <button type="button" class="btn btn-primary" (click)="openShareBox()">
-                    <i class="fa fa-share-alt" aria-hidden="true"></i>
-                    Share</button>
+            <li role="presentation">
+                <a  aria-controls="tab" role="tab" data-toggle="tab"
+                (click)="onShowResTable()"
+                >Results Table</a>
+            </li>
+            <li class="ellipsis">
+                <div class="ellipsis" (click)="openConfig()" *ngIf="test_id">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <div (click) = "openConfirm()" 
+                        *ngIf="config" class="remove-test">
+                            <p>Remove Test</p>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
     
     
-    
+    <div *ngIf="showResTable">
+        <div class="result-table">
+            <table>
+                <caption>Results Table</caption>
+                <tr>
+                    <th>No.</th>
+                    <th>Username</th>
+                    <th>Score</th>
+                    <th>Time Spent (seconds)</th>
+                    <th>Submitted/ Timeout</th>
+                </tr>
+                <tr *ngFor="let result of results; let i = index"
+                >
+                    <td>{{i+1}}</td>
+                    <td>
+                        {{result.user_name | titlecase}}
+                    </td>
+                    <td>{{result.point}}/100</td>
+                    <td>{{result.time}}</td>
+                    <td>{{result.date | date}} - {{result.date   | date: "HH:mm"}}</td>
+                </tr>
+            </table>
+            <p *ngIf="results.length == 0" [ngStyle]="{textAlign:'center', marginTop: '20px'}">Data empty</p>
+        </div>
+    </div>
     <!-- [startDate]="startDate" [endDate]="endDate" -->
     <div class="panel panel-default" *ngIf="test&&showContent">
         <div class="panel-heading">
+            <button type="button" class="btn btn-primary share" (click)="openShareBox()">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+                Share</button>
             <h3 class="panel-title"> {{test.testTitle | uppercase}} Test</h3>
             <i>({{test.easyQty+test.normalQty+test.hardQty}} questions)</i>
             <p *ngIf="test.timeTest > 1">Time: {{test.timeTest}} mins</p>
@@ -70,7 +106,7 @@
             <ng-container *ngFor="let page of arrayV(); let i= index;">
                 <li routerLinkActive="active">
                     <a [routerLink]="['/subject/tests/content-test']"
-                        [queryParams]="{subject: this.subject_id, test: this.test_id, page: i+1}">
+                        [queryParams]="{subject: this.subject_id, test: this.test_id, page: i+1,  time: time}">
                         {{i+1}}
                     </a>
                 </li>
@@ -79,10 +115,12 @@
         </ul>
     </div>
 
-    <div class="show-chart-{{!showContent}}">
+    <div class="show-chart-{{!showContent}} show-res-table-{{!showResTable}}">
         <!-- <h3 [ngStyle]="{textAlign: 'center'}">{{testTitle | uppercase}} Test Results</h3> -->
         <app-score-chart [test_id]="test_id" [subject_id]="subject_id" [time]="time"></app-score-chart>
+        <app-score-bar-chart></app-score-bar-chart>
         <app-line-time ></app-line-time>
+        <app-questions-analytics></app-questions-analytics>
     </div>
     <div class="panel panel-danger confirm-del-subject" *ngIf="confirmBlock">
         <div class="panel-heading">

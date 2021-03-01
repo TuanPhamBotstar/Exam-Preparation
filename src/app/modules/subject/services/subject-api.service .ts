@@ -21,6 +21,9 @@ export class SubjectApiService {
   getSubjects(user_id:string, page: number):Observable<{}>{
     return this.http.get(`${subjectUrl}/author/${user_id}/${page}`);
   }
+  getSubjectsByName(author: string, subjectname: string):Observable<any>{
+    return this.http.get(`${subjectUrl}/${author}/${subjectname}`);
+  }
   getSubjectName(subject_id:string):Observable<any>{
     return this.http.get(`${subjectUrl}/${subject_id}`);
   }
@@ -34,8 +37,8 @@ export class SubjectApiService {
   editQuestion(qs_id: string, question: Question):Observable<{}>{
     return this.http.put(`${questionUrl}/${qs_id}`,question);
   }
-  getQuestions(subject_id:string, page: number):Observable<{}>{
-    return this.http.get(`${questionUrl}/bySubject/${subject_id}/${page}`);
+  getQuestions(author: string, subject_id:string, page: number):Observable<{}>{
+    return this.http.get(`${questionUrl}/bySubject/${author}/${subject_id}/${page}`);
   }
   delQuestion(id:string):Observable<{}>{
     return this.http.delete(`${questionUrl}/${id}`);

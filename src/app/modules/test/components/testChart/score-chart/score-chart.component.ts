@@ -19,10 +19,10 @@ export class ScoreChartComponent implements OnInit {
   rangeTimes = ['day', 'week', 'month', 'all'];
   startDate: any;
   endDate: any;
-
+  evaluate: any;
   results: any = null;
   avgScore: number = 0;
-  public pieChartLabels: Label[] = ['Weak', 'Below Average', 'Average', 'Good', 'Excellent'];
+  public pieChartLabels: Label[] = ['Weak', 'Below Average', 'Average', 'Good', 'Excellent']
   public pieChartData = [];
   public pieChartType: any = 'pie';
   pieChartOptions: ChartOptions = {
@@ -57,7 +57,7 @@ export class ScoreChartComponent implements OnInit {
     this.emit = new BehaviorSubject([]);
     if (this.emit) {
       this.emit.subscribe(data => {
-        console.log(data)
+        console.log('score chart', data)
         this.results = data;
         this.levelPoint = {
           weak: 0,
@@ -66,42 +66,21 @@ export class ScoreChartComponent implements OnInit {
           good: 0,
           excellent: 0
         };
-        if (this.results) {
-          this.avgScore = 0;
-          this.results.forEach(item => {
-            // console.log(item.point)
-            this.avgScore += item.point;
-            if (item.point >= 85) {
-              this.levelPoint.excellent++;
-            }
-            else if (item.point >= 70) {
-              this.levelPoint.good++;
-            }
-            else if (item.point >= 55) {
-              this.levelPoint.average++;
-            }
-            else if (item.point >= 40) {
-              this.levelPoint.below_average++;
-            }
-            else {
-              this.levelPoint.weak++;
-            }
-          })
-          // console.log(this.avgScore)
-          // this.total = data.length;
-          this.pieChartData = [
-            this.levelPoint.weak,
-            this.levelPoint.below_average,
-            this.levelPoint.average,
-            this.levelPoint.good,
-            this.levelPoint.excellent,
-          ];
-        }
       })
     }
   }
   setResults(results: any) {
     this.emit.next(results);
+  }
+  setEvaluate(evaluate: any, avgScore: any){
+    this.evaluate = evaluate;
+    this.avgScore = avgScore;
+    if(this.evaluate){
+      this.pieChartData = [];
+      for(const property in evaluate){
+        this.pieChartData.push(evaluate[property]);
+      }
+    }
   }
   toTimes(times){
     this.router.navigate(['/subject/tests/content-test'],

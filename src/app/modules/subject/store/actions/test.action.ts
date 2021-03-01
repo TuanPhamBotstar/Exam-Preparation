@@ -30,7 +30,7 @@ export const DELETE_TEST_FAILURE = '[TEST] Delete Test Failure';
 // load tests by subject_id
 export class LoadTests implements Action {
     readonly type = LOAD_TESTS;
-    constructor(public subject_id: string) { }
+    constructor(public author: string, public subject_id: string) { }
 }
 export class LoadTestsSuccess implements Action {
     readonly type = LOAD_TESTS_SUCCESS;
@@ -56,7 +56,7 @@ export class LoadTestingFailure implements Action {
 // load detail test by test_id and subject_id
 export class LoadDetailTest implements Action {
     readonly type = LOAD_DETAIL_TEST;
-    constructor(public subject_id: string, public test_id: string) { }
+    constructor(public author: string, public subject_id: string, public test_id: string) { }
 }
 export class LoadDetailTestSuccess implements Action {
     readonly type = LOAD_DETAIL_TEST_SUCCESS;

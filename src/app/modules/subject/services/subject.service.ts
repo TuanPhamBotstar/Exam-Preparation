@@ -28,8 +28,8 @@ export class SubjectService {
     this.store.dispatch(new SubjectActions.RemoveSubjects(subject_id));
   }
   // questions handle
-  loadQuestions(subject_id, page) {
-    this.store.dispatch(new QuestionActions.LoadQuestions(subject_id, page));
+  loadQuestions(author: string, subject_id, page) {
+    this.store.dispatch(new QuestionActions.LoadQuestions(author,subject_id, page));
   }
   loadQuestion(id) {
     this.store.dispatch(new QuestionActions.LoadQuestion(id));
