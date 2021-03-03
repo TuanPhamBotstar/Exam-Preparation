@@ -92,6 +92,9 @@ export class SubjectOveriewComponent implements OnInit, OnDestroy {
   onActive(cpnRef) {
     cpnRef.testViewChild(12)
   }
+  onEditSubject(subject_id: string){
+      this.router.navigate(['/subjects/edit-subject'], {queryParams: { subject: subject_id, page: this.page}})
+  }
   //pagination
   arrayV() {
     return Array(this.totalPage);

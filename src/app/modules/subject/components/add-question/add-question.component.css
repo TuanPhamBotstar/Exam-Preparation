@@ -47,6 +47,9 @@ form.add-question div button{
     /* margin-top: 10px; */
     line-height: initial;
 }
+.form-group{
+    margin-bottom: 5px;
+}
 form.add-question button.add-answer{
     background-color: #337ab7;
     margin-bottom: 12px;

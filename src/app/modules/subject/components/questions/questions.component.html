@@ -6,14 +6,15 @@
             Add Question
         </button>
     </div>
-    <ng-container>
+    <ng-container>       
         <div class="questions-container">
+            <p *ngIf="questions">Total {{total}} questions</p>
             <div class="question" *ngFor="let question of questions; let i = index">
                 <div class="question-elemment">
                     <h4>
                         <strong>Question {{i+1+(page-1)*10}}:</strong> ({{levels[question.level]}})
                     </h4>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEditQuestion (question)"></i>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEditQuestion(question)"></i>
                     <p>
                         {{question.title}}
                     </p>

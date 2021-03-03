@@ -1,99 +1,121 @@
-<div class="result-container" *ngIf="results">
-    <div  class="show-chart-{{showChart}}">
-    <app-result-chart></app-result-chart>
-    <div [ngStyle]="{textAlign: 'center', width:'100%' }">{{startDate | date}} - {{endDate | date}}</div>
-    <div class="time-select-btn">
-        <div *ngFor="let times of rangeTimes" 
-        class="time-btn {{times}}-select" 
-        [class.active] = "time === times"
-        (click)="toTimes(times)">
-        </div>
-    </div>
-    <div class="result-table">
-        <table>
-            <caption>Your Results</caption>
-            <tr>
-                <th>No.</th>
-                <th>Name Test</th>
-                <th>Score</th>
-                <th>Time Spent (seconds)</th>
-                <th>Submitted/ Timeout</th>
-                <th>Details</th>
-            </tr>
-            <tr *ngFor="let result of results; let i = index"
-            [class.active] = "i === active"
-            >
-                <td>{{i+1}}</td>
-                <td>
-                    {{result.nameTest | uppercase}}
-                </td>
-                <td>{{result.point}}/100</td>
-                <td>{{result.time}}</td>
-                <td>{{result.date | date}} - {{result.date   | date: "HH:mm"}}</td>
-                <td 
-                (click)="viewChosenAnswer(result.test_id, result.chosenAnswers, result.correctAnswer, i)" 
-                class="res-detail">See details</td>
-            </tr>
-        </table>
-        <p *ngIf="results.length == 0" [ngStyle]="{textAlign:'center', marginTop: '20px'}">Data empty</p>
-    </div>
-    </div>
 
-    <div class="test-content" *ngIf="!showChart">
-        <div class="panel panel-default" *ngIf="test">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{test.testTitle | uppercase}} Test</h3>
-                <i>({{test.easyQty+test.normalQty+test.hardQty}} questions)</i>
-                <p>Time: {{test.timeTest}} min</p>
-                <i class="fa fa-times" aria-hidden="true" (click)="closeDetailRes()"></i>
-            </div>
-            <div class="panel-body" >
-                <div class="questions-container">
-                    <div class="question" *ngFor="let question of test.questions; let i = index">
-                        <div class="question-elemment">
-                            <h4>
-                                <!-- <strong>Câu {{i+1+(page-1)*5}}:</strong> -->
-                                <strong>Question {{i+1}}</strong>
-                            </h4>
-                            <p>
-                                {{question.title}}
-                            </p>
-                        </div>
-                        <div class="answers">
-                            <div class="" *ngFor="let answer of question.answers; let j = index">
-                                <div class="answer-elemnt">
-                                    <input type="radio" *ngIf="j !== chosenAnswers[i] && j !== correctAnswer[i] || chosenAnswers[i] === null" disabled="1">
-                                    <i *ngIf="j === chosenAnswers[i]" class="fa fa-check-circle-o" aria-hidden="true" 
-                                    ></i>
-                                    <!-- <i *ngIf="j === chosenAnswers[i] || j === correctAnswer[i]" class="fa fa-check-circle-o" aria-hidden="true" 
-                                        [class.noChosen]="chosenAnswers[i] === undefined || chosenAnswers[i] === null"
-                                        [class.isCorrect]="correctAnswer[i] === chosenAnswers[i] || j === correctAnswer[i]" 
-                                        [class.inCorrect]="correctAnswer[i] !== chosenAnswers[i]"
-                                    >
-                                    </i> -->
-                                    <label for="a_{{i}}_{{j}}">
-                                        {{alphaArr[j]}}. {{answer['content']}}
-                                    </label>    
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
+<div role="tabpanel" class="tab-container">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Dashboard</a>
+        </li>
+        <li role="presentation">
+            <a href="#resultsTable" aria-controls="tab" role="tab" data-toggle="tab">Details</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+            <div class="time-select-btn">
+                <div *ngFor="let times of rangeTimes" 
+                    class="time-btn {{times}}-select" 
+                    [class.active] = "time === times"
+                    (click)="toTimes(times)">
                 </div>
             </div>
-            <!-- <ul class="pagination" *ngIf="showTest">
-                <li><a (click)="onPrevious()">&laquo;</a></li>
-                <ng-container *ngFor="let no of arrayV(); let i= index;">
-                    <li (click)="toPage(i+1)" [class.active]="i == page - 1">
-                        <a>
-                            {{i+1}}
-                        </a>
-                    </li>
-                </ng-container>
-                <li><a (click)="onNext()">&raquo;</a></li>
-            </ul> -->
+            <app-result-chart></app-result-chart>
+            <app-user-activity></app-user-activity>
         </div>
-        
+        <div role="tabpanel" class="tab-pane" id="resultsTable">
+            <div class="time-select-btn" *ngIf="showChart">
+                <div *ngFor="let times of rangeTimes" 
+                    class="time-btn {{times}}-select" 
+                    [class.active] = "time === times"
+                    (click)="toTimes(times)">
+                </div>
+            </div>
+            <div class="result-table">
+                <div class="result-container">
+                    <table *ngIf="showChart">
+                        <caption>Your Results</caption>
+                        <tr>
+                            <th>No.</th>
+                            <th>Name Test</th>
+                            <th>Score</th>
+                            <th>Time Spent (seconds)</th>
+                            <th>Submitted/ Timeout</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr *ngFor="let result of results; let i = index"
+                        [class.active] = "i === active"
+                        >
+                            <td>{{i+1}}</td>
+                            <td>
+                                {{result.nameTest | uppercase}}
+                            </td>
+                            <td>{{result.point}}/100</td>
+                            <td>{{result.time}}</td>
+                            <td>{{result.date | date}} - {{result.date   | date: "HH:mm"}}</td>
+                            <td 
+                            (click)="viewChosenAnswer(result.test_id, result.chosenAnswers, result.correctAnswer, i)" 
+                            class="res-detail">See details</td>
+                        </tr>
+                    </table>
+                    <p *ngIf="results.length == 0" [ngStyle]="{textAlign:'center', marginTop: '20px'}">Data empty</p>
+                
+                    <div class="test-content">
+                        <div class="panel panel-default" *ngIf="test">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{test.testTitle | uppercase}} Test</h3>
+                                <i>({{test.easyQty+test.normalQty+test.hardQty}} questions)</i>
+                                <p>Time: {{test.timeTest}} min</p>
+                                <button type="button" class="btn btn-success back-detail" (click)="closeDetailRes()">Back</button>
+                                <!-- <i class="fa fa-times" aria-hidden="true" (click)="closeDetailRes()"></i> -->
+                            </div>
+                            <div class="panel-body" >
+                                <div class="questions-container">
+                                    <div class="question" *ngFor="let question of test.questions; let i = index">
+                                        <div class="question-elemment">
+                                            <h4>
+                                                <!-- <strong>Câu {{i+1+(page-1)*5}}:</strong> -->
+                                                <strong>Question {{i+1}}</strong>
+                                            </h4>
+                                            <p>
+                                                {{question.title}}
+                                            </p>
+                                        </div>
+                                        <div class="answers">
+                                            <div class="" *ngFor="let answer of question.answers; let j = index">
+                                                <div class="answer-elemnt">
+                                                    <input type="radio" *ngIf="j !== chosenAnswers[i] || chosenAnswers[i] === null" disabled="1">
+                                                    <i *ngIf="j === chosenAnswers[i]" class="fa fa-check-circle-o" aria-hidden="true" 
+                                                    ></i>
+                                                    <label for="a_{{i}}_{{j}}">
+                                                        {{alphaArr[j]}}. {{answer['content']}}
+                                                    </label>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                            <!-- <ul class="pagination" *ngIf="showTest">
+                                <li><a (click)="onPrevious()">&laquo;</a></li>
+                                <ng-container *ngFor="let no of arrayV(); let i= index;">
+                                    <li (click)="toPage(i+1)" [class.active]="i == page - 1">
+                                        <a>
+                                            {{i+1}}
+                                        </a>
+                                    </li>
+                                </ng-container>
+                                <li><a (click)="onNext()">&raquo;</a></li>
+                            </ul> -->
+                        </div>
+                        
+                    </div>
+                </div>             
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 

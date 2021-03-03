@@ -17,6 +17,10 @@ export class CreateSubjectComponent implements OnInit {
   subscription: Subscription;
   public subjectForm: FormGroup;
   public author: string;
+  subjectName: string;
+  subject_id: string;
+  isEdit: number;
+  isAdd: number;
   constructor(
     public formBuilder: FormBuilder,
     public router: Router,
@@ -39,7 +43,7 @@ export class CreateSubjectComponent implements OnInit {
   createSubjectForm() {
     this.subjectForm = this.formBuilder.group({
       subjectname: ['', [Validators.required]]
-    })
+    })  
   }
   onAddSubject(subjectname: string) {
     const user_id = JSON.parse(localStorage.getItem('user')).user_id;
@@ -48,7 +52,7 @@ export class CreateSubjectComponent implements OnInit {
     this.subscription = this.subjectService.getSubject().subscribe(data => {
       console.log(data)
       if(!data.subject.loading){
-        this.router.navigate(['/subject/questions'], {queryParams: {subject: data.subject.subject_id, page: 1}});
+        this.router.navigate(['/subject/questions/add-question'], {queryParams: {subject: data.subject.subject_id, page: 1}});
       }
     })
   }

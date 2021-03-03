@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { config } from 'process';
 import { AuthGuard } from 'src/app/shared/Services/guard/auth-guard.guard';
 import { pathToFileURL } from 'url';
 import { NotFoundComponent } from '../auth/components/page-not-found/not-found.component';
 import { AnalyticComponent } from '../test/components/analytic/analytic.component';
+import { ConfigMenuComponent } from '../test/components/config-menu/config-menu.component';
 import { OverviewTestComponent } from '../test/components/overview-test/overview-test.component';
 import { ResultComponent } from '../test/components/result/result.component';
 import { TestComponent } from '../test/components/test/test.component';
@@ -31,6 +33,10 @@ const routes: Routes = [
             path: 'create-subject',
             component: CreateSubjectComponent
           },
+          {
+            path: 'edit-subject',
+            component: CreateSubjectComponent
+          },
 
         ]
       },
@@ -38,14 +44,6 @@ const routes: Routes = [
         path: 'subject',
         component: SubjectDetailComponent,
         children: [
-          // {
-          //   path: 'add-question',
-          //   component: AddQuestionComponent
-          // },
-          // {
-          //   path: 'edit-question',
-          //   component: AddQuestionComponent
-          // },
           {
             path: 'tests',
             component: OverviewTestComponent,
@@ -78,10 +76,10 @@ const routes: Routes = [
             path: 'dashboard',
             component: DashboardComponent
           },
-          // {
-          //   path:'noi-dung-de-thi',
-          //   component:TestComponent
-          // }  
+          {
+            path:'configure',
+            component:ConfigMenuComponent
+          }  
         ]
       },
       {

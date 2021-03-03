@@ -10,9 +10,11 @@
 
 /* navbar */
 .navbar{
-    height: 30px;
+    height: auto;
+    min-height: 15px;
     margin-bottom: 0;
     margin: 10px 0px 0px;
+    height: auto;
 }
 .navbar ul{
     height: auto;
@@ -23,7 +25,6 @@
     font-weight: 700;
 }
 ul li {
-    cursor: pointer;
     position: relative;
   }
   ul li :last-child{
@@ -31,7 +32,7 @@ ul li {
   }
 ul li a{
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 10px;
 }
 
 ul li.active > a {
@@ -45,7 +46,19 @@ ul li:nth-child(n+3){
 ul li:nth-child(n+3).active{
     display: inline-block;
 }
+ul li i.fa-chevron-right{
+  margin-right: 10px;
+  -webkit-text-stroke: 1px white;
+  cursor: initial;
+}
 
+.navbar ul li a{
+  cursor: initial;
+}
+.navbar ul li a:hover{
+  background-color: #fff;
+  color: #337ab7;
+}
 /*  */
 .isExistSubject{
     text-align: center;

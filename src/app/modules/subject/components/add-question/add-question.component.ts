@@ -21,6 +21,7 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
   confirmBlock: boolean = false;
   perPage: number = 10;
   page: number;
+  idxQs: number;
   showNewQuestion: boolean = false;
   newQs: any;
   answersArr: any;
@@ -69,7 +70,8 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
 
     this.subscription2 = this.subjectService.getSubject().subscribe(data => {  
       if(data.question.question != true && !data.question.loading){
-        console.log('get question',data.question.question)
+        console.log('get question',data.question)
+        this.idxQs = data.question.list.length;
         this.question = data.question.question;
         if(this.editQuestion === 1 && this.question ){
           this.createEditQuestionForm();
@@ -139,6 +141,9 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
     // this.subjectApi.addQuestion(newQuestion).subscribe(data => console.log(data));
     if(this.addQuestion === 1){
       this.subjectService.addQuestion(newQuestion);
+      if(this.idxQs === 10){
+        this.page ++;
+      }
       this.showNewQuestion = true;
       setTimeout(() => {this.showNewQuestion = false; this.addQuestionForm.reset();}, 1000);
     }
@@ -155,6 +160,9 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
   }
   onDeleteQuestion(){
     this.subjectService.deleteQuestion(this.question_id);
+    if(this.idxQs === 1 && this.page > 1){
+      this.page --;
+    }
     this.router.navigate(['/subject/questions'], {queryParams: {subject: this.subject_id, page: this.page}});
   }
   onBack(){

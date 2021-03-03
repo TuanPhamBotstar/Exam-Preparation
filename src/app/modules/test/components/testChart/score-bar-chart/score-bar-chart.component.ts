@@ -34,26 +34,26 @@ export class ScoreBarChartComponent implements OnInit {
           scaleLabel: {
             display: true,
             labelString: "Users",
-            fontSize: 16,
+            // fontSize: 16,
           },
           ticks: {
             // steps: 10,
-            // stepValue: 10,
-            max: 10,
+            // stepSize: 10,
+            max: 6,
             min: 0
           }
         },
       ],
-      xAxes: [{
-        scaleLabel: {
-          display: true,
-          // labelString: "Score",
-          fontSize: 16,
-        },
-        gridLines: {
-          display: false
-        }
-      }]
+      // xAxes: [{
+      //   scaleLabel: {
+      //     display: true,
+      //     // labelString: "Score",
+      //     fontSize: 16,
+      //   },
+      //   gridLines: {
+      //     display: false
+      //   }
+      // }]
     }
   };
   public barChartPlugins: any = [pluginDataLabels];

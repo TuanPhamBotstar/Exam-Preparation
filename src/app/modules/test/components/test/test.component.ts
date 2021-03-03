@@ -14,6 +14,7 @@ import { ScoreChartComponent } from '../testChart/score-chart/score-chart.compon
 import { ResApiService } from '../../services/res-api.service';
 import { ScoreBarChartComponent } from '../testChart/score-bar-chart/score-bar-chart.component';
 import { QuestionsAnalyticsComponent } from '../testChart/questions-analytics/questions-analytics.component';
+import { ViewAnswerComponent } from '../view-answer/view-answer.component';
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -51,17 +52,19 @@ export class TestComponent implements OnInit, OnDestroy {
   shareForm: FormGroup;
   showContent: boolean = false;
   showResTable: boolean = false;
+  active: number = null;
   // viewChild
   setData: any = null;
   @ViewChild(LineTimeComponent) linetTime: LineTimeComponent;
   @ViewChild(ScoreChartComponent) scoreChart: ScoreChartComponent;
   @ViewChild(ScoreBarChartComponent) scoreBarChart: ScoreBarChartComponent;
   @ViewChild(QuestionsAnalyticsComponent) questionAnalytic: QuestionsAnalyticsComponent;
+  @ViewChild(ViewAnswerComponent) viewAnswer: ViewAnswerComponent;
   ngAfterViewInit(){
     if(this.setData){
       this.setData.subscribe(data => {
         console.log(data)
-        console.log(this.startDate)
+        // console.log(this.startDate)
         this.scoreChart.setResults(data);
         this.scoreChart.setEvaluate(this.evaluate, this.avgScore);
         this.linetTime.setResults(data);
@@ -69,6 +72,7 @@ export class TestComponent implements OnInit, OnDestroy {
         this.scoreBarChart.setScores(this.userScore);
         this.linetTime.setDate(this.startDate, this.endDate)
         this.questionAnalytic.setCorrectQty(this.staticQuestions);
+        this.questionAnalytic.setResults(data)
       })
     }
   }
@@ -109,7 +113,7 @@ export class TestComponent implements OnInit, OnDestroy {
       }
     });
     this.subcription = this.testService.getTests().subscribe(data => {
-      console.log(data.test)
+      console.log('get test', data.test)
       if (data.test.testing && !data.test.loading) {
         this.test = data.test.testing;
         this.testTitle = this.test.testTitle;
@@ -173,6 +177,7 @@ export class TestComponent implements OnInit, OnDestroy {
     this.testService.getTests().subscribe(data => {
       console.log(data.test)
       this.isShareSuccess = data.test.isShareSuccess;
+      setTimeout(() => this.isShareSuccess = false, 1000);
     })
     // this.testApi.putTypeCode(this.shareForm.value).subscribe(data => {
     //   console.log(data)
@@ -216,13 +221,23 @@ export class TestComponent implements OnInit, OnDestroy {
   onShowContent(){
     this.showContent = true;
     this.showResTable = false;
+    this.active = null;
   }
   onShowChart(){
     this.showContent = false;
     this.showResTable = false;
+    this.active = null;
   }
   onShowResTable(){
     this.showContent = false;
     this.showResTable = true;
+  }
+  onViewAnswer(userName, score, chosenAnswers, correctAnswer, i, time){
+    this.active = i;
+    this.viewAnswer.setTestData(userName, score, this.test,chosenAnswers, correctAnswer, time);
+    console.log('pass test')
+  }
+  onCloseDetail(active){
+    this.active = active;
   }
 }

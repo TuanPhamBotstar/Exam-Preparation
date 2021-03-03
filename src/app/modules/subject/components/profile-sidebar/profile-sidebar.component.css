@@ -12,8 +12,7 @@
   padding: 60px 0 100px 0;
   min-height: calc(100vh);
   background: #fff;
-  box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
-  border-radius: 5px;
+  box-shadow: 3px 0px 5px rgba(0,0,0,0.2);
 }
   /* bar-btn */
 .bar-btn{
@@ -140,6 +139,7 @@ ul li a.remove-subject{
 ul li ul > li {
   border-top: 1px solid #f0f4f7;
 }
+/* alert box delete subject */
 .confirm-del-subject{
   position: fixed;
   top: 110px;

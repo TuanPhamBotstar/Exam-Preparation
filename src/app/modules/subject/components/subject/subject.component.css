@@ -1,21 +1,25 @@
 .create-subject{
     width: 100%;
-    padding-right: 10px;
+    /* padding-right: 10px; */
 }
 /* Profile container */
 .profile {
-  margin: 20px 0;
+  /* margin: 20px 0; */
+}
+.row{
+  margin: 0;
 }
 .sidebar-container{
   position: sticky;
   top: 0px;
   z-index: 1;
+  padding-left: 2px;
 }
   /* bar-btn */
 .bar-btn{
   position: absolute;
   top:0px;
-  left: 25px;
+  left: 10px;
   font-size: 1.5em;
   cursor: pointer;
   z-index: 200;
@@ -32,7 +36,6 @@
 /* main-subject */
 .main-subject{
   background-color: #fff;
-  min-height: calc(100vh - 140px);
-  border-radius: 5px;
+  min-height: calc(100vh);
   padding-bottom: 20px;
 }

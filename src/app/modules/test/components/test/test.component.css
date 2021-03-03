@@ -81,13 +81,29 @@ label, input{
 }
 /* share box */
 .share-box{
+    position: fixed;
     border: 2px solid green;
     border-radius: 5px;
-    position: absolute;
-    top: 72px;
-    left: 50%;
-    transform: translateX(-50%);
+    /* position: absolute; */
+    top: 30%;
+    left: 30%;
     width: 60%;
+    z-index: 110;
+}
+.status-share{
+    position: absolute;
+    background-color: #5cb85c;
+    color: #fff;
+    padding: 10px;
+    width: 180px;
+    text-align: center;
+    border-radius: 5px;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.status-share p{
+    margin: 0;
 }
 .share-box .panel{
     margin-bottom: 0;
@@ -144,11 +160,20 @@ label, input{
     display: none;
 }
 /* tabs */
+/* .tabs-container{
+    background-color: paleturquoise;
+    border-radius: 5px;
+}
+.tabs-container h2{
+    text-align: center;
+} */
 .nav-tabs a{
     color: #555;
+    cursor: pointer;
 }
 .nav-tabs>li.active>a{
     color: #337ab7;
+    cursor: pointer;
 }
 .nav-tabs li.ellipsis{
     position: relative;

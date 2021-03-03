@@ -21,6 +21,7 @@
     width: 100%;
     height: 150px;
     border: 1px solid #5b9bd1;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
@@ -56,16 +57,16 @@
   }
   .subject i.glyphicon-list-alt{
     font-size: 1.5em;
-    color: coral;
+    color: #8cc5f3;
   }
   .subject i{
     font-size: 1.1em;
   }
   .subject i.fa-clock-o{
-    color: green;
+    color: #8cc5f3;
   }
   .subject i.fa-question-circle{
-    color: orange;
+    color: #8cc5f3;
   }
   .subject p{
     margin-top: 10px;
@@ -89,7 +90,7 @@
   }
   /* box search */
   input{
-    width: 60%;
+    width: 38.5%;
     /* border: none;
     outline: none; */
     background-image: url('https://www.w3schools.com/howto/searchicon.png');
@@ -100,6 +101,7 @@
     font-size: 16px;
     position: relative;
     left: 10px;
+    /* margin: auto; */
     margin-top: 10px;
   }
   .resSearchEmpty{

@@ -9,6 +9,7 @@ import * as pluginLabels from 'chartjs-plugin-labels';
 import { ResultChartComponent } from '../result-chart/result-chart.component';
 //  BehaviorSubject 
 import { BehaviorSubject } from 'rxjs';
+import { UserActivityComponent } from '../user-activity/user-activity.component';
 
 const setData = new BehaviorSubject(123);
 @Component({
@@ -31,6 +32,8 @@ export class ResultComponent implements OnInit, AfterViewInit {
   public chosenAnswers: any;
   public correctAnswer: any;
   public alphaArr = ['A', 'B', 'C', 'D', 'E', 'F'];
+  dateArr: any;
+  userArr: any;
   constructor(
     private resApi: ResApiService,
     private testApi: TestApiService,
@@ -38,10 +41,13 @@ export class ResultComponent implements OnInit, AfterViewInit {
     private router: Router,
   ) { }
   @ViewChild(ResultChartComponent) child: ResultChartComponent;
+  @ViewChild(UserActivityComponent) userActivity: UserActivityComponent;
   ngAfterViewInit(){
     if(this.setData){
       this.setData.subscribe(data => {
         this.child.setResults(data)
+        this.userActivity.setDate(this.dateArr, this.userArr);
+        this.userActivity.setResults(data);
       })
     }
   }
@@ -57,6 +63,8 @@ export class ResultComponent implements OnInit, AfterViewInit {
           console.log(data)
           this.startDate = data.startDate;
           this.endDate = data.endDate;
+          this.dateArr = data.dateArr;
+          this.userArr = data.userArr;
           this.setData.next(data.results);
         })
         this.setData.subscribe(data => {

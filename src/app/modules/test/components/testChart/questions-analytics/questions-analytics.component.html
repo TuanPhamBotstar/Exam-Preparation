@@ -1,11 +1,15 @@
 <div *ngIf="results">
     <div class="chart-containter">
+        <div class="layer-empty" *ngIf="results.length === 0">
+            There is no data for this duration
+        </div>
         <div style="display: block;">
         <canvas baseChart
                 [datasets]="barChartData"
                 [labels]="barChartLabels"
                 [options]="barChartOptions"
                 [legend]="barChartLegend"
+                [colors]="barChartColors"
                 [plugins]="barChartPlugins"
                 [chartType]="barChartType">
         </canvas>

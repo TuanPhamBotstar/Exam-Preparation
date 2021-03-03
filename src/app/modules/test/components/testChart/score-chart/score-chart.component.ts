@@ -21,7 +21,7 @@ export class ScoreChartComponent implements OnInit {
   endDate: any;
   evaluate: any;
   results: any = null;
-  avgScore: number = 0;
+  avgScore: any;
   public pieChartLabels: Label[] = ['Weak', 'Below Average', 'Average', 'Good', 'Excellent']
   public pieChartData = [];
   public pieChartType: any = 'pie';
@@ -42,6 +42,10 @@ export class ScoreChartComponent implements OnInit {
   };
   pieChartLegend: boolean;
   pieChartPlugins = [pluginLabels];
+  public chartColors: any[] = [
+    { 
+      backgroundColor:["#FF7360", "#e7eca3", "#bca9e1", "#a4c5ea", "#9de19a"] 
+    }];
   levelPoint = {
     weak: 0,
     below_average: 0,
@@ -57,7 +61,7 @@ export class ScoreChartComponent implements OnInit {
     this.emit = new BehaviorSubject([]);
     if (this.emit) {
       this.emit.subscribe(data => {
-        console.log('score chart', data)
+        // console.log('score chart', data) 
         this.results = data;
         this.levelPoint = {
           weak: 0,
@@ -75,12 +79,14 @@ export class ScoreChartComponent implements OnInit {
   setEvaluate(evaluate: any, avgScore: any){
     this.evaluate = evaluate;
     this.avgScore = avgScore;
+    console.log(avgScore)
     if(this.evaluate){
       this.pieChartData = [];
       for(const property in evaluate){
         this.pieChartData.push(evaluate[property]);
       }
     }
+    console.log(this.pieChartData)
   }
   toTimes(times){
     this.router.navigate(['/subject/tests/content-test'],

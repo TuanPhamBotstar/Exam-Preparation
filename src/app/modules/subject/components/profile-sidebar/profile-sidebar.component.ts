@@ -4,6 +4,8 @@ import { AuthApiService } from 'src/app/shared/Services/auth/auth-api.service';
 import { AuthService } from 'src/app/shared/Services/auth/auth.service';
 import { SubjectService } from '../../services/subject.service';
 import { Location } from '@angular/common';
+import { SubjectApiService } from '../../services/subject-api.service ';
+import { TestService } from '../../services/test.service';
 @Component({
   selector: 'app-profile-sidebar',
   templateUrl: './profile-sidebar.component.html',
@@ -16,15 +18,17 @@ export class ProfileSidebarComponent implements OnInit {
   config: boolean = false;
   username: any;
   subject_id: string;
+  subjectName: string;
   page: number = 1;
   time: string = 'all';
-  public show: boolean = true;
+  show: boolean = true;
   constructor(
-    public router: Router,
-    public activatedRoute: ActivatedRoute,
-    public auth: AuthService,
-    public authApi: AuthApiService,
-    public subjectService: SubjectService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private auth: AuthService,
+    private authApi: AuthApiService,
+    private subjectService: SubjectService,
+    private subjectApi: SubjectApiService,
     private _location: Location,
   ) { }
   ngOnInit(): void {
@@ -45,6 +49,10 @@ export class ProfileSidebarComponent implements OnInit {
         this.time = data.time;
       }
       if (data.subject) {
+        this.subjectApi.getSubjectName(data.subject).subscribe(data => {
+          console.log('get subject name', data.subjectname)
+          this.subjectName = data.subjectname;
+        })
         this.subject_id = data.subject;
         this.caret_down = true;
         this.submenu = true;
@@ -87,6 +95,7 @@ export class ProfileSidebarComponent implements OnInit {
     this.confirmBlock = !this.confirmBlock;
   }
   openConfig(){
-    this.config = !this.config;
+    // this.config = !this.config;
+    this.router.navigate(['subject/configure'], { queryParams: { subject: this.subject_id } });
   }
 }

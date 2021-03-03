@@ -1,0 +1,190 @@
+/* alert box delete subject */
+.confirm-del-subject{
+    position: fixed;
+    top: 50%;
+    right: 37.5%;
+    transform: translate(50%,-50%);
+    width: 30%;
+    z-index: 100;
+  }
+  .confirm-del-subject .panel-heading{
+    background-color: #d9534f;
+  }
+  .confirm-del-subject .panel-heading h4{
+    color: #fff;
+    text-align: left;
+  }
+  .confirm-del-subject .panel-body h4{
+    color: initial;
+  }
+  .confirm-del-subject i{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    -webkit-text-stroke: 2px #d9534f;
+    font-size: 0.8em;
+    color: white;
+  }
+  .confirm-del-subject button{
+    margin: 20px 10px;
+    width: 45px;
+    text-align: center;
+    padding: 6px 0px;
+  }
+  /* subject-card */
+  .subject-card{
+    margin-top: 30px;
+  }
+  .title-card{
+    height: 50px;
+    text-align: left;
+  }
+  .subject-info{
+    position: relative;
+      width: 100%;
+      height: 150px;
+      border: 1px solid #8cc5f3;
+      border-radius: 5px;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+      margin: 20px 0 50px;
+  }
+  .subject-info p{
+      margin: 0 15px;
+  }
+  .subject-info i{
+      margin: auto 15px;
+  }
+  hr{
+    margin-bottom: 35px;
+  }
+
+  /* popup */
+.popup-subject{
+    position: fixed;
+    top:50%;
+    left: 60%;
+    transform: translate(-50%,-50%);
+    width: 40%;
+    }
+    .panel-primary{
+        width: 100%;
+        margin-bottom: 0;
+        border: 2px solid #8cc5f3;
+        background-color: #fff;
+    }
+    .popup-subject .panel-heading {
+        padding: 20px;
+        background-color: #fff;
+    }
+    .popup-subject .panel-heading p{
+        font-size: 1.25em;
+        font-weight: initial;
+        text-align: left;
+        color: initial;
+    }
+    .popup-subject i.glyphicon-remove{
+    position: absolute;
+    -webkit-text-stroke: 2px #fff;
+    color: initial;
+    top:8px;
+    right: 6px;
+    font-size: 1.2em;
+    cursor: pointer;  
+    font-weight: initial;
+    }
+    .panel-body input{
+        width: 420px;
+        box-shadow: none;
+        font-size: 1em;
+        border: 1px solid rgba(0,0,0,0.5);
+    }
+    .form-group span{
+        margin-top: 10px;
+    }
+.status-alert{
+  background-color: #5cb85c;
+  color: #fff;
+  padding: 5px;
+  width: 180px;
+  text-align: center;
+  border-radius: 5px;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s linear;
+}
+p.sparate{
+  margin-top: 20px;
+}
+.delete-subject-container{
+  position: relative;
+  margin-top: 20px;
+  width: 100%;
+  height: 150px;
+  border-radius: 5px;
+  border: 2px solid rgba(0,0,0,0.2);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.delete-subject-container p{
+  margin: 0 15px;
+}
+.delete-subject-container input{
+  font-size: 1em;
+  margin: auto 15px;
+  width: 420px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+.label-danger{
+  color: #d9534f;
+  background-color: #fff;
+  margin-top: 15px;
+  font-size: 0.8em;
+  display: inline-block;
+}
+.delete-subject-container .label-danger{
+  padding: 0 15px;  
+  display: block ;
+  text-align: left;
+  margin-top: 10px;
+  position: absolute;
+  top: 70%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+}
+.delete-subject-container input:focus{
+  border: 1px solid #8cc5f3;
+  box-shadow: 1px 1px 3px #8cc5f3, -1px -1px 3px #8cc5f3;
+}
+.delete-subject-container button{
+  margin-right: 15px;
+  float: right;
+}
+/* edit subject name */
+.form-group {
+  margin-bottom: 0px;
+}
+form div button[type=submit]{
+  width: auto;
+  height: auto;
+  padding: 3px 12px;
+  margin-right: 0px;
+  float: right;
+}
+.form-control{
+  width: 420px;
+}
+div.title-edit{
+  width: 20%;
+}
+.btn-config{
+  width: 16%;
+}

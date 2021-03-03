@@ -1,0 +1,20 @@
+<div class="chart-containter" >
+    <div class="layer-empty" *ngIf="results.length === 0">
+      There is no data for this duration
+    </div>
+    <div style="display: block;">
+        <canvas baseChart width="400" height="100"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+    <!-- <h4 [ngStyle]="{textAlign: 'center'}">Realtime Users</h4> -->
+    <p class="name-chart">Your's Real Times</p>
+  </div>
+ 
+  

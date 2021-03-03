@@ -46,7 +46,7 @@ export class AnalyticComponent implements OnInit {
           ticks: {
             // steps: 10,
             // stepValue: 10,
-            max: 30,
+            // max: 30,
             min: 0
           }
         },
@@ -76,7 +76,7 @@ export class AnalyticComponent implements OnInit {
       this.time =data.time ? data.time: '';
       if(data.time){
         this.resApi.getResultByAuthor(this.author, data.time).subscribe(data => {
-          console.log(data)
+          console.log('get results by author',data)
           this.results = data.results;
           this.barChartLabels = [];
             this.barChartData[0].data = [];

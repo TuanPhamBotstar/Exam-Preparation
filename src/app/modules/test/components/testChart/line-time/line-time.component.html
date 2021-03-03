@@ -1,4 +1,7 @@
-<div class="line-chart-container" *ngIf="results.length > 0">
+<div class="line-chart-container" >
+  <div class="layer-empty" *ngIf="results.length === 0">
+    There is no data for this duration
+  </div>
   <div style="display: block;">
       <canvas baseChart width="400" height="100"
         [datasets]="lineChartData"

@@ -174,7 +174,7 @@ nav.navbar{
     border: none;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
     z-index: 1000;
-    padding: 0 10% 0 20%;
+    padding: 0 6% 0 6%;
     margin-bottom: 0;
 }
 .navbar ul{
@@ -235,14 +235,14 @@ div.user i{
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    width: 220px;
+    width: 180px;
     padding: 20px 20px;
 }
 .change-profile-box ul{
     display: flex;
     flex-flow: column wrap;
     align-items: flex-start;
-    height: 60px;
+    height: 20px;
 }
     
 .change-profile-box ul li a{
@@ -281,7 +281,7 @@ footer p{
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
     padding: 0 10px;
-    background-color: #edf0f5;
+    /* background-color: #eaf4ff; */
     border-radius: 15px;
     margin-bottom: 10px;
 }
@@ -328,7 +328,7 @@ footer p{
 }
 
 .result-table thead{
-    background-color: #daeaf7;
+    background-color: #eaf4ff;
 }
 .result-table table tbody{
     height: 300px;
@@ -341,12 +341,14 @@ table, tr, td, th{
     text-align: center;
 }
 table tr:nth-child(even){
-    background-color: #daeaf7;
+    background-color: #eaf4ff;
 }
 table tr:hover, table tr.active{
     background-color: #8cc5f3;
 }
-
+table td.username{
+    text-align: left;
+}
 caption{
     text-align: center;
     font-size: 1.5em;
@@ -358,10 +360,26 @@ caption{
 }
 .chart-containter{
     width: 100%;
-    margin: 10px auto;
+    margin: 30px auto;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 10px 20px;
+    background-color: #eaf4ff;
+    position: relative;
+}
+.layer-empty{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(221, 221, 221,0.2);
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 .name-chart{
     text-align: center;

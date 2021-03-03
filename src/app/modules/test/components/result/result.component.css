@@ -1,3 +1,13 @@
+/* tabs */
+.nav-tabs a{
+    color: #555;
+    cursor: pointer;
+}
+.nav-tabs>li.active>a{
+    color: #337ab7;
+    cursor: pointer;
+}
+/*  */
 .result-container{
     position: relative;
     min-height: 100vh;
@@ -15,6 +25,7 @@
     border: 1px solid rgba(0,0,0,0.2);
     border-radius: 5px;
 }
+
 /* detail result */
 .test-content{
     position: relative;
@@ -25,7 +36,22 @@
     z-index: 10;
     width: 100%;
 }
-
+/* render question and answer */
+.test-content .panel-default{
+    margin-top: 20px;
+    border: none;
+}
+.test-content .panel-default>.panel-heading{
+    background-color: #fff;
+    border: none;
+}
+.back-detail, .fa-long-arrow-left{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    /* -webkit-text-stroke: 1px #fff; */
+    /* font-size: 1.2em; */
+}
 .panel-body{
     padding: 0;
 }
@@ -71,7 +97,7 @@ label, input{
     width: 250px;
     display: flex;
     justify-content: space-around;
-    margin: 10px auto 40px;
+    margin: 20px auto 40px;
 }
 .time-select-btn .time-btn{
     position:relative;
@@ -122,4 +148,9 @@ i.noChosen{
 }
 .fa-check-circle-o{
     margin-right: 10px;
+}
+
+/* tab */
+.tab-container{
+    margin-top: 20px;
 }

@@ -1,18 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Component, OnInit } from '@angular/core';
 // ng2-chart
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { ActivatedRoute } from '@angular/router';
-
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 @Component({
-  selector: 'app-line-time',
-  templateUrl: './line-time.component.html',
-  styleUrls: ['./line-time.component.css']
+  selector: 'app-user-activity',
+  templateUrl: './user-activity.component.html',
+  styleUrls: ['./user-activity.component.css']
 })
-export class LineTimeComponent implements OnInit {
-  // @Input() startDate: any;
-  // @Input() endDate: any;
+export class UserActivityComponent implements OnInit {
+
   emit: any;
   results: any;
   dateArr: any;
@@ -35,7 +33,7 @@ export class LineTimeComponent implements OnInit {
         {        
           scaleLabel: {
             display: true,
-            labelString: "Users",
+            labelString: "Quantity",
             // fontSize: 16,
           },
           ticks: {
@@ -68,6 +66,7 @@ export class LineTimeComponent implements OnInit {
         if (data) {
           // console.log('line time chart',data)
           this.results = data;
+          console.log(this.results.length)
         }
       });
     }
@@ -87,4 +86,5 @@ export class LineTimeComponent implements OnInit {
       this.lineChartLabels = dateArr;
     }
   }
+
 }

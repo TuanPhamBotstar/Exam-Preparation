@@ -6,7 +6,10 @@
     </div>
 </div>
 <div class="chart-container">
-    <div class="overview-analytics" *ngIf="results.length > 0">
+    <div class="layer-empty" *ngIf="results.length === 0">
+        There is no data for this duration
+    </div>
+    <div class="overview-analytics" >
         <div class="data-analytic-container">
             <div class="data-analytic">
                 <i class="fa fa-user-circle" aria-hidden="true"></i>
@@ -21,18 +24,19 @@
                 <i class="fa fa-star-o" aria-hidden="true"></i>
                 <div class="data-title">
                     <p>Average Score</p>
-                    <p class='data'>{{(avgScore)}}</p>
+                    <p class='data'>{{avgScore}}</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="your-res-chart" *ngIf="results.length > 0">
+    <div class="your-res-chart" >
         <div style="display: block">
             <canvas baseChart
                     [data]="pieChartData"
                     [labels]="pieChartLabels"
                     [options]="pieChartOptions"
-                    [chartType]="pieChartType">
+                    [chartType]="pieChartType"
+                    [colors]="chartColors"
                     [plugins]="pieChartPlugins"
                     [legend]="pieChartLegend">
             </canvas>

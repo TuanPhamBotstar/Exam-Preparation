@@ -1,37 +1,33 @@
 
-<!-- <div class="navbar">
-    <ul class="nav navbar-nav">
-        <li class="active">
-            <a [routerLink]="['/subjects']" [queryParams]="{page: 1}">
-                <i class="fa fa-home" aria-hidden="true"></i>
-            </a>
+<div class="navbar" *ngIf="test_id">
+    <ul class="nav navbar-nav">            
+        <li>
+            <a >{{subjectname | uppercase}} Subject</a>
         </li>
-            
-        <li class="active">
-            <a (click)="onDashboard()">{{subjectname | uppercase}}</a>
-        </li>
+        <!--
         <li routerLinkActive = "active">
             <a (click)="onDashboard()" routerLink = "/subject/dashboard">Dashboard</a>
-        </li>
-        <li routerLinkActive = "active">
+        </li> -->
+        <!-- <li routerLinkActive = "active">
             <a (click)="overviewTests()" routerLink = "/subject/tests" >Tests</a>
+        </li> -->
+        <li>
+            <a >
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                   {{testTitle | uppercase}} Test</a>
         </li>
-        <li 
-        class.acctive = "test_id" *ngIf="test_id" routerLinkActive = "active">
-            <a routerLink = "/subject/tests">{{testTitle | uppercase}} Test</a>
-        </li>
-        <li routerLinkActive = "active">
+        <!-- <li routerLinkActive = "active">
             <a (click)=allQuestions() routerLink = "/subject/questions">Questions ({{total}})</a>
-        </li>
+        </li> -->
     </ul>
-    <div class="ellipsis" (click)="openConfig()" *ngIf="test_id">
+    <!-- <div class="ellipsis" (click)="openConfig()" *ngIf="test_id">
         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
         <div (click) = "openConfirmBlock()" 
             *ngIf="config" class="remove-test">
                 <p>Remove Test</p>
         </div>
-    </div>
-</div>   -->
+    </div> -->
+</div>  
 
 <router-outlet *ngIf="!isExistSubject"></router-outlet>
 

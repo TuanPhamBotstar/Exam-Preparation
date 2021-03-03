@@ -10,11 +10,13 @@
 .subject-container{
   width: 20%;
   padding: 20px 10px;
+  position: relative;
 }
 .subject{
     width: 100%;
     height: 150px;
     border: 1px solid #5b9bd1;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0,0.2);
     border-radius: 10px;
     text-align: center;
     /* margin: 10px 20px; */
@@ -22,7 +24,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    background-color: #efefef;
+    background-color: #fff;
   }
   .subject:hover{
   box-shadow: 2px 2px 5px  #5b9bd1 inset,-2px -2px 5px  #5b9bd1 inset;
@@ -35,25 +37,25 @@
     outline: none;
   }
   .subject.add .fa-folder{
-    color: coral;
+    color: #8cc5f3;
     position: relative;
     font-size: 3.7em;
   }
-  .subject.add .fa-plus-circle{
-    color: #f2f3f5;
+  .subject.add .fa-plus{
+    color: #ddd;
     position: absolute;
     font-size: 32px;
-    bottom: 2px;
-    right: 0;
+    bottom: 8px;
+    right: 10px;
   }
-  .subject.add:hover .fa-plus-circle{
-    color: #fff;
+  .subject.add:hover .fa-plus{
+    color: #eee;
   }
   .subject i{
     font-size: 2.5em;
   }
   i.glyphicon-folder-open{
-    color: coral;
+    color: #8cc5f3;
   }
   .subject p{
     margin-top: 10px;
@@ -88,13 +90,13 @@
   position: relative;
   left: 10px;
   align-items: center;
-  width: 50%;
+  width: 38%;
   border: 1px solid rgba(0, 0, 0,0.2);
   border-radius: 10px;
   padding: 0 10px;
 }   
 input{
-  width: 60%;
+  width: 38.5%;
   /* border: none;
   outline: none; */
   background-image: url('https://www.w3schools.com/howto/searchicon.png');
@@ -111,4 +113,11 @@ input{
   margin: 20px 10px ;
 }
 
-
+/* edit */
+.edit-subject{
+  position: absolute;
+  right: 20px;
+  top: 28px;
+  font-size: 0.8em;
+  color: #5b9bd1;
+}

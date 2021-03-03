@@ -42,7 +42,7 @@
                         <li routerLinkActive="active">
                             <a (click)="onDashboard()" routerLink = "/subject/dashboard">
                                 <i class="glyphicon glyphicon-th-list"></i>
-                                Dashboard
+                                {{subjectName | uppercase}} - Dashboard
                             </a>
                         </li>
                         <li routerLinkActive="active">
@@ -66,13 +66,13 @@
                             </a>
                         </li>                 
                         <li routerLinkActive="active">
-                            <a (click) = "openConfig()"> 
+                            <a (click) = "openConfig()"  routerLink = "/subject/configure" >
                                 <i class="fa fa-cog" aria-hidden="true"></i>
                                 Configure
                             </a>
-                            <ng-container *ngIf="caret_down">
+                            <!-- <ng-container *ngIf="caret_down">
                                 <i class="fa fa-caret-down" aria-hidden="true" (click)="openConfig()"></i>
-                            </ng-container>
+                            </ng-container> -->
                             <ul class="nav">
                                 <li routerLinkActive="active">
                                     <a (click) = "openConfirmBlock()"
@@ -93,7 +93,7 @@
                 <li routerLinkActive="active">
                     <a [routerLink]="['/activity-logs']" [queryParams]="{time: time}">
                         <i class="glyphicon glyphicon-calendar"></i>
-                        Activity Logs </a>
+                        Your's Activity Logs </a>
                 </li>
             </ul>
         </div>

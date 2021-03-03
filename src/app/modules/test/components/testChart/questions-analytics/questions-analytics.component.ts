@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 // ng2-chart
 import { ChartType, ChartOptions } from 'chart.js';
-import { SingleDataSet, Label } from 'ng2-charts';
+import { SingleDataSet, Label, Color, ChartsModule } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { flatten } from '@angular/compiler';
 @Component({
@@ -35,26 +35,27 @@ export class QuestionsAnalyticsComponent implements OnInit {
           scaleLabel: {
             display: true,
             labelString: "Users",
-            fontSize: 16,
+            // fontSize: 16,
           },
           ticks: {
             // steps: 10,
             // stepValue: 10,
-            max: 10,
+            // max: 10,
+            stepSize: 1,
             min: 0
           }
         },
       ],
-      xAxes: [{
-        scaleLabel: {
-          display: true,
-          // labelString: "Score",
-          fontSize: 16,
-        },
-        gridLines: {
-          display: false
-        }
-      }]
+      // xAxes: [{
+      //   scaleLabel: {
+      //     display: true,
+      //     // labelString: "Score",
+      //     fontSize: 16,
+      //   },
+      //   gridLines: {
+      //     display: false
+      //   }
+      // }]
     }
   };
   public barChartPlugins: any = [pluginDataLabels];
@@ -65,7 +66,12 @@ export class QuestionsAnalyticsComponent implements OnInit {
     { data: [], label: 'Correct'},
     { data: [], label: 'InCorrect'},
   ];
+  public barChartColors: Array<any> = [
+    { backgroundColor: '#8cc5f3' },
+    { backgroundColor: 'rgba(255,99,132,0.6)' },
+  ];  
   ngOnInit(): void {
+    console.log(this.barChartOptions)
     this.emit = new BehaviorSubject([]);
     if (this.emit) {
       this.emit.subscribe(data => {
@@ -79,7 +85,8 @@ export class QuestionsAnalyticsComponent implements OnInit {
   }
   setCorrectQty(staticQuestions: any){
     if(staticQuestions){
-      
+      this.barChartOptions.scales.yAxes[0].ticks.max = staticQuestions.totalQs + 4;
+      // console.log('barChartOptions.scales.yAxes.ticks.max', this.barChartOptions.scales.yAxes[0].ticks.max)
       this.barChartLabels = Array.from({length: staticQuestions.totalQs}, (_, i) => `Question ${i + 1}`);
       this.barChartData[0].data = staticQuestions.correctQty;
       this.barChartData[1].data = staticQuestions.inCorrectQty;

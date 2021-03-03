@@ -27,7 +27,7 @@
                 >
                 
                 <span 
-                class="label label-danger"
+                class="label"
                 *ngIf="createTestForm.controls.testTitle.touched && createTestForm.controls.testTitle.errors?.required"
                 >
                 Please enter test name.
@@ -41,7 +41,7 @@
                 #timeTest
                 >
                 <span 
-                class="label label-danger"
+                class="label"
                 *ngIf="createTestForm.controls.timeTest.touched && createTestForm.controls.timeTest.errors?.required"
                 >
                 Please enter time.
@@ -55,13 +55,13 @@
                 #codeTest
                 >
                 <span 
-                class="label label-danger"
+                class="label"
                 *ngIf="createTestForm.controls.codeTest.touched && createTestForm.controls.codeTest.errors?.required"
                 >
                 Please enter Code.
                 </span>
                 <span 
-                class="label label-danger"
+                class="label"
                 *ngIf="createTestForm.controls.codeTest.touched && createTestForm.controls.codeTest.errors?.pattern"
                 >
                 Code must include 4 digit characters.

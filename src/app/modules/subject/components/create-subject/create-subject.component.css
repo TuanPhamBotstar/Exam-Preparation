@@ -1,23 +1,43 @@
 
 /* popup */
 .popup-subject{
-    position: absolute;
-    top:0%;
-    left: 50%;
-    transform: translate(-50%,50%);
+    position: fixed;
+    top:50%;
+    left: 60%;
+    transform: translate(-50%,-50%);
+    width: 40%;
+    }
+    .panel-primary{
+        width: 100%;
+        margin-bottom: 0;
+        border: 2px solid coral;
     }
     .popup-subject .panel-heading {
         padding: 20px;
+        background-color: #fff;
     }
-    .popup-subject .panel-heading h3{
+    .popup-subject .panel-heading p{
+        font-size: 1.25em;
         font-weight: initial;
+        text-align: left;
+        color: initial;
     }
     .popup-subject i.glyphicon-remove{
     position: absolute;
-    -webkit-text-stroke: 2px #337ab7;
+    -webkit-text-stroke: 2px #fff;
+    color: initial;
     top:8px;
     right: 6px;
     font-size: 1.2em;
     cursor: pointer;  
     font-weight: initial;
+    }
+    .panel-body input{
+        width: 420px;
+        box-shadow: none;
+        font-size: 1em;
+        border: 1px solid rgba(0,0,0,0.5);
+    }
+    .form-group span{
+        margin-top: 10px;
     }

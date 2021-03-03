@@ -1,11 +1,56 @@
-
-<div class="your-res-chart" *ngIf="results.length > 0">
+<div class="overview-analytics">
+    <div class="layer-empty" *ngIf="results.length === 0">
+        There is no data for this duration
+    </div>
+    <div class="data-analytic-container">
+        <div class="data-analytic">
+            <i class="fa fa-list-ol" aria-hidden="true"></i>
+            <div class="data-title">
+                <p>Total Submit</p>
+                <p class='data'>{{results.length}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="data-analytic-container">
+        <div class="data-analytic">
+            <i class="fa fa-star-o" aria-hidden="true"></i>
+            <div class="data-title">
+                <p>Average Score</p>
+                <p class='data'>{{avgScore}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="data-analytic-container">
+        <div class="data-analytic">
+            <i class="fa fa-trophy" aria-hidden="true"></i>
+            <div class="data-title">
+                <p>Highest Score</p>
+                <p class='data'>{{highestScore}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="data-analytic-container">
+        <div class="data-analytic">
+            <i class="fa fa-smile-o" aria-hidden="true" *ngIf="lowestScore >= 70"></i>
+            <i class="fa fa-frown-o" aria-hidden="true" *ngIf="lowestScore < 70"></i>
+            <div class="data-title">
+                <p>Lowest Score</p>
+                <p class='data'>{{lowestScore}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="your-res-chart">
+    <div class="layer-empty" *ngIf="results.length === 0">
+        There is no data for this duration
+    </div>
     <div style="display: block" style="width:60%; height: 60%">
         <canvas baseChart
                 [data]="pieChartData"
                 [labels]="pieChartLabels"
                 [options]="pieChartOptions"
-                [chartType]="pieChartType">
+                [chartType]="pieChartType"
+                [colors]="chartColors"
                 [plugins]="pieChartPlugins"
                 [legend]="pieChartLegend">
         </canvas>
