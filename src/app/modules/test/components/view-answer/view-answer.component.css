@@ -18,15 +18,21 @@
 i.inCorrect{
     color: red;
     margin-right: 10px;
+    width: 12.8px;
+    height: 12.8px;
 }
 i.isCorrect{
     display: inline-block;
     color: green;
     margin-right: 10px;
+    width: 12.8px;
+    height: 12.8px;
 }
 i.noChosen{
     color: #999;
     margin-right: 10px;
+    width: 12.8px;
+    height: 12.8px;
 }
 .fa-check-circle-o{
     margin-right: 10px;

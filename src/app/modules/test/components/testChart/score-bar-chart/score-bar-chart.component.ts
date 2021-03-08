@@ -33,7 +33,7 @@ export class ScoreBarChartComponent implements OnInit {
           id: 'yAxes1',
           scaleLabel: {
             display: true,
-            labelString: "Users",
+            labelString: "Candidates",
             // fontSize: 16,
           },
           ticks: {
@@ -61,7 +61,7 @@ export class ScoreBarChartComponent implements OnInit {
   public barChartType: any = 'bar';
   public barChartLegend = true;
   public barChartData = [
-    { data: [], label: 'Users'},
+    { data: [], label: 'Candidates'},
   ];
   ngOnInit(): void {
     this.emit = new BehaviorSubject([]);

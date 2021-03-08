@@ -32,7 +32,7 @@
                     <!-- (click)="toSubject()" -->
                     <a [routerLink]="['/subjects']" [queryParams]="{page: page}">
                         <i class="glyphicon glyphicon-folder-open"></i>
-                        Subject Tests
+                        Subjects
                     </a>
                     <ng-container *ngIf="caret_down">
                         <i class="fa fa-caret-down" aria-hidden="true" (click)="onToggleSubmenu()"></i>
@@ -42,7 +42,8 @@
                         <li routerLinkActive="active">
                             <a (click)="onDashboard()" routerLink = "/subject/dashboard">
                                 <i class="glyphicon glyphicon-th-list"></i>
-                                {{subjectName | uppercase}} - Dashboard
+                                Dashboard 
+                                <!-- ({{subjectName | uppercase}})  -->
                             </a>
                         </li>
                         <li routerLinkActive="active">
@@ -73,14 +74,14 @@
                             <!-- <ng-container *ngIf="caret_down">
                                 <i class="fa fa-caret-down" aria-hidden="true" (click)="openConfig()"></i>
                             </ng-container> -->
-                            <ul class="nav">
+                            <!-- <ul class="nav">
                                 <li routerLinkActive="active">
                                     <a (click) = "openConfirmBlock()"
                                     *ngIf="config" class="remove-subject">
                                         Remove Subject
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
                         <!-- <li>
                             <a (click) = "openConfirmBlock()">

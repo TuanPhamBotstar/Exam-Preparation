@@ -26,19 +26,21 @@ export class HomeComponent implements OnInit {
   @ViewChild('changeProfileBox') div:ElementRef;
   ngOnInit(): void {
     this.auth.getUser().subscribe(data => {
-      // console.log(data)
-      const user_id = data['user_id'];
-      if(user_id){
-        this.authApi.getUsername(user_id).subscribe(data => {
-          this.username = data;
-        })
-      } 
+      if(!data.loading){
+        console.log(data)
+        const user_id = data['user_id'];
+        if(user_id){
+          this.authApi.getUsername(user_id).subscribe(data => {
+            this.username = data;
+          })
+        } 
+      }
     })
     // console.log(localStorage.getItem('user'))
-    if(localStorage.getItem('user')){ 
-      this.isSignedIn = 1;
-      this.username = JSON.parse(localStorage.getItem('user')).username;
-    }
+      if(localStorage.getItem('user')){ 
+        this.isSignedIn = 1;
+        this.username = JSON.parse(localStorage.getItem('user')).username;
+      }
   }
   onActive(e){
     // console.log(e)

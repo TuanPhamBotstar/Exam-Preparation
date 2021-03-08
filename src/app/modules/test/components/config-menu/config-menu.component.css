@@ -1,33 +1,44 @@
 /* alert box delete subject */
-.confirm-del-subject{
-    position: fixed;
+.confirm-del-subject.panel.panel-danger{
+    /* position: fixed;
     top: 50%;
-    right: 37.5%;
+    right: 40%;
     transform: translate(50%,-50%);
     width: 30%;
-    z-index: 100;
+    z-index: 100; */
+  }
+  .confirm-del-subject h4{
+    font-size: 16px;
+  }
+  .confirm-del-subject p{
+    font-size: 16px;
+    color: initial;
+    margin-top: 10px;
   }
   .confirm-del-subject .panel-heading{
-    background-color: #d9534f;
+    /* background-color: #d9534f; */
   }
   .confirm-del-subject .panel-heading h4{
-    color: #fff;
-    text-align: left;
+    /* color: #fff;
+    text-align: left; */
   }
   .confirm-del-subject .panel-body h4{
     color: initial;
   }
   .confirm-del-subject i{
     position: absolute;
-    top:10px;
-    right: 10px;
-    -webkit-text-stroke: 2px #d9534f;
+    top:8px;
+    right: 8px;
+    -webkit-text-stroke: 2px #fff;
     font-size: 0.8em;
-    color: white;
+    color: #555;
+  }
+  .confirm-del-subject i:hover{
+    color: #000;
   }
   .confirm-del-subject button{
     margin: 20px 10px;
-    width: 45px;
+    width: 65px;
     text-align: center;
     padding: 6px 0px;
   }
@@ -43,7 +54,7 @@
     position: relative;
       width: 100%;
       height: 150px;
-      border: 1px solid #8cc5f3;
+      border: 1px solid rgba(0,0,0,0.2);
       border-radius: 5px;
       display: flex;
       flex-flow: row nowrap;
@@ -104,29 +115,36 @@
     .form-group span{
         margin-top: 10px;
     }
+    .form-group .label{
+      padding: 0;
+    }
 .status-alert{
   background-color: #5cb85c;
   color: #fff;
-  padding: 5px;
-  width: 180px;
+  padding: 10px;
+  width: auto;
   text-align: center;
   border-radius: 5px;
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  transform: translate(10px, -10px);
   transition: all 0.5s linear;
+  z-index: 1;
+}
+.status-alert i{
+  margin: 0;
 }
 p.sparate{
   margin-top: 20px;
 }
 .delete-subject-container{
-  position: relative;
+  /* position: relative; */
   margin-top: 20px;
   width: 100%;
   height: 150px;
   border-radius: 5px;
-  border: 2px solid rgba(0,0,0,0.2);
+  border: 1px solid rgba(0,0,0,0.2);
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -134,6 +152,9 @@ p.sparate{
 }
 .delete-subject-container p{
   margin: 0 15px;
+}
+div.relative {
+  position: relative;
 }
 .delete-subject-container input{
   font-size: 1em;
@@ -143,28 +164,31 @@ p.sparate{
   border-radius: 5px;
   border: 1px solid rgba(0,0,0,0.2);
 }
+.delete-subject-container input::-webkit-input-placeholder {
+  font-size: 14px;
+}
 .label-danger{
   color: #d9534f;
   background-color: #fff;
   margin-top: 15px;
   font-size: 0.8em;
   display: inline-block;
+  position: absolute;
 }
 .delete-subject-container .label-danger{
   padding: 0 15px;  
   display: block ;
   text-align: left;
-  margin-top: 10px;
   position: absolute;
-  top: 70%;
-  left: 46%;
-  transform: translate(-50%, -50%);
+  bottom: -30%;
+  left: 0;
+  transform: translateY(100%);
 }
 .delete-subject-container input:focus{
   border: 1px solid #8cc5f3;
   box-shadow: 1px 1px 3px #8cc5f3, -1px -1px 3px #8cc5f3;
 }
-.delete-subject-container button{
+.delete-subject-container   on{
   margin-right: 15px;
   float: right;
 }
@@ -175,9 +199,11 @@ p.sparate{
 form div button[type=submit]{
   width: auto;
   height: auto;
-  padding: 3px 12px;
+  padding: 5px 12px;
   margin-right: 0px;
   float: right;
+  font-size: 16px;
+  border-radius: 4px;
 }
 .form-control{
   width: 420px;
@@ -186,5 +212,9 @@ div.title-edit{
   width: 20%;
 }
 .btn-config{
-  width: 16%;
+  width: 20%;
+}
+.btn-config .btn-danger{
+  float: right;
+  margin-right: 15px;
 }

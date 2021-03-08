@@ -4,7 +4,7 @@
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-around;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 130px);
 }
 /* introduce */
 .introduce{

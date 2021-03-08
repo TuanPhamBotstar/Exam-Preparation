@@ -5,10 +5,11 @@
     <!-- <h2>Tạo Đề Thi</h2> -->
 
 
-    <div class="panel panel-heading">
+    <div class="">    
+        <button type="button" class="btn btn-default btn-back" (click)="onBack()">Back</button>       
         <div class="panel-heading">
-                <h3 class="panel-title">Create new Test</h3>
-                <i class="glyphicon glyphicon-remove" (click)="onBack()"></i>
+                <h3 class="panel-title">Create Test</h3>
+                <!-- <i class="glyphicon glyphicon-remove" (click)="onBack()"></i> -->
         </div>
         <div class="">
             <form 
@@ -136,31 +137,42 @@
             <div class="form-group">
                 <label>Total quantity of questions: {{totalQty}}</label>
             </div>
-            <ng5-slider *ngIf="easyTotal" [(value)]="totalQty" [options]="optionsTotal"></ng5-slider>
-            <div class="form-group">
-                <label [class.error] = "hardQty - easyQty > hardTotal || easyQty > hardQty">
-                    Total quantity of hard questions: {{hardQty - easyQty}}/{{hardTotal}}
-                </label>
+            <div class="custom-slider">
+                <ng5-slider *ngIf="maxTypQs > 0"
+                [(value)]="totalQty" [options]="optionsTotal" (valueChange)="changeOptions(totalQty)">
+            </ng5-slider>
             </div>
             <div class="form-group">
-                <label [class.error] = "totalQty - hardQty > normalTotal || hardQty > totalQty">
-                    Total quantity of normal questions: {{totalQty - hardQty}}/{{normalTotal}}
-                </label>
-            </div>
-            <div class="form-group">
+                <span class="type-qs easy-qs"></span>
                 <label [class.error] = "easyQty > easyTotal">
-                    Total quantity of easy questions: {{easyQty}}/{{easyTotal}}
+                    Easy questions: {{easyQty}}/{{easyTotal}}
                 </label>
             </div>
-            <ng5-slider *ngIf="easyTotal" [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ng5-slider>
+            <div class="form-group">
+                <span class="type-qs normal-qs"></span>
+                <label [class.error] = "normalQty - easyQty > normalTotal || easyQty > normalQty">
+                    Normal questions: {{normalQty - easyQty}}/{{normalTotal}}
+                </label>
+            </div>
+            <div class="form-group">
+                <span class="type-qs hard-qs"></span>
+                <label [class.error] = "totalQty - normalValue > hardTotal || normalValue > totalQty">
+                    Hard questions: {{totalQty - normalValue}}/{{hardTotal}}
+                </label>
+            </div>
+            <div class="custom-slider">
+                <ng5-slider  *ngIf="maxTypQs > 0"
+                [(value)]="easyValue" [(highValue)]="normalValue" [options]="options"></ng5-slider>
+            </div>
             <!-- {{this.addQuestionForm.value | json}}   -->
             <div class="form-group">
                 
                     <button 
                     type="submit" class="btn btn-primary"
-                    [disabled]="createTestForm.invalid"
+                    [disabled]="createTestForm.invalid || normalQty - easyQty > normalTotal || easyQty > normalQty 
+                                || totalQty - normalValue > hardTotal || normalValue > totalQty || easyQty > easyTotal"
                     >
-                        Create new Test
+                        Create
                     </button>
                 
             </div>
@@ -169,3 +181,19 @@
     </div>
 
 </div>
+
+<div class="panel panel-danger confirm-del-subject" *ngIf="maxTypQs === 0">
+    <div class="panel-heading">
+          <h4 class="panel-title">Warning</h4>
+    </div>
+    <div class="panel-body">
+            <p>
+                Total questions is 0. <br />
+                Please add question before create test</p>
+            <div>
+                <button type="button" class="btn btn-default" (click) = "onBack()">Back</button>
+                <button type="button" class="btn btn-default" (click) = "toAddQuestion()">Add Question</button>
+          </div>
+    </div>
+</div>
+<div class="layer-blur" *ngIf="maxTypQs === 0"></div>

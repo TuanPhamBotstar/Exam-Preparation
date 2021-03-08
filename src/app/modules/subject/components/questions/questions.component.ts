@@ -9,6 +9,7 @@ import { SubjectService } from '../../services/subject.service';
   styleUrls: ['./questions.component.css']
 })
 export class QuestionsComponent implements OnInit {
+  loading: boolean = true;
   show: boolean = true;
   subscription: Subscription;
   subscription2: Subscription;
@@ -33,6 +34,7 @@ export class QuestionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    setTimeout(() => this.loading = false, 1000)
     const author = JSON.parse(localStorage.getItem('user')).user_id;
     this.subscription = this.activatedRoute.queryParams.subscribe(data => { 
       this.subject_id = data.subject;

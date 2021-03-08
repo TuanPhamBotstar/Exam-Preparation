@@ -15,6 +15,7 @@ export class QuestionsAnalyticsComponent implements OnInit {
   emit: any;
   results: any = null;
   userScores: any = null;
+  maxQty: number;
   constructor() { }
   // ng2 chart
   public barChartOptions: ChartOptions = {
@@ -34,7 +35,7 @@ export class QuestionsAnalyticsComponent implements OnInit {
           id: 'yAxes1',
           scaleLabel: {
             display: true,
-            labelString: "Users",
+            labelString: "Candidates",
             // fontSize: 16,
           },
           ticks: {
@@ -46,18 +47,8 @@ export class QuestionsAnalyticsComponent implements OnInit {
           }
         },
       ],
-      // xAxes: [{
-      //   scaleLabel: {
-      //     display: true,
-      //     // labelString: "Score",
-      //     fontSize: 16,
-      //   },
-      //   gridLines: {
-      //     display: false
-      //   }
-      // }]
     }
-  };
+};
   public barChartPlugins: any = [pluginDataLabels];
   public barChartLabels = [];
   public barChartType: any = 'bar';
@@ -90,6 +81,37 @@ export class QuestionsAnalyticsComponent implements OnInit {
       this.barChartLabels = Array.from({length: staticQuestions.totalQs}, (_, i) => `Question ${i + 1}`);
       this.barChartData[0].data = staticQuestions.correctQty;
       this.barChartData[1].data = staticQuestions.inCorrectQty;
+      this.maxQty = Math.max(Math.max.apply(0,staticQuestions.correctQty),Math.max.apply(0,staticQuestions.inCorrectQty));
+      this.barChartOptions = {
+        responsive: true,
+    plugins: {
+      labels: false,
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    },
+    scales: {
+      yAxes: [
+        {
+          position: 'left',
+          id: 'yAxes1',
+          scaleLabel: {
+            display: true,
+            labelString: "Candidates",
+            // fontSize: 16,
+          },
+          ticks: {
+            // steps: 10,
+            // stepValue: 10,
+            max: Math.ceil(this.maxQty*(1.2)),
+            stepSize: 1,
+            min: 0
+          }
+        },
+      ],
+    }
+      }
     }
   }
 

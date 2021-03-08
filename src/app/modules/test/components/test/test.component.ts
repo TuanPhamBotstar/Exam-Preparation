@@ -24,6 +24,7 @@ import { ViewAnswerComponent } from '../view-answer/view-answer.component';
   }
 })
 export class TestComponent implements OnInit, OnDestroy {
+  rangeTimes = ['day', 'week', 'month', 'all'];
   startDate: any;
   endDate: any;
   evaluate: any;
@@ -46,6 +47,7 @@ export class TestComponent implements OnInit, OnDestroy {
   test_id: string;
   subject_id: string;
   test: any;
+  typeCode: boolean;
   results: any;
   questions: Question[] = [];
   qsOnePage: Question[] = [];
@@ -68,9 +70,9 @@ export class TestComponent implements OnInit, OnDestroy {
         this.scoreChart.setResults(data);
         this.scoreChart.setEvaluate(this.evaluate, this.avgScore);
         this.linetTime.setResults(data);
-        // this.scoreBarChart.setResults(data);
+        this.scoreBarChart.setResults(data);
         this.scoreBarChart.setScores(this.userScore);
-        this.linetTime.setDate(this.startDate, this.endDate)
+        this.linetTime.setDate(this.startDate, this.endDate);
         this.questionAnalytic.setCorrectQty(this.staticQuestions);
         this.questionAnalytic.setResults(data)
       })
@@ -119,6 +121,12 @@ export class TestComponent implements OnInit, OnDestroy {
         this.testTitle = this.test.testTitle;
         this.questions = this.test.questions;
         this.total = this.questions.length;
+        if(this.test.typeCode){
+          this.typeCode = true;
+        }
+        else{
+          this.typeCode = false;
+        }
         console.log(this.total)
         this.totalPage = Math.ceil(this.total/this.perPage);
         let limit = this.page * this.perPage
@@ -173,9 +181,11 @@ export class TestComponent implements OnInit, OnDestroy {
   onShareTest() {
     this.shareForm.value.test_id = this.test_id;
     console.log(this.shareForm.value)
+    
     this.testService.putTypeCode(this.shareForm.value);
     this.testService.getTests().subscribe(data => {
       console.log(data.test)
+      this.typeCode = this.shareForm.value.haveCode;
       this.isShareSuccess = data.test.isShareSuccess;
       setTimeout(() => this.isShareSuccess = false, 1000);
     })
@@ -197,7 +207,7 @@ export class TestComponent implements OnInit, OnDestroy {
     this.shareForm = this.formBuilder.group({
       link: [`http://localhost:4200/testing/?test=${this.test_id}`],
       listEmail: [''],
-      haveCode: [false]
+      haveCode: [this.typeCode]
     })
   }
   //pagination
@@ -239,5 +249,9 @@ export class TestComponent implements OnInit, OnDestroy {
   }
   onCloseDetail(active){
     this.active = active;
+  }
+  toTimes(times){
+    this.router.navigate(['/subject/tests/content-test'],
+     {queryParams: {subject: this.subject_id, test: this.test_id, page: 1, time: times}})
   }
 }

@@ -1,6 +1,12 @@
+
 .create-test{
-    padding: 0 15px;
     margin-top: 25px;
+    padding: 7px;
+    .btn-back{
+        position: absolute;
+        top: 25px;
+        right: 20px;
+    }
 }
 .create-test .panel{
     position: relative;
@@ -17,6 +23,23 @@
     font-size: 1.2em;
     -webkit-text-stroke: 2px #f2f2f2;
 }
+    span.type-qs{
+        width: 10px;
+        height: 10px;       
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 1px;
+    }
+    span.easy-qs{
+        background: #58e091;
+    }
+    span.normal-qs{
+        background: rgb(240, 169, 76);
+    }
+    span.hard-qs{
+        background: #eb3824;
+    }
+
 .form-group label{
     font-weight: initial;
 }
@@ -68,5 +91,39 @@ ng5-slider{
     margin-bottom: 30px;
 }
  
+::ng-deep {
+    .custom-slider .ng5-slider .ng5-slider-bar{
+        background: #8cc5f3;
+    }
+    .custom-slider .ng5-slider .ng5-slider-pointer{
+        width: 24px;
+        height: 24px;
+        top: -12px;
+    }
+    .custom-slider .ng5-slider .ng5-slider-pointer:after{
+        top: 8px;
+        left: 8px;
+    }
+    .custom-slider .ng5-slider {
+      .ng5-slider-bar {
+        height: 2px;
+      }
+  
+      .ng5-slider-left-out-selection .ng5-slider-bar {
+        background: #58e091 !important;
+      }
+  
+      .ng5-slider-right-out-selection .ng5-slider-bar {
+        background: #eb3824 !important;
+      }
+  
+      .ng5-slider-selection {
+          background: rgb(240, 169, 76);
+      }
+    }
+  } 
 
-
+//   warning
+.confirm-del-subject button{
+    width: 100px;
+}

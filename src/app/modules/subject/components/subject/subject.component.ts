@@ -1,7 +1,10 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+
 //viewChild
 import { ProfileSidebarComponent } from '../profile-sidebar/profile-sidebar.component';
+
+
 @Component({
   selector: 'app-subject',
   templateUrl: './subject.component.html',

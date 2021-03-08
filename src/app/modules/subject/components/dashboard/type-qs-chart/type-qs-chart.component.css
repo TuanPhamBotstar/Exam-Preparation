@@ -48,4 +48,5 @@
 .typeQs-chart{
     width: 70%;
     margin: 5px;
+    position: relative;
 }

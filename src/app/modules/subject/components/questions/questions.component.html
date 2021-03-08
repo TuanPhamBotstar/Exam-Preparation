@@ -1,6 +1,8 @@
+
 <router-outlet (activate)="onActive($event)" (deactivate)="onDeactivate()"></router-outlet>
 <div class="component-container" *ngIf="show">
-    <div class="add-question">
+    <div class="add-question" *ngIf="questions">
+        <p >Total {{total}} questions</p>
         <button type="button" class="btn btn-primary" (click)=onAddQuestion()>
             <i class="fa fa-plus" aria-hidden="true"></i>
             Add Question
@@ -8,7 +10,6 @@
     </div>
     <ng-container>       
         <div class="questions-container">
-            <p *ngIf="questions">Total {{total}} questions</p>
             <div class="question" *ngFor="let question of questions; let i = index">
                 <div class="question-elemment">
                     <h4>

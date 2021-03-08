@@ -52,6 +52,7 @@ export class AvgScoreChartComponent implements OnInit {
           ticks: {
             // steps: 10,
             // stepValue: 10,
+            stepSize: 10,
             fontSize: 16,
             max: 100,
             min: 0
@@ -62,7 +63,7 @@ export class AvgScoreChartComponent implements OnInit {
           id: 'yAxes2',
           scaleLabel: {
             display: true,
-            labelString: "Quantity of users",
+            labelString: "Candidates",
             fontSize: 16,
           },
           ticks: {

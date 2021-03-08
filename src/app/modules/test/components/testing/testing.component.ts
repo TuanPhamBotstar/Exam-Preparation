@@ -99,7 +99,9 @@ export class TestingComponent implements OnInit, OnDestroy {
         this.loadPagination()
       }
     })
-
+    this.confirmCode.valueChanges.subscribe(() => {
+      this.errCode = false;
+    })
   }
   ngOnDestroy(): void {
     if (this.subscription) {

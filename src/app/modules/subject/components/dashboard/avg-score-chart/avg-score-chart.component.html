@@ -1,4 +1,7 @@
 <div *ngIf="1" class="chart-containter">
+    <div class="layer-empty" *ngIf="barChartLabels.length === 0">
+        Data empty
+    </div>
     <div style="display: block">
       <canvas baseChart
               [datasets]="barChartData"

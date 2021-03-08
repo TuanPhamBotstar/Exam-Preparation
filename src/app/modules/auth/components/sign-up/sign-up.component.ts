@@ -57,7 +57,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     })
   }
   redirectLogin() {
-    this.router.navigate(['dang-nhap'], { relativeTo: this.activatedRouter.parent });
+    this.router.navigate(['log-in'], { relativeTo: this.activatedRouter.parent });
   }
   onSignUp(username: string, password: string, fullname: string, email: string) {
     let newUser = new User('', username, password, fullname, email);

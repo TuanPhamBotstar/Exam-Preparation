@@ -102,6 +102,7 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
       level:[this.question.level,[Validators.required]],
       answers:this.formBuilder.array([])
     });
+    console.log(this.addQuestionForm.controls)
   }
   createAddQuestionForm(){
     this.addQuestionForm = this.formBuilder.group({
@@ -128,7 +129,9 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
     this.answers.push(this.newAnswer());
   }
   removeAnswer(i:number){
-    this.answers.removeAt(i);
+    if(this.answers.controls.length > 2){
+      this.answers.removeAt(i);
+    }
   }
   onSaveQuestion(){
     console.log(this.addQuestionForm.value);
@@ -149,7 +152,7 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
     }
     if(this.editQuestion === 1){
       this.subjectService.editQuestion(this.question_id, newQuestion);
-      this.subjectService.loadQuestion(this.question_id);
+      // this.subjectService.loadQuestion(this.question_id);
       this.showNewQuestion = true;
       setTimeout(() => {this.showNewQuestion = false}, 1000);
     }

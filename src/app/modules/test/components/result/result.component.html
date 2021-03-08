@@ -66,7 +66,7 @@
                                 <h3 class="panel-title">{{test.testTitle | uppercase}} Test</h3>
                                 <i>({{test.easyQty+test.normalQty+test.hardQty}} questions)</i>
                                 <p>Time: {{test.timeTest}} min</p>
-                                <button type="button" class="btn btn-success back-detail" (click)="closeDetailRes()">Back</button>
+                                <button type="button" class="btn btn-default back-detail" (click)="closeDetailRes()">Back</button>
                                 <!-- <i class="fa fa-times" aria-hidden="true" (click)="closeDetailRes()"></i> -->
                             </div>
                             <div class="panel-body" >
@@ -83,7 +83,7 @@
                                         </div>
                                         <div class="answers">
                                             <div class="" *ngFor="let answer of question.answers; let j = index">
-                                                <div class="answer-elemnt">
+                                                <div class="    ">
                                                     <input type="radio" *ngIf="j !== chosenAnswers[i] || chosenAnswers[i] === null" disabled="1">
                                                     <i *ngIf="j === chosenAnswers[i]" class="fa fa-check-circle-o" aria-hidden="true" 
                                                     ></i>

@@ -4,10 +4,16 @@
 .add-question{
     position: relative;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+.add-question p{
+    margin-bottom: 0px;
+    margin-left: 12px;
 }
 .add-question button{
-    margin-top: 10px;
     margin-right: 10px;
 }
 .pagination{

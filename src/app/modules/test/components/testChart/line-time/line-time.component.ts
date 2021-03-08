@@ -22,7 +22,7 @@ export class LineTimeComponent implements OnInit {
   endDate: any;
   // line-chart
   public lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Users', borderWidth: 1}, // straight line: lineTension: 0,
+    { data: [], label: 'Candidates', borderWidth: 1}, // straight line: lineTension: 0,
   ];
   public lineChartLabels: Label[] = [];
   public lineChartOptions: (ChartOptions & { annotation?: any }) = {
@@ -35,7 +35,7 @@ export class LineTimeComponent implements OnInit {
         {        
           scaleLabel: {
             display: true,
-            labelString: "Users",
+            labelString: "Candidates",
             // fontSize: 16,
           },
           ticks: {

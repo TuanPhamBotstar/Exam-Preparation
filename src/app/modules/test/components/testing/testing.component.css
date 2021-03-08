@@ -5,19 +5,20 @@
     width: 100%;
     min-height: 100vh;
     z-index: 0;
+    margin-top: 20px;
 }
 .testing-sidebar{
     height: 250px;
     width: 20%;
     margin-left: 20px;
     position: sticky;
-    top: 20px;
+    top: 100px;
     right: 0;
     z-index: 1000;
     padding: 0px;
     display: flex;
     flex-flow: column wrap;
-    justify-content: center;
+    justify-content: space-around;
     /* background-color: #5b9bd1; */
     --gradient-from-color: #5b9bd1;
     --gradient-to-color: #8cc5f3;
@@ -31,6 +32,9 @@
 .count-down-time{
     text-align: center;
     font-size: 2.5em;
+}
+.count-down-time p{
+    margin-top: 20px;
 }
 .testing-sidebar div{
     text-align: center;
@@ -83,13 +87,26 @@ label, input{
 
 /*  confirm block */
 .confirm-del-subject{
-    position:sticky;
-    top: 20px;
+    position:fixed;
+    top: 50%;
     right: 50%;
-    transform: translate(50%,0%);
-    width: 40%;
+    transform: translate(50%,-50%);
+    width: 30%;
     z-index: 1000;
+    background-color: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 }
+.confirm-del-subject .panel-heading{
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: #fff;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  }
+.confirm-del-subject .panel-heading h4{
+    color: initial;
+}
+
 .confirm-del-subject .panel-body{
     text-align: center;
 }
@@ -100,44 +117,65 @@ label, input{
     position: absolute;
     top:10px;
     right: 10px;
+    color: #555;
+    -webkit-text-stroke: 2px #fff;
 }
-.confirm-del-subject button{
-    margin: 20px 40px;
+.confirm-del-subject i:hover{
+    color: #000;
 }
+
 .isTrue{
     color: green;
     font-weight: 600;
     
 }
 /* type code */
-.type-code{
-    position: absolute ;
-    width: 40%;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+.start-test{
+    position: fixed ;
+    width: 30%;
+    top: 50%;
+    right: 41%;
+    transform: translate(50%,-50%);
     z-index: 100;
-    border: 1px solid coral;
-    border-radius: 5px;
-    background-color: pink;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
 }
-.type-code input[type=radio]{
+.start-test input[type=radio]{
     margin-right: 10px;
 }
-.type-code input[type=text]{
+.start-test input[type=text]{
     cursor: initial;
-    width: 60px;
+    width: 100%;
     margin: auto auto;
 }
-.type-code .panel{
+.start-test .label-danger {
+    color: #d9534f;
+    background-color: #fff;
+    font-size: 1em;
+    font-weight: initial;
+    display: inline-block;
+    margin-top: 8px;
+}
+.start-test .panel{
     margin-bottom: 0;
 }
-.type-code button{
+.start-test button{
     width: auto;
     height: auto;
     padding: 5px 10px;
+    margin-top: 20px;
 }
 
+.start-test .type-code{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+.start-test .type-code label, .start-test .type-code span{
+    text-align: left;
+    padding: 0;
+}
 /* result box */
 .panel-body .result-content{
     margin: 20px 0 10px;

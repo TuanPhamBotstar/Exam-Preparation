@@ -1,16 +1,18 @@
 .add-question-container{
-    position: relative;
+    margin-top: 20px;
+    padding: 7px;
 }
 .alert-status{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    padding: 15px 20px;
+    position: fixed;
+    bottom: 15px;
+    left: 5px;
+    padding: 5px 10px;
+    z-index: 10;
 }
 .alert-status span{
     font-size: 1em;
     font-weight: initial;
+    padding: 10px;
 }
 .showNewQuestion{
     width: 40%;
@@ -22,16 +24,10 @@
     position: relative;
     /* width: 80%; */
 }
-.panel-heading > i{
+.panel-heading button.btn-back{
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-weight: 100;
-    font-size: 1.2em;
-    -webkit-text-stroke: 2px #f2f2f2;
-}
-.panel-heading h3:not(.panel-title){
-    font-size: 1.2em;
+    top: 25px;
+    right: 20px;
 }
 .panel{
     margin-top: 20px;
@@ -46,19 +42,35 @@ form.add-question div button{
     font-size: 1em;
     /* margin-top: 10px; */
     line-height: initial;
+    margin-top: 15px;
 }
 .form-group{
     margin-bottom: 5px;
 }
-form.add-question button.add-answer{
-    background-color: #337ab7;
-    margin-bottom: 12px;
+form.add-question div button.add-answer{
+    margin-top: 2px;
     font-size: 1em;
     text-align: center;
-    padding: 0 3px;
+} 
+form.add-question div button.add-answer i{
+    -webkit-text-stroke: 2px #fff;
+}
+form.add-question div button.add-answer:hover i{
+    -webkit-text-stroke: 2px #ddd;
+}
+form.add-question div button.add-answer:focus i{
+    -webkit-text-stroke: 2px #eee;
+}
+form.add-question div button.add-answer:focus{
+    background-color: #eee;
+}
+form.add-question span.add-answer{
+    padding-left: 2px;
+    cursor: pointer;
+    width: auto;
 }
 .delQs_btn{
-    float: right;
+    margin-left: 20px;
     border: none;
 }
 form.add-question textarea, form.add-question span{
@@ -69,6 +81,15 @@ form.add-question label{
     width: 10%;
     font-weight: normal;
 }
+    .label-danger {
+        background-color: #fff;
+        color: #d9534f;
+        font-size: 0.9em;
+        display: inline-block;
+        text-align: left;
+        margin-top: 10px;
+        padding-left: 2px;
+    }
 form.add-question select{
     width:105px;
     padding:5px;
@@ -78,12 +99,27 @@ div.answer-container{
     flex-flow: nowrap row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 5px;
+    margin-bottom: 8px;
 }
 div.answer-container label{
     margin-bottom: 0;
     text-align: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
 }
+div.answer-container label.show-false{
+    opacity: 0;
+}
+h3.answers-title{
+    margin-top: 15px;
+    margin-bottom:  8px;
+    font-size: 1em;
+    font-weight: bold;
+}
+h3.end-title{
+    margin-bottom: 3px;
+}
+
 form.add-question  input[type=checkbox]{
     /* margin-right: 6px; */
     margin: 0;
@@ -94,17 +130,17 @@ i{
     font-size: 1em;
 }
 
-.confirm-del-subject{
-    position: absolute;
+/* .confirm-del-subject{
+    position: fixed;
     top: 50%;
-    right: 50%;
-    transform: translate(50%,-50%);
-    width: 45%;
+    left: 60%;
+    transform: translate(-50%,-50%);
+    width: 40%;
     z-index: 100;
-  }
-/* delete confirm aler */
+  } */
+/* delete confirm alert */
 
-.confirm-del-subject .panel-heading{
+/* .confirm-del-subject .panel-heading{
     background-color: #d9534f;
   }
   .confirm-del-subject .panel-heading h4{
@@ -113,18 +149,21 @@ i{
   }
   .confirm-del-subject .panel-body h4{
     color: initial;
-  }
+  } */
   .confirm-del-subject i{
     position: absolute;
-    top:10px;
-    right: 10px;
-    -webkit-text-stroke: 2px #d9534f;
+    top:8px;
+    right: 8px;
+    -webkit-text-stroke: 2px #fff;
     font-size: 0.8em;
-    color: white;
+    color: #555;
   }
-  .confirm-del-subject button{
+  .confirm-del-subject i:hover{
+      color: #000;
+  }
+  /* .confirm-del-subject button{
     margin: 20px 10px;
-    width: 45px;
+    width: 65px;
     text-align: center;
     padding: 6px 0px;
-  }
+  } */

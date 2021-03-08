@@ -20,6 +20,9 @@
         </div>
     </div>
     <div class="typeQs-chart" *ngIf="pieChartData.length > 0">
+        <div class="layer-empty" *ngIf="totalQs === 0">
+            Data empty
+        </div>
         <div style="display: block">
             <canvas baseChart
             [data]="pieChartData"

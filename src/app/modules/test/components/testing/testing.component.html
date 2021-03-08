@@ -1,7 +1,7 @@
-<div class="type-code" *ngIf="tutorialBox">
+<div class="start-test" *ngIf="tutorialBox">
         <div class="panel panel-heading">
             <div class="panel-heading">
-                    <h3 class="panel-title">Tutorial do quiz</h3>
+                    <h3 class="panel-title">Are you ready?</h3>
             </div>
             <div class="">
                 <form 
@@ -10,12 +10,12 @@
                 [formGroup]="confirmCode"
                 (ngSubmit)="onStartTesting()"
                 > 
-                <div class="form-group">
-                    <input type="radio" checked="'checked'">
-                    <label>Choose the best answer</label>
-                </div>
-                <div class="form-group" *ngIf="isTypeCode">
-                    <label>Nhập mã code</label>
+                    <!-- <div class="form-group">
+                        <input type="radio" checked="'checked'">
+                        <label>Choose the best answer</label>
+                    </div> -->
+                <div class="form-group" *ngIf="isTypeCode" class="type-code">
+                    <label>Enter Code</label>
                     <input type="text" 
                     class="form-control" placeholder="0000"
                     formControlName="codeTyped"
@@ -40,32 +40,32 @@
             </div>
         </div>
 </div>
-<div class="panel panel-primary confirm-del-subject" *ngIf="confirmBlock">
+<div class=" confirm-del-subject" *ngIf="confirmBlock">
     <div class="panel-heading">
-          <h3 class="panel-title">Submit</h3>
+          <h4 class="panel-title">Submit</h4>
           <i class="glyphicon glyphicon-remove" (click)="openConfirm()"></i>
     </div>
     <div class="panel-body">
-          <p>Time still remain. Submit anyway ?</p>
+          <p>Time still remain. Submit anyway?</p>
           <div>
 
-              <button type="button" class="btn btn-primary" (click) = "openConfirm()">No</button>
+              <button type="button" class="btn btn-default" (click) = "openConfirm()">No</button>
               
-              <button type="button" class="btn btn-danger" (click) = "onReport()">Yes</button>
+              <button type="button" class="btn btn-primary" (click) = "onReport()">Yes</button>
           </div>
     </div>
 </div>
-<div class="panel panel-primary confirm-del-subject" *ngIf="resBlock">
+<div class="confirm-del-subject" *ngIf="resBlock">
     <div class="panel-heading">
-          <h3 class="panel-title">Result</h3>
+          <h4 class="panel-title">Result</h4>
           <i class="glyphicon glyphicon-remove" (click)="closeResBlock()"></i>
     </div>
     <div class="panel-body">
         <div class="result-content">
-            <p>You answered</p>
-            <p class="score">{{count}}/{{totalQs}}</p>
-            <p>questions correct</p>
-            <p class="score">Score is {{point}}</p>
+            <p>
+                You answered <span class="score">{{count}}/{{totalQs}}</span> questions correct
+            </p>
+            <p>Score is <span class="score">{{point}}</span></p>
         </div>
         <div>
             <button type="button" class="btn btn-primary" (click) = "closeResBlock()">Ok</button>
@@ -74,7 +74,7 @@
 </div>
 <div class="testing">
     <div class="test-content">
-        <div class="panel panel-default" *ngIf="test">
+        <div class="panel " *ngIf="test">
             <div class="panel-heading">
                 <h3 class="panel-title">{{test.testTitle | uppercase}} Test</h3>
                 <i>({{test.easyQty+test.normalQty+test.hardQty}} questions)</i>
@@ -138,9 +138,9 @@
             <p>{{m}} : {{s}}</p>
         </div>
         <div>
-            <button type="submit" class="btn btn-success" (click)="openConfirm()">Submit</button>
+            <button type="submit" class="btn btn-default" (click)="openConfirm()">Submit</button>
         </div>
     </div>
 
 </div>
-
+<div class="layer-blur" *ngIf="tutorialBox || confirmBlock || resBlock"></div>
