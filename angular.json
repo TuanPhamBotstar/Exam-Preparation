@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["chart.js"],
             "outputPath": "dist/ExamPrep",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -93,7 +94,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/chart.js/dist/Chart.bundle.min.js"]
           }
         },
         "lint": {
@@ -124,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "ExamPrep"
+  "defaultProject": "ExamPrep",
+  "cli": {
+    "analytics": "5137b638-f7ed-4652-b202-2d0dbfe68a97"
+  }
 }

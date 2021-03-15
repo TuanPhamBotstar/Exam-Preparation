@@ -1,0 +1,146 @@
+<div class="start-test" *ngIf="tutorialBox">
+        <div class="panel panel-heading">
+            <div class="panel-heading">
+                    <h3 class="panel-title">Are you ready?</h3>
+            </div>
+            <div class="">
+                <form 
+                class="add-question"
+                novalidate="true"
+                [formGroup]="confirmCode"
+                (ngSubmit)="onStartTesting()"
+                > 
+                    <!-- <div class="form-group">
+                        <input type="radio" checked="'checked'">
+                        <label>Choose the best answer</label>
+                    </div> -->
+                <div class="form-group" *ngIf="isTypeCode" class="type-code">
+                    <label>Enter Code</label>
+                    <input type="text" 
+                    class="form-control" placeholder="0000"
+                    formControlName="codeTyped"
+                    #codeTyped
+                    >
+                    <span 
+                    class="label label-danger"
+                    *ngIf="errCode"
+                    >
+                    Code is incorrect.
+                    </span>
+                </div>
+                <div class="form-group">
+                    
+                    <button 
+                        type="submit" class="btn btn-primary"
+                    >
+                        Start
+                    </button>
+                </div>
+            </form>
+            </div>
+        </div>
+</div>
+<div class=" confirm-del-subject" *ngIf="confirmBlock">
+    <div class="panel-heading">
+          <h4 class="panel-title">Submit</h4>
+          <i class="glyphicon glyphicon-remove" (click)="openConfirm()"></i>
+    </div>
+    <div class="panel-body">
+          <p>Time still remain. Submit anyway?</p>
+          <div>
+
+              <button type="button" class="btn btn-default" (click) = "openConfirm()">No</button>
+              
+              <button type="button" class="btn btn-primary" (click) = "onReport()">Yes</button>
+          </div>
+    </div>
+</div>
+<div class="confirm-del-subject" *ngIf="resBlock">
+    <div class="panel-heading">
+          <h4 class="panel-title">Result</h4>
+          <i class="glyphicon glyphicon-remove" (click)="closeResBlock()"></i>
+    </div>
+    <div class="panel-body">
+        <div class="result-content">
+            <p>
+                You answered <span class="score">{{count}}/{{totalQs}}</span> questions correct
+            </p>
+            <p>Score is <span class="score">{{point}}</span></p>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" (click) = "closeResBlock()">Ok</button>
+        </div>
+    </div>
+</div>
+<div class="testing">
+    <div class="test-content">
+        <div class="panel " *ngIf="test">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{test.testTitle | uppercase}} Test</h3>
+                <i>({{test.easyQty+test.normalQty+test.hardQty}} questions)</i>
+                <p>Time: {{test.timeTest}} min</p>
+                <p *ngIf="showTest">Mã đề: {{test.testCode}}</p>
+            </div>
+            <div class="panel-body" *ngIf="showTest">
+                <div class="questions-container">
+                    <div class="question" *ngFor="let question of qsOnePage; let i = index">
+                        <div class="question-elemment">
+                            <h4>
+                                <strong>Question {{i+1+(page-1)*5}}:</strong>
+                            </h4>
+                            <p>
+                                {{question.title}}
+                            </p>
+                        </div>
+                        <div class="answers">
+                            <div class="" *ngFor="let answer of question.answers; let j = index">
+                                <form>
+                                <div class="answer-elemnt">
+                                    <input *ngIf="chosenAnsers[i+(this.page-1)*this.perPage] !== undefined && j == chosenAnsers[i+(this.page-1)*this.perPage]" 
+                                    type="radio" name="a_{{i}}" id="a_{{i}}_{{j}}" #isCorrect (change)="showRes($event,i,j)" checked>
+                                    <input *ngIf="j != chosenAnsers[i+(this.page-1)*this.perPage]" 
+                                    type="radio" name="a_{{i}}" id="a_{{i}}_{{j}}" #isCorrect (change)="showRes($event,i,j)">
+                                    <label for="a_{{i}}_{{j}}">
+                                        {{alphaArr[j]}}. {{answer['content']}}
+                                    </label>    
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                        <!-- <div class="answers" *ngIf="ansFromServer">
+                            <div class="" *ngFor="let answer of question.answers; let j = index" >
+                                <div class="answer-elemnt" *ngIf="j==correctAnswer[i]">
+                                    <i class="isTrue">Đáp án: {{alphaArr[j]}}. </i>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div> 
+                </div>
+            </div>
+            <ul class="pagination" *ngIf="totalPage > 1 && showTest">
+                <li><a (click)="onPrevious()">&laquo;</a></li>
+                <ng-container *ngFor="let no of arrayV(); let i= index;">
+                    <li (click)="toPage(i+1)" [class.active]="i == page - 1">
+                        <a>
+                            {{i+1}}
+                        </a>
+                    </li>
+                </ng-container>
+                <li><a (click)="onNext()">&raquo;</a></li>
+            </ul>
+        </div>
+        
+    </div>
+
+    <div class="testing-sidebar" *ngIf="showTest"> 
+        <div class="count-down-time">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+            <p>{{m}} : {{s}}</p>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-default" (click)="openConfirm()">Submit</button>
+        </div>
+    </div>
+
+</div>
+<div class="layer-blur" *ngIf="tutorialBox || confirmBlock || resBlock"></div>

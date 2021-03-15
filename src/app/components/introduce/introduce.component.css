@@ -1,0 +1,93 @@
+.main-container{
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;
+    height: calc(100vh - 130px);
+}
+/* introduce */
+.introduce{
+    width: 30%;
+    padding-left: 150px;
+}
+.introduce p{
+    color: #2672ab;
+    font-size: 3em;
+    text-align: left;
+    margin-bottom: 0;   
+}
+.introduce button{
+    margin-top: 10px;
+    font-size: 1.5em;
+    border-radius: 24px;
+}
+.introduce button:focus{
+    outline: none;
+}
+.introduce.img{
+    width: 70%;
+}
+.introduce.img img{
+    width: 70%;
+    height:auto;
+    display: block;
+    margin: auto;
+}
+/* old */
+section.feature-section{
+    /* margin: 50px 0 120px 0; */
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;
+    height: calc(100vh - 140px);
+}
+section div.feature{
+    position: relative;
+    margin:20px 0;
+    padding: 20px;
+    width: 25%;
+    height: 420px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.2);
+    background-color: #fff;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+    text-align: center;
+}
+section div.feature img{
+    width: auto;
+    height: 140px;
+}
+section div.feature div.content{
+    position: absolute;
+    top:180px;
+    right: 0;
+    padding: 0 20px;
+}
+section div.feature button{
+    position: absolute;
+    bottom: 10px;
+    right: 50%;
+    font-size: 1.2em;
+    /* letter-spacing: 2px; */
+    transform: translateX(50%);
+    padding: 5px 15px;
+    border-radius: 5px;
+    /* background-color: #5b9bd1; */
+    --gradient-from-color: #5b9bd1;
+    --gradient-to-color: #8cc5f3;
+    background: var(--gradient-to-color) 
+    linear-gradient(180deg,var(--gradient-from-color),
+    var(--gradient-to-color) 51%,var(--gradient-from-color));
+    border: none;
+}
+section div.feature button:hover{
+    color: #fff;
+    background-color: #408cca;
+}
+section div.feature button:active{
+    color: #fff;
+    background-color: #4a95d3;
+}
+/* --------------------- */

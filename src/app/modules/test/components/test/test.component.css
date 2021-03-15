@@ -1,0 +1,244 @@
+/* test content */
+.test-content{
+    position: relative;
+    top:10px;
+    background-color: #fff;
+}
+.test-btn{
+    display: flex;
+    flex: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.panel-default{
+    margin-top: 20px;
+    border: none;
+}
+.panel-default>.panel-heading{
+    background-color: #fff;
+    border: none;
+    position: relative;
+}
+.panel-heading .share{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.panel-body{
+    padding: 0;
+}
+.panel-body input {
+  
+}
+.panel-body form {
+    display: block;
+}
+.panel-heading{
+    text-align: center;
+}
+.panel-heading p{
+    margin-bottom: 0;
+}
+label, input{
+    font-weight: initial;
+}
+/*  confirm block */
+.confirm-del-subject i{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #555;
+    -webkit-text-stroke: 2px #fff;
+    font-size: 0.8em;
+}
+.confirm-del-subject i:hover{
+    color: #000;
+}
+.confirm-del-subject .panel-body{
+    padding: 15px;
+}
+
+/* share box */
+.share-box{
+    position: fixed;
+    /* border: 2px solid rgba(0, 0, 0, 0.2); */
+    border-radius: 8px; 
+    top: 30%;
+    left: 40%;
+    width: 40%;
+    z-index: 110;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+.status-share{
+    position: fixed;
+    background-color: #5cb85c;
+    color: #fff;
+    padding: 10px;
+    width: 180px;
+    text-align: center;
+    border-radius: 5px;
+    bottom: 10px;
+    left: 10px;
+    /* transform: translate(-50%,-50%); */
+}
+.status-share p{
+    margin: 0;
+}
+.share-box .panel{
+    margin-bottom: 0;
+}
+.share-box .panel-heading{
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: #fff;
+    border-bottom: 2px solid #e9ecef;
+}
+.share-box .panel-heading h4{
+    font-size: 1em;
+    text-align: left;
+    color: initial;
+}
+.share-box .panel-heading i.glyphicon-remove{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    color: #555;
+    -webkit-text-stroke: 2px #fff;
+}
+.share-box .panel-heading i.glyphicon-remove:hover{
+    color: #000;
+}
+.share-box .panel-body form div{
+    text-align: center;
+    margin: 20px auto;
+}
+.share-box .panel-body input[type=text]{
+    width: 93%;
+    height: auto;
+    background-color: #f2f2f2;
+    font-size: 1em;
+    box-shadow: none;
+    cursor: initial;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.share-box .panel-body input[type=checkbox]{
+    width: auto;
+    height: auto;
+    box-shadow: none;
+}
+.share-box .panel-body{
+    background-color: #fff;
+    padding: 20px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.share-box .panel-body label{
+    cursor: initial;
+    width: auto;
+    display: inline;
+    margin-left: 10px;
+}
+.share-box .link-copy{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.share-box .panel-body button{
+    width: auto;
+    height: auto;
+}
+.share-box .panel-body form button[type=button]{
+    background-color: initial;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 3px;
+    font-size: 1em;
+    width: 45px;
+    height: 36.4px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-left: none;
+}
+.share-box .panel-body form button[type=button]:hover{
+    background-color: #555;
+    border: none;
+    color: #fff;
+}
+.share-box .panel-body form button[type=button]:active{
+    background-color: #777;
+}
+.share-box .panel-body form button[type=submit]{
+    font-size: 1em;
+}
+.shareSuccess{
+    color: green;
+}
+/* pagination */
+.pagination{
+    margin-left: 10px;
+}
+/* app-chart */
+.show-chart-false{
+    /* visibility: hidden; */
+    display: none;
+}
+.show-chart-true{
+    visibility: visible;
+}
+.show-res-table-false{
+    display: none;
+}
+/* tabs */
+/* .tabs-container{
+    background-color: paleturquoise;
+    border-radius: 5px;
+}
+.tabs-container h2{
+    text-align: center;
+} */
+.nav-tabs a{
+    color: #555;
+    cursor: pointer;
+}
+.nav-tabs>li.active>a{
+    color: #337ab7;
+    cursor: pointer;
+}
+.nav-tabs li.ellipsis{
+    position: relative;
+    float: right;
+}
+div.ellipsis{
+    color:#062f53;
+    margin: 5px 4px;
+}
+.remove-test{
+    position: absolute;
+    top: 80%;
+    right: 0px;
+    width: 110px;
+    background-color: #f6f9fb;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 5px;
+    z-index: 10;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+.remove-test:hover{
+    background-color: #ddebf5;
+}
+
+.remove-test p{
+  margin-bottom: 0;
+}
+/* slect time */
+.time-select-btn{
+    margin: 20px auto 30px;
+}

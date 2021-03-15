@@ -1,0 +1,199 @@
+<div class="create-test">
+
+    <!-- <i class="glyphicon glyphicon-arrow-left" (click)="onBack()"></i> -->
+    
+    <!-- <h2>Tạo Đề Thi</h2> -->
+
+
+    <div class="">    
+        <button type="button" class="btn btn-default btn-back" (click)="onBack()">Back</button>       
+        <div class="panel-heading">
+                <h3 class="panel-title">Create Test</h3>
+                <!-- <i class="glyphicon glyphicon-remove" (click)="onBack()"></i> -->
+        </div>
+        <div class="">
+            <form 
+            class="add-question"
+            novalidate="true"
+            [formGroup]="createTestForm"
+            (ngSubmit)="onCreateTest()"
+        >
+            <div class="form-group">
+                <label>Test name</label>
+                <input type="text" 
+                class="form-control"
+                placeholder="Test name"
+                formControlName="testTitle"
+                #testTitle
+                >
+                
+                <span 
+                class="label"
+                *ngIf="createTestForm.controls.testTitle.touched && createTestForm.controls.testTitle.errors?.required"
+                >
+                Please enter test name.
+                </span>
+            </div> 
+            <div class="form-group">
+                <label>Time (min)</label>
+                <input type="number" min="15" step="5" 
+                class="form-control" placeholder="00"
+                formControlName="timeTest"
+                #timeTest
+                >
+                <span 
+                class="label"
+                *ngIf="createTestForm.controls.timeTest.touched && createTestForm.controls.timeTest.errors?.required"
+                >
+                Please enter time.
+                </span>
+            </div>
+            <div class="form-group">
+                <label>Code</label>
+                <input type="text"  
+                class="form-control" placeholder="0000"
+                formControlName="codeTest"
+                #codeTest
+                >
+                <span 
+                class="label"
+                *ngIf="createTestForm.controls.codeTest.touched && createTestForm.controls.codeTest.errors?.required"
+                >
+                Please enter Code.
+                </span>
+                <span 
+                class="label"
+                *ngIf="createTestForm.controls.codeTest.touched && createTestForm.controls.codeTest.errors?.pattern"
+                >
+                Code must include 4 digit characters.
+                </span>
+            </div>
+            <!-- <div class="form-group">
+                <label>Số lượng câu hỏi</label>
+            </div>
+            <div class="qty-config">
+                <input type="text" class="hide"
+                formControlName="subject_id">
+                <input type="text" class="hide"
+                formControlName="author">
+                <div class="form-group">
+                    <label>Khó</label>
+                    <input type="number"  class="" placeholder="0" min="0"
+                    formControlName="hardQty"
+                    #hardQty
+                    >
+                    <span 
+                    class="label label-danger"
+                    *ngIf="createTestForm.controls.hardQty.touched && createTestForm.controls.hardQty.errors?.required"
+                    >
+                    Chưa nhập trường này !
+                    </span>
+                    <span 
+                    class="label label-danger"
+                    *ngIf="errQty"
+                    >
+                    Phải nhỏ hơn hoặc bằng {{hardTotal}} !
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Trung bình</label>
+                    <input type="number" class="" placeholder="0" min="0"
+                    formControlName="normalQty"
+                    #normalQty
+                    >
+                    <span 
+                    class="label label-danger"
+                    *ngIf="createTestForm.controls.normalQty.touched && createTestForm.controls.normalQty.errors?.required"
+                    >
+                    Chưa nhập trường này !
+                    </span>
+                    <span 
+                    class="label label-danger"
+                    *ngIf="errQty"
+                    >
+                    Phải nhỏ hơn hoặc bằng {{normalTotal}} !
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Dễ</label>
+                    <input type="number" class="" placeholder="0" min="0"
+                    formControlName="easyQty"
+                    #easyQty
+                    >
+                    <span 
+                    class="label label-danger"
+                    *ngIf="createTestForm.controls.easyQty.touched && createTestForm.controls.easyQty.errors?.required"
+                    >
+                    Chưa nhập trường này !
+                    </span>
+                    <span 
+                    class="label label-danger"
+                    *ngIf="errQty"
+                    >
+                    Phải nhỏ hơn hoặc bằng {{easyTotal}} !
+                    </span>
+                </div>
+            </div> -->
+            <div class="form-group">
+                <label>Total quantity of questions: {{totalQty}}</label>
+            </div>
+            <div class="custom-slider">
+                <ng5-slider *ngIf="maxTypQs > 0"
+                [(value)]="totalQty" [options]="optionsTotal" (valueChange)="changeOptions(totalQty)">
+            </ng5-slider>
+            </div>
+            <div class="form-group">
+                <span class="type-qs easy-qs"></span>
+                <label [class.error] = "easyQty > easyTotal">
+                    Easy questions: {{easyQty}}/{{easyTotal}}
+                </label>
+            </div>
+            <div class="form-group">
+                <span class="type-qs normal-qs"></span>
+                <label [class.error] = "normalQty - easyQty > normalTotal || easyQty > normalQty">
+                    Normal questions: {{normalQty - easyQty}}/{{normalTotal}}
+                </label>
+            </div>
+            <div class="form-group">
+                <span class="type-qs hard-qs"></span>
+                <label [class.error] = "totalQty - normalValue > hardTotal || normalValue > totalQty">
+                    Hard questions: {{totalQty - normalValue}}/{{hardTotal}}
+                </label>
+            </div>
+            <div class="custom-slider">
+                <ng5-slider  *ngIf="maxTypQs > 0"
+                [(value)]="easyValue" [(highValue)]="normalValue" [options]="options"></ng5-slider>
+            </div>
+            <!-- {{this.addQuestionForm.value | json}}   -->
+            <div class="form-group">
+                
+                    <button 
+                    type="submit" class="btn btn-primary"
+                    [disabled]="createTestForm.invalid || normalQty - easyQty > normalTotal || easyQty > normalQty 
+                                || totalQty - normalValue > hardTotal || normalValue > totalQty || easyQty > easyTotal"
+                    >
+                        Create
+                    </button>
+                
+            </div>
+        </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="panel panel-danger confirm-del-subject" *ngIf="maxTypQs === 0">
+    <div class="panel-heading">
+          <h4 class="panel-title">Warning</h4>
+    </div>
+    <div class="panel-body">
+            <p>
+                Total questions is 0. <br />
+                Please add question before create test</p>
+            <div>
+                <button type="button" class="btn btn-default" (click) = "onBack()">Back</button>
+                <button type="button" class="btn btn-default" (click) = "toAddQuestion()">Add Question</button>
+          </div>
+    </div>
+</div>
+<div class="layer-blur" *ngIf="maxTypQs === 0"></div>

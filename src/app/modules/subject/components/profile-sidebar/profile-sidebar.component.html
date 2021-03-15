@@ -1,0 +1,117 @@
+<div>
+    <div class="profile-sidebar" *ngIf="show">
+            <!-- <div class="bar-btn">
+                <i class="glyphicon glyphicon-menu-hamburger" (click)="onToggle()"></i>
+            </div> -->
+        <!-- SIDEBAR USERPIC -->
+        <!-- <div class="profile-userpic">
+            <img src="/assets/img/avatar.png" class="img-responsive" alt="">
+        </div>
+        
+        <div class="profile-usertitle">
+            <div class="profile-usertitle-name">
+                {{ username | titlecase}}
+            </div>
+            <div class="profile-usertitle-job">
+                Student
+            </div>
+        </div> -->
+        <!-- END SIDEBAR USER TITLE -->
+
+        <!-- SIDEBAR MENU -->
+        <div class="profile-usermenu">
+            <ul class="nav">
+                <li routerLinkActive="active">
+                    <a routerLink="/overviews" [queryParams]="{time: time}">
+                        <i class="glyphicon glyphicon-th-list"></i>
+                        Overview
+                    </a>
+                </li>
+                <!-- class="active" -->
+                <li routerLinkActive="active">
+                    <!-- (click)="toSubject()" -->
+                    <a [routerLink]="['/subjects']" [queryParams]="{page: page}">
+                        <i class="glyphicon glyphicon-folder-open"></i>
+                        Subjects
+                    </a>
+                    <ng-container *ngIf="caret_down">
+                        <i class="fa fa-caret-down" aria-hidden="true" (click)="onToggleSubmenu()"></i>
+                    </ng-container>
+
+                    <ul class="nav" *ngIf="submenu">
+                        <li routerLinkActive="active">
+                            <a (click)="onDashboard()" routerLink = "/subject/dashboard">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                Dashboard 
+                                <!-- ({{subjectName | uppercase}})  -->
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a (click)="overviewTests()" routerLink = "subject/tests">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                                Tests
+                            </a>
+                            <!-- <ul class="nav">
+                                <li>
+                                    <a >Dashboard</a>
+                                </li>
+                                <li>
+                                    <a >Contents</a>
+                                </li>
+                            </ul> -->
+                        </li>
+                        <li routerLinkActive="active">
+                            <a (click)=allQuestions() routerLink = "subject/questions">
+                                <i class="glyphicon glyphicon-question-sign"></i>
+                                Questions
+                            </a>
+                        </li>                 
+                        <li routerLinkActive="active">
+                            <a (click) = "openConfig()"  routerLink = "/subject/configure" >
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                Configure
+                            </a>
+                            <!-- <ng-container *ngIf="caret_down">
+                                <i class="fa fa-caret-down" aria-hidden="true" (click)="openConfig()"></i>
+                            </ng-container> -->
+                            <!-- <ul class="nav">
+                                <li routerLinkActive="active">
+                                    <a (click) = "openConfirmBlock()"
+                                    *ngIf="config" class="remove-subject">
+                                        Remove Subject
+                                    </a>
+                                </li>
+                            </ul> -->
+                        </li>
+                        <!-- <li>
+                            <a (click) = "openConfirmBlock()">
+                                <i class="glyphicon glyphicon-minus"></i>
+                                Remove Subject Test
+                            </a>
+                        </li> -->
+                    </ul>
+                </li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/activity-logs']" [queryParams]="{time: time}">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        Your's Activity Logs </a>
+                </li>
+            </ul>
+        </div>
+        <!-- END MENU -->
+    </div>
+</div>
+
+<div class="panel panel-danger confirm-del-subject" *ngIf="confirmBlock">
+    <div class="panel-heading">
+          <h4 class="panel-title">Delete Subject Test</h4>
+          <i class="glyphicon glyphicon-remove" (click)="openConfirmBlock()"></i>
+    </div>
+    <div class="panel-body">
+            <h4>Are you sure you want to delete this subject test ?</h4>
+            <div>
+              <button type="button" class="btn btn-primary" (click) = "openConfirmBlock()">No</button>
+              <button type="button" class="btn btn-danger" (click) = "onDelSubject()">Yes</button>
+          </div>
+    </div>
+</div>  

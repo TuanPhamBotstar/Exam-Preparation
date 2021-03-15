@@ -1,0 +1,111 @@
+.overview-test-container{
+    position: relative;
+    top:0px;
+    padding: 10px;
+    /* background: #f2f2f2; */
+    min-height: 100vh;
+    /* border: 1px solid rgba(0, 0, 0, 0.2); */
+}
+/* subject */
+.subject-content{
+    display: flex;
+    flex-flow: row  wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.subject-container{
+  width: 20%;
+  padding: 10px 10px;
+}
+.subject{
+    width: 100%;
+    height: 150px;
+    border: 1px solid #5b9bd1;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    /* padding: 20px; */
+  }
+  .subject:hover{
+  box-shadow: 2px 2px 5px  #5b9bd1 inset,-2px -2px 5px  #5b9bd1 inset;
+  }
+  
+  .subject.add .glyphicon-list-alt{
+    position: relative;
+    font-size: 3.7em;
+  }
+  .subject.add .fa-plus{
+    color: #5b9bd1;
+    position: absolute;
+    font-size: 32px;
+    bottom: -10px;
+    right: -10px;
+  }
+  .subject.add:hover .fa-plus{
+    color: #67a7db;
+  }
+  .subject.add span{
+    font-size: 1em;
+  }
+  .subject.add button{
+    border-radius: 5px;
+    outline: none;
+  }
+  .subject i.glyphicon-list-alt{
+    font-size: 1.5em;
+    color: #8cc5f3;
+  }
+  .subject i{
+    font-size: 1.1em;
+  }
+  .subject i.fa-clock-o{
+    color: #8cc5f3;
+  }
+  .subject i.fa-question-circle{
+    color: #8cc5f3;
+  }
+  .subject p{
+    margin-top: 10px;
+    width: 130px;
+    font-size: 1em;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
+  }
+  .questions-quantity {
+    margin: 10px;
+  }
+  .subject .subject-element{
+    margin: auto auto;
+  }
+  /* responsive */
+  @media screen and (max-width: 1100px){
+    .subject-container{
+      width: 25%;
+    }
+  }
+  /* box search */
+  input{
+    width: 38.5%;
+    /* border: none;
+    outline: none; */
+    background-image: url('https://www.w3schools.com/howto/searchicon.png');
+    background-position: 10px 6px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    transition: width 0.4s ease-in-out;
+    font-size: 16px;
+    position: relative;
+    left: 10px;
+    /* margin: auto; */
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .resSearchEmpty{
+    margin: 20px 10px ;
+  }

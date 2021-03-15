@@ -1,0 +1,194 @@
+<div class="test-content">
+    <!-- <div class="test-btn">
+        <button type="button" class="btn btn-primary" (click)="openShareBox()">
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
+            Share</button>
+        <i class="fa fa-trash-o" aria-hidden="true" (click)="openConfirm()"></i>
+    </div> -->
+    <div role="tabpanel" class="tabs-container">
+        <!-- <h2>{{testTitle | uppercase}}</h2> -->
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a  aria-controls="home" role="tab" data-toggle="tab"
+                (click)="onShowChart()"
+                >Dashboard</a>
+            </li>
+            <li role="presentation">
+                <a  aria-controls="tab" role="tab" data-toggle="tab"
+                (click)="onShowContent()"
+                >Contents</a>
+            </li>
+            <li role="presentation">
+                <a  aria-controls="tab" role="tab" data-toggle="tab"
+                (click)="onShowResTable()"
+                >Results Table</a>
+            </li>
+            <li class="ellipsis">
+                <div class="ellipsis" (click)="openConfig()" *ngIf="test_id">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <div (click) = "openConfirm()" 
+                        *ngIf="config" class="remove-test">
+                            <p>Remove Test</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="time-select-btn" *ngIf="showResTable && active === null">
+        <div *ngFor="let times of rangeTimes" 
+        class="time-btn {{times}}-select" 
+        [class.active] = "time === times"
+        (click)="toTimes(times)">
+        </div>
+    </div>
+    <div *ngIf="showResTable">
+        <div class="result-table" *ngIf="active === null">
+            <table>
+                <caption>Results Table</caption>
+                <tr>
+                    <th>No.</th>
+                    <th>Username</th>
+                    <th>Score</th>  
+                    <th>Time Spent (seconds)</th>
+                    <th>Submitted/ Timeout</th>
+                    <th>Details</th>
+                </tr>
+                <tr *ngFor="let result of results; let i = index"
+                [class.active] = "i === active"
+                >
+                    <td>{{i+1}}</td>
+                    <td class="username">
+                        {{result.user_name | titlecase}}
+                    </td>
+                    <td>{{result.point}}/100</td>
+                    <td>{{result.time}}</td>
+                    <td>{{result.date | date}} - {{result.date   | date: "HH:mm"}}</td>
+                    <td 
+                    (click)="onViewAnswer(result.user_name, result.point, result.chosenAnswers, result.correctAnswer, i, time)"
+                    class="res-detail"
+                    >See details</td>
+                </tr>
+            </table>
+            <p *ngIf="results.length === 0" [ngStyle]="{textAlign:'center', marginTop: '20px'}">Data empty</p>
+        </div>
+        <app-view-answer (activeStatus)="onCloseDetail($event)"></app-view-answer>
+    </div>
+    <!-- [startDate]="startDate" [endDate]="endDate" -->
+    <div class="panel panel-default" *ngIf="test&&showContent">
+        <div class="panel-heading">
+            <button type="button" class="btn btn-primary share" (click)="openShareBox()">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+                Share</button>
+            <h3 class="panel-title"> {{test.testTitle | uppercase}} Test</h3>
+            <i>({{test.easyQty+test.normalQty+test.hardQty}} questions)</i>
+            <p *ngIf="test.timeTest > 1">Time: {{test.timeTest}} mins</p>
+            <p *ngIf="test.timeTest <= 1">Time: {{test.timeTest}} min</p>
+            <p>Code: {{test.testCode}}</p>
+        </div>
+        <div class="panel-body">
+            <div class="questions-container">
+                <div class="question" *ngFor="let question of qsOnePage; let i = index">
+                    <div class="question-elemment">
+                        <h4>
+                            <strong>Question {{i+1+(page-1)*perPage}}:</strong>
+                        </h4>
+                        <p>
+                            {{question.title}}
+                        </p>
+                    </div>
+                    <div class="answers">
+                        <div class="" *ngFor="let answer of question.answers; let j = index">
+                            <!-- is{{answer.isCorrect}} -->
+                            <form>
+                                <div class="answer-elemnt is{{answer['isCorrect']}}">
+                                    <!-- <input type="radio" id="a_{{i}}_{{j}}" value=j> -->
+                                    <label for="a_{{i}}_{{j}}">
+                                        {{alphaArr[j]}}. {{answer['content']}}
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="pagination" *ngIf="totalPage > 1">
+            <li><a (click)="onPrevious()">&laquo;</a></li>
+            <ng-container *ngFor="let page of arrayV(); let i= index;">
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/subject/tests/content-test']"
+                        [queryParams]="{subject: this.subject_id, test: this.test_id, page: i+1,  time: time}">
+                        {{i+1}}
+                    </a>
+                </li>
+            </ng-container>
+            <li><a (click)="onNext()">&raquo;</a></li>
+        </ul>
+    </div>
+
+    <div class="chart-tab show-chart-{{!showContent}} show-res-table-{{!showResTable}}">
+        <!-- <h3 [ngStyle]="{textAlign: 'center'}">{{testTitle | uppercase}} Test Results</h3> -->
+        <app-score-chart [test_id]="test_id" [subject_id]="subject_id" [time]="time"></app-score-chart>
+        <app-score-bar-chart></app-score-bar-chart>
+        <app-line-time ></app-line-time>
+        <app-questions-analytics></app-questions-analytics>
+    </div>
+    <div class="panel panel-danger confirm-del-subject" *ngIf="confirmBlock">
+        <div class="panel-heading">
+            <h4 class="panel-title">Delete Test</h4>
+            <i class="glyphicon glyphicon-remove" (click)="openConfirm()"></i>
+        </div>
+        <div class="panel-body">
+            <p>Do you sure you want to delete this test?</p>
+            <div>
+                <button type="button" class="btn btn-default" (click)="openConfirm()">Discard</button>
+                <button type="button" class="btn btn-danger" (click)="onDelTest()">Delete</button>
+            </div>
+        </div>
+    </div>
+    <div class="layer-blur" *ngIf="confirmBlock || shareBox"></div>
+
+    <div class="share-box" *ngIf="shareBox">
+        <div class="status-share" *ngIf="isShareSuccess">
+            <p class="share">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save successfully</p>
+        </div>
+        <div class="panel-heading">
+
+                <!-- <h3 class="shareSuccess" *ngIf="isShareSuccess">Chia sẽ thành công !</h3> -->
+                <h4 class="panel-title">Share Test</h4>
+                <i class="glyphicon glyphicon-remove" (click)="openShareBox()"></i>
+
+        </div>
+        <div class="panel-body">
+            <form class="add-question" novalidate="true" [formGroup]="shareForm" (ngSubmit)="onShareTest()">
+                <div class="form-group link-copy">
+                    <input type="text" class="form-control"
+                        formControlName="link" #link>
+                    <button type="button" (click)="copyToClipboard(link)">Copy</button>
+                </div>
+                <!-- <div class="form-group">
+                    <label>Recipients </label>
+                    <input type="text" class="form-control" placeholder="example@gmail.com" formControlName="listEmail"
+                        #listEmail>
+                    <span class="label label-danger" *ngIf="0">
+                        Please enter email of recipients.
+                    </span>
+                </div> -->
+                <div class="form-group">
+                    <input class="" type="checkbox" formControlName="haveCode" #haveCode id="checkCode">
+                    <label for="checkCode">Do you want user to enter code?</label>
+                </div>
+                <div class="form-group">
+
+                    <button type="submit" class="btn btn-primary" [disabled]="0">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>      
+    </div>
+</div>

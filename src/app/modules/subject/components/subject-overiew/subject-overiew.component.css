@@ -1,0 +1,125 @@
+.subject-content {
+    position: relative;
+    background: #fff;
+    display: flex;
+    flex-flow: row  wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    }
+/* subject */
+.subject-container{
+  width: 20%;
+  padding: 10px 10px;
+  position: relative;
+}
+.subject{
+    width: 100%;
+    height: 150px;
+    border: 1px solid #5b9bd1;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0,0.2);
+    border-radius: 8px;
+    text-align: center;
+    /* margin: 10px 20px; */
+    cursor: pointer;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    background-color: #fff;
+  }
+  .subject:hover{
+  box-shadow: 2px 2px 5px  #5b9bd1 inset,-2px -2px 5px  #5b9bd1 inset;
+  }
+  .subject.add span{
+    font-size: 1.2em;
+  }
+  .subject.add button{
+    border-radius: 5px;
+    outline: none;
+  }
+  .subject.add .fa-folder{
+    color: #8cc5f3;
+    position: relative;
+    font-size: 3.7em;
+  }
+  .subject.add .fa-plus{
+    color: #ddd;
+    position: absolute;
+    font-size: 32px;
+    bottom: 8px;
+    right: 10px;
+  }
+  .subject.add:hover .fa-plus{
+    color: #eee;
+  }
+  .subject i{
+    font-size: 2.5em;
+  }
+  i.glyphicon-folder-open{
+    color: #8cc5f3;
+  }
+  .subject p{
+    margin-top: 10px;
+    font-size: 1em;
+    white-space: nowrap; 
+    width: 160px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
+  }
+  .subject .subject-element{
+    margin: auto auto;
+  }
+
+/* pagination */
+.pagination{
+  position: relative;
+  bottom: 0px;
+  left: 10px;
+  margin: 10px 0 0;
+}
+/* responsive */
+@media screen and (max-width: 1100px){
+  .subject-container{
+    width: 25%;
+  }
+}
+
+/* box search */
+.boxsearch{
+  display: flex;
+  flex-flow: row nowrap;
+  position: relative;
+  left: 10px;
+  align-items: center;
+  width: 38%;
+  border: 1px solid rgba(0, 0, 0,0.2);
+  border-radius: 10px;
+  padding: 0 10px;
+}   
+input{
+  width: 38.5%;
+  /* border: none;
+  outline: none; */
+  background-image: url('https://www.w3schools.com/howto/searchicon.png');
+  background-position: 10px 6px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  transition: width 0.4s ease-in-out;
+  font-size: 16px;
+  position: relative;
+  left: 10px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.resSearchEmpty{
+  margin: 20px 10px ;
+}
+
+/* edit */
+.edit-subject{
+  position: absolute;
+  right: 20px;
+  top: 28px;
+  font-size: 0.8em;
+  color: #5b9bd1;
+}

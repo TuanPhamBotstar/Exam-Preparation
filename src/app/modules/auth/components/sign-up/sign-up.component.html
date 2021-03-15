@@ -1,0 +1,116 @@
+
+<div class="panel panel-danger" *ngIf="isExist === -1">
+    <h4>Username or Email already exists.</h4>
+</div>
+
+<div class="panel panel-success" *ngIf="isExist === 1">
+      <div class="panel-heading">
+            <h4 class="panel-title">Sign up successfully. Please sign in for continue.</h4>
+      </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+          <h3 class="panel-title">Sign Up</h3>
+    </div>
+    <div class="panel-body">
+        <form
+            (ngSubmit) = "onSignUp(username.value,password.value,fullname.value,email.value)"
+            [formGroup] = "signUpForm"
+            novalidate="true"
+        >
+            <div class="form-group">
+                <input 
+                type="text" 
+                class="form-control" 
+                formControlName="fullname"
+                placeholder="Full name"
+                required
+                #fullname
+                > 
+                <span 
+                *ngIf="signUpForm.controls.fullname.touched && signUpForm.controls.fullname.errors?.required"
+                >
+                Please enter full name.
+                </span>
+            </div> 
+            
+            <div class="form-group">
+                <input 
+                type="text" 
+                class="form-control" 
+                formControlName="username"
+                placeholder="Username"
+                required
+                pattern="^((?!@).)*$"
+                #username
+                > 
+                <span 
+                *ngIf="signUpForm.controls.username.touched && signUpForm.controls.username.errors?.required"
+                >
+                Please enter username.
+                </span>
+                <span 
+                *ngIf="signUpForm.controls.username.touched && signUpForm.controls.username.errors?.pattern"
+                >
+                Username must have not '@' character.
+                </span>
+            </div>
+            
+            <div class="form-group">
+                <input 
+                type="text" 
+                class="form-control" 
+                formControlName="email"
+                placeholder="Email"
+                pattern="^\S+@\S+$"
+                required
+                #email
+                > 
+                <span 
+                *ngIf="signUpForm.controls.email.touched && signUpForm.controls.email.errors?.required"
+                >
+                Please enter email.
+                </span>
+                <span 
+                *ngIf="signUpForm.controls.email.touched && signUpForm.controls.email.errors?.pattern"
+                >
+                Please enter a valid email address.
+                </span>
+            </div>
+
+            <div class="form-group">
+                <input 
+                type="password" 
+                class="form-control" 
+                formControlName="password"
+                placeholder="New password"
+                required
+                minlength="6"
+                #password
+                >              
+                <span 
+                *ngIf="signUpForm.controls.password.touched && signUpForm.controls.password.errors?.required"
+                >
+                Please enter password.
+                </span>
+                <span 
+                *ngIf="signUpForm.controls.password.touched && signUpForm.controls.password.errors?.minlength"
+                > 
+                Must have at least 6 characters.
+                </span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button type="submit" 
+                    class="btn btn-primary"
+                    [disabled]="signUpForm.invalid"
+                    >
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

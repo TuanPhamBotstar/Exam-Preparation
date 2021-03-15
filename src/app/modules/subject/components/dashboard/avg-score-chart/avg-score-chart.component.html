@@ -1,0 +1,43 @@
+<div *ngIf="1" class="chart-containter">
+    <div class="layer-empty" *ngIf="barChartLabels.length === 0">
+        Data empty
+    </div>
+    <div style="display: block">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [plugins]="barChartPlugins"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+    <p class="name-chart">Average score and quantity of user finished of each test</p>
+</div>
+<!-- <div class="result-table" *ngIf="barChartLabels.length > 0">
+    <table>
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Test name</th>
+            <th>Quantity of users</th>
+            <th>Average Score</th>
+        </tr>
+        </thead>   
+        <tbody>
+        <ng-container *ngFor="let result of results; let i = index">
+        <tr *ngIf="result.totalUsers > 0"
+            class="res-detail"
+        >
+            <td>{{i+1}}</td>
+            <td>
+                {{result._id | uppercase}}
+            </td>
+            <td>{{result.totalUsers}}</td>
+            <td>{{(result.avgScore).toFixed(2)}}</td>
+        </tr>
+        </ng-container>
+        </tbody> 
+    </table>
+</div> -->
+

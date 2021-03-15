@@ -1,0 +1,125 @@
+
+.btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-container span{
+    margin-left: 10px;
+}
+
+/* navbar */
+.navbar{
+    height: auto;
+    min-height: 15px;
+    margin-bottom: 0;
+    margin: 10px 0px 0px;
+    height: auto;
+}
+.navbar ul{
+    height: auto;
+    margin-left: 0px;  
+}
+.active{
+    color:#062f53;
+    font-weight: 700;
+}
+ul li {
+    position: relative;
+  }
+  ul li :last-child{
+      border-right: none;
+  }
+ul li a{
+    display: inline-block;
+    padding: 10px 10px;
+}
+
+ul li.active > a {
+    color: #5b9bd1;
+    background-color: #f6f9fb;  
+  }
+
+ul li:nth-child(n+3){
+    display: none;
+}
+ul li:nth-child(n+3).active{
+    display: inline-block;
+}
+ul li i.fa-chevron-right{
+  margin-right: 10px;
+  -webkit-text-stroke: 1px white;
+  cursor: initial;
+}
+
+.navbar ul li a{
+  cursor: initial;
+}
+.navbar ul li a:hover{
+  background-color: #fff;
+  color: #337ab7;
+}
+/*  */
+.isExistSubject{
+    text-align: center;
+    margin: 30px;
+}
+.pagination{
+    margin-left: 10px;
+}
+
+/*  */
+.confirm-del-subject{
+    position: fixed;
+    top: 110px;
+    right: 37.5%;
+    transform: translateX(50%);
+    width: 30%;
+    z-index: 100;
+  }
+  .confirm-del-subject .panel-heading{
+    background-color: #d9534f;
+  }
+  .confirm-del-subject .panel-heading h4{
+    color: #fff;
+    text-align: left;
+  }
+  .confirm-del-subject .panel-body h4{
+    color: initial;
+  }
+  .confirm-del-subject i{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    -webkit-text-stroke: 2px #d9534f;
+    font-size: 0.8em;
+    color: white;
+  }
+  .confirm-del-subject button{
+    margin: 20px 10px;
+    width: 45px;
+    text-align: center;
+    padding: 6px 0px;
+  }
+  div.ellipsis {
+    position: relative;
+    float: right;
+    color:#062f53;
+    margin: 5px 4px;
+}
+.remove-test{
+    position: absolute;
+    top: 100%;
+    right: -5px;
+    width: 140px;
+    background-color: #f6f9fb;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+    z-index: 10;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+.remove-test p{
+  margin-bottom: 0;
+}

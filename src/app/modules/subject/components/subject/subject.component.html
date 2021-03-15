@@ -1,0 +1,21 @@
+<div class="create-subject">
+    <div class="row profile">
+		<div class="col-md-2 sidebar-container">
+			<!-- <div class="bar-btn hamburger" *ngIf="colMd == 12">
+				<i class="glyphicon glyphicon-menu-hamburger" (click)="onToggleSidebr()"></i>
+			</div>
+			<div class="bar-btn" *ngIf="colMd == 10">
+				<i class="fa fa-times" aria-hidden="true" (click)="onToggleSidebr()"></i>
+			</div> -->
+			<app-profile-sidebar></app-profile-sidebar>
+		</div>
+		<div class="col-md-{{colMd}} main-subject">
+			<router-outlet></router-outlet>
+		</div>
+	</div>         
+
+</div>
+
+
+
+

@@ -1,0 +1,129 @@
+
+.create-test{
+    margin-top: 25px;
+    padding: 7px;
+    .btn-back{
+        position: absolute;
+        top: 25px;
+        right: 20px;
+    }
+}
+.create-test .panel{
+    position: relative;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+    border: 1px solid rgba(0,0,0,0.2);
+    width: 100%;
+    /* background-color: #f2f2f2; */
+    margin: 15px auto;
+}
+.panel-heading i{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2em;
+    -webkit-text-stroke: 2px #f2f2f2;
+}
+    span.type-qs{
+        width: 10px;
+        height: 10px;       
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 1px;
+    }
+    span.easy-qs{
+        background: #58e091;
+    }
+    span.normal-qs{
+        background: rgb(240, 169, 76);
+    }
+    span.hard-qs{
+        background: #eb3824;
+    }
+
+.form-group label{
+    font-weight: initial;
+}
+.form-group span.label{
+    color: #d9534f;
+    font-weight: initial;
+    font-size: 0.9em;
+    margin-top: 10px;
+    display: inline-block;
+    padding-left: 1px;
+}
+.qty-config .form-group{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.qty-config .form-group label{
+    flex-basis: 43.5%;
+}
+
+.qty-config .form-group input{
+    margin-right: 20px;
+    width: 80px;
+    padding-left: 10px;
+}
+.qty-config .form-group span{
+    height: 20px;
+}
+div.form-group{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+form div button[type=submit] {
+    width: auto;    
+    display: block;
+    margin: 20px auto;
+    height: auto;
+    font-size: 1em;
+}
+.hide{
+    display: none;
+}
+.error{
+    color: red;
+}
+/* range slide */
+ng5-slider{
+    margin-bottom: 30px;
+}
+ 
+::ng-deep {
+    .custom-slider .ng5-slider .ng5-slider-bar{
+        background: #8cc5f3;
+    }
+    .custom-slider .ng5-slider .ng5-slider-pointer{
+        width: 24px;
+        height: 24px;
+        top: -12px;
+    }
+    .custom-slider .ng5-slider .ng5-slider-pointer:after{
+        top: 8px;
+        left: 8px;
+    }
+    .custom-slider .ng5-slider {
+      .ng5-slider-bar {
+        height: 2px;
+      }
+  
+      .ng5-slider-left-out-selection .ng5-slider-bar {
+        background: #58e091 !important;
+      }
+  
+      .ng5-slider-right-out-selection .ng5-slider-bar {
+        background: #eb3824 !important;
+      }
+  
+      .ng5-slider-selection {
+          background: rgb(240, 169, 76);
+      }
+    }
+  } 
+
+//   warning
+.confirm-del-subject button{
+    width: 100px;
+}

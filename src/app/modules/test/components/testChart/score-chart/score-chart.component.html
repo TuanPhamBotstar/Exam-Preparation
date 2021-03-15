@@ -1,0 +1,71 @@
+<div class="time-select-btn">
+    <div *ngFor="let times of rangeTimes" 
+    class="time-btn {{times}}-select" 
+    [class.active] = "time === times"
+    (click)="toTimes(times)">
+    </div>
+</div>
+<div class="chart-container">
+    <div class="layer-empty" *ngIf="results.length === 0">
+        There is no data for this duration
+    </div>
+    <div class="overview-analytics" >
+        <div class="data-analytic-container">
+            <div class="data-analytic">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                <div class="data-title">
+                    <p>Total Candidates</p>
+                    <p class='data'>{{results.length}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="data-analytic-container">
+            <div class="data-analytic">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+                <div class="data-title">
+                    <p>Average Score</p>
+                    <p class='data'>{{avgScore}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="your-res-chart" >
+        <div style="display: block">
+            <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [options]="pieChartOptions"
+                    [chartType]="pieChartType"
+                    [colors]="chartColors"
+                    [plugins]="pieChartPlugins"
+                    [legend]="pieChartLegend">
+            </canvas>
+        </div>
+        <p class="name-chart">Score Ratio</p>
+    </div>
+</div>
+
+<!-- <div class="result-table">
+    <table>
+        <caption>Results Table</caption>
+        <tr>
+            <th>No.</th>
+            <th>Username</th>
+            <th>Score</th>
+            <th>Time Spent (seconds)</th>
+            <th>Submitted/ Timeout</th>
+        </tr>
+        <tr *ngFor="let result of results; let i = index"
+        >
+            <td>{{i+1}}</td>
+            <td>
+                {{result.user_name | titlecase}}
+            </td>
+            <td>{{result.point}}/100</td>
+            <td>{{result.time}}</td>
+            <td>{{result.date | date}} - {{result.date   | date: "HH:mm"}}</td>
+        </tr>
+    </table>
+    <p *ngIf="results.length == 0" [ngStyle]="{textAlign:'center', marginTop: '20px'}">Data empty</p>
+</div> -->
+

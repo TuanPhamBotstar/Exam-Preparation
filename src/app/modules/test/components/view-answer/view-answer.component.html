@@ -1,0 +1,59 @@
+<div class="test-content">
+    <div class="panel panel-default" *ngIf="test">
+        <div class="panel-heading">
+            <p class="panel-title">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                {{userName | uppercase}}</p>
+            <p class="panel-title">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                Score: {{score}}
+            </p>            
+            <button type="button" class="btn btn-default back-detail" (click)="closeDetailRes()">Back</button>            
+        </div>
+        <div class="panel-body" >
+            <div class="questions-container">
+                <div class="question" *ngFor="let question of qsOnePage; let i = index">
+                    <div class="question-elemment">
+                        <h4>
+                            <!-- <strong>Câu {{i+1+(page-1)*5}}:</strong> -->
+                            <strong>Question {{i+1+(page-1)*perPage}}</strong>
+                        </h4>
+                        <p>
+                            {{question.title}}
+                        </p>
+                    </div>
+                    <div class="answers">
+                        <div class="" *ngFor="let answer of question.answers; let j = index">
+                            <div class="answer-elemnt">
+                                <input type="radio" *ngIf="j !== chosenAnswers[i+(page-1)*perPage] && j !== correctAnswer[i+(page-1)*perPage]" disabled="1">
+                                <i *ngIf="j === chosenAnswers[i+(page-1)*perPage] || j === correctAnswer[i+(page-1)*perPage]" class="fa fa-check-circle-o" aria-hidden="true" 
+                                    [class.noChosen]="chosenAnswers[i+(page-1)*perPage] === undefined || chosenAnswers[i+(page-1)*perPage] === null"
+                                    [class.isCorrect]="correctAnswer[i+(page-1)*perPage] === chosenAnswers[i+(page-1)*perPage] || j === correctAnswer[i+(page-1)*perPage]" 
+                                    [class.inCorrect]="correctAnswer[i+(page-1)*perPage] !== chosenAnswers[i+(page-1)*perPage]"
+                                >
+                                </i>
+                                <label for="a_{{i}}_{{j}}">
+                                    {{alphaArr[j]}}. {{answer['content']}}
+                                </label>    
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <ul class="pagination" *ngIf="totalPage > 1">
+            <li><a (click)="onPrevious()">&laquo;</a></li>
+            <ng-container *ngFor="let page of arrayV(); let i= index;">
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/subject/tests/content-test']"
+                        [queryParams]="{subject: this.subject_id, test: this.test_id, page: i+1,  time: time}">
+                        {{i+1}}
+                    </a>
+                </li>
+            </ng-container>
+            <li><a (click)="onNext()">&raquo;</a></li>
+        </ul>
+    </div>
+    
+</div>
+
